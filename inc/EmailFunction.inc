@@ -14,15 +14,17 @@ function SendMainLink($name_of_page, $GET_type_array, $GET_value_array){
     return $link;
   }
   $length = count($GET_type_array);
-  if ($length >= 1){
-    $link .= "?";
+  $link .= "?";
+  if ($length > 1){
     for ($i = 0; $i < $length; $i += 1){
       $value = str_replace(' ', '_', $GET_value_array[$i]);
-      $link .= $type . "=" . $value;
+      $link .= str_replace(' ', '%20', $GET_type_array[$i]) . "=" . str_replace(' ', '_', $GET_value_array[$i]);
       if ($i != $length - 1){
         $link .= "&";
       }
     }
+  }else if($length == 1){
+    $link .= str_replace(' ', '%20', $GET_type_array) . "=" . str_replace(' ', '_', $GET_value_array);
   }
   return $link;
 }
