@@ -1,0 +1,7 @@
+/* This is my CSS file*/
+
+.bg-cover{
+    background: url(../images/brian.png);
+    height: 300px;
+    background-size: cover;
+}
