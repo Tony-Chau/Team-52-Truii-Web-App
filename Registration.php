@@ -16,11 +16,11 @@
 
         <form action="action.php">
           <div class="row" align="center" style="width:90%;margin-top:10%;margin-left:5%;margin-right:5%;">
-            <div class="div-username">
+            <div class="div-email">
               <label style="display:inline-block;width:30%;font-size:150%;color:#FFFFFF;">
-                Username
+                Email
               </label><br>
-                <input type="text" name="username" style="width:100%;border-radius:5px;padding-left:2%;font-size:150%;">
+                <input type="text" name="email" style="width:100%;border-radius:5px;padding-left:2%;font-size:150%;">
             </div>
           </div>
 
@@ -33,20 +33,21 @@
             </div>
           </div>
 
-          <div class="row" align="center" style="width:90%;margin-top:10%;margin-left:5%;margin-right:5%;">
+          <div class="row" align="center" style="width:90%;margin-top:5%;margin-left:5%;margin-right:5%;">
+            <div class="div-confirmpassword">
+              <label style="display:inline-block;width:60%;font-size:150%;color:#FFFFFF;">
+                Confirm Password
+              </label><br>
+                <input type="password" name="confirmpassword" style="width:100%;border-radius:5px;padding-left:2%;font-size:150%;">
+            </div>
+          </div>
+
+          <div class="row" align="center" style="width:90%;margin-top:10%;margin-left:5%;margin-right:5%;margin-bottom:10%;">
             <div class="div-submit">
-              <input type="submit" value="Login"style="width:100%;border-radius:5px;font-size:150%;">
+              <input type="submit" value="Register"style="width:100%;border-radius:5px;font-size:150%;">
             </div>
           </div>
         </form>
-
-          <div class="row" align="center" style="width:90%;margin-top:10%;margin-left:5%;margin-right:5%; margin-bottom:10%;">
-            <div class="div-registration">
-              <form action="Registration.php">
-                <input type="submit" value="Register" style="width:100%;border-radius:5px;font-size:150%;"/>
-              </form>
-            </div>
-          </div>
   </div>
   <!-- JavaScript files should be linked at the bottom of the page  -->
   <script src="js/jquery.min.js"></script>
