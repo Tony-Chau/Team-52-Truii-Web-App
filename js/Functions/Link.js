@@ -1,6 +1,6 @@
 function GetLink(PageDirectory, Type, Value){
   var link = "" . PageDirectory;
-  if (Type === null || Value === null || Type == "" || Value == ""){
+  if (Type == null || Value == null || Type == "" || Value == ""){
     return link;
   }
   var length = Type.length;
