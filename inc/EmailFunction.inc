@@ -9,7 +9,7 @@ function send_Validation_email($email, $name_of_user){
 }
 
 function GetLink($PageDirectory, $Type, $Value){
-  $link = "" . $name_of_page;
+  $link = "" . $PageDirectory;
   if ($Type === null || $Value === null){
     return $link;
   }
