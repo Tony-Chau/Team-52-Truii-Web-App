@@ -1,14 +1,14 @@
 <?php
 function get_dbServer(){
-  return '';
+  return 'team52.heliohost.org';
 }
 function get_dbUsername(){
-  return '';
+  return 'team52_manager';
 }
 function get_dbPassword(){
-  return '';
+  return 'Midori.1';
 }
 function get_dbDatabase(){
-  return '';
+  return 'team52_Truii';
 }
  ?>
