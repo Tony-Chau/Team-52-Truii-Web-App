@@ -24,3 +24,7 @@ function readCookie(Cookiename){
 function CheckCookie(name){
   return (readCookie(name) != '');
 }
+
+function ClearCookie(name){
+  document.cookie = name + "=;expires=" + Date() + ";";
+}
