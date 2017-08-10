@@ -1,7 +1,72 @@
-/* This is my CSS file*/
+/* main css */
 
-.bg-cover{
-    background: url(../images/brian.png);
-    height: 300px;
-    background-size: cover;
+.logo {
+    width: 50%;
+    height: 15%;
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.container-fluid {
+    width: 350px;
+    margin: auto;
+    margin-bottom: 25%;
+    background: rgba(253, 103, 26, 0.8);
+    border-radius: 25px;
+}
+
+.row-top {
+    width: 90%;
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+.row-mid {
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+.row-button {
+    width: 90%;
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 10%;
+    text-align: center;
+}
+
+.row-bottom {
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom:10%;
+    text-align: center;
+}
+
+.label {
+    display: inline-block;
+    font-size: 150%;
+    color: #FFFFFF;
+}
+
+.input {
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 2%;
+    font-size: 150%;
+}
+
+.submit {
+    width: 100%;
+    border-radius: 5px;
+    font-size: 150%;
 }
