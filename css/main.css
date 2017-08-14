@@ -1,60 +1,60 @@
 /* main css */
 
 .logo {
-    width: 50%;
+    width: 200px;
     height: 15%;
+    margin-left: -10px;
     margin-top: 5%;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-bottom: 1%;
+}
+
+.centered {
+  margin: auto;
 }
 
 .container-fluid {
-    width: 350px;
-    margin: auto;
+    display: inline-block;
     margin-bottom: 25%;
     background: rgba(253, 103, 26, 0.8);
     border-radius: 25px;
+    padding: 2%;
 }
 
 .row-top {
-    width: 90%;
+    width: 95%;
+    margin: auto;
     margin-top: 10%;
-    margin-left: 5%;
-    margin-right: 5%;
     margin-bottom: 5%;
     text-align: center;
 }
 
 .row-mid {
-    width: 90%;
+    width: 95%;
+    margin: auto;
     margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
     margin-bottom: 5%;
     text-align: center;
 }
 
 .row-button {
-    width: 90%;
-    margin-top: 10%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 10%;
+    width: 95%;
+    margin: auto;
+    margin-top: 15%;
+    margin-bottom: 5%;
     text-align: center;
 }
 
 .row-bottom {
-    width: 90%;
-    margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
+    width: 95%;
+    margin: auto;
+    margin-top: 15%;
     margin-bottom:10%;
     text-align: center;
 }
 
 .label {
     display: inline-block;
-    font-size: 150%;
+    font-size: 125%;
     color: #FFFFFF;
 }
 
@@ -62,7 +62,7 @@
     width: 100%;
     border-radius: 5px;
     padding-left: 2%;
-    font-size: 150%;
+    font-size: 125%;
 }
 
 .submit {
