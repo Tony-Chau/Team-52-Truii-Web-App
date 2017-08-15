@@ -1,17 +1,19 @@
 class Geolocation{
-  constructor(longititude_name, latitude_name){
+  constructor(latitude_name, longititude_name){
     this.latitude_name = document.getElementById(latitude_name);
     this.longititude_name =  document.getElementById(longititude_name);
   }
-  function getLocation(){
+  getLocation(){
     if (navigator.Geolocation){
       navigator.geolocation.getCurrentPosition(showPosition);
     }else{
       alert("Gelocation is not supported by this browser");
     }
   }
-  function showPosition(position){
+  showPosition(position){
     this.latitude_name.innerHTML = position.coords.latitude_name;
     this.longititude_name.innerHTML = position.coords.longititude_name;
   }
 }
+//To call the Geloction function, type: var geo = new Geolocation("lat_name", "lon_name");
+//For function: geo.getLocation();
