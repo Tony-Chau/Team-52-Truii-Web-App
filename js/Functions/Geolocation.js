@@ -1,6 +1,5 @@
 class Geolocation{
-  constructor(Button_name, longititude_name, latitude_name){
-    this.Button = document.getElementById(Button_name);
+  constructor(longititude_name, latitude_name){
     this.latitude_name = document.getElementById(latitude_name);
     this.longititude_name =  document.getElementById(longititude_name);
   }
