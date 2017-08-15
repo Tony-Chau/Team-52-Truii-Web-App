@@ -1,5 +1,5 @@
 function GetLink(PageDirectory, Type, Value){
-  var link = "" . PageDirectory;
+  var link = "" + PageDirectory;
   if (Type == null || Value == null || Type == "" || Value == ""){
     return link;
   }
