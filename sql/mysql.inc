@@ -11,4 +11,5 @@ function get_dbPassword(){
 function get_dbDatabase(){
   return 'team52_Truii';
 }
+include 'UserTableDB.inc';
  ?>
