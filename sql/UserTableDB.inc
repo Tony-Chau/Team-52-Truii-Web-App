@@ -64,5 +64,6 @@ function RequestUserDetail($userID, $request){
   foreach($result as $data){
     $pdo = null;
     return $data["\" . $request . "\""];
+  }
 }
  ?>
