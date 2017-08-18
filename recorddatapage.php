@@ -6,7 +6,41 @@
  <link rel="stylesheet" href="css/bootstrap.min.css">
  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
  <link rel="stylesheet" href="css/style.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script>
+ var columnNumber;
+function Create(){
+  var div = "";
+  var i = 1;
+  for (i = 1; i <= columnNumber; i+= 1){
+    div += "<div class=\"form-group\" id=\"ColumnList\">";
+    div += "<h2> Column" +  i + "</h2><label for=\"exampletextinput\">Column " +  i + " Title </label>";
+    div += "<input type=\"text\" class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" name=\"ColumnTitle" + i + "\">";
+    div += "<div class=\"form-group\"><label for=\"exampleSelect1\">Unit of Measurement</label>";
+    div += "<select class=\"form-control\" id=\"exampleSelect1\" name=\"ColumnType" + i + "\">";
+    div += "<option>% Percentage</option><option># Numbers</option><option> Text</option></select></div></div>";
+  }
+  return div;
+}
 
+ $(document).ready(function(){
+   $("#fadeToItemColumn").click(function(){
+     $("#Create").fadeOut();
+     //This gets the value from the select box
+     var exampleSelect1 = document.getElementById("exampleSelect1");
+      columnNumber = exampleSelect1.options[exampleSelect1.selectedIndex].value;
+      $("#Column").html(Create());
+      $("#Column").fadeIn();
+      $("#Buttons").fadeIn();
+   }),
+   $("#FadeBack").click(function(){
+     $("#Create").fadeIn();
+      $("#Column").fadeOut();
+      $("#Buttons").fadeOut();
+   })
+ });
+
+ </script>
 </head>
 
 
@@ -20,48 +54,34 @@
 
 
 </header>
-
+<form>
 <div id ="recordform">
-  <div class= "container1">
+  <div class= "container1" id="Create">
 
-
-  <form>
     <div class="form-group">
       <label for="exampletextinput">Title </label>
       <input type="text" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title">
 
-    </div>
-
-    <div class="form-group">
       <label for="exampleSelect1">Number of columns</label>
-      <select class="form-control" id="exampleSelect1">
-
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+      <select class="form-control" id="exampleSelect1" id="NumberOfColumn">
+        <?php
+        for ($i = 1; $i < 100; $i += 1){
+          echo "<option>" . $i . "</option>";
+        }
+         ?>
       </select>
     </div>
+      <button type="button" class="btn btn-primary" id="fadeToItemColumn">Submit</button>
+</div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
 
+  <div class="form-group" id="Column">
 
-<h2> Column 1 </h2>
-  <div class="form-group">
-    <label for="exampletextinput">Column 1 Title </label>
-    <input type="text" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title">
+</div>
+<div class="form-group" id="Buttons" style="display: none;">
+<button type="button" class="btn btn-primary" id="FadeBack">Back</button>
+<button type="submit" class="btn btn-primary">Submit</button>;
+</div>
 
-  </div>
-
-  <div class="form-group">
-    <label for="exampleSelect1">Unit of Measurement</label>
-    <select class="form-control" id="exampleSelect1">
-      <option>% Percentage</option>
-      <option># Numbers</option>
-      <option> Text</option>
-    </select>
-  </div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
+</div>
 </form>
