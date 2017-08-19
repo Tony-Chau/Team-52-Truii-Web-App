@@ -32,7 +32,7 @@ function Create(){
    $("#fadeToItemColumn").click(function(){
        $("#Create").fadeOut();
     //  This gets the value from the select box
-    //  var exampleSelect1 = document.getElementById("exampleSelect1");
+      var exampleSelect1 = document.getElementById("exampleSelect1");
        columnNumber = exampleSelect1.options[exampleSelect1.selectedIndex].value;
        $("#Column").html(Create());
        $("#Column").fadeIn();
@@ -83,7 +83,7 @@ function Create(){
 </div>
 <div class="form-group" id="Buttons" style="display: none;">
 <button type="button" class="btn btn-primary" id="FadeBack">Back</button>
-<button type="submit" class="btn btn-primary" id="Submit">Submit</button>
+<button type="submit" class="btn btn-primary">Submit</button>
 </div>
 </div>
 </form>
