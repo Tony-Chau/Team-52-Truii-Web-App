@@ -20,6 +20,7 @@
     <div class="container-fluid">
 
         <form action="action.php">
+          <div id = "log">
           <div class="row-top">
             <label class="label">Username</label><br>
             <input type="text" name="username" class="input">
@@ -36,12 +37,51 @@
         </form>
 
           <div class="row-bottom">
-            <form action="Registration.php">
-              <input type="submit" value="Register" class="submit">
-            </form>
+              <input type="button" value="Register" class="submit"  id= "btnRegister"></input>
           </div>
+        </div>
+          <form action="action.php" style="display: none;" id = "Register">
+            <div id ="Register">
+            <div class="row-top" >
+              <label class="label">Email</label><br>
+              <input type="email" name="email" class="input" required>
+            </div>
+
+            <div class="row-mid">
+              <label class="label">Password</label><br>
+              <input type="password" name="password" class="input">
+            </div>
+
+            <div class="row-mid">
+              <label class="label">Confirm Password</label><br>
+              <input type="password" name="confirmpassword" class="input" required>
+            </div>
+
+            <div class="row-bottom">
+              <input type="submit" value="Register" class="submit">
+            </div>
+            <div class="row-bottom">
+              <input type="button" value="Back" id="btnLog" class="submit">
+            </div>
+          </div>
+          </form>
+        <!--onclick="window.location='Registration.php';"-->
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#btnRegister").click(function(){
+            $("#log").animate({height: 'toggle', opacity: "0"}, "slow");
+            $("#Register").animate({height: 'toggle', opacity: "100"}, "slow");
+        }),
+        $("#btnLog").click(function(){
+        $("#Register").animate({ height: 'toggle' ,opacity: '0'}, "slow");
+          $("#log").animate({height: 'toggle' , opacity: '100' }, "slow");
+
+        });
+    });
+</script>
 
   <!-- JavaScript files should be linked at the bottom of the page  -->
   <script src="js/jquery.min.js"></script>

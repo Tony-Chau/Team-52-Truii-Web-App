@@ -22,7 +22,7 @@
         <form action="action.php">
           <div class="row-top">
             <label class="label">Email</label><br>
-            <input type="text" name="email" class="input">
+            <input type="email" name="email" class="input" required>
           </div>
 
           <div class="row-mid">
@@ -32,7 +32,7 @@
 
           <div class="row-mid">
             <label class="label">Confirm Password</label><br>
-            <input type="password" name="confirmpassword" class="input">
+            <input type="password" name="confirmpassword" class="input" required>
           </div>
 
           <div class="row-bottom">
