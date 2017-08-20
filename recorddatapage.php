@@ -27,22 +27,31 @@ function Create(){
 
   return div;
 }
-
+function appear(){
+		
+}
  $(document).ready(function(){
    $("#fadeToItemColumn").click(function(){
-       $("#Create").fadeOut();
+       $("#Create").fadeOut("slow");
+	   
     //  This gets the value from the select box
       var exampleSelect1 = document.getElementById("exampleSelect1");
        columnNumber = exampleSelect1.options[exampleSelect1.selectedIndex].value;
-       $("#Column").html(Create());
-       $("#Column").fadeIn();
-       $("#Buttons").fadeIn();
+	   window.setTimeout(function(){
+		   $("#Column").fadeIn("slow");
+			$("#Buttons").fadeIn("slow");
+	   }, 1000);
+	   $("#Column").html(Create());
+	   
+	    
+       
    }),
    $("#FadeBack").click(function(){
-     $("#Create").fadeIn();
-       $("#Column").fadeOut();
-       $("#Buttons").fadeOut();
-
+       $("#Column").fadeOut("slow");
+       $("#Buttons").fadeOut("slow");
+	   window.setTimeout(function(){
+		   $("#Create").fadeIn("slow");
+	   }, 1000);
    })
  });
 
@@ -78,7 +87,7 @@ function Create(){
       <button type="button" class="btn btn-primary" id="fadeToItemColumn">Submit</button>
 
 </div>
-  <div class="form-group" id="Column">
+  <div class="form-group" id="Column" style="display: none;">
 
 </div>
 <div class="form-group" id="Buttons" style="display: none;">
