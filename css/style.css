@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+h1 {
+  font-family: SourceSansPro-Regular;
+  font-size: 5vw;
+}
+
+/*Start of title and Logo bar */
+
+#titlelogo {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background-color:rgb(10,191,211);
+}
+.container{
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0, 5px;
+}
+
+#titlelogo .logo {
+  margin: 5px 0px;
+}
+header {
+  width:100%;
+  z-index: 3;
+}
+header nav{
+  float:right;
+}
+
+ header h1{
+  color:#FFFFFF;
+  font-weight: 200;
+  font-size: 40px;
+  font-family:SourceSansPro-Regular;
+  padding: 0px 10px;
+  transition: all 0.2s;
+  display: block;
+  float: right;
+}
+
+.container{
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0, 5px;
+
+}
+
+
+.logo {
+  display: inline-block;
+  width: 40px;
+  height: 80px;
+  background:url('../images/truii-logo-mono-blk.png') center center no-repeat;
+  background-size: contain;
+  float: left;
+}
+
+#titlelogo .logo {
+  margin: 5px 0px;
+}
+
+
+#recordform {
+      padding: 100px;
+}
+
+#titlelogo1 {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background-color:#E3E4E4;
+}
+
+#titlelogo1 .logo {
+  margin: 5px 0px;
+}
+
+
+.logo1 {
+  display: inline-block;
+  width: 40px;
+  height: 80px;
+  padding-left: 20%;
+  background:url('../images/truii-full-colour-white.png') center center no-repeat;
+  background-size: contain;
+  float: left;
+}
+
+#Homebutton {
+padding: 100px;
+font-family: SourceSansPro-Regular;
+font-size: 5vw;
+}
+
+#titlelogo2 {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background-color:#EE6724;
+}
