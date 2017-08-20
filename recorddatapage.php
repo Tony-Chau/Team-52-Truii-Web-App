@@ -8,8 +8,9 @@
  <link rel="stylesheet" href="css/style.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script>
- var columnNumber;
-function Create(){
+ var columnNumber; //The number of columns the user has inputted on the first table
+//Creates the Html code for the divColumn and also uses the information it had obtained from the first table to create the second one
+function ColumnHTML(){
   var div = "";
   var i = 1;
   var title = document.getElementById("xampletextinput").value;
@@ -18,7 +19,7 @@ function Create(){
   div += "<input type=\"text\" value=\"" + columnNumber + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"ColumnNumber\" style=\"display: none !important;\">";
   for (i = 1; i <= columnNumber; i+= 1){
     div += "<div class=\"form-group\" id=\"ColumnList\">";
-    div += "<h2> Column" +  i + "</h2><label for=\"exampletextinput\">Column " +  i + " Title </label>";
+    div += "<h2> Column " +  i + "</h2><label for=\"exampletextinput\">Column " +  i + " Title </label>";
     div += "<input type=\"text\" class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" name=\"ColumnTitle" + i + "\">";
     div += "<div class=\"form-group\"><label for=\"exampleSelect1\">Unit of Measurement</label>";
     div += "<select class=\"form-control\" id=\"exampleSelect1\" name=\"ColumnType" + i + "\">";
@@ -27,31 +28,28 @@ function Create(){
 
   return div;
 }
-function appear(){
-		
-}
+
  $(document).ready(function(){
-   $("#fadeToItemColumn").click(function(){
-       $("#Create").fadeOut("slow");
-	   
+   $("#btnfadeToItemColumn").click(function(){
+       $("#divCreate").fadeOut("slow"); //Fade out animation to make the first table disseapear
     //  This gets the value from the select box
       var exampleSelect1 = document.getElementById("exampleSelect1");
        columnNumber = exampleSelect1.options[exampleSelect1.selectedIndex].value;
+       //The sleep funciton to give the web more time
 	   window.setTimeout(function(){
-		   $("#Column").fadeIn("slow");
-			$("#Buttons").fadeIn("slow");
-	   }, 1000);
-	   $("#Column").html(Create());
-	   
-	    
-       
+		   $("#divColumn").fadeIn("slow");
+			$("#divButtons").fadeIn("slow");
+    }, 500);
+    //Uses ColumnHtml function to to return a string to include it to the html code of divColumn
+	   $("#divColumn").html(ColumnHTML());
    }),
-   $("#FadeBack").click(function(){
-       $("#Column").fadeOut("slow");
-       $("#Buttons").fadeOut("slow");
+   //This button does the opposite task where it fades the second table out and fades the first table back in
+   $("#btnFadeBack").click(function(){
+       $("#divColumn").fadeOut("slow");
+       $("#divButtons").fadeOut("slow");
 	   window.setTimeout(function(){
-		   $("#Create").fadeIn("slow");
-	   }, 1000);
+		   $("#divCreate").fadeIn("slow");
+	   }, 500);
    })
  });
 
@@ -70,7 +68,7 @@ function appear(){
 </header>
 <form>
 <div id ="recordform">
-  <div class= "container1" id="Create">
+  <div class= "container1" id="divCreate">
 
     <div class="form-group">
       <label for="exampletextinput">Title </label>
@@ -84,14 +82,14 @@ function appear(){
          ?>
       </select>
     </div>
-      <button type="button" class="btn btn-primary" id="fadeToItemColumn">Submit</button>
+      <button type="button" class="btn btn-primary" id="btnfadeToItemColumn">Submit</button>
 
 </div>
-  <div class="form-group" id="Column" style="display: none;">
+  <div class="form-group" id="divColumn" style="display: none;">
 
 </div>
-<div class="form-group" id="Buttons" style="display: none;">
-<button type="button" class="btn btn-primary" id="FadeBack">Back</button>
+<div class="form-group" id="divButtons" style="display: none;">
+<button type="button" class="btn btn-primary" id="btnFadeBack">Back</button>
 <button type="submit" class="btn btn-primary">Submit</button>
 </div>
 </div>
