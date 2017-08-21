@@ -1,5 +1,6 @@
 /* main css */
 
+
 .logo {
     width: 200px;
     height: 15%;
@@ -14,7 +15,6 @@
 
 .container-fluid {
     display: inline-block;
-    margin-bottom: 25%;
     background: rgba(253, 103, 26, 0.8);
     border-radius: 25px;
     padding: 2%;

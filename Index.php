@@ -10,7 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
-<body style="background-image: url('BackGround/StartBackGround.png');background-position:right top;background-size:auto 100%;background-repeat: no-repeat;">
+<body style="background-image: url('BackGround/StartCropBackGround.jpg');
+background-size:100% 100%; background-repeat: no-repeat; background-attachment: fixed;">
 
   <div class="centered" align="center">
     <img src="Logo/truii-full-colour-white.png" class="logo" alt="TruiiLogo">
@@ -68,7 +69,7 @@
         <!--onclick="window.location='Registration.php';"-->
     </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
         $("#btnRegister").click(function(){
