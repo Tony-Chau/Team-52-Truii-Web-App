@@ -1,4 +1,5 @@
 <?php
+//Logs the user in
 function LogUser($username, $password){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -6,17 +7,18 @@ function LogUser($username, $password){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM usertable");
+    $result = $pdo->query("SELECT * FROM UserTable WHERE Username = '" . $username . "'");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
   foreach($result as $data){
-    if (($result['UserName'] == $username) && $result['Password'] == $password){
-      $_SESSION['UserID'] = $result['UserID'];
+    if ($data['Password'] == $password){
+      log_in($data['UserID']);
+      $pdo = null;
     }
   }
-  $pdo = nuill;
 }
+//Creates an account for the user
 function CreateUser($Username, $password){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -24,32 +26,57 @@ function CreateUser($Username, $password){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("INSERT INTO usertable(UserName, Password) VALUES(\"" . $username . "\", \"" . $password . "\");");
+    $result = $pdo->query("INSERT INTO UserTable(Username, Password) VALUES(\"" . $Username . "\", \"" . $password . "\");");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
   $pdo=null;
 }
-function CheckUser($username, $password){
+//Check if the account exist
+function CheckUser($username){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM usertable");
+    $result = $pdo->query("SELECT * FROM UserTable");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
   foreach($result as $data){
-    if ($data['UserName'] == $username){
+    if ($data['Username'] == $username){
       $pdo= null;
-      return false;
+      return true;
     }
   }
   $pdo=null;
-  return true;
+  return false;
 }
+//Checks if Username and password matches
+function CheckUserAndPassword($username, $password){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("SELECT * FROM UserTable");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  foreach($result as $data){
+    if ($data['Username'] == $username && $data['Password'] == $password){
+      $pdo= null;
+      return true;
+    }
+  }
+  $pdo=null;
+  return false;
+}
+
+
+//Ask an request to obtain any details
 function RequestUserDetail($userID, $request){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -57,13 +84,13 @@ function RequestUserDetail($userID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM usertable WHERE UserID = \"" . $userID . "\");" );
+    $result = $pdo->query("SELECT * FROM UserTable WHERE UserID = \"" . $userID . "\");" );
   }catch (PDOException $e){
     echo $e->getMessage();
   }
   foreach($result as $data){
     $pdo = null;
-    return $data["\" . $request . "\""];
+    return $data[$request];
   }
 }
  ?>
