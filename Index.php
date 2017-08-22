@@ -1,6 +1,5 @@
 <?php
   include './sql/mysql.inc';
-  //unset($_SESSION['UserID']);
   if (is_log()){
     header('location: home.php');
   }
@@ -115,8 +114,7 @@ background-size:100% 100%; background-repeat: no-repeat; background-attachment: 
         $("#btnLog").click(function(){
         $("#Register").animate({ height: 'toggle' ,opacity: '0'}, "slow");
           $("#log").animate({height: 'toggle' , opacity: '100' }, "slow");
-        }),
-        $('[name=log_username]').value = 'pa';
+        })
     });
 </script>
   <!-- JavaScript files should be linked at the bottom of the page  -->
