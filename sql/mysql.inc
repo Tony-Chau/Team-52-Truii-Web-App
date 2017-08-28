@@ -1,6 +1,11 @@
 <?php
   session_start();
 include 'UserTableDB.inc';
+include 'TableListDB.inc';
+include 'FieldTableDB.inc';
+include 'CustomFieldTableDB.inc';
+include 'GraphTableDB.inc';
+
 function get_dbServer(){
   return 'team52.heliohost.org';
 }
@@ -25,4 +30,12 @@ function log_in($value){
 function log_out(){
   unset($_SESSION['UserID']);
 }
+
+function GetCurrentTime(){
+  $time = new DateTimeZone('Australia/Brisbane');
+  $datetime = new DateTime();
+  $datetime->setTimezone($time);
+  return $datetime;
+}
+
  ?>
