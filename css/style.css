@@ -134,3 +134,19 @@ font-size: 5vw;
   background: rgba(238, 86, 36, 0.6);
   border-color: rgba(238, 86, 36, 0.6);
 }
+
+
+.list-group-item.active,
+.list-group-item.focus,
+.list-group-item.action {
+  color: #ffffff;
+  background-color: rgba(238, 86, 36, 0.5);
+  background: #EE6724;
+  border-color: #EE6724;
+}
+
+.list-group-item.active:hover {
+  color: #ffffff;
+  background: rgba(238, 86, 36, 0.6);
+  border-color: rgba(238, 86, 36, 0.6);
+}
