@@ -8,6 +8,14 @@ h1 {
   font-size: 5vw;
 }
 
+p {
+  font-size: 3vw;
+  font-family: SourceSansPro-Regular;
+}
+a {
+  font-family: SourceSansPro-Regular;
+}
+
 /*Start of title and Logo bar */
 
 #titlelogo {
@@ -102,6 +110,27 @@ font-size: 5vw;
   background-color:#EE6724;
 }
 
-.img{
+.background-image{
   opacity:0.2;
+}
+
+.list-group-item-action {
+  color: rgb(10,191,211);
+}
+
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary {
+  color: #ffffff;
+  background-color: rgba(238, 86, 36, 0.5);
+  background: #EE6724;
+  border-color: #EE6724;
+}
+
+.btn-primary:hover {
+  color: #ffffff;
+  background: rgba(238, 86, 36, 0.6);
+  border-color: rgba(238, 86, 36, 0.6);
 }
