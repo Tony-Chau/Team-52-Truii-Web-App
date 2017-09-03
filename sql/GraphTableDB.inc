@@ -40,7 +40,7 @@ function RequestGraphTableDetail($GraphID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM GraphTable WHERE GraphID = " . $GraphID . ");" );
+    $result = $pdo->query("SELECT * FROM GraphTable WHERE GraphID = " . $GraphID . ";" );
   }catch (PDOException $e){
     echo $e->getMessage();
   }
