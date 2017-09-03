@@ -1,7 +1,6 @@
 <?php
 //Creates Table
-function CreateTable($TableName){
-  $username = RequestUserDetail($_SESSION['UserID'], 'Username');
+function EnterTable($TableName){
   $dateTime = GetCurrentTime();
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -9,7 +8,7 @@ function CreateTable($TableName){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("INSERT INTO TableList(TableName, Username, DateCreated) VALUES(\"" . $TableName . "\", \"" . $username . "\", \"" . $dateTime->format('Y-m-d H:i:s') . "\");");
+    $result = $pdo->query("INSERT INTO TableList(TableName, Username, DateCreated) VALUES(\"" . $TableName . "\", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");");
   }catch (PDOException $e){
     echo $e->getMessage();
   }

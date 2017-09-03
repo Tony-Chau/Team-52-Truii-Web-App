@@ -49,4 +49,22 @@ function RequestGraphTableDetail($GraphID, $request){
     return $data[$request];
   }
 }
+
+//Ask an request to obtain any details as a list
+function RequestGraphTableDetailAsList($GraphID, $requestfield){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("SELECT " . $requestfield . " FROM GraphTable;");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  foreach($result as $data){
+    $pdo = null;
+    return $data[$request];
+  }
+}
  ?>

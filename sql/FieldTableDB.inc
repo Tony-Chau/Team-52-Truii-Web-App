@@ -40,7 +40,7 @@ function RequestFieldTableDetail($FieldID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM FieldTable WHERE FieldID = " . $FieldID . ");" );
+    $result = $pdo->query("SELECT * FROM FieldTable WHERE FieldID = " . $FieldID . ";" );
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -48,5 +48,21 @@ function RequestFieldTableDetail($FieldID, $request){
     $pdo = null;
     return $data[$request];
   }
+}
+
+//Ask an request to obtain any details as a list
+function RequestFieldTableDetailAsList($FieldID, $requestfield){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("SELECT " . $requestfield . " FROM FieldTable;");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo = null;
+  return $result;
 }
 ?>
