@@ -9,9 +9,9 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
   $sql = "CREATE TABLE " . $TableName . "( " . $TableName . "ID INT AUTO_INCREMENT NOT NULL, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
-      $sql .= $ArrayOfFields[$i] . $DataType[$i] . ', PRIMARY KEY(' . $TableName . 'ID));';
+      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ', PRIMARY KEY(' . $TableName . 'ID));';
     }
-    $sql .= $ArrayOfFields[$i] . $DataType[$i] . ', ';
+    $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ', ';
   }
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
