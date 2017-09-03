@@ -33,7 +33,7 @@ function GetGraphTableList(){
 }
 
 //Ask an request to obtain any details
-function RequestCustomFieldTableDetail($GraphID, $request){
+function RequestGraphTableDetail($GraphID, $request){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
