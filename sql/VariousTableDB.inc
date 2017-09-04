@@ -1,18 +1,19 @@
 <?php
 //Generates tables
 function CreateTable($TableName, $ArrayOfFields, $DataType){
-  $dateTime = GetCurrentTime();
+  $sql = "CREATE TABLE " . GetTableIDLastNumber() + 1 . "( " . $TableName . "ID INT AUTO_INCREMENT NOT NULL, ";
+  for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
+    if ($i == count($ArrayOfFields) - 1){
+      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ', PRIMARY KEY(' . $TableName . 'ID));';
+    }else{
+      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ', ';
+    }
+  }
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
-  $sql = "CREATE TABLE " . $TableName . "( " . $TableName . "ID INT AUTO_INCREMENT NOT NULL, ";
-  for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
-    if ($i == count($ArrayOfFields) - 1){
-      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ', PRIMARY KEY(' . $TableName . 'ID));';
-    }
-    $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ', ';
-  }
+
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
     $result = $pdo->query($sql);
@@ -38,15 +39,14 @@ function SortDataType($DataStringList){
   return $NewDataString;
 }
 
-function GetVariousTable($TableName){
-  $dateTime = GetCurrentTime();
+function GetVariousTable($TableID){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM " . $TableName . ";");
+    $result = $pdo->query("SELECT * FROM " . $TableID . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -54,7 +54,7 @@ function GetVariousTable($TableName){
   return $result;
 }
 
-function RequestVariousTableAsList($TableName, $requestfield){
+function RequestVariousTableAsList($TableID, $requestfield){
   $dateTime = GetCurrentTime();
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -62,7 +62,7 @@ function RequestVariousTableAsList($TableName, $requestfield){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT " . $requestfield . " FROM " . $TableName . ";");
+    $result = $pdo->query("SELECT " . $requestfield . " FROM " . $TableID . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -70,12 +70,63 @@ function RequestVariousTableAsList($TableName, $requestfield){
   return $result;
 }
 
-function AddColumn($TableName, $FieldName, $DataType){
-
+function AddColumn($TableID, $FieldName, $DataType){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("ALTER TABLE " . $TableID . " ADD " .  $FieldName . " " . $DataType . ";");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
 }
 
-function DeleteColumn($TableName, $FieldName){
-
+function DeleteColumn($TableID, $FieldName){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("ALTER TABLE " . $TableID . " DROP " .  $FieldName . ";");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
 }
 
+function EnterVariousTable($TableID, $array_of_data, $array_of_type){
+  $sql = "INSERT INTO " . $TableID . "(";
+  for ($i = 0; $i < count($array_of_data); $i += 1){
+    if ($i == count($array_of_data) - 1){
+      $sql .= sqlInsertionString($array_of_data[$i], $array_of_type[$i]) . ");";
+    }else{
+      $sql .= sqlInsertionString($array_of_data[$i], $array_of_type[$i]) . ",";
+    }
+  }
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query($sql);
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
+}
+
+function sqlInsertionString($data, $type){
+  if ($type == 'VARCHAR(255)'){
+    return "\" " . $data . "\"";
+  }else if ($type == 'DATETIME'){
+    return "\" " . $data->format('Y-m-d H:i:s') . "\"";
+  }else{
+    return $data;
+  }
+}
  ?>
