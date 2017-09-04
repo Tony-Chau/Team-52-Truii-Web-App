@@ -70,6 +70,23 @@ function RequestVariousTableAsList($TableID, $requestfield){
   return $result;
 }
 
+function DeleteTable($TableID){
+  $dateTime = GetCurrentTime();
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("DROP TABLE " . $TableID . ";");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
+  DeleteFieldTable($TableID);
+}
+
+
 function AddColumn($TableID, $FieldName, $DataType){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -82,6 +99,7 @@ function AddColumn($TableID, $FieldName, $DataType){
     echo $e->getMessage();
   }
   $pdo=null;
+  EnterFieldTable($TableID, $FieldName, $DataType);
 }
 
 function DeleteColumn($TableID, $FieldName){
@@ -96,6 +114,7 @@ function DeleteColumn($TableID, $FieldName){
     echo $e->getMessage();
   }
   $pdo=null;
+  DeleteField($TableID, $FieldName);
 }
 
 function EnterVariousTable($TableID, $array_of_data, $array_of_type){

@@ -65,4 +65,34 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
   $pdo = null;
   return $result;
 }
+
+function DeleteField($TableID, $FieldName){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("DELETE FROM FieldTable WHERE TableID = " . $TableID . "& FieldName = " . $FieldName . ";" );
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo = null;
+}
+
+function DeleteFieldTable($TableID){
+  $dateTime = GetCurrentTime();
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("DELETE FROM FieldTable WHERE TableID = " . $TableID . ";");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
+
+}
 ?>
