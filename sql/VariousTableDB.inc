@@ -1,12 +1,13 @@
 <?php
 //Generates tables
 function CreateTable($TableName, $ArrayOfFields, $DataType){
-  $sql = "CREATE TABLE " . GetTableIDLastNumber() + 1 . "( " . $TableName . "ID INT AUTO_INCREMENT NOT NULL, ";
+  EnterTable($TableName);
+  $sql = "CREATE TABLE " . GetTableIDLastNumber() . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
-      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ', PRIMARY KEY(' . $TableName . 'ID));';
+      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", PRIMARY KEY(" . $TableName . "ID));";
     }else{
-      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ', ';
+      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", ";
     }
   }
   $dbUser = get_dbUsername();
@@ -21,7 +22,6 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
     echo $e->getMessage();
   }
   $pdo=null;
-  EnterTable($TableName);
 }
 //Sorry I need to know the name of this, which is why i left it empty
 function SortDataType($DataStringList){
