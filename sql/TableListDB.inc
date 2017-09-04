@@ -48,4 +48,22 @@ function RequestTableDetail($TableID, $request){
   }
 }
 
+function GetTableIDLastNumber(){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("SELECT TableID FROM TableList ORDER BY TableID DESC LIMIT 1;");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo = null;
+  if ($result['TableID'] == null || $result['TableID'] == ''){
+    return -1;
+  }
+  return $result['TableID'];
+}
+
 ?>
