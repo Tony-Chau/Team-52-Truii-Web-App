@@ -139,6 +139,22 @@ function EnterVariousTable($TableID, $array_of_data, $array_of_type){
   $pdo=null;
 }
 
+function UpdateVariousTable($TableID, $VariousID, $RowID, $Field, $Value){
+  $TableName = RequestTableDetail($TableID, "TableName");
+  $sql = "UPDATE " . $TableID . " SET " . $Field . " = " . $Value . " WHERE " . $TableName . "ID = " . $RowID . ";";
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query($sql);
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
+}
+
 function sqlInsertionString($data, $type){
   if ($type == 'VARCHAR(255)'){
     return "\" " . $data . "\"";

@@ -67,4 +67,20 @@ function RequestGraphTableDetailAsList($GraphID, $requestfield){
     return $data[$request];
   }
 }
+
+function UpdateGraphTableColourCode($GraphID, $ColourCode){
+  $sql = "UPDATE GraphTable SET ColourCode = " . $ColourCode . " WHERE GraphID = " . $GraphID . ";";
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query($sql);
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
+}
+
  ?>
