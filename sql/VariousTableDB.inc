@@ -139,9 +139,9 @@ function EnterVariousTable($TableID, $array_of_data, $array_of_type){
   $pdo=null;
 }
 
-function UpdateVariousTable($TableID, $VariousID, $RowID, $Field, $Value){
+function UpdateVariousTable($TableID, $VariousID, $Field, $Value){
   $TableName = RequestTableDetail($TableID, "TableName");
-  $sql = "UPDATE " . $TableID . " SET " . $Field . " = " . $Value . " WHERE " . $TableName . "ID = " . $RowID . ";";
+  $sql = "UPDATE " . $TableID . " SET " . $Field . " = " . $Value . " WHERE " . $TableName . "ID = " . $VariousID . ";";
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
