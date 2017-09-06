@@ -99,7 +99,7 @@ function AddColumn($TableID, $FieldName, $DataType){
     echo $e->getMessage();
   }
   $pdo=null;
-  EnterFieldTable($TableID, $FieldName, $DataType);
+  //EnterFieldTable($TableID, $FieldName, $DataType);
 }
 
 function DeleteColumn($TableID, $FieldName){
@@ -114,7 +114,7 @@ function DeleteColumn($TableID, $FieldName){
     echo $e->getMessage();
   }
   $pdo=null;
-  DeleteField($TableID, $FieldName);
+  //DeleteField($TableID, $FieldName);
 }
 
 function EnterVariousTable($TableID, $array_of_data, $array_of_type){
