@@ -2,7 +2,7 @@
 //Generates tables
 function CreateTable($TableName, $ArrayOfFields, $DataType){
   EnterTable($TableName);
-  $sql = "CREATE TABLE " . GetTableIDLastNumber() . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
+  $sql = "CREATE TABLE " . NumberToWordsFormat(GetTableIDLastNumber()) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
       $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", PRIMARY KEY(" . $TableName . "ID));";
@@ -46,7 +46,7 @@ function GetVariousTable($TableID){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM " . $TableID . ";");
+    $result = $pdo->query("SELECT * FROM " . NumberToWordsFormat($TableID) . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -62,7 +62,7 @@ function RequestVariousTableAsList($TableID, $requestfield){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT " . $requestfield . " FROM " . $TableID . ";");
+    $result = $pdo->query("SELECT " . $requestfield . " FROM " . NumberToWordsFormat($TableID) . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -78,7 +78,7 @@ function DeleteTable($TableID){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("DROP TABLE " . $TableID . ";");
+    $result = $pdo->query("DROP TABLE " . NumberToWordsFormat($TableID) . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -94,7 +94,7 @@ function AddColumn($TableID, $FieldName, $DataType){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("ALTER TABLE " . $TableID . " ADD " .  $FieldName . " " . $DataType . ";");
+    $result = $pdo->query("ALTER TABLE " . NumberToWordsFormat($TableID) . " ADD " .  $FieldName . " " . $DataType . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -109,7 +109,7 @@ function DeleteColumn($TableID, $FieldName){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("ALTER TABLE " . $TableID . " DROP " .  $FieldName . ";");
+    $result = $pdo->query("ALTER TABLE " . NumberToWordsFormat($TableID) . " DROP " .  $FieldName . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -117,8 +117,25 @@ function DeleteColumn($TableID, $FieldName){
   //DeleteField($TableID, $FieldName);
 }
 
+function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){
+  $OldFieldName = RequestFieldTableDetail($FieldID, "FieldName");
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("ALTER TABLE " . NumberToWordsFormat($TableID) . " CHANGE " . $OldFieldName . " " . $NewFieldName . " " . $NewFieldType . ";");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
+  ChangeField($FieldID, $NewFieldName, $NewFieldType);
+}
+
+
 function EnterVariousTable($TableID, $array_of_data, $array_of_type){
-  $sql = "INSERT INTO " . $TableID . "(";
+  $sql = "INSERT INTO " . NumberToWordsFormat($TableID) . "(";
   for ($i = 0; $i < count($array_of_data); $i += 1){
     if ($i == count($array_of_data) - 1){
       $sql .= sqlInsertionString($array_of_data[$i], $array_of_type[$i]) . ");";
@@ -141,7 +158,7 @@ function EnterVariousTable($TableID, $array_of_data, $array_of_type){
 
 function UpdateVariousTable($TableID, $VariousID, $Field, $Value){
   $TableName = RequestTableDetail($TableID, "TableName");
-  $sql = "UPDATE " . $TableID . " SET " . $Field . " = " . $Value . " WHERE " . $TableName . "ID = " . $VariousID . ";";
+  $sql = "UPDATE " . NumberToWordsFormat($TableID) . " SET " . $Field . " = " . $Value . " WHERE " . $TableName . "ID = " . $VariousID . ";";
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
