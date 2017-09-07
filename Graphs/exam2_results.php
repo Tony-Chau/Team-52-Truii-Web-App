@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Exam Results </h1>
+    <h1> Exam Average Results </h1>
   </div>
 </header>
 

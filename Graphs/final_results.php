@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Exam Results </h1>
+    <h1> Student Results </h1>
   </div>
 </header>
 
@@ -56,17 +56,17 @@
 
         var trace2 = {
         x: [8, 9, 10, 11, 12],
-        y: [61, 68, 77, 83, 88],
+        y: [9, 31, 53, 75, 97],
         mode: 'scatter',
-        name: 'Sophia Keren',
-        text: ['Overall Grade 61/100 B-', 'Overall Grade 68/100 B', 'Overall Grade 77/100 B+', 'Overall Grade 83/100 A-', 'Overall Grade 88 A-']
+        name: 'Shiraori',
+        text: ['Overall Grade 9/100 E', 'Overall Grade 31/100 D', 'Overall Grade 53/100 C', 'Overall Grade 75/100 B+', 'Overall Grade 97/100 A+']
         };
 
         var trace3 = {
         x: [8, 9, 10, 11, 12],
         y: [52, 60, 63, 69, 75],
         mode: 'scatter',
-        name: 'Yamada',
+        name: 'Mary',
         text: ['Overall Grade 52/100 C', 'Overall Grade 60/100 C+', 'Overall Grade 63/100 B-', 'Overall Grade 69/100 B', 'Overall Grade 75/100 B+']
         };
 
@@ -83,7 +83,7 @@
         y: [81, 76, 84, 79, 89],
         mode: 'scatter',
         name: 'An Jun Cheng',
-        text: ['Overall Grade 81/100 A-', 'Overall Grade 76/100 B+', 'Overall Grade 84/100 A-', 'Overall Grade 79/100 B+', 'Overall Grade 89/100 A-']
+        text: ['Overall Grade 81/100 A-', 'Overall Grade 76/100 B+', 'Overall Grade 84/100 A-', 'Overall Grade 79/100 B+', 'Overall Grade 89/100 A']
         };
 
         var trace6 = {

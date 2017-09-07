@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Cheaters </h1>
+    <h1> Sick Students </h1>
   </div>
 </header>
 
@@ -26,23 +26,23 @@
         var trace1 = {
           x: [1, 2, 3, 4],
           y: [10, 15, 13, 17],
-          mode: 'markers',
+          mode: 'lines',
           type: 'scatter',
           name: 'Year 2000',
-          text: ['Number of Students Caught During Term 1', 'Number of Students Caught During Term 2', 'Number of Students Caught During Term 3', 'Number of Students Caught During Term 4']
+          text: ['Number of Sick Students in Term 1', 'Number of Sick Students in Term 2', 'Number of Sick Students in Term 3', 'Number of Sick Students in Term 4']
         };
 
         var trace2 = {
           x: [1, 2, 3, 4],
           y: [20, 30, 26, 34],
-          mode: 'markers',
+          mode: 'lines',
           type: 'scatter',
           name: 'Year 2001',
-          text: ['Number of Students Caught During Term 1', 'Number of Students Caught During Term 2', 'Number of Students Caught During Term 3', 'Number of Students Caught During Term 4']
+          text: ['Number of Sick Students in Term 1', 'Number of Sick Students in Term 2', 'Number of Sick Students in Term 3', 'Number of Sick Students in Term 4']
         };
 
         var layout = {
-          title: 'Cheating Student Caught during Exams',
+          title: 'Sick Students During the Years',
           xaxis: {
             title: 'Term',
             showgrid: false,

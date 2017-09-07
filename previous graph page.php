@@ -100,7 +100,7 @@
             <div class="caption">
               <h3>Chart 7</h3>
               <p>Number Cheating Attempted by Students</p>
-              <p><a href="Graphs/cheatingStudents.php" class="btn btn-primary" role="button">View</a> </p>
+              <p><a href="Graphs/cheatingstudents.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@
             <div class="caption">
               <h3>Chart 8</h3>
               <p>Number of Sick Students</p>
-              <p><a href="#" class="btn btn-primary" role="button">View</a> </p>
+              <p><a href="Graphs/sickstudents.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>
