@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Year 11's Results </h1>
+    <h1> Exam Results </h1>
   </div>
 </header>
 
@@ -22,20 +22,26 @@
 
       <div id="Results"></div>
       <script>
-        var data = [{
-        values: [81, 19],
-        labels: ['Year 11\'s That Passed', 'Year 11\'s That Failed'],
-        type: 'pie'
-        }];
+        var trace1 = {
+          x: [1, 2, 3, 4],
+          y: [60, 55, 70, 40],
+          mode: 'markers',
+          marker: {
+            size: [60, 55, 70, 40]
+          }
+          };
 
-        var layout = {
+          var data = [trace1];
+
+          var layout = {
+          title: 'Exam Average Results Overtime',
+          showlegend: false,
           height: 500,
           width: (window.innerWidth / 1.5)
         };
 
+
         Plotly.newPlot('Results', data, layout);
-
-
       </script>
     </div>
   </div>

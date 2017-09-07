@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Year 11's Results </h1>
+    <h1> Year 9's Results </h1>
   </div>
 </header>
 
@@ -22,18 +22,18 @@
 
       <div id="Results"></div>
       <script>
-        var data = [{
-        values: [81, 19],
-        labels: ['Year 11\'s That Passed', 'Year 11\'s That Failed'],
-        type: 'pie'
-        }];
+      var data = [{
+      type: 'bar',
+      x: [50, 30, 80],
+      y: ['StudentA', 'StudentB', 'StudentC'],
+      text: ['50/100 Average Behaviour', '30/100 Bad Behaviour', '80/100 Good Behaviour'],
+      marker: {
+        color: 'rgb(253, 103, 26)'
+      },
+      orientation: 'h'
+      }];
 
-        var layout = {
-          height: 500,
-          width: (window.innerWidth / 1.5)
-        };
-
-        Plotly.newPlot('Results', data, layout);
+        Plotly.newPlot('Results', data);
 
 
       </script>
