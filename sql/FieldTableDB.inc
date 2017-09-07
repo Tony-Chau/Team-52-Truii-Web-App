@@ -106,8 +106,11 @@ function GetFieldID($TableID, $FieldName){
   }catch (PDOException $e){
     echo $e->getMessage();
   }
-  $pdo=null;
-  return $result['FieldID'];
+  foreach($result as $data){
+    $pdo=null;
+    return $result['FieldID'];
+  }
+
 }
 
 function ChangeField($FieldID, $NewFieldName, $NewFieldType){
