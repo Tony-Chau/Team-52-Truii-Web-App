@@ -117,6 +117,23 @@ function DeleteColumn($TableID, $FieldName){
   //DeleteField($TableID, $FieldName);
 }
 
+function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){
+  $OldFieldName = RequestFieldTableDetail($FieldID, "FieldName");
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("ALTER TABLE " . $TableID . " CHANGE " . $OldFieldName . " " . $NewFieldName . " " . $NewFieldType . ";");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
+  ChangeField($FieldID, $NewFieldName, $NewFieldType);
+}
+
+
 function EnterVariousTable($TableID, $array_of_data, $array_of_type){
   $sql = "INSERT INTO " . $TableID . "(";
   for ($i = 0; $i < count($array_of_data); $i += 1){
