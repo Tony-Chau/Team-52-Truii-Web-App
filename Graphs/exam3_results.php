@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Exam Average Results </h1>
+    <h1> Classes Exam Average Results </h1>
   </div>
 </header>
 
@@ -58,7 +58,7 @@
         var data = [trace1, trace2, trace3];
 
         var layout = {
-          title: 'Comparing Classes',
+          title: 'Comparing Classes Average Exam Results',
           xaxis: {
             title: 'Terms',
             showgrid: false,
