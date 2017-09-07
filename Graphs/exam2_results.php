@@ -35,6 +35,15 @@
 
           var layout = {
           title: 'Exam Average Results Overtime',
+          xaxis: {
+            title: 'Year',
+            showgrid: false,
+            zeroline: false
+          },
+          yaxis: {
+            title: 'Overall Grade',
+            showline: false
+          },
           showlegend: false,
           height: 500,
           width: (window.innerWidth / 1.5)
