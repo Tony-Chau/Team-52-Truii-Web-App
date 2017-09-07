@@ -122,7 +122,7 @@
             <div class="caption">
               <h3>Chart 9</h3>
               <p>Exam 3 Results</p>
-              <p><a href="#" class="btn btn-primary" role="button">View</a> </p>
+              <p><a href="Graphs/exam3_results.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>
