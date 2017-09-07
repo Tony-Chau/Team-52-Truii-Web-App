@@ -63,7 +63,7 @@
             <img src="..." alt="...">
             <div class="caption">
               <h3>Chart 4</h3>
-              <p> Number of students that passed</p>
+              <p>Number of students that passed</p>
               <p><a href="Graphs/final_results.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
@@ -87,6 +87,42 @@
               <h3>Chart 6</h3>
               <p>Exam 2 Results</p>
               <p><a href="Graphs/exam2_results.php" class="btn btn-primary" role="button">View</a> </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-sm-12 col-md-4">
+          <div class="thumbnail">
+            <img src="..." alt="...">
+            <div class="caption">
+              <h3>Chart 7</h3>
+              <p>Number Cheating Attempted by Students</p>
+              <p><a href="Graphs/cheatingStudents.php" class="btn btn-primary" role="button">View</a> </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+          <div class="thumbnail">
+            <img src="..." alt="...">
+            <div class="caption">
+              <h3>Chart 8</h3>
+              <p>Number of Sick Students</p>
+              <p><a href="#" class="btn btn-primary" role="button">View</a> </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+          <div class="thumbnail">
+            <img src="..." alt="...">
+            <div class="caption">
+              <h3>Chart 9</h3>
+              <p>Exam 3 Results</p>
+              <p><a href="#" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>
