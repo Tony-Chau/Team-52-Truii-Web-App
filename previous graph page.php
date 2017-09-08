@@ -38,8 +38,8 @@
             <img src="images/bars.png" alt="...">
             <div class="caption">
               <h3>Chart 2</h3>
-              <p>Exam 1 results</p>
-              <p><a href="Graphs/exam1_results.php" class="btn btn-primary" role="button">View</a> </p>
+              <p>Exam results</p>
+              <p><a href="Graphs/exam_results.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>
@@ -63,8 +63,8 @@
             <img src="..." alt="...">
             <div class="caption">
               <h3>Chart 4</h3>
-              <p>Number of students that passed</p>
-              <p><a href="Graphs/final_results.php" class="btn btn-primary" role="button">View</a> </p>
+              <p>Student Overall Results During HighSchool</p>
+              <p><a href="Graphs/results_overtime.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>
@@ -85,8 +85,8 @@
             <img src="..." alt="...">
             <div class="caption">
               <h3>Chart 6</h3>
-              <p>Exam 2 Results</p>
-              <p><a href="Graphs/exam2_results.php" class="btn btn-primary" role="button">View</a> </p>
+              <p>Exam Average Results</p>
+              <p><a href="Graphs/exam_average_results.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
             <img src="..." alt="...">
             <div class="caption">
               <h3>Chart 7</h3>
-              <p>Number Cheating Attempted by Students</p>
+              <p>Number of Cheating Students Caught During a Year</p>
               <p><a href="Graphs/cheatingstudents.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
@@ -110,7 +110,7 @@
             <img src="..." alt="...">
             <div class="caption">
               <h3>Chart 8</h3>
-              <p>Number of Sick Students</p>
+              <p>Number of Sick Students During a Year</p>
               <p><a href="Graphs/sickstudents.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
@@ -121,8 +121,8 @@
             <img src="..." alt="...">
             <div class="caption">
               <h3>Chart 9</h3>
-              <p>Exam 3 Results</p>
-              <p><a href="Graphs/exam3_results.php" class="btn btn-primary" role="button">View</a> </p>
+              <p>Classes Exam Average Results</p>
+              <p><a href="Graphs/exam_average_class_results.php" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>

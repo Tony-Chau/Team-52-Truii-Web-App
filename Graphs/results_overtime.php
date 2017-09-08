@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Student Overall Results During HighSchool</h1>
+    <h1> Student Overall Results During HighSchool </h1>
   </div>
 </header>
 

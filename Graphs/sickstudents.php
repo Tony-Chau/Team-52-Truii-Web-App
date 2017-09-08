@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Number of Sick Students During a Year</h1>
+    <h1> Number of Sick Students During a Year </h1>
   </div>
 </header>
 
