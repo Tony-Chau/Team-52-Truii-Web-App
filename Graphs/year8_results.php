@@ -54,7 +54,7 @@
             title: 'Overall Grade',
             showline: false
           },
-          width:  (window.innerWidth / 1.5),
+          width: (window.innerWidth / 1.2),
           height: 500
         };
 

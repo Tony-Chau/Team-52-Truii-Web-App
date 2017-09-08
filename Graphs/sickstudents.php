@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Sick Students </h1>
+    <h1> Number of Sick Students During a Year</h1>
   </div>
 </header>
 
@@ -52,7 +52,7 @@
             title: 'Number of Students',
             showline: false
           },
-          width:  (window.innerWidth / 1.5),
+          width: (window.innerWidth / 1.2),
           height: 500
         };
 

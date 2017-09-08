@@ -12,7 +12,7 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
-    <h1> Student Results </h1>
+    <h1> Student Overall Results During HighSchool</h1>
   </div>
 </header>
 
@@ -113,7 +113,7 @@
             title: 'Overall Grade',
             showline: false
           },
-          width:  (window.innerWidth / 1.5),
+          width: (window.innerWidth / 1.2),
           height: 500
         };
 

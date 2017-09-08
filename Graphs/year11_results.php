@@ -30,7 +30,7 @@
 
         var layout = {
           height: 500,
-          width: (window.innerWidth / 1.5)
+          width: (window.innerWidth / 1.2)
         };
 
         Plotly.newPlot('Results', data, layout);
