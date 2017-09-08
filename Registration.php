@@ -1,3 +1,9 @@
+<?php
+  include './sql/mysql.inc';
+  if (is_log()){
+    header('location: home.php');
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
