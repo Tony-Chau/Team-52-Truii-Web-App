@@ -28,27 +28,25 @@
 
   <div class= "container1">
 
-
-      <div align="center">
         <a href="graph.php" style="text-decoration:none">
+      <div align="center">
         <br><input type="image" src="images//piechart.png" name="image" width="180" height="180"><br>
-        <h1 style="color:#EF6724;"> Pie Chart </h1> </a>
-      </div>
+        <h1 style="color:#EF6724;"> Pie Chart </h1>
+      </div></a>
 
 
-
-      <div align="center">
           <a href="recorddatapage.php" style="text-decoration:none">
-        <br><input type="image" src="images//bargraph.png" name="image" width="180" height="180"><br>
-        <h1 style="color:#EF6724;">Bar Chart</h1> </a>
-      </div>
-
-
       <div align="center">
+
+        <br><input type="image" src="images//bargraph.png" name="image" width="180" height="180"><br>
+        <h1 style="color:#EF6724;">Bar Chart</h1>
+      </div></a>
+
         <a href="recorddatapage.php" style="text-decoration:none">
+      <div align="center">
         <br><input type="image" src="images//linegraph.png" name="image" width="180" height="180"><br>
         <h1 style="color:#EF6724;">Line Chart</h1>
-      </div>
+      </div></a>
 
   </div>
 </body>

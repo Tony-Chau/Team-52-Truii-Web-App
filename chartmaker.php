@@ -25,18 +25,17 @@
   <div id ="Homebutton">
     <div class= "container">
 
-        <div align="center">
           <a href="charttype.php" style="text-decoration:none">
+        <div align="center">
           <br><input type="image" src="images//addnew.png" name="image" width="180" height="120"><br>
-          <h1 style="color:#EF6724;"> New Chart </h1></a>
-        </div>
+          <h1 style="color:#EF6724;"> New Chart </h1>
+        </div></a>
 
-
-        <div align="center">
           <a href="charttype.php" style="text-decoration:none">
+        <div align="center">
           <br><input type="image" src="images//viewold.png" name="image" width="180" height="120"><br>
-          <h1 style="color:#EF6724;"> View Previous Charts</h1> </a>
-        </div>
+          <h1 style="color:#EF6724;"> View Previous Charts</h1>
+        </div></a>
 
     </div>
   </div>

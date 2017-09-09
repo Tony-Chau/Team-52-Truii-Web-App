@@ -32,19 +32,18 @@
   <div id ="Homebutton">
     <div class= "container1">
 
-
-        <div align="center">
           <a href='chartmaker.php' style="text-decoration:none">
-          <br><input type="image" src="images//graphmarker.png" name="image" width="120" height="80" href='chartmaker.php'><br>
-          <h1 style="color:#EF6724;"> Graph Marker </h1> </a>
-        </div>
-
-
         <div align="center">
+
+          <br><input type="image" src="images//graphmarker.png" name="image" width="120" height="80" href='chartmaker.php'><br>
+          <h1 style="color:#EF6724;"> Graph Marker </h1>
+        </div></a>
+
           <a href='recorddatapage.php' style="text-decoration:none">
+        <div align="center">
           <br><input type="image" src="images//recorddata.png" name="image" width="120" height="80"><br>
-          <h1 style="color:#0ABFDD;"> Record Data</h1> </a>
-        </div>
+          <h1 style="color:#0ABFDD;"> Record Data</h1>
+        </div></a>
 
     </div>
   </div>
