@@ -30,20 +30,18 @@
   <div id ="Homebutton">
     <div class= "container">
 
-      <form name="myform" action="charttype.php" method="POST">
         <div align="center">
+          <a href="charttype.php" style="text-decoration:none">
           <br><input type="image" src="images//addnew.png" name="image" width="180" height="120"><br>
-          <h1 style="color:#EF6724;"> New Chart </h1>
+          <h1 style="color:#EF6724;"> New Chart </h1></a>
         </div>
-      </form>
 
 
-      <form name="myform" action="previous graph page.php" method="POST">
         <div align="center">
+          <a href="charttype.php" style="text-decoration:none">
           <br><input type="image" src="images//viewold.png" name="image" width="180" height="120"><br>
-          <h1 style="color:#EF6724;"> View Previous Charts</h1>
+          <h1 style="color:#EF6724;"> View Previous Charts</h1> </a>
         </div>
-      </form>
 
     </div>
   </div>

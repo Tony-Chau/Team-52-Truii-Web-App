@@ -33,28 +33,27 @@
 
   <div class= "container1">
 
-    <form name="myform" action="graph.php" method="POST">
+
       <div align="center">
+        <a href="graph.php" style="text-decoration:none">
         <br><input type="image" src="images//piechart.png" name="image" width="180" height="180"><br>
-        <h1 style="color:#EF6724;"> Pie Chart </h1>
+        <h1 style="color:#EF6724;"> Pie Chart </h1> </a>
       </div>
-    </form>
 
 
-    <form name="myform" action="recorddatapage.php" method="POST">
+
       <div align="center">
+          <a href="recorddatapage.php" style="text-decoration:none">
         <br><input type="image" src="images//bargraph.png" name="image" width="180" height="180"><br>
-        <h1 style="color:#EF6724;">Bar Chart</h1>
+        <h1 style="color:#EF6724;">Bar Chart</h1> </a>
       </div>
-    </form>
 
 
-    <form name="myform" action="recorddatapage.php" method="POST">
       <div align="center">
+        <a href="recorddatapage.php" style="text-decoration:none">
         <br><input type="image" src="images//linegraph.png" name="image" width="180" height="180"><br>
         <h1 style="color:#EF6724;">Line Chart</h1>
       </div>
-    </form>
 
   </div>
 </body>

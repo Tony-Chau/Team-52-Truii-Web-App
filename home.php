@@ -37,20 +37,19 @@
   <div id ="Homebutton">
     <div class= "container1">
 
-      <form name="myform" action="chartmaker.php" method="POST">
+
         <div align="center">
-          <br><input type="image" src="images//graphmarker.png" name="image" width="120" height="80"><br>
-          <h1 style="color:#EF6724;"> Graph Marker </h1>
+          <a href='chartmaker.php' style="text-decoration:none">
+          <br><input type="image" src="images//graphmarker.png" name="image" width="120" height="80" href='chartmaker.php'><br>
+          <h1 style="color:#EF6724;"> Graph Marker </h1> </a>
         </div>
-      </form>
 
 
-      <form name="myform" action="recorddatapage.php" method="POST">
         <div align="center">
+          <a href='recorddatapage.php' style="text-decoration:none">
           <br><input type="image" src="images//recorddata.png" name="image" width="120" height="80"><br>
-          <h1 style="color:#0ABFDD;"> Record Data</h1>
+          <h1 style="color:#0ABFDD;"> Record Data</h1> </a>
         </div>
-      </form>
 
     </div>
   </div>
