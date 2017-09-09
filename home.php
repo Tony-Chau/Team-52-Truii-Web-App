@@ -1,14 +1,9 @@
 <?php
-  include './sql/mysql.inc';
+  include 'sql/mysql.inc';
   if (!is_log()){
     header('location: Index.php');
   }
-  if($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (is_log()){
-      log_out();
-      header('location: Index.php');
-    }
-  }
+  CheckRequestLogout();
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +23,7 @@
 
     <form method="POST">
       <div align="center">
-        <input type="submit" value="Logout" id="logout" class="submit"><br>
+        <input type="submit" value="Logout" id="logout" name="logout" class="submit"><br>
       </div>
     </form>
   </header>

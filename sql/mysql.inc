@@ -1,5 +1,6 @@
 <?php
   session_start();
+include './inc/tools.inc';
 include 'UserTableDB.inc';
 include 'TableListDB.inc';
 include 'FieldTableDB.inc';
@@ -32,17 +33,12 @@ function log_out(){
   unset($_SESSION['UserID']);
 }
 
-function GetCurrentTime(){
-  $time = new DateTimeZone('Australia/Brisbane');
-  $datetime = new DateTime();
-  $datetime->setTimezone($time);
-  return $datetime;
-}
-
-function NumberToWordsFormat($Number){
-  $format = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-  $FormNumber = $format->format($Number);
-  $NewFormNumber = str_replace(" ", "_", $FormNumber);
-  return str_replace("-", "_", $NewFormNumber);
+function CheckRequestLogout(){
+  if($_SERVER['REQUEST_METHOD'] == "POST") {
+    if(isset($_POST['logout']) && is_log()){
+        log_out();
+        header('location: Index.php');
+    }
+  }
 }
 ?>
