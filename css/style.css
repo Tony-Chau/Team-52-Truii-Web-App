@@ -46,8 +46,8 @@ header nav{
   font-size: 5vw;
   font-family:SourceSansPro-Regular;
   padding: 0px 10px;
-  margin-top: 20%;
-  margin-bottom: 5%;
+  /*margin-top: 20%;
+  margin-bottom: 5%;*/
   transition: all 0.2s;
   display: block;
 
@@ -204,4 +204,3 @@ margin-top: 10%;
   background-size: contain;
   float: right;
 }
-
