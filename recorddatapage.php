@@ -89,15 +89,15 @@ function ColumnHTML(){
          ?>
       </select>
     </div>
-      <button type="button" class="btn btn-primary" id="btnfadeToItemColumn">Submit</button>
+      <button type="button" class="btn btn-primary1" id="btnfadeToItemColumn">Submit</button>
 
 </div>
   <div class="form-group" id="divColumn" style="display: none;">
 
 </div>
 <div class="form-group" id="divButtons" style="display: none;">
-<button type="button" class="btn btn-primary" id="btnFadeBack">Back</button>
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="button" class="btn btn-primary1" id="btnFadeBack">Back</button>
+<button type="submit" class="btn btn-primary1">Submit</button>
 </div>
 </div>
 </form>
