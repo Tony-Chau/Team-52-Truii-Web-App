@@ -1,6 +1,5 @@
 /* main css */
 
-
 .logo {
     width: 200px;
     height: 15%;
@@ -42,6 +41,7 @@
     margin-top: 15%;
     margin-bottom: 5%;
     text-align: center;
+
 }
 
 .row-bottom {
@@ -50,6 +50,7 @@
     margin-top: 15%;
     margin-bottom:10%;
     text-align: center;
+
 }
 
 .label {
@@ -63,10 +64,15 @@
     border-radius: 5px;
     padding-left: 2%;
     font-size: 125%;
+
+
 }
 
 .submit {
     width: 100%;
     border-radius: 5px;
     font-size: 150%;
+    background:#08BFDD;
+    color: #F7F7F8;
+
 }
