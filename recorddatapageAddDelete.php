@@ -26,8 +26,8 @@ function ColumnHTML(){
   columnNumber += 1;
   //var title = document.getElementById("xampletextinput").value;
   //There was a glitch in the form function, so these parts will be invisible, but data is still transferred
-  //div += "<input type=\"text\" value=\"" + title + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"Title\" style=\"display: none !important;\">";
-  //div += "<input type=\"text\" value=\"" + columnNumber + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"ColumnNumber\" style=\"display: none !important;\">";
+  // div += "<input type=\"text\" value=\"" + title + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"Title\" style=\"display: none !important;\">";
+  // div += "<input type=\"text\" value=\"" + columnNumber + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"ColumnNumber\" style=\"display: none !important;\">";
   for (var i = firstColumn; i < columnNumber; i+=1){
     div += "<div class=\"form-group\" id=\"Column" + i + "\">";
     div += "</br>";
