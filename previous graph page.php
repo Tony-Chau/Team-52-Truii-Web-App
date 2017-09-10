@@ -11,13 +11,32 @@
 <body>
 <header id ="titlelogo2">
   <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
     <h1> Chart Library </h1>
+    </div>
+      <div class="col-xs-3">
+
+      <div class="icon">
+      <img class="" src="images//homeicon-01.png" alt=""> </div>
+
+      </div>
+
+  <div class="col-xs-3">
+  <div class="icon">
+      <img class="" src="images//back-01.png" alt=""> </div>
+</div>
+
   </div>
+</div>
+
 </header>
 
 
   <div id ="Homebutton">
     <div class= "container">
+       <center><img src="images/truii-full-colour-white.png" alt="Truii" width="200" height="128"></center>
+
 
 
       <div class="row">
