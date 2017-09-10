@@ -43,12 +43,14 @@ header nav{
  header h1{
   color:#FFFFFF;
   font-weight: 200;
-  font-size: 40px;
+  font-size: 5vw;
   font-family:SourceSansPro-Regular;
   padding: 0px 10px;
+  margin-top: 20%;
+  margin-bottom: 5%;
   transition: all 0.2s;
   display: block;
-  float: right;
+
 }
 
 .container{
@@ -75,6 +77,7 @@ header nav{
 
 #recordform {
       padding: 100px;
+      margin-top: 10%;
 }
 
 #titlelogo1 {
@@ -99,9 +102,10 @@ header nav{
 }
 
 #Homebutton {
-padding: 3px;
+padding: 100px;
 font-family: SourceSansPro-Regular;
 font-size: 5vw;
+margin-top: 10%;
 }
 
 #titlelogo2 {
@@ -165,3 +169,39 @@ font-size: 5vw;
   background: rgba(238, 86, 36, 0.6);
   border-color: rgba(238, 86, 36, 0.6);
 }
+
+.big1 img {
+  height: 50%;
+  width: 70%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 10%
+
+}
+
+.big2 img {
+  height: 50%;
+  width: 70%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%
+
+}
+
+.icon img {
+  width: 80%;
+  height: 80%;
+  margin-top: 20%;
+
+
+}
+
+.backlogo {
+  display: inline-block;
+  width: 20%;
+  height: 20%;
+  background:url('../images/back-01.png');
+  background-size: contain;
+  float: right;
+}
+
