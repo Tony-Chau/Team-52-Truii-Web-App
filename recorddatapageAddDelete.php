@@ -29,18 +29,21 @@ function ColumnHTML(){
   // div += "<input type=\"text\" value=\"" + title + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"Title\" style=\"display: none !important;\">";
   // div += "<input type=\"text\" value=\"" + columnNumber + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"ColumnNumber\" style=\"display: none !important;\">";
   for (var i = firstColumn; i < columnNumber; i+=1){
-    div += "<div class=\"form-group\" id=\"Column" + i + "\">";
-    div += "</br>";
-    div += "<h2> Column " + i + "</h2><label for=\"exampletextinput\">Column " +  i + " Title </label>";
-    div += "<input type=\"text\" class=\"form-control\" id=\"textinput" + i + "\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" name=\"ColumnTitle" + i + "\">";
-    div += "<div class=\"form-group\"><label for=\"exampleSelect1\">Unit of Measurement</label>";
-    div += "<select class=\"form-control\" id=\"selectinput" + i + "\" name=\"ColumnType" + i + "\">";
-    div += "<option value=\"percentage\">% Percentage</option><option value=\"umbers\"># Numbers</option><option value=\"text\">Text</option></select></div></div>";
-    //div += "<button type=\"button\" class=\"btn btn-primary\" id=\"AddColumn"+ i +"\">Add Column</button>";
-    //div += "<button type=\"button\" class=\"btn btn-primary\" id=\"DeleteColumn"+ i +"\">Delete Column</button></br>";
+    div += "<div class=\"form-group\" id=\"Column" + i + "\" style=\"margin-right: 10%\">";
+    div += "<fieldset clase=\"form-box\" id=\"Box" + i + "\" style=\"border: 2px black dashed; border-radius: 25px;\">";
+    div += "<legend style=\"width: auto; height: auto; margin-bottom: 5px; margin-left: 6%;\"><b>Column " + i + "</b></legend>";
+    div += "<button type=\"button\" class=\"btn btn-primary\" id=\"DeleteColumn"+ i +"\" style=\"float: right; margin-top: -22px; margin-right: -2px;\">X</button>";
+    div += "<label for=\"exampletextinput\" style=\"margin-left: 4%; margin-right: 4%; margin-top -5%\">Column Title </label>";
+    div += "<input type=\"text\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" name=\"ColumnTitle" + i + "\"></br>";
+    div += "<div class=\"form-group\" style=\"margin-bottom: 2%;\"><label for=\"exampleSelect1\" style=\"margin-left: 4%; margin-right: 4%;\">Unit of Measurement</label>";
+    div += "<select class=\"form-control\" id=\"selectinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" name=\"ColumnType" + i + "\">";
+    div += "<option value=\"percentage\">% Percentage</option><option value=\"umbers\"># Numbers</option><option value=\"text\">Text</option></select></div></fieldset>";
+    div += "<button type=\"button\" class=\"btn btn-primary\" id=\"AddColumn"+ i +"\" style=\"margin-top: 1%; margin-left: 6%;\">Add Column</button>";
+    div += "</div>";
   }
   return div;
 }
+
 
 function Collect(){
   text = [columnNumber];
@@ -134,7 +137,7 @@ function Delete(){
 <div id ="recordform">
   <div class= "container1" id="divCreate">
 
-    <div class="form-group">
+    <div class="form-group" style="margin-right: 10%">
       <label for="exampletextinput">Title </label>
       <input type="text" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title"></input>
       <!--<label for="exampleSelect1">Number of columns</label>
