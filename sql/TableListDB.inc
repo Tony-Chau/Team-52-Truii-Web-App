@@ -60,10 +60,12 @@ function GetTableIDLastNumber(){
     echo $e->getMessage();
   }
   $pdo = null;
-  if ($result['TableID'] == null || $result['TableID'] == ''){
-    return -1;
+  foreach($result as $data){
+    if ($data['TableID'] != null || $data['TableID'] != ''){
+      return $result['TableID'];
+    }
   }
-  return $result['TableID'];
+  return -1;
 }
 
 ?>
