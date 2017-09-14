@@ -14,14 +14,15 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
-
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
     $result = $pdo->query($sql);
   }catch (PDOException $e){
     echo $e->getMessage();
   }
-  $pdo=null;
+    for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
+      EnterFieldTable(GetTableIDLastNumber(), $ArrayOfFields[$i], $DataType[$i]);
+    }
 }
 //Sorry I need to know the name of this, which is why i left it empty
 function SortDataType($DataStringList){
@@ -99,7 +100,7 @@ function AddColumn($TableID, $FieldName, $DataType){
     echo $e->getMessage();
   }
   $pdo=null;
-  //EnterFieldTable($TableID, $FieldName, $DataType);
+  EnterFieldTable($TableID, $FieldName, $DataType);
 }
 
 function DeleteColumn($TableID, $FieldName){
@@ -114,7 +115,7 @@ function DeleteColumn($TableID, $FieldName){
     echo $e->getMessage();
   }
   $pdo=null;
-  //DeleteField($TableID, $FieldName);
+  DeleteField($TableID, $FieldName);
 }
 
 function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){
