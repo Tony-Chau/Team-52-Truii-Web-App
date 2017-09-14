@@ -1,77 +1,115 @@
 <?php
-include("../mysql.inc");
-include("connection.php");
-include("getcolumns.php");
+  include("sql/mysql.inc");
+  include("sql/Bootgrid/connection.php");
+  include("sql/Bootgrid/getcolumns.php");
 
-$output = '';
-
-for($i = 1; $i < $size; $i+=1){
-    $cName = $arr['rows'][$i]['COLUMN_NAME'];
-    $output .= '<option value="'.$cName.'">'.$cName.'</option>';
-}
+  $output = '';
+  for($i = 1; $i < $size; $i+=1){
+      $cName = $arr['rows'][$i]['COLUMN_NAME'];
+      $output .= '<option value="'.$cName.'">'.$cName.'</option>';
+  }
 
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bootgrid Tutorial - Server Side Processing using Ajax PHP</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>
-    <style>
-      body
-      {
-        margin:0;
-        pAdd_Dataing:0;
-        background-color:#f1f1f1;
-      }
-      .box
-      {
-        width:1270px;
-        padding:20px;
-        background-color:#fff;
-        border:1px solid #ccc;
-        border-radius:5px;
-        margin-top:25px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container box">
-      <h1 align="center">Jquery Bootgrid Tutorial - Server Side Processing using Ajax PHP</h1>
-      <br />
-      <div align="right">
-        <button type="button" id="add_data_button" data-toggle="modal" data-target="#testModal" class="btn btn-info btn-lg">Add Data</button>
-        <button type="button" id="add_column_button" data-toggle="modal" data-target="#columnAddModal" class="btn btn-info btn-lg">Add Column</button>
-        <button type="button" id="delete_column_button" data-toggle="modal" data-target="#columnDeleteModal" class="btn btn-info btn-lg">Delete Column</button>
-      </div>
-      <div class="table-responsive">
-        <table id="test_data" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <?php
-              for($i = 0; $i < $size; $i+=1){
-                  $col = '';
-                  $col .= "<th data-column-id='" . $arr["rows"][$i]["COLUMN_NAME"] . "'";
-                  if ($i == 0){
-                      $col .= "data-type='numeric'>";
-                  }
-                  else{
-                      $col .= ">";
-                  }
-                  $col .= $arr["rows"][$i]["COLUMN_NAME"] . "</th>";
-                  echo $col;
-              }
-               ?>
-              <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
-            </tr>
-          </thead>
-        </table>
+<head>
+
+  <title>Data Page</title>
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>
+  <style>
+    body
+    {
+      margin:0;
+      pAdd_Dataing:0;
+      background-color:#f1f1f1;
+    }
+
+    .box
+    {
+      width:1270px;
+      padding:20px;
+      background-color:#fff;
+      border:1px solid #ccc;
+      border-radius:5px;
+      margin-top:25px;
+    }
+  </style>
+</head>
+<body>
+  <!--<header id ="titlelogo" style="margin-bottom: 5%">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1> Data Page </h1>
+        </div>
+        <div class="col-xs-3">
+          <div class="icon">
+            <img class="" src="images//homeicon-01.png" alt="">
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="icon">
+            <img class="" src="images//back-01.png" alt="">
+          </div>
+        </div>
       </div>
     </div>
-  </body>
+  </header>-->
+
+  <div class="container box">
+    <h1 align="center">Data Page</h1>
+    <br />
+    <div align="right">
+      <?php
+
+        $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#testModal\" class=\"btn btn-info btn-lg\"";
+        if ($size <= 1){
+          $addData .= " disabled";
+        }
+        $addData .= ">Add Data</button>";
+        echo $addData;
+
+        echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\">Add Column</button>";
+
+        $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info btn-lg\"";
+        if ($size <= 1){
+          $delColumn .= " disabled";
+        }
+        $delColumn .= ">Delete Column</button>";
+        echo $delColumn;
+       ?>
+    </div>
+    <div class="table-responsive">
+      <table id="test_data" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <?php
+            for($i = 0; $i < $size; $i+=1){
+                $col = '';
+                $col .= "<th data-column-id='" . $arr["rows"][$i]["COLUMN_NAME"] . "'";
+                if ($i == 0){
+                    $col .= "data-type='numeric'>";
+                }
+                else{
+                    $col .= ">";
+                }
+                $col .= $arr["rows"][$i]["COLUMN_NAME"] . "</th>";
+                echo $col;
+            }
+             ?>
+            <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</body>
 </html>
 <script type="text/javascript" language='javascript'>
 $(document).ready(function(){
@@ -106,7 +144,7 @@ $(document).ready(function(){
         id: 'b0df282a-0d67-40e5-8558-c9e93b7befed'
       };
     },
-    url: 'fetch.php',
+    url: 'sql/Bootgrid/fetch.php',
     formatters: {
       'commands': function(column, row)
       {
@@ -150,7 +188,7 @@ $(document).ready(function(){
     if(form_correct)
     {
       $.ajax({
-        url:"insert.php",
+        url:"sql/Bootgrid/insert.php",
         method:"POST",
         data:form_data,
         success:function(data)
@@ -175,7 +213,7 @@ $(document).ready(function(){
       var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
       eval("var " + col + " = $(this).data('row-id');");
       var rowUpdate = "$.ajax({" +
-        "url:'fetch_single.php'," +
+        "url:'sql/Bootgrid/fetch_single.php'," +
         "method:'POST'," +
         "data:{"+col+":"+col+"}," +
         "dataType:'json'," +
@@ -204,7 +242,7 @@ $(document).ready(function(){
         var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
         eval("var " + col + " = $(this).data('row-id');");
         var rowDelete = "$.ajax({"+
-          "url:'delete.php'," +
+          "url:'sql/Bootgrid/delete.php'," +
           "method:'POST'," +
           "data:{"+col+":"+col+"}, "+
           "success:function(data){" +
@@ -227,7 +265,7 @@ $(document).ready(function(){
     if(column_name != '')
     {
       $.ajax({
-        url:"Columninsert.php",
+        url:"sql/Bootgrid/Columninsert.php",
         method:"POST",
         data:form_data,
         success:function(data)
@@ -252,7 +290,7 @@ $(document).ready(function(){
     if(column_selected != '')
     {
       $.ajax({
-        url:"Columndelete.php",
+        url:"sql/Bootgrid/Columndelete.php",
         method:"POST",
         data:form_data,
         success:function(data)
@@ -272,6 +310,7 @@ $(document).ready(function(){
 
 });
 </script>
+
 
 <div id="testModal" class="modal fade">
   <div class="modal-dialog">

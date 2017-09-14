@@ -2,7 +2,7 @@
 //include after <include("connection.php");>
 
 $size = 0;
-$table = 'various';
+$table = 100000000;
 $ColumnsQuery = "
     SELECT COLUMN_NAME
     FROM INFORMATION_SCHEMA.COLUMNS

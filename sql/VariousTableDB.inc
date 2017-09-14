@@ -94,7 +94,7 @@ function AddColumn($TableID, $FieldName, $DataType){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("ALTER TABLE " . /*NumberToWordsFormat($TableID)*/$TableID . " ADD " .  $FieldName . " " . $DataType . ";");
+    $result = $pdo->query("ALTER TABLE " . NumberToWordsFormat($TableID) . " ADD " .  $FieldName . " " . $DataType . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -109,7 +109,7 @@ function DeleteColumn($TableID, $FieldName){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    // $result = $pdo->query("ALTER TABLE " . /*NumberToWordsFormat($TableID)*/$TableID . " DROP " .  $FieldName . ";");
+    $result = $pdo->query("ALTER TABLE " . /*NumberToWordsFormat($TableID)*/$TableID . " DROP " .  $FieldName . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }

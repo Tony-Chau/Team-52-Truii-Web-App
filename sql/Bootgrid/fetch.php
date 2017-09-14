@@ -76,14 +76,21 @@ if($records_per_page != -1)
 
 //echo $query;
 $result = mysqli_query($connection, $query);
-while($row = mysqli_fetch_assoc($result))
-{
-    $data[] = $row;
-}
 
-$query1 = "SELECT * FROM " . $table;
-$result1 = mysqli_query($connection, $query1);
-$total_records = mysqli_num_rows($result1);
+if(!empty($result)){
+
+    while($row = mysqli_fetch_assoc($result))
+    {
+        $data[] = $row;
+    }
+
+    $query1 = "SELECT * FROM " . $table;
+    $result1 = mysqli_query($connection, $query1);
+    $total_records = mysqli_num_rows($result1);
+
+}else{
+    $total_records = 0;
+}
 
 $output = array(
     'current'     => intval($_POST["current"]),
