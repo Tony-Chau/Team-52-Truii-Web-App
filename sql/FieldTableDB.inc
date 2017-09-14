@@ -1,7 +1,7 @@
 <?php
 //Creates Table
 function EnterFieldTable($TableID, $fieldname, $DataType){
-  $username = RequestUserDetail($_SESSION['UserID'], 'Username');
+  //$username = RequestUserDetail($_SESSION['UserID'], 'Username');
   $dateTime = GetCurrentTime();
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();

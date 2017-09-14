@@ -2,7 +2,8 @@
 //include after <include("connection.php");>
 
 $size = 0;
-$table = 100000000;
+$tableid = 1;
+$table = NumberToWordsFormat($tableid);
 $ColumnsQuery = "
     SELECT COLUMN_NAME
     FROM INFORMATION_SCHEMA.COLUMNS
