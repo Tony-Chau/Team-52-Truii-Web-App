@@ -34,7 +34,7 @@
 
           <a href='chartmaker.php' style="text-decoration:none">
         <div align="center">
-          
+
             <div class="big1">
           <br><input type="image" src="images//graphmarker.png" name="image" href='chartmaker.php'><br> </div>
           <h1 style="color:#EF6724;"> Chart Marker </h1>
