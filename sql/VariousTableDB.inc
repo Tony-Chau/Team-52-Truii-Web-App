@@ -2,7 +2,8 @@
 //Generates tables
 function CreateTable($TableName, $ArrayOfFields, $DataType){
   EnterTable($TableName);
-  $sql = "CREATE TABLE " . NumberToWordsFormat(GetTableIDLastNumber()) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
+  $TableID = GetTableIDLastNumber();
+  $sql = "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
       $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", PRIMARY KEY(" . $TableName . "ID));";
@@ -21,6 +22,9 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
     echo $e->getMessage();
   }
   $pdo=null;
+  for ($i = 0; $i < count($ArrayOfFields); $i += 1){
+    EnterFieldTable($TableID, $ArrayOfFields[$i], $DataType[$i]);
+  }
 }
 //Sorry I need to know the name of this, which is why i left it empty
 function SortDataType($DataStringList){
