@@ -8,6 +8,9 @@ function EnterFieldTable($TableID, $fieldname, $DataType){
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "<script language=\"javascript\">";
+  echo "alert(\"" . $fieldname . " and " . $DataType . "\")";
+  echo "</script>";
   try{
     $result = $pdo->query("INSERT INTO FieldTable(FieldName, TableID, DataType) VALUES(\"" . $fieldname . "\", " . $TableID . ", \"" . $DataType . "\");");
   }catch (PDOException $e){

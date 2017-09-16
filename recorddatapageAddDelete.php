@@ -1,9 +1,25 @@
 <?php
-  include './sql/mysql.inc';
+  include 'sql/mysql.inc';
   if (!is_log()){
     header('location: Index.php');
   }
   CheckRequestLogout();
+
+  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if (isset($_POST['title'])){
+          $firstColumn = 1;
+          $columnNumber = $_POST["numofColumn"];
+
+          $table_name = ($_POST["title"]);
+          $aFields = array();
+          $dTypes = array();
+          for ($i = $firstColumn; $i <= $columnNumber; $i+=1){
+              array_push($aFields, $_POST["ColumnTitle{$i}"]);
+              array_push($dTypes, $_POST["ColumnType{$i}"]);
+          }
+          CreateTable($table_name, $aFields, $dTypes);
+      }
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +33,7 @@
  <script>
 
  var firstColumn = 1;
- var columnNumber = 1; //The number of columns the user has inputted on the first table
+ var columnNumber = 0; //The number of columns the user has inputted on the first table
 //Creates the Html code for the divColumn and also uses the information it had obtained from the first table to create the second one
  var text;
  var selectoption;
@@ -28,16 +44,16 @@ function ColumnHTML(){
   //There was a glitch in the form function, so these parts will be invisible, but data is still transferred
   // div += "<input type=\"text\" value=\"" + title + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"Title\" style=\"display: none !important;\">";
   // div += "<input type=\"text\" value=\"" + columnNumber + "\"class=\"form-control\" id=\"xampletextinput\" aria-describedby=\"tablename\" name=\"ColumnNumber\" style=\"display: none !important;\">";
-  for (var i = firstColumn; i < columnNumber; i+=1){
+  for (var i = firstColumn; i <= columnNumber; i+=1){
     div += "<div class=\"form-group\" id=\"Column" + i + "\" style=\"margin-right: 10%\">";
     div += "<fieldset clase=\"form-box\" id=\"Box" + i + "\" style=\"border: 2px black dashed; border-radius: 25px;\">";
     div += "<legend style=\"width: auto; height: auto; margin-bottom: 5px; margin-left: 6%;\"><b>Column " + i + "</b></legend>";
     div += "<button type=\"button\" class=\"btn btn-primary\" id=\"DeleteColumn"+ i +"\" style=\"float: right; margin-top: -22px; margin-right: -2px;\">X</button>";
     div += "<label for=\"exampletextinput\" style=\"margin-left: 4%; margin-right: 4%; margin-top -5%\">Column Title </label>";
-    div += "<input type=\"text\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" name=\"ColumnTitle" + i + "\"></br>";
+    div += "<input type=\"text\" name=\"ColumnTitle" + i + "\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" value=\"\" required></br>";
     div += "<div class=\"form-group\" style=\"margin-bottom: 2%;\"><label for=\"exampleSelect1\" style=\"margin-left: 4%; margin-right: 4%;\">Unit of Measurement</label>";
-    div += "<select class=\"form-control\" id=\"selectinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" name=\"ColumnType" + i + "\">";
-    div += "<option value=\"percentage\">% Percentage</option><option value=\"umbers\"># Numbers</option><option value=\"text\">Text</option></select></div></fieldset>";
+    div += "<select name=\"ColumnType" + i + "\" class=\"form-control\" id=\"selectinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\">";
+    div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"numbers\"># Numbers</option><option value=\"percentage\">% Percentage</option></select></div></fieldset>";
     div += "<button type=\"button\" class=\"btn btn-primary\" id=\"AddColumn"+ i +"\" style=\"margin-top: 1%; margin-left: 6%;\">Add Column</button>";
     div += "</div>";
   }
@@ -73,6 +89,7 @@ function Delete(){
 
 
   $(document).ready(function(){
+    document.getElementById("firstofColumn").value = firstColumn;
     $("#btnfadeToItemColumn").click(function(){
       $("#divCreate").fadeOut("slow"); //Fade out animation to make the first table disseapear
     //  This gets the value from the select box
@@ -101,19 +118,21 @@ function Delete(){
       $("#divColumn").html(ColumnHTML());
       Insert();
       $("#divColumn").show();
+      document.getElementById("numofColumn").value = columnNumber;
     });
 
     $("#btn_DeleteColumn").click(function(){
       Delete();
-      if (columnNumber == 1){
+      if (columnNumber == 0){
         $("#divColumn").hide();
       }
+      document.getElementById("numofColumn").value = columnNumber;
     });
   });
 
 </script>
 </head>
-
+<!--
 <header id ="titlelogo">
   <div class="container">
     <div class="row">
@@ -132,32 +151,26 @@ function Delete(){
       </div>
     </div>
   </div>
-</header>
-<form>
-<div id ="recordform">
-  <div class= "container1" id="divCreate">
+</header>-->
 
-    <div class="form-group" style="margin-right: 10%">
-      <label for="exampletextinput">Title </label>
-      <input type="text" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title"></input>
-      <!--<label for="exampleSelect1">Number of columns</label>
-      <select class="form-control" id="exampleSelect1" id="NumberOfColumn">
-        <?php
-        //for ($i = 1; $i < 100; $i += 1){
-        //  echo "<option>" . $i . "</option>";
-        //}
-         ?>
-      </select>-->
+<form method=POST>
+  <div id ="recordform">
+    <div class= "container1" id="divCreate">
+      <div class="form-group" style="margin-right: 10%">
+        <label for="exampletextinput">Title </label>
+        <input type="text" name="title" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title" value="" required>
+      </div>
+    </div>
+
+    <div class="form-group" id="divColumn"></div>
+
+    <div class="form-group" id="divButtons">
+      <input type="hidden" name="firstofColumn" id="firstofColumn" value=1>
+      <input type="hidden" name="numofColumn" id="numofColumn" value=0>
+
+      <button type="button" class="btn btn-primary" id="btn_AddColumn">Add Column</button>
+      <button type="button" class="btn btn-primary" id="btn_DeleteColumn">Delete Column</button>
+      <button type="submit" class="btn btn-primary" name="create_table">Submit</button>
     </div>
   </div>
-  <div class="form-group" id="divColumn">
-
-  </div>
-  <div class="form-group" id="divButtons">
-    <button type="button" class="btn btn-primary" id="btn_AddColumn">Add Column</button>
-    <button type="button" class="btn btn-primary" id="btn_DeleteColumn">Delete Column</button>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</div>
 </form>

@@ -5,10 +5,11 @@
   include("getcolumns.php");
   if(isset($_POST["operation"]))
   {
+
+      $oldcName = $_POST['column_selected'];
       $cName = $_POST['column_name'];
       $dType = 'VARCHAR(255)';
-      AddColumn($tableid, $cName, $dType);
-
-      echo 'Column Inserted';
+      RenameColumn($tableid, $oldcName, $cName, $dType);
+      echo 'Column Renamed';
   }
 ?>

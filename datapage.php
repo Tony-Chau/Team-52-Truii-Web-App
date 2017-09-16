@@ -77,6 +77,14 @@
 
         echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\">Add Column</button>";
 
+        /*
+        $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\"";
+        if ($size <= 1){
+          $editColumn .= " disabled";
+        }
+        $editColumn .= ">Edit Column</button>";
+        echo $editColumn;*/
+
         $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info btn-lg\"";
         if ($size <= 1){
           $delColumn .= " disabled";
@@ -125,6 +133,13 @@ $(document).ready(function(){
     $('.modal-title').text('Add Column');
     $('#action').val('Add Column');
     $('#operation').val('Add');
+  });
+
+  $('#edit_column_button').click(function(){
+    $('#column_editform')[0].reset();
+    $('.modal-title').text('Edit Column');
+    $('#action').val('Edit Column');
+    $('#operation').val('Edit');
   });
 
   $('#delete_column_button').click(function(){
@@ -283,6 +298,33 @@ $(document).ready(function(){
     }
   });
 
+  /*
+  $(document).on('submit', '#column_editform', function(event){
+    event.preventDefault();
+    var column_name = $('#column_name').val();
+    var column_selected = $('#column_selected').val();
+    var form_data = $(this).serialize();
+    if(column_name != '' && column_selected != '')
+    {
+      $.ajax({
+        url:"sql/Bootgrid/Columnedit.php",
+        method:"POST",
+        data:form_data,
+        success:function(data)
+        {
+          alert(data);
+          $('#column_deleteform')[0].reset();
+          $('#columnDeleteModal').modal('hide');
+          location.reload();
+        }
+      });
+    }
+    else
+    {
+      alert("All Fields are Required");
+    }
+  });*/
+
   $(document).on('submit', '#column_deleteform', function(event){
     event.preventDefault();
     var column_selected = $('#column_selected').val();
@@ -365,6 +407,35 @@ $(document).ready(function(){
     </form>
   </div>
 </div>
+
+<!--
+<div id="columnEditModal" class="modal fade">
+  <div class="modal-dialog">
+    <form method="post" id="column_editform">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Test</h4>
+        </div>
+        <div class="modal-body">
+          <label>Select Column</label>
+          <select name="column_selected" id="column_selected" class="form-control">
+            <option value="">Select Column</option>
+            <?php //echo $output ?>
+          </select>
+          <br />
+          <label>Enter Column Name</label>
+          <input type='text' name='column_name' id='column_name' class='form-control' />
+          <br />
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" name="operation" id="operation" />
+          <input type="submit" name="action" id="action" class="btn btn-success" value="Edit Column" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>-->
 
 <div id="columnDeleteModal" class="modal fade">
   <div class="modal-dialog">

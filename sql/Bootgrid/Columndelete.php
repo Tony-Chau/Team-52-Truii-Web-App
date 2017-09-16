@@ -6,7 +6,7 @@
   if(isset($_POST["operation"]))
   {
       $cName = $_POST['column_selected'];
-      DeleteColumn($table, $cName);
+      DeleteColumn($tableid, $cName);
       echo 'Column Deleted';
   }
 ?>
