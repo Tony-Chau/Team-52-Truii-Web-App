@@ -1,1 +1,2 @@
-TRUNCATE TABLE usertable;
+TRUNCATE TABLE TableList;
+TRUNCATE TABLE FieldTable;

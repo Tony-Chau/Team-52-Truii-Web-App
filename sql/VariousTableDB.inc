@@ -2,8 +2,7 @@
 //Generates tables
 function CreateTable($TableName, $ArrayOfFields, $DataType){
   EnterTable($TableName);
-  $last = GetTableIDLastNumber();
-  $sql = "CREATE TABLE " . NumberToWordsFormat($last) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
+  $sql = "CREATE TABLE " . NumberToWordsFormat(GetTableIDLastNumber()) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
       $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", PRIMARY KEY(" . $TableName . "ID));";
@@ -21,9 +20,7 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
   }catch (PDOException $e){
     echo $e->getMessage();
   }
-    for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
-      EnterFieldTable($last, $ArrayOfFields[$i], $DataType[$i]);
-    }
+  $pdo=null;
 }
 //Sorry I need to know the name of this, which is why i left it empty
 function SortDataType($DataStringList){
@@ -101,7 +98,7 @@ function AddColumn($TableID, $FieldName, $DataType){
     echo $e->getMessage();
   }
   $pdo=null;
-  EnterFieldTable($TableID, $FieldName, $DataType);
+  //EnterFieldTable($TableID, $FieldName, $DataType);
 }
 
 function DeleteColumn($TableID, $FieldName){
@@ -116,7 +113,7 @@ function DeleteColumn($TableID, $FieldName){
     echo $e->getMessage();
   }
   $pdo=null;
-  DeleteField($TableID, $FieldName);
+  //DeleteField($TableID, $FieldName);
 }
 
 function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){

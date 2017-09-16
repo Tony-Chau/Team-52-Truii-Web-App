@@ -7,8 +7,9 @@ function EnterTable($TableName){
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $sql = "INSERT INTO TableList(TableName, UserID, DateCreated) VALUES (\"" . $TableName . "\", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");";
   try{
-    $result = $pdo->query("INSERT INTO TableList(TableName, Username, DateCreated) VALUES(\"" . $TableName . "\", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");");
+    $result = $pdo->query($sql);
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -61,9 +62,7 @@ function GetTableIDLastNumber(){
   }
   $pdo = null;
   foreach($result as $data){
-    if ($data['TableID'] != null || $data['TableID'] != ''){
-      return $result['TableID'];
-    }
+    return $data;
   }
   return -1;
 }
