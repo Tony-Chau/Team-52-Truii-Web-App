@@ -9,7 +9,6 @@
       if (isset($_POST['title'])){
           $firstColumn = 1;
           $columnNumber = $_POST["numofColumn"];
-
           $table_name = ($_POST["title"]);
           $aFields = array();
           $dTypes = array();
