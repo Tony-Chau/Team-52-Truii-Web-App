@@ -12,13 +12,13 @@
         <div class="col-xs-3">
 
         <div class="icon">
-        <img class="" src="images//homeicon-01.png" alt=""> </div>
+        <img class="" alt=""> </div>
 
         </div>
 
     <div class="col-xs-3">
     <div class="icon">
-        <img class="" src="images//back-01.png" alt=""> </div>
+        <img class="" alt="" > </div>
   </div>
 
     </div>
@@ -31,6 +31,7 @@
  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
  <link rel="stylesheet" href="css/style.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src='js/Functions/Link.js'></script>
  <script>
     var columnNumber = 1;
    function addField(){
@@ -39,37 +40,41 @@
      var number = '#Column' + i;
      var div = "<div class=\"container\" id=\"Column" + i + "\" style=\"margin-right: 10%;margin-left: -10px;margin-top:10px;display:none;padding-top: 10px; padding-bottom: 10px;\">";
      div += "<fieldset clase=\"form-box\" id=\"Box" + i + "\" style=\"position: relative; border-radius: 25px;background-color:rgb(10,191,211);opacity:0.8\">";
-     div += "<button style=\"position: absolute;right: 10px; top:-15px;text-align: right;\" type=\"button\" onClick=\"deleteField("+ i +")\"class=\"btn btn-primary\" id=\"DeleteColumn"+ i +"\">X</button>";
+     div += "<button style=\"position: absolute;right: 10px; top:-15px;text-align: right;\" type=\"button\" onClick=\"deleteField("+ i +");\" class=\"btn btn-primary\" id=\"DeleteColumn"+ i +"\">X</button>";
      div += "<label for=\"exampletextinput\" style=\"color: #FFFFFF;margin-left: 4%; margin-right: 4%;padding-top: 10px;\">Column Title </label>";
-     div += "<input onkeyup=\"gainvalue(" + i + ")\" type=\"text\" name=\"ColumnTitle" + i + "\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" value=\"\" required></br>";
+     div += "<input type=\"text\" name=\"ColumnTitle" + i + "\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" required></br>";
      div += "<div class=\"form-group\" style=\"margin-bottom: 2%;\"><label for=\"exampleSelect1\" style=\"margin-left: 4%; margin-right: 4%;color: #FFFFFF;\">Unit of Measurement</label>";
      div += "<select name=\"ColumnType" + i + "\" class=\"form-control\" id=\"selectinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\">";
      div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"numbers\"># Numbers</option><option value=\"percentage\">% Percentage</option></select></div></fieldset>";
      div += "</div>";
      $('#divColumn').append(div);
      $(number).animate({height: 'toggle', display:'block'}, 500);
-     $('#Column1').animate({})
-     alert('ColumnValue size: ' + columnText.length);
-     document.getElementById('txtNumber').value = i;
    }
    function deleteField(column){
-     var mess = '#Column' + column;
+     $('#Column' + column).animate({display:'none', height: 'toggle'}, 500);
      document.getElementById("textinput" + column).required = false;
-     $(mess).animate({display:'none', height: 'toggle'}, 500);
+     document.getElementById("textinput" + column).value = '';
    }
    function ResetValue(){
-     columnNumber = 1;
+     document.getElementById('xampletextinput').value = '';
+     for (var i = 1; i < (columnNumber + 1); i += 1){
+        document.getElementById('textinput' + i).value = '';
+     }
    }
 
+   function Submission(){
+      var str = "<input name='columnNumber' style='display:none;' value=" + columnNumber + " type=number>";
+      $('#divButtons').append(str);
+      document.getElementById('create_table').click();
+   }
  </script>
 </head>
-
 <form method=GET>
   <div id ="recordform">
     <div class= "container1" id="divCreate">
       <div class="form-group" style="margin-right: 10%">
         <label for="exampletextinput">Title </label>
-        <input type="text" name="title" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title" value="" required>
+        <input type="text" name="title" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title" required>
       </div>
     </div>
 
@@ -90,8 +95,9 @@
           </div>
           <button type="button" class="btn btn-primary" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
           <div class="form-group" id="divButtons" style = "margin-top: 10px;">
-      <button type="button" class="btn btn-primary" id="btn_ResetColumn">Reset Column</button>
-      <button type="submit" class="btn btn-primary" name="create_table">Submit</button>
+      <button type="button" class="btn btn-primary" id="btn_ResetColumn" onclick="ResetValue();">Reset Column</button>
+      <button type="button" class="btn btn-primary" onClick='Submission();' >Submit</button>
+      <button type="submit" class="btn btn-primary" id='create_table' style="display:none;">Submit</button>
     </div>
   </div>
 </form>
