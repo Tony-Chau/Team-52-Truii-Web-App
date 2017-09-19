@@ -14,9 +14,9 @@
      var i = columnNumber;
      var number = '#Column' + i;
      var div = "<div class=\"container\" id=\"Column" + i + "\" style=\"margin-right: 10%;margin-left: -10px;margin-top:10px;display:none;\">";
-     div += "<fieldset clase=\"form-box\" id=\"Box" + i + "\" style=\"border: 2px black dashed; border-radius: 25px;\">";
+     div += "<fieldset clase=\"form-box\" id=\"Box" + i + "\" style=\"position: relative; border: 2px black dashed; border-radius: 25px;\">";
      div += "<legend style=\"width: auto; height: auto; margin-bottom: 5px; margin-left: 6%;\"><b>Column " + i + "</b></legend>";
-     div += "<button type=\"button\" onClick=\"deleteField("+ i +")\"class=\"btn btn-primary\" id=\"DeleteColumn"+ i +"\" style=\"float: right; margin-top: -22px; margin-right: -2px;\">X</button>";
+     div += "<button style=\"position: absolute;right: 10px; top:-1px;text-align: right;\" type=\"button\" onClick=\"deleteField("+ i +")\"class=\"btn btn-primary\" id=\"DeleteColumn"+ i +"\">X</button>";
      div += "<label for=\"exampletextinput\" style=\"margin-left: 4%; margin-right: 4%; margin-top -5%\">Column Title </label>";
      div += "<input onkeyup=\"gainvalue(" + i + ")\" type=\"text\" name=\"ColumnTitle" + i + "\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" value=\"\" required></br>";
      div += "<div class=\"form-group\" style=\"margin-bottom: 2%;\"><label for=\"exampleSelect1\" style=\"margin-left: 4%; margin-right: 4%;\">Unit of Measurement</label>";
