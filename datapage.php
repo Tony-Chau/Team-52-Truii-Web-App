@@ -3,6 +3,9 @@
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/getcolumns.php");
 
+
+
+
   $output = '';
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['COLUMN_NAME'];
@@ -32,37 +35,24 @@
 
     .box
     {
-      width:1270px;
+      min-width: 600px;
       padding:20px;
       background-color:#fff;
       border:1px solid #ccc;
       border-radius:5px;
       margin-top:25px;
     }
+
+    .table-responsive .bootgrid-table td
+    {
+      white-space: nowrap !important;
+    }
+
   </style>
 </head>
 <body>
-  <!--<header id ="titlelogo" style="margin-bottom: 5%">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-6">
-          <h1> Data Page </h1>
-        </div>
-        <div class="col-xs-3">
-          <div class="icon">
-            <img class="" src="images//homeicon-01.png" alt="">
-          </div>
-        </div>
-        <div class="col-xs-3">
-          <div class="icon">
-            <img class="" src="images//back-01.png" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>-->
 
-  <div class="container box">
+  <div class="box">
     <h1 align="center">Data Page</h1>
     <br />
     <div align="right">
@@ -77,13 +67,13 @@
 
         echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\">Add Column</button>";
 
-        /*
+
         $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\"";
         if ($size <= 1){
           $editColumn .= " disabled";
         }
         $editColumn .= ">Edit Column</button>";
-        echo $editColumn;*/
+        echo $editColumn;
 
         $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info btn-lg\"";
         if ($size <= 1){
@@ -93,14 +83,14 @@
         echo $delColumn;
        ?>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive" style="overflow-x: scroll">
       <table id="test_data" class="table table-bordered table-striped">
-        <thead>
-          <tr>
+        <thead style="">
+          <tr style="">
             <?php
             for($i = 0; $i < $size; $i+=1){
                 $col = '';
-                $col .= "<th data-column-id='" . $arr["rows"][$i]["COLUMN_NAME"] . "'";
+                $col .= "<th data-column-id='" . $arr["rows"][$i]["COLUMN_NAME"] . "' ";
                 if ($i == 0){
                     $col .= "data-type='numeric'>";
                 }

@@ -25,23 +25,25 @@
 </ul>
 
 </body>
-  
+
   <div id ="Homebutton">
     <div class= "container">
 
-          <a href="charttype.php" style="text-decoration:none">
+      <a href="charttype.php" style="text-decoration:none">
         <div align="center">
             <div class="big1">
               <br><input type="image" src="images//addnew.png" name="image" ><br></div>
           <h1 style="color:#EF6724;"> New Chart </h1>
-        </div></a>
+        </div>
+      </a>
 
-          <a href="charttype.php" style="text-decoration:none">
+      <a href="previous graph page.php" style="text-decoration:none">
         <div align="center">
           <div class="big2">
             <br><input type="image" src="images//viewold.png" name="image"><br></div>
           <h1 style="color:#EF6724;"> View Previous Charts</h1>
-        </div></a>
+        </div>
+      </a>
 
     </div>
   </div>

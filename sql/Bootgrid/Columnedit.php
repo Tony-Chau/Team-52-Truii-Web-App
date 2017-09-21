@@ -2,6 +2,8 @@
   //columninsert.php
   include("../mysql.inc");
   include("connection.php");
+
+  //started using getcolumns.php
   include("getcolumns.php");
   if(isset($_POST["operation"]))
   {
