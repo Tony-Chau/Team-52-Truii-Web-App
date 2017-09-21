@@ -16,15 +16,21 @@
 
 </head>
 
-<body style="background-image: url('images/backgroundss.png');background-position:right top;background-size:auto 100%;background-repeat: no-repeat; ">
 
-<header id ="titlelogo2">
-  <div class="container">
-    <div id ="Homebutton"></div>
+<body>
 
-    <h1> Chart Type </h1>
-  </div>
-</header>
+<ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#news">Back</a></li>
+  <li style="float:right"><a class="active" href="#about">Chart Type</a></li>
+
+</ul>
+
+</body>
+  <div id ="Homebutton">
+  
+  <body style="background-image: url('images/backgroundss.png');background-position:right top;background-size:auto 100%;background-repeat: no-repeat; ">
+
 
   <div class= "container1">
 
