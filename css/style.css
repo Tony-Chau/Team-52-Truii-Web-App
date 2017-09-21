@@ -27,6 +27,7 @@ a {
   max-width: 1024px;
   margin: 0 auto;
   padding: 0, 5px;
+  
 }
 
 #titlelogo .logo {
@@ -46,21 +47,62 @@ header nav{
   font-size: 5vw;
   font-family:SourceSansPro-Regular;
   padding: 0px 10px;
-  /*margin-top: 20%;
-  margin-bottom: 5%;*/
+  margin-top: 20%;
+  margin-bottom: 5%;
   transition: all 0.2s;
   display: block;
 
 }
 
-.container{
+
+body ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(238, 86, 36, 0.8);
+}
+
+body li {
+    float: left;
+}
+
+body ul {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+body li a {
+    display: block;
+    color: white;
+    text-align: center;
+    font-family: SourceSansPro-Regular;
+    padding: 20px 22px;
+    text-decoration: none;
+}
+
+body li a:hover:not(.active) {
+    background-color: rgba(238, 86, 36, 0.5);
+    color: white;
+    text-decoration: none;
+}
+
+body .active {
+    background-color: #EE6724;
+        color: white;
+        text-decoration: none;
+}
+
+
+.container1{
   max-width: 1024px;
   margin: 0 auto;
   padding: 0, 5px;
 
 }
 
-
+/*
 .logo {
   display: inline-block;
   width: 40px;
@@ -68,7 +110,7 @@ header nav{
   background:url('../images/truii-logo-mono-blk.png') center center no-repeat;
   background-size: contain;
   float: left;
-}
+} */
 
 #titlelogo .logo {
   margin: 5px 0px;
@@ -76,15 +118,11 @@ header nav{
 
 
 #recordform {
-      padding-top: 20px;
-      padding-left: 50px;
-      padding-bottom: 30px;
+      padding: 100px;
       margin-top: 10%;
 }
 
 #titlelogo1 {
-  position: fixed;
-  top: 0; left: 0; right: 0;
   background-color:#E3E4E4;
 }
 
@@ -104,17 +142,12 @@ header nav{
 }
 
 #Homebutton {
-padding: 3px;
+padding: 5px;
 font-family: SourceSansPro-Regular;
 font-size: 5vw;
 margin-top: 10%;
 }
 
-#titlelogo2 {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  background-color:#EE6724;
-}
 
 .background-image{
   opacity:0.2;
@@ -123,7 +156,6 @@ margin-top: 10%;
 .list-group-item-action {
   color: rgb(10,191,211);
 }
-
 
 .btn-primary:focus,
 .btn-primary:active,
@@ -196,13 +228,4 @@ margin-top: 10%;
   margin-top: 20%;
 
 
-}
-
-.backlogo {
-  display: inline-block;
-  width: 20%;
-  height: 20%;
-  background:url('../images/back-01.png');
-  background-size: contain;
-  float: right;
 }
