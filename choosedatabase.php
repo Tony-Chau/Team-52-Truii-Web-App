@@ -21,30 +21,16 @@
 
 </head>
 
-<header id ="titlelogo2">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6">
-    <h1> Data Library </h1>
-    </div>
-      <div class="col-xs-3">
+<body>
 
-      <div class="icon">
-      <img class="" src="images//homeicon-01.png" alt=""> </div>
+<ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#news">Back</a></li>
+  <li style="float:right"><a class="active" href="#about">Truii Data Library</a></li>
 
-      </div>
+</ul>
 
-  <div class="col-xs-3">
-  <div class="icon">
-      <img class="" src="images//back-01.png" alt=""> </div>
-</div>
-
-  </div>
-</div>
-
-  </div>
-
-</header>
+</body>
 
 <div id ="Homebutton">
   <div class= "container">
