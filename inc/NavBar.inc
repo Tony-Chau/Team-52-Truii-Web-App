@@ -1,8 +1,8 @@
 <?php
-function navBarCreate($ColorCode, $previous){
+function navBarCreate($ColorCode, $currentpage, $previous){
 echo '<nav style="background-color:'.$ColorCode.'">
   <ul>
-    <li class="active"><a href="#about">Chart Maker</a></li>
+    <li class="active"><a href="#about">'.$currentpage.'</a></li>
     <li><a href="home.php">Home</a></li>
     <li><a href="'.$previous.'">Back</a></li>
   <li style="float:right;">

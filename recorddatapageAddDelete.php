@@ -1,10 +1,14 @@
 <?php
   include 'sql/mysql.inc';
+  include 'inc/NavBar.inc';
+
   if (!is_log()){
     header('location: Index.php');
   }
   CheckRequestLogout();
-
+//  echo "<header>"rgb(10,191,211);
+  navBarCreate('green','Record Data', 'home.php');
+//  echo "</header>";
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['title'])){
           $columnNumber = $_POST["columnNumber"];
@@ -24,33 +28,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-  <header id ="titlelogo">
-    <div class="container">
-
-      <div class="row">
-        <div class="col-xs-6">
-          <h1> Record Data </h1>
-        </div>
-        <div class="col-xs-3">
-
-          <div class="icon">
-            <img class="" alt="">
-          </div>
-
-        </div>
-
-        <div class="col-xs-3">
-          <div class="icon">
-            <img class="" alt="" >
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-
-  </header>
  <title>Truii Record Page</title>
  <link rel="stylesheet" href="css/bootstrap.min.css">
  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -94,6 +71,7 @@
    }
  </script>
 </head>
+<body>
 <form method=POST>
   <div id ="recordform">
     <div class="container1" id="divCreate">
@@ -126,3 +104,4 @@
     </div>
   </div>
 </form>
+</body>

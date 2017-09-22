@@ -6,7 +6,7 @@
     header('location: Index.php');
   }
   CheckRequestLogout();
-  navBarCreate('rgba(238, 86, 36, 0.6)', 'home.php');
+  navBarCreate('rgba(238, 86, 36, 0.6)', 'Home', 'home.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,10 +47,10 @@
           <h1 style="color:#EF6724;"> Chart Marker </h1>
         </div></a>
 
-          <a href='recorddatapage.php' style="text-decoration:none">
+          <a href='recorddatapageAddDelete.php' style="text-decoration:none">
         <div align="center">
            <div class="big2">
-          <br><input type="image" src="images//recorddata.png" name="image" href='recorddatapage.php'><br> </div>
+          <br><input type="image" src="images//recorddata.png" name="image"><br> </div>
           <h1 style="color:#0ABFDD;"> Record Data</h1>
         </div></a>
 
