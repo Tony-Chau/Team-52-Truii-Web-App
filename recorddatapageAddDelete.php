@@ -12,8 +12,10 @@
           $aFields = array();
           $dTypes = array();
           for ($i = 1; $i < ($columnNumber + 1); $i+=1){
-              array_push($aFields, $_POST["ColumnTitle{$i}"]);
-              array_push($dTypes, $_POST["ColumnType{$i}"]);
+              if (!empty($_POST["ColumnTitle{$i}"])){
+                  array_push($aFields, $_POST["ColumnTitle{$i}"]);
+                  array_push($dTypes, $_POST["ColumnType{$i}"]);
+              }
           }
           CreateTable($table_name, $aFields, $dTypes);
       }
@@ -28,22 +30,24 @@
 
       <div class="row">
         <div class="col-xs-6">
-      <h1> Record Data </h1>
-      </div>
+          <h1> Record Data </h1>
+        </div>
         <div class="col-xs-3">
 
-        <div class="icon">
-        <img class="" alt=""> </div>
+          <div class="icon">
+            <img class="" alt="">
+          </div>
 
         </div>
 
-    <div class="col-xs-3">
-    <div class="icon">
-        <img class="" alt="" > </div>
-  </div>
+        <div class="col-xs-3">
+          <div class="icon">
+            <img class="" alt="" >
+          </div>
+        </div>
 
+      </div>
     </div>
-  </div>
 
 
   </header>
@@ -66,7 +70,7 @@
      div += "<input type=\"text\" name=\"ColumnTitle" + i + "\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" required></br>";
      div += "<div class=\"form-group\" style=\"margin-bottom: 2%;\"><label for=\"exampleSelect1\" style=\"margin-left: 4%; margin-right: 4%;color: #FFFFFF;\">Unit of Measurement</label>";
      div += "<select name=\"ColumnType" + i + "\" class=\"form-control\" id=\"selectinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\">";
-     div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"numbers\"># Numbers</option><option value=\"percentage\">% Percentage</option></select></div></fieldset>";
+     div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"INT(11)\"># Numbers</option><option value=\"percentage\">% Percentage</option></select></div></fieldset>";
      div += "</div>";
      $('#divColumn').append(div);
      $(number).animate({height: 'toggle', display:'block'}, 500);
@@ -92,7 +96,7 @@
 </head>
 <form method=POST>
   <div id ="recordform">
-    <div class= "container1" id="divCreate">
+    <div class="container1" id="divCreate">
       <div class="form-group" style="margin-right: 10%">
         <label for="exampletextinput">Title </label>
         <input type="text" name="title" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title" required>
@@ -107,13 +111,15 @@
           <div class="form-group" style="margin-bottom: 2%;"><label for="exampleSelect1" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;">Unit of Measurement</label>
             <select name="ColumnType1" class="form-control" id="selectinput1" style="width: 92%; margin-left: 4%; margin-right: 4%;">
               <option value="VARCHAR(255)">Text</option>
-              <option value="numbers"># Numbers</option>
+              <option value="INT(11)"># Numbers</option>
               <option value="percentage">% Percentage</option>
-                </select></div></fieldset>
-            </div>
+            </select>
           </div>
-          <button type="button" class="btn btn-primary" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
-          <div class="form-group" id="divButtons" style = "margin-top: 10px;">
+        </fieldset>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
+    <div class="form-group" id="divButtons" style = "margin-top: 10px;">
       <button type="button" class="btn btn-primary" id="btn_ResetColumn" onclick="ResetValue();">Reset Column</button>
       <button type="button" class="btn btn-primary" onClick='Submission();' >Submit</button>
       <button type="submit" class="btn btn-primary" id='create_table' style="display:none;">Submit</button>

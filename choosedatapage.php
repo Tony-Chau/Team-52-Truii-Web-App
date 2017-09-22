@@ -29,9 +29,9 @@
               header('location: datapage.php');
           }
           else {
-              echo '<script language="javascript">';
-              echo 'alert("Sorry, Selected Table No Longer Exists, Please Select Another Table")';
-              echo '</script>';
+              echo "<script language='javascript'>";
+              echo "alert('Sorry, Selected Table No Longer Exists, Please Select Another Table')";
+              echo "</script>";
           }
 
       }
@@ -48,12 +48,12 @@
  <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body><!--
+<body>
   <header id="titlelogo1">
     <div class="container1">
       <span class="logo1"></span>
     </div>
-  </header>-->
+  </header>
 
 
   <div id ="Homebutton">
