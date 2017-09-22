@@ -38,7 +38,6 @@
       background-color:#fff;
       border:1px solid #ccc;
       border-radius:5px;
-      margin-top:25px;
     }
 
     .table-responsive .bootgrid-table td
