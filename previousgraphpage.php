@@ -11,8 +11,8 @@
 <body>
 
 <ul>
-  <li><a href="#home">Home</a></li>
-  <li><a href="#news">Back</a></li>
+  <li><a href="home.php">Home</a></li>
+  <li><a href="chartmaker.php">Back</a></li>
   <li style="float:right"><a class="active" href="#about">Truii Chart Library</a></li>
 
 </ul>

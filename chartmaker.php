@@ -16,14 +16,12 @@
 
 </head>
 <body>
-
 <ul>
   <li><a href="#home">Home</a></li>
   <li><a href="#news">Back</a></li>
   <li style="float:right"><a class="active" href="#about">Chart Maker</a></li>
 
 </ul>
-
 </body>
 
   <div id ="Homebutton">
@@ -37,7 +35,7 @@
         </div>
       </a>
 
-      <a href="previous graph page.php" style="text-decoration:none">
+      <a href="previousgraphpage.php" style="text-decoration:none">
         <div align="center">
           <div class="big2">
             <br><input type="image" src="images//viewold.png" name="image"><br></div>
