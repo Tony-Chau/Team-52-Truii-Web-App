@@ -22,6 +22,7 @@ a {
   position: fixed;
   top: 0; left: 0; right: 0;
   background-color:rgb(10,191,211);
+
 }
 .container{
   max-width: 1024px;
@@ -68,10 +69,6 @@ header nav{
   background:url('../images/truii-logo-mono-blk.png') center center no-repeat;
   background-size: contain;
   float: left;
-}
-
-#titlelogo .logo {
-  margin: 5px 0px;
 }
 
 
@@ -147,8 +144,8 @@ margin-top: 10%;
 .btn-primary1 {
   color: #ffffff;
   background-color: rgba(10,191,211);
-  background: rgba(10,191,211);
-  border-color: rgba(10,191,211);
+  background: #0abfd3;
+  border-color: #0abfd3;
 }
 
 .btn-primary1:hover {
