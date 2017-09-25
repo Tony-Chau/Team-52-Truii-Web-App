@@ -2,7 +2,13 @@
 //include after <include("connection.php");>
 
 $size = 0;
-$tableid = 1;
+//$tableid = 47;
+if (!empty($_SESSION['tableid'])){
+    $tableid = $_SESSION['tableid'];
+}
+else {
+    $tableid = 47;
+}
 $table = NumberToWordsFormat($tableid);
 $ColumnsQuery = "
     SELECT COLUMN_NAME

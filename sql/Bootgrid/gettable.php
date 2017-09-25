@@ -1,0 +1,20 @@
+<?php
+//include after <include("connection.php");>
+
+$tsize = 0;
+$TablesIDQuery = "SELECT TableID FROM TableList";
+
+$gotTableID = mysqli_query($connection, $TablesIDQuery);
+while($tID = mysqli_fetch_assoc($gotTableID))
+{
+    $tIDs[] = $tID;
+    $tsize += 1;
+}
+
+$tIDsoutput = array( 'rows' => $tIDs );
+
+$json = json_encode($tIDsoutput);
+$tIDsarr = (json_decode($json, true));
+
+
+ ?>

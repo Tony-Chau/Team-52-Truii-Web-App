@@ -17,3 +17,9 @@ function GetLink(PageDirectory, Type, Value){
   }
   return link;
 }
+function isset(val){
+  if (typeof val === 'undefined'){
+    return false;
+  }
+  return true;
+}
