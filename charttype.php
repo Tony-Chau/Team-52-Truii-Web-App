@@ -13,6 +13,8 @@
  <link rel="stylesheet" href="css/bootstrap.min.css">
  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
  <link rel="stylesheet" href="css/style.css">
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+ <link href="https://font.googleapis.com/css?family-Source+San+Pro:300,400,600,700" rel="stylesheet">
 
 </head>
 
@@ -20,15 +22,21 @@
 <body>
 
 <ul>
+  <!--
   <li><a href="#home">Home</a></li>
   <li><a href="#news">Back</a></li>
+-->
   <li style="float:right"><a class="active" href="#about">Chart Type</a></li>
 
+  <li class ="fa fa-angle-left fa-4x"></i>
+  <li class ="fa fa-bar-chart fa-4x"></li>
+  <li class ="fa  fa-pencil-square-o fa-4x"></li>
+  </ul>
 </ul>
 
 </body>
   <div id ="Homebutton">
-  
+
   <body style="background-image: url('images/backgroundss.png');background-position:right top;background-size:auto 100%;background-repeat: no-repeat; ">
 
 

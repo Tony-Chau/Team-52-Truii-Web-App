@@ -2,36 +2,16 @@
 <html>
 <head>
 
-  <header id ="titlelogo">
-    <div class="container">
-
-      <div class="row">
-        <div class="col-xs-6">
-      <h1> Record Data </h1>
-      </div>
-        <div class="col-xs-3">
-
-        <div class="icon">
-        <img class="" alt=""> </div>
-
-        </div>
-
-    <div class="col-xs-3">
-    <div class="icon">
-        <img class="" alt="" > </div>
-  </div>
-
-    </div>
-  </div>
 
 
-  </header>
  <title>Truii Record Page</title>
  <link rel="stylesheet" href="css/bootstrap.min.css">
  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
  <link rel="stylesheet" href="css/style.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src='js/Functions/Link.js'></script>
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+ <link href="https://font.googleapis.com/css?family-Source+San+Pro:300,400,600,700" rel="stylesheet">
  <script>
     var columnNumber = 1;
    function addField(){
@@ -69,6 +49,20 @@
    }
  </script>
 </head>
+<body>
+  <div class= "colo">
+<ul>
+
+  <li style="float:right"><a class="active1" href="#about">Record Data</a></li>
+
+
+<li class ="fa fa-angle-left fa-4x"></i>
+<li class ="fa fa-bar-chart fa-4x"></li>
+<li class ="fa  fa-pencil-square-o fa-4x"></li>
+</ul>
+</div>
+</body>
+
 <form method=POST>
   <div id ="recordform">
     <div class= "container1" id="divCreate">
@@ -93,11 +87,13 @@
                 </select></div></fieldset>
             </div>
           </div>
-<<<<<<< HEAD
+
           <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
     <div class="form-group" id="divButtons" style = "margin-top: 10px;">
       <button type="button" class="btn btn-primary1" id="btn_ResetColumn">Reset Column</button>
       <button type="submit" class="btn btn-primary1" name="create_table">Submit</button>
+
+      <!--
 =======
           <button type="button" class="btn btn-primary" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
           <div class="form-group" id="divButtons" style = "margin-top: 10px;">
@@ -105,6 +101,7 @@
       <button type="button" class="btn btn-primary" onClick='Submission();' >Submit</button>
       <button type="submit" class="btn btn-primary" id='create_table' style="display:none;">Submit</button>
 >>>>>>> d373fc8093d43dd5983a60f2fc7523158b6bfdc6
+-->
     </div>
   </div>
 </form>

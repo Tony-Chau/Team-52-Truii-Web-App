@@ -9,6 +9,9 @@
 //  echo "<header>"rgb(10,191,211);
   navBarCreate('green','Record Data', 'home.php');
 //  echo "</header>";
+
+
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['title'])){
           $columnNumber = $_POST["columnNumber"];
@@ -34,6 +37,8 @@
  <link rel="stylesheet" href="css/style.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src='js/Functions/Link.js'></script>
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+ <link href="https://font.googleapis.com/css?family-Source+San+Pro:300,400,600,700" rel="stylesheet">
  <script>
     var columnNumber = 1;
    function addField(){
@@ -72,6 +77,20 @@
  </script>
 </head>
 <body>
+
+<ul>
+  <div class="col">
+
+  <li style="float:right"><a class="active1" href="#about">Record Data</a></li>
+
+
+<li class ="fa fa-angle-left fa-4x"></i>
+<li class ="fa fa-bar-chart fa-4x"></li>
+<li class ="fa  fa-pencil-square-o fa-4x"></li>
+</div>
+
+</ul>
+
 <form method=POST>
   <div id ="recordform">
     <div class="container1" id="divCreate">
@@ -96,11 +115,11 @@
         </fieldset>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
+    <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
     <div class="form-group" id="divButtons" style = "margin-top: 10px;">
-      <button type="button" class="btn btn-primary" id="btn_ResetColumn" onclick="ResetValue();">Reset Column</button>
-      <button type="button" class="btn btn-primary" onClick='Submission();' >Submit</button>
-      <button type="submit" class="btn btn-primary" id='create_table' style="display:none;">Submit</button>
+      <button type="button" class="btn btn-primary1" id="btn_ResetColumn" onclick="ResetValue();">Reset Column</button>
+      <button type="button" class="btn btn-primary1" onClick='Submission();' >Submit</button>
+      <button type="submit" class="btn btn-primary1" id='create_table' style="display:none;">Submit</button>
     </div>
   </div>
 </form>
