@@ -1,12 +1,11 @@
 <?php
   include 'sql/mysql.inc';
   include 'inc/NavBar.inc';
-
   if (!is_log()){
     header('location: Index.php');
   }
   CheckRequestLogout();
-  navBarCreate('rgb(238, 86, 36)', 'Home');
+  navBarCreate('rgb(252, 103, 25)', 'Home');
 ?>
 <!DOCTYPE html>
 <html>

@@ -7,7 +7,7 @@
   }
   CheckRequestLogout();
 //  echo "<header>"rgb(10,191,211);
-  navBarCreate('rgb(10,191,211)','Record Data');
+  navBarCreate('rgb(31,194,222)','Record Data');
 //  echo "</header>";
 
 

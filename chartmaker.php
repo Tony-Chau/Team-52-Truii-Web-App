@@ -5,7 +5,7 @@
     header('location: Index.php');
   }
   CheckRequestLogout();
-  navBarCreate('rgb(238, 86, 36)', 'Chart Maker');
+  navBarCreate('rgb(252, 103, 25)', 'Chart Maker');
 ?>
 <!DOCTYPE html>
 <html>
