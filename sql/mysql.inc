@@ -58,5 +58,11 @@ function NumberToWordsFormat($Number){
   return str_replace("-", "_", $NewFormNumber);
 }
 
+function SpaceCancel($string){
+  $NewFormNumber = str_replace(" ", "_", $FormNumber);
+  return str_replace("-", "_", $NewFormNumber);
+}
+
+
 ////////////////////////////////////////////////////////////////////////
 ?>

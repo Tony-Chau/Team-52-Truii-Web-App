@@ -3,12 +3,9 @@
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/getcolumns.php");
 
-
-
-
   $output = '';
   for($i = 1; $i < $size; $i+=1){
-      $cName = $arr['rows'][$i]['COLUMN_NAME'];
+      $cName = $arr['rows'][$i]['FieldName'];
       $output .= '<option value="'.$cName.'">'.$cName.'</option>';
   }
 
@@ -64,7 +61,6 @@
 
         echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\">Add Column</button>";
 
-
         $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\"";
         if ($size <= 1){
           $editColumn .= " disabled";
@@ -82,19 +78,18 @@
     </div>
     <div class="table-responsive" style="overflow-x: scroll">
       <table id="test_data" class="table table-bordered table-striped">
-        <thead style="">
-          <tr style="">
+        <thead>
+          <tr>
             <?php
-            for($i = 0; $i < $size; $i+=1){
+            $col = '';
+            $col .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
+            $col .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
+            echo $col;
+
+            for($i = 1; $i < $size; $i+=1){
                 $col = '';
-                $col .= "<th data-column-id='" . $arr["rows"][$i]["COLUMN_NAME"] . "' ";
-                if ($i == 0){
-                    $col .= "data-type='numeric'>";
-                }
-                else{
-                    $col .= ">";
-                }
-                $col .= $arr["rows"][$i]["COLUMN_NAME"] . "</th>";
+                $col .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
+                $col .= $arr['rows'][$i]['FieldName'] . "</th>";
                 echo $col;
             }
              ?>
@@ -164,7 +159,7 @@ $(document).ready(function(){
   //$aColumns = array();
   $aColumn = "var aColumns = ['";
   for($i = 1; $i < $size; $i+=1){
-    $aColumn .= $arr['rows'][$i]['COLUMN_NAME'];
+    $aColumn .= $arr['rows'][$i]['FieldName'];
     if ($i < $size-1){
       $aColumn .= "', '";
     }
@@ -352,7 +347,7 @@ $(document).ready(function(){
         <div class="modal-body">
           <?php
           for($i = 1; $i < $size; $i+=1){
-              $col = $arr["rows"][$i]["COLUMN_NAME"];
+              $col = $arr['rows'][$i]['FieldName'];
               echo "<label>Enter " . $col . "</label>";
               echo "<input type='text' name='$col' id='$col' class='form-control' />";
               echo "<br />";
@@ -362,7 +357,7 @@ $(document).ready(function(){
         </div>
         <div class="modal-footer">
           <?php
-          $id = $arr["rows"][0]["COLUMN_NAME"];
+          $id = $arr['rows'][0]['COLUMN_NAME'];
           echo "<input type='hidden' name='$id' id='$id' />";
            ?>
           <input type="hidden" name="operation" id="operation" />

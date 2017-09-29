@@ -7,8 +7,10 @@ if (!empty($_SESSION['tableid'])){
     $tableid = $_SESSION['tableid'];
 }
 else {
-    $tableid = 47;
+    header('location: choosedatapage.php');
 }
+
+
 $table = NumberToWordsFormat($tableid);
 $ColumnsQuery = "
     SELECT COLUMN_NAME
@@ -17,7 +19,12 @@ $ColumnsQuery = "
     AND TABLE_NAME = '" . $table . "'";
 
 $gotcolumns = mysqli_query($connection, $ColumnsQuery);
-while($column = mysqli_fetch_assoc($gotcolumns))
+$column = mysqli_fetch_assoc($gotcolumns);
+$columns[] = $column;
+$size+=1;
+
+$fieldName = GetFieldTableList($tableid);
+while($column = $fieldName->fetch(PDO::FETCH_ASSOC))
 {
     $columns[] = $column;
     $size+=1;
