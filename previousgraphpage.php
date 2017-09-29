@@ -1,3 +1,16 @@
+<?php
+  include 'sql/mysql.inc';
+  include 'inc/NavBar.inc';
+
+  if (!is_log()){
+    header('location: Index.php');
+  }
+  CheckRequestLogout();
+  navBarCreate('rgba(238, 86, 36, 0.8)', 'Chart Library');
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,20 +25,20 @@
 </head>
 <body>
 
-<ul>
   <!--
-  <li><a href="home.php">Home</a></li>
-  <li><a href="chartmaker.php">Back</a></li>
--->
-  <li style="float:right"><a class="active" href="#about">Truii Chart Library</a></li>
-  <li class ="fa fa-angle-left fa-4x"></i>
-  <li class ="fa fa-bar-chart fa-4x"></li>
-  <li class ="fa  fa-pencil-square-o fa-4x"></li>
-  </ul>
+  <ul class="chartpages">
+    <!-
+    <li><a href="home.php">Home</a></li>
+    <li><a href="chartmaker.php">Back</a></li>
+    ->
+    <li style="float:right"><a class="active" href="#about">Truii Chart Library</a></li>
+    <li class="fa fa-angle-left fa-4x" onclick="goBack()"></li>
+    <a href="chartmaker.php"><li class="fa fa-bar-chart fa-4x"></li></a>
+    <a href="recorddatapageAddDelete.php"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
+  </ul>-->
 
 
 
-</body>
 
 
   <div id ="Homebutton">
