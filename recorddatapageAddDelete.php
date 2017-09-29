@@ -7,7 +7,7 @@
   }
   CheckRequestLogout();
 //  echo "<header>"rgb(10,191,211);
-  navBarCreate('rgba(10,191,211, 0.8)','Record Data');
+  navBarCreate('rgb(10,191,211)','Record Data');
 //  echo "</header>";
 
 
@@ -90,13 +90,13 @@
   <form method=POST>
     <div id ="recordform">
       <div class="container1" id="divCreate">
-        <div class="form-group" style="margin-right: 10%">
+        <div class="form-group" style="margin-right: 10%;">
           <label for="exampletextinput">Title </label>
           <input type="text" name="title" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title" required>
         </div>
       </div>
 
-      <div class="form-group" id="divColumn" style='margin-top:10px;'>
+      <div class="form-group" id="divColumn" style='margin-top:10px; '>
         <div class="container" id="Column1" style="margin-right: 10%;margin-left: -10px;margin-top:10px;padding-top: 10px; padding-bottom: 20px;">
           <fieldset clase="form-box" id="Box1" style="position: relative; border-radius: 25px;background-color:rgb(10,191,211);opacity:0.8">
             <label for="exampletextinput" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;padding-top: 10px;">Column Title </label>

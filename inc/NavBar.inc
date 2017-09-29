@@ -1,6 +1,6 @@
 <?php
 function navBarCreate($ColorCode, $currentpage){
-echo '<ul style="background-color:'.$ColorCode.'">
+echo '<ul style="background-color:'.$ColorCode.'; z-index: 5">
         <li class="fa fa-angle-left fa-4x" onclick="goBack()"></li>
         <li><a href="#about">'.$currentpage.'</a></li>
         <li><a href="home.php">Home</a></li>

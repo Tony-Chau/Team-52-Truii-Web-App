@@ -6,7 +6,7 @@
     header('location: Index.php');
   }
   CheckRequestLogout();
-  navBarCreate('rgba(238, 86, 36, 0.8)', 'Home');
+  navBarCreate('rgb(238, 86, 36)', 'Home');
 ?>
 <!DOCTYPE html>
 <html>

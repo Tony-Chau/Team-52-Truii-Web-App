@@ -6,7 +6,7 @@
     header('location: Index.php');
   }
   CheckRequestLogout();
-  navBarCreate('rgba(238, 86, 36, 0.8)', 'Chart Library');
+  navBarCreate('rgb(238, 86, 36)', 'Chart Library');
 
 ?>
 
