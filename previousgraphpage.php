@@ -21,7 +21,11 @@
  <link rel="stylesheet" href="css/style.css">
  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
  <link href="https://font.googleapis.com/css?family-Source+San+Pro:300,400,600,700" rel="stylesheet">
-
+ <style>
+   .col-sm-12, col-md-4 {
+      position: static !important;
+   }
+ </style>
 </head>
 <body>
 
@@ -42,10 +46,7 @@
 
 
   <div id ="Homebutton">
-    <div class= "container">
-       <center><img src="images/truii-full-colour-white.png" alt="Truii" width="200" height="128"></center>
-
-
+    <div class="container">
 
       <div class="row">
 
