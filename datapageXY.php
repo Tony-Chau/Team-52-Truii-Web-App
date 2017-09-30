@@ -60,6 +60,46 @@
       background-color: rgb(31,194,222);
       border-color: rgb(31,194,222);
     }
+
+
+    /* xy buttons part  start */
+
+    #x-button, #y-button {
+        margin:4px;
+        background-color:#EFEFEF;
+        border-radius:4px;
+        border:1px solid #D0D0D0;
+        overflow:auto;
+        float:left;
+    }
+
+    #x-button:hover,  #y-button:hover {
+        background:blue;
+    }
+
+    #x-button, #y-button label {
+        float:left;
+        width:4.0em;
+    }
+
+    #x-button, #y-button label span {
+        text-align:center;
+        padding:3px 0px;
+        display:block;
+    }
+
+    #x-button, #y-button label input {
+        position:absolute;
+        top:-20px;
+    }
+
+    #x-button, #y-button input:checked + span {
+        background-color:#911;
+        color:#fff;
+    }
+
+    /* xy buttons part  end */
+
   </style>
 </head>
 <body>
@@ -79,8 +119,11 @@
 
             for($i = 1; $i < $size; $i+=1){
                 $col = '';
-                $col .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
-                $col .= $arr['rows'][$i]['FieldName'] . "</th>";
+                $col .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'><span class=\"text\">";
+                $col .= $arr['rows'][$i]['FieldName'] . "</span>\n";
+                $col .= "<div id=\"x-button\"><label><input type=\"checkbox\" value=\"#\"><span>Choose As X</span></input></label></div> \n";
+                $col .= "<div id=\"y-button\"><label><input type=\"checkbox\" value=\"#\"><span>Choose As Y</span></input></label></div>";
+                $col .= "</th>\n";
                 echo $col;
             }
              ?>
@@ -116,6 +159,19 @@ $(document).ready(function(){
         return buttons;
       }
     }
+
+    <?php
+      $chooseXY = '';
+      $chooseXY .= '<div id="x-button"><label><input type="checkbox" value="#"><span>Choose As X</span></input></label></div>';
+      $chooseXY .= '<div id="y-button"><label><input type="checkbox" value="#"><span>Choose As Y</span></input></label></div>';
+
+      for($i = 1; $i < $size; $i+=1){
+          $addtofield .= "$('" . $chooseXY . "').appendTo('#" . $arr['rows'][$i]['FieldName'] . "');";
+      };
+    ?>
+    var ChooseXY = "<?php echo $addtofield;?>";
+    eval(ChooseXY);
+
   });
 
 
