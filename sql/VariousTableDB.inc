@@ -102,7 +102,7 @@ function AddColumn($TableID, $FieldName, $DataType){
     echo $e->getMessage();
   }
   $pdo=null;
-  //EnterFieldTable($TableID, $FieldName, $DataType);
+  EnterFieldTable($TableID, $FieldName, $DataType);
 }
 
 function DeleteColumn($TableID, $FieldName){
@@ -117,7 +117,7 @@ function DeleteColumn($TableID, $FieldName){
     echo $e->getMessage();
   }
   $pdo=null;
-  //DeleteField($TableID, $FieldName);
+  DeleteField($TableID, $FieldName);
 }
 
 function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){
