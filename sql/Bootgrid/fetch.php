@@ -86,9 +86,9 @@ if(!empty($result)){
         $data[] = $row;
     }
 
-    $query1 = "SELECT * FROM " . $table;
-    $result1 = mysqli_query($connection, $query1);
-    $total_records = mysqli_num_rows($result1);
+    //$query1 = "SELECT * FROM " . $table;
+    //$result1 = mysqli_query($connection, $query1);
+    $total_records = mysqli_num_rows($result);
 
 }else{
     $total_records = 0;

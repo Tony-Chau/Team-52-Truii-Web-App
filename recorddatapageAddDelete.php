@@ -2,7 +2,7 @@
   include 'sql/mysql.inc';
   include 'inc/NavBar.inc';
   include("sql/Bootgrid/connection.php");
-  include("sql/Bootgrid/gettable.php");
+
 
   if (!is_log()){
     header('location: Index.php');
@@ -27,7 +27,8 @@
               }
           }
           CreateTable($table_name, $aFields, $dTypes);
-          $latest = "".$tsize;
+          include("sql/Bootgrid/gettable.php");
+          $latest = $tsize;
           $tID = $tIDsarr['rows'][$latest]['TableID'];
           $_SESSION['tableid'] = $tID;
           header('location: datapage.php');

@@ -12,22 +12,36 @@ else {
 
 
 $table = NumberToWordsFormat($tableid);
-$ColumnsQuery = "
+$IDcolumnQuery = "
     SELECT COLUMN_NAME
     FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA = '" . get_dbDatabase() . "'
     AND TABLE_NAME = '" . $table . "'";
 
-$gotcolumns = mysqli_query($connection, $ColumnsQuery);
-$column = mysqli_fetch_assoc($gotcolumns);
-$columns[] = $column;
+$gotcolumnsID = mysqli_query($connection, $IDcolumnQuery);
+$columnID = mysqli_fetch_assoc($gotcolumnsID);
+$columns[] = $columnID;
 $size+=1;
 
+/*
 $fieldName = GetFieldTableList($tableid);
 while($column = $fieldName->fetch(PDO::FETCH_ASSOC))
 {
     $columns[] = $column;
     $size+=1;
+}
+*/
+
+$fieldQuery = "SELECT * FROM FieldTable WHERE TableID = " . $tableid . ";";
+$gotfields = mysqli_query($connection, $fieldQuery);
+if(!empty($gotfields)){
+
+    while($fields = mysqli_fetch_assoc($gotfields))
+    {
+        $columns[] = $fields;
+        $size+=1;
+    }
+
 }
 
 $columnsoutput = array( 'rows' => $columns );

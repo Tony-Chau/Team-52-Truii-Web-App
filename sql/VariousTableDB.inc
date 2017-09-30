@@ -85,7 +85,7 @@ function AddColumn($TableID, $FieldName, $DataType){
 }
 
 function DeleteColumn($TableID, $FieldName){
-  $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . $TableID . " DROP " .  $FieldName . ";";
+  $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . " DROP " .  $FieldName . ";";
   $sql .= DeleteField($TableID, $FieldName);
   CallDatabase($sql);
 }
