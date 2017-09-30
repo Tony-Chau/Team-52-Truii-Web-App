@@ -3,10 +3,6 @@
 function CreateTable($TableName, $ArrayOfFields, $DataType){
   $sql = EnterTable($TableName);
   $TableID = GetTableIDLastNumber();
-  if ($TableID == -1){
-    $TableID = 1;
-  }
-
   $sql .= "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
@@ -16,7 +12,7 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
     }
   }
   $sql .= EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType);
-  CreateData($sql);
+  CallDatabase($sql);
 }
 //Sorry I need to know the name of this, which is why i left it empty
 function SortDataType($DataStringList){
@@ -85,38 +81,20 @@ function DeleteTable($TableID){
 function AddColumn($TableID, $FieldName, $DataType){
   $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . " ADD " .  $FieldName . " " . $DataType . ";";
   $sql .= EnterFieldTable($TableID, $FieldName, $DataType);
-  CreateData($sql);
+  CallDatabase($sql);
 }
 
 function DeleteColumn($TableID, $FieldName){
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query("ALTER TABLE " . /*NumberToWordsFormat($TableID)*/$TableID . " DROP " .  $FieldName . ";");
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
-  DeleteField($TableID, $FieldName);
+  $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . $TableID . " DROP " .  $FieldName . ";";
+  $sql .= DeleteField($TableID, $FieldName);
+  CallDatabase($sql);
 }
 
 function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){
   $OldFieldName = RequestFieldTableDetail($FieldID, "FieldName");
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query("ALTER TABLE " . NumberToWordsFormat($TableID) . " CHANGE " . $OldFieldName . " " . $NewFieldName . " " . $NewFieldType . ";");
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
-  ChangeField($FieldID, $NewFieldName, $NewFieldType);
+  $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . " CHANGE " . $OldFieldName . " " . $NewFieldName . " " . $NewFieldType . ";";
+  $sql .= ChangeField($FieldID, $NewFieldName, $NewFieldType);
+  CallDatabase($sql);
 }
 
 
@@ -129,17 +107,7 @@ function EnterVariousTable($TableID, $array_of_data, $array_of_type){
       $sql .= sqlInsertionString($array_of_data[$i], $array_of_type[$i]) . ",";
     }
   }
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query($sql);
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
+  CallDatabase($sql);
 }
 
 function UpdateVariousTable($TableID, $VariousID, $Field, $Value){

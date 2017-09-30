@@ -55,7 +55,7 @@ function GetTableIDLastNumber(){
   foreach($result as $data){
     return $data['TableID'];
   }
-  return -1;
+  return 1;
 }
 
 ?>

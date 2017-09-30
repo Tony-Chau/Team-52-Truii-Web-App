@@ -60,7 +60,7 @@ function SpaceCancel($string){
   return str_replace("-", "_", $NewFormNumber);
 }
 
-function CreateData($sql){
+function CallDatabase($sql){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
