@@ -1,19 +1,8 @@
 <?php
 //Creates Table
 function EnterCustomFieldTable($FieldID, $GraphID, $ColourCode){
-  $username = RequestUserDetail($_SESSION['UserID'], 'Username');
-  $dateTime = GetCurrentTime();
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query("INSERT INTO CustomFieldTable(FieldID, GraphID, ColourCode) VALUES(" . $FieldID . ", " . $GraphID . ", \"" . $ColourCode . "\");");
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
+  $sql = "INSERT INTO CustomFieldTable(FieldID, GraphID, ColourCode) VALUES(" . $FieldID . ", " . $GraphID . ", \"" . $ColourCode . "\");"
+  CallDatabase($sql);
 }
 
 //Presents the list of tables
@@ -57,7 +46,7 @@ function RequestCustomFieldTableDetailAsList($CustomFieldID, $requestfield){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT " . $requestfield . " FROM CustomFieldTable;");
+    $result = $pdo->query("SELECT " . $requestfield . " FROM CustomFieldTable WHERE CustomerFieldID = " . $CustomFieldID . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
