@@ -1,9 +1,9 @@
 <?php
 //Generates tables
 function CreateTable($TableName, $ArrayOfFields, $DataType){
-  EnterTable($TableName);
+  $sql = EnterTable($TableName);
   $TableID = GetTableIDLastNumber();
-  $sql = "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
+  $sql .= "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
       $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", PRIMARY KEY(" . $TableName . "ID));";
@@ -11,20 +11,8 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
       $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", ";
     }
   }
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query($sql);
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
-  for ($i = 0; $i < count($ArrayOfFields); $i += 1){
-    EnterFieldTable($TableID, $ArrayOfFields[$i], $DataType[$i]);
-  }
+  $sql .= EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType);
+  CreateData($sql);
 }
 //Sorry I need to know the name of this, which is why i left it empty
 function SortDataType($DataStringList){
@@ -91,18 +79,9 @@ function DeleteTable($TableID){
 
 
 function AddColumn($TableID, $FieldName, $DataType){
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query("ALTER TABLE " . NumberToWordsFormat($TableID) . " ADD " .  $FieldName . " " . $DataType . ";");
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
-  EnterFieldTable($TableID, $FieldName, $DataType);
+  $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . " ADD " .  $FieldName . " " . $DataType . ";";
+  $sql .= EnterFieldTable($TableID, $FieldName, $DataType);
+  CreateData($sql);
 }
 
 function DeleteColumn($TableID, $FieldName){

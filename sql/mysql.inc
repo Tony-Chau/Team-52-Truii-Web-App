@@ -41,9 +41,6 @@ function CheckRequestLogout(){
     }
   }
 }
-
-////////////////////////////////////////////////////////////////////////
-
 function GetCurrentTime(){
   $time = new DateTimeZone('Australia/Brisbane');
   $datetime = new DateTime();
@@ -63,6 +60,19 @@ function SpaceCancel($string){
   return str_replace("-", "_", $NewFormNumber);
 }
 
+function CreateData($sql){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query($sql);
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $pdo=null;
 
-////////////////////////////////////////////////////////////////////////
+}
+
 ?>
