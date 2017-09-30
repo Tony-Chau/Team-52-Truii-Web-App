@@ -3,6 +3,10 @@
 function CreateTable($TableName, $ArrayOfFields, $DataType){
   $sql = EnterTable($TableName);
   $TableID = GetTableIDLastNumber();
+  if ($TableID == -1){
+    $TableID = 1;
+  }
+
   $sql .= "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
