@@ -105,7 +105,7 @@
 <body>
 
   <div class="box" style="margin-top: 50px">
-    <br />
+  </br>
 
     <div class="table-responsive" style="overflow-x: scroll">
       <table id="test_data" class="table table-bordered table-striped">
@@ -152,7 +152,7 @@ $(document).ready(function(){
     formatters: {
       'commands': function(column, row)
       {
-        var id = "row."+"<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
+        var id = "row."+"<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>" + "\"";
         var buttonID = eval(id);
         var buttons = "<button type='button' class='btn btn-warning btn-xs update' data-row-id='"+buttonID+"'>Edit</button>"+
               "&nbsp; <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+buttonID+"'>Delete</button>";
@@ -160,20 +160,19 @@ $(document).ready(function(){
       }
     }
 
-    <?php
-      $chooseXY = '';
-      $chooseXY .= '<div id="x-button"><label><input type="checkbox" value="#"><span>Choose As X</span></input></label></div>';
-      $chooseXY .= '<div id="y-button"><label><input type="checkbox" value="#"><span>Choose As Y</span></input></label></div>';
-
-      for($i = 1; $i < $size; $i+=1){
-          $addtofield .= "$('" . $chooseXY . "').appendTo('#" . $arr['rows'][$i]['FieldName'] . "');";
-      };
-    ?>
-    var ChooseXY = "<?php echo $addtofield;?>";
-    eval(ChooseXY);
-
   });
-
+  var chooseXY = '<div id="x-button"><label><input type="checkbox" value="#"><span>Choose As X</span></input></label></div>';
+  chooseXY += '<div id="y-button"><label><input type="checkbox" value="#"><span>Choose As Y</span></input></label></div>';
+  var addtofield = '';
+  "<?php for ($i = 1; $i < $size; $i += 1){?>";
+  "<?php echo $arr['rows'][$i]['FieldName'];?>";
+  addtofield +=  $(chooseXY).appendTo("<?php echo $arr['rows'][$i]['FieldName'];?>");
+  "<?php }?>";
+  // for (var i = 1; i < size; i += 1){
+  //   var field = "<?php ;?>";
+  //   addtofield += "$('" +chooseXY+"').appendTo('#" + field +  "');";
+  // }
+  eval(addtofield);
 
 });
 </script>
