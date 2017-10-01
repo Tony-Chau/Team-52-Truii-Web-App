@@ -107,22 +107,38 @@
   <div class="box" style="margin-top: 50px">
   </br>
 
-    <div class="table-responsive" style="overflow-x: scroll">
+    <div class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <td></td>
+              <?php
+              for($i = 1; $i < $size; $i+=1){
+                  $col = '';
+                  $col .= "<td id='xy-" . $arr['rows'][$i]['FieldName'] . "'>";
+                  $col .= "<div id='x-button'><label><input type='checkbox' value='#'><span>Choose As X</span></input></label></div>\n";
+                  $col .= "<div id='y-button'><label><input type='checkbox' value='#'><span>Choose As X</span></input></label></div>";
+                  $col .= "</td>";
+                  echo $col;
+              }
+               ?>
+            <td></td>
+          </tr>
+        </thead>
+      </table>
       <table id="test_data" class="table table-bordered table-striped">
         <thead>
           <tr>
             <?php
             $col = '';
             $col .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
-            $col .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
+            $col .= $arr['rows'][0]['COLUMN_NAME'] . "</th>\n";
             echo $col;
 
             for($i = 1; $i < $size; $i+=1){
                 $col = '';
-                $col .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'><span class=\"text\">";
-                $col .= $arr['rows'][$i]['FieldName'] . "</span>\n";
-                $col .= "<div id=\"x-button\"><label><input type=\"checkbox\" value=\"#\"><span>Choose As X</span></input></label></div> \n";
-                $col .= "<div id=\"y-button\"><label><input type=\"checkbox\" value=\"#\"><span>Choose As Y</span></input></label></div>";
+                $col .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
+                $col .= $arr['rows'][$i]['FieldName'];
                 $col .= "</th>\n";
                 echo $col;
             }
@@ -138,6 +154,15 @@
 <script type="text/javascript" language='javascript'>
 $(document).ready(function(){
 
+  <?php
+    $addtofield = "";
+    for($i = 1; $i < $size; $i+=1){
+        $addtofield .= "$('<p>qwerty</p>').appendTo('#" . $arr['rows'][$i]['FieldName'] . "');";
+    };
+  ?>
+  var AddToField = "<?php echo $addtofield;?>";
+  eval(AddToField);
+
   var productTable = $('#test_data').bootgrid({
     ajax: true,
     rowSelect: true,
@@ -152,7 +177,7 @@ $(document).ready(function(){
     formatters: {
       'commands': function(column, row)
       {
-        var id = "row."+"<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>" + "\"";
+        var id = "\"row."+"<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>" + "\"";
         var buttonID = eval(id);
         var buttons = "<button type='button' class='btn btn-warning btn-xs update' data-row-id='"+buttonID+"'>Edit</button>"+
               "&nbsp; <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+buttonID+"'>Delete</button>";
@@ -161,18 +186,8 @@ $(document).ready(function(){
     }
 
   });
-  var chooseXY = '<div id="x-button"><label><input type="checkbox" value="#"><span>Choose As X</span></input></label></div>';
-  chooseXY += '<div id="y-button"><label><input type="checkbox" value="#"><span>Choose As Y</span></input></label></div>';
-  var addtofield = '';
-  "<?php for ($i = 1; $i < $size; $i += 1){?>";
-  "<?php echo $arr['rows'][$i]['FieldName'];?>";
-  addtofield +=  $(chooseXY).appendTo("<?php echo $arr['rows'][$i]['FieldName'];?>");
-  "<?php }?>";
-  // for (var i = 1; i < size; i += 1){
-  //   var field = "<?php ;?>";
-  //   addtofield += "$('" +chooseXY+"').appendTo('#" + field +  "');";
-  // }
-  eval(addtofield);
+
+
 
 });
 </script>
