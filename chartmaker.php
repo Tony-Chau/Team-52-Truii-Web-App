@@ -6,6 +6,7 @@
   }
   CheckRequestLogout();
   navBarCreate('rgb(252, 103, 25)', 'Chart Maker');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,18 +22,9 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-<ul>
 
-
-<li class ="fa fa-angle-left fa-4x"></li>
-<li class ="fa  fa-pencil-square-o fa-4x"></li>
-<li class ="fa fa-bar-chart fa-4x"></li>
-<li style="float:left;padding: 2%;"><a class="active" href="#about">Chart Maker</a></li>
-</ul>
 </body>
-=======
-  <!--
+<!-- =======
   <ul class="chartpages">
     <!-
     <li><a href="#home">Home</a></li>
@@ -42,8 +34,9 @@
     <li class="fa fa-angle-left fa-4x" onclick="goBack()"></li>
     <a href="chartmaker.php"><li class="fa fa-bar-chart fa-4x"></li></a>
     <a href="recorddatapageAddDelete.php"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
-  </ul>-->
+  </ul>
 >>>>>>> 96c96403f8c25fab08d61e1c12a05909dc8a7aca
+-->
 
 
 

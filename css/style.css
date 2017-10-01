@@ -70,7 +70,6 @@ body li  a{
     text-decoration: none;
 }
 
-/*
 body li a:hover:not(.active) {
     background-color: rgba(238, 86, 36, 0.5);
     color: white;
@@ -82,18 +81,8 @@ body .active {
         color: white;
         text-decoration: none;
 }
-*/
 
-body li a:hover:not(.active){
-  color: white;
-  text-decoration: none;
-}
 
-body .active {
-
-        color: white;
-        text-decoration: none;
-}
 
 
 body ul .col {
@@ -104,7 +93,7 @@ body ul .col {
     background-color: rgba(10,191,211, 0.8);
 }
 
-/*
+
 body li a:hover:not(.active1) {
     background-color: rgba(10, 191, 211, 0.5);
     color: white;
@@ -117,7 +106,6 @@ body .active1 {
         color: white;
         text-decoration: none;
 }
-*/
 
 
 
@@ -240,10 +228,7 @@ margin-top: 10%;
 
 .fa{
   color: #FFFFFF;
-  float: right;
-  padding-bottom: 2%;
-  padding-top: 2%;
-  padding-right: 10%;
-  padding-left: 10%;
+  margin-right: 4%;
+  margin-left: 4%
 
 }
