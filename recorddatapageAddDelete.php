@@ -9,10 +9,10 @@
   }
   CheckRequestLogout();
 //  echo "<header>"rgb(10,191,211);
-  navBarCreate('rgb(31,194,222)','Record Data');
+
 //  echo "</header>";
 
-
+$added = false;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['title'])){
@@ -31,10 +31,19 @@
           $latest = $tsize;
           $tID = $tIDsarr['rows'][$latest]['TableID'];
           $_SESSION['tableid'] = $tID;
-          header('location: datapage.php');
+          $added = true;
+          //header('location: datapage.php');
       }
   }
+  echo "<script>
+  var check = " . $added . ";
+  if (". $added."){
+    window.location.href = 'datapage.php';
+  }
+  </script>";
+    navBarCreate('rgb(31,194,222)','Record Data');
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,6 +92,7 @@
    }
 
  </script>
+
 </head>
 <body>
 
