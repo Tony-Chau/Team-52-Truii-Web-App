@@ -11,14 +11,14 @@
       {
           $query = "INSERT INTO " . $table . "(";
           for($i = 1; $i < $size; $i+=1){
-              $query .= $arr["rows"][$i]["COLUMN_NAME"];
+              $query .= $arr['rows'][$i]['FieldName'];
               if ($i < ($size-1)){
                   $query .= ', ';
               }
           }
           $query .= ") VALUES ('";
           for($i = 1; $i < $size; $i+=1){
-              $col = $arr["rows"][$i]["COLUMN_NAME"];
+              $col = $arr['rows'][$i]['FieldName'];
               $query .= mysqli_real_escape_string($connection, $_POST[$col]);
               if ($i < ($size-1)){
                   $query .= "', '";
@@ -37,7 +37,7 @@
       {
           $query = "UPDATE " . $table . " SET ";
           for ($i = 1; $i < $size; $i+=1){
-              $col = $arr["rows"][$i]["COLUMN_NAME"];
+              $col = $arr['rows'][$i]['FieldName'];
               $query .= $col . " = '";
               $query .= mysqli_real_escape_string($connection, $_POST[$col]);
               if ($i < ($size-1)){

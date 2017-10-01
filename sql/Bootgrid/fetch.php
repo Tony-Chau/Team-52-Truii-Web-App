@@ -30,22 +30,24 @@ $start_from = ($current_page_number - 1) * $records_per_page;
 //started using getcolumns.php
 include("getcolumns.php");
 $query .= "SELECT ";
-for($i = 0; $i < $size; $i+=1){
-    $query .= $table . "." . $arr["rows"][$i]["COLUMN_NAME"];
-    if ($i < ($size-1)){
+$query .= $table . '.' . $arr["rows"][0]["COLUMN_NAME"];
+for($i = 1; $i < $size; $i+=1){
+    if ($i < $size){
         $query .= ", ";
     }
+    $query .= $table . "." . $arr["rows"][$i]["FieldName"];
 }
 $query .= " FROM " . $table . " ";
 
 if(!empty($_POST["searchPhrase"]))
 {
     $query .= 'WHERE (';
-    for($i = 0; $i < $size; $i+=1){
+    $query .= $table . '.' . $arr["rows"][0]["COLUMN_NAME"];
+    for($i = 1; $i < $size; $i+=1){
         if ($i > 0){
             $query .= 'OR ';
         }
-        $query .= $table . '.' . $arr["rows"][$i]["COLUMN_NAME"];
+        $query .= $table . '.' . $arr["rows"][$i]["FieldName"];
         $query .= 'LIKE "%'.$_POST["searchPhrase"].'%" ';
     }
     $query .= ') ';
@@ -86,7 +88,7 @@ if(!empty($result)){
 
     $query1 = "SELECT * FROM " . $table;
     $result1 = mysqli_query($connection, $query1);
-    $total_records = mysqli_num_rows($result1);
+    $total_records = mysqli_num_rows($result);
 
 }else{
     $total_records = 0;

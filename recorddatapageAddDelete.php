@@ -1,13 +1,15 @@
 <?php
   include 'sql/mysql.inc';
   include 'inc/NavBar.inc';
+  include("sql/Bootgrid/connection.php");
+
 
   if (!is_log()){
     header('location: Index.php');
   }
   CheckRequestLogout();
 //  echo "<header>"rgb(10,191,211);
-  navBarCreate('green','Record Data', 'home.php');
+  navBarCreate('rgb(31,194,222)','Record Data');
 //  echo "</header>";
 
 
@@ -25,6 +27,11 @@
               }
           }
           CreateTable($table_name, $aFields, $dTypes);
+          include("sql/Bootgrid/gettable.php");
+          $latest = $tsize;
+          $tID = $tIDsarr['rows'][$latest]['TableID'];
+          $_SESSION['tableid'] = $tID;
+          header('location: datapage.php');
       }
   }
 ?>
@@ -74,53 +81,50 @@
       $('#divButtons').append(str);
       document.getElementById('create_table').click();
    }
+
  </script>
 </head>
 <body>
 
-<ul>
-  <div class="col">
+  <!--
+  <ul class="recorddatapages">
+    <li style="float:right"><a class="active1" href="#about">Record Data</a></li>
+    <li class="fa fa-angle-left fa-4x" onclick="goBack()"></li>
+    <a href="chartmaker.php"><li class="fa fa-bar-chart fa-4x"></li></a>
+    <a href="recorddatapageAddDelete.php"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
+  </ul>-->
 
-  <li style="float:right"><a class="active1" href="#about">Record Data</a></li>
+  <form method=POST>
+    <div id ="recordform">
+      <div class="container1" id="divCreate">
+        <div class="form-group" style="margin-right: 10%;">
+          <label for="exampletextinput">Title </label>
+          <input type="text" name="title" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title" required>
+        </div>
+      </div>
 
-
-<li class ="fa fa-angle-left fa-4x"></i>
-<li class ="fa fa-bar-chart fa-4x"></li>
-<li class ="fa  fa-pencil-square-o fa-4x"></li>
-</div>
-
-</ul>
-
-<form method=POST>
-  <div id ="recordform">
-    <div class="container1" id="divCreate">
-      <div class="form-group" style="margin-right: 10%">
-        <label for="exampletextinput">Title </label>
-        <input type="text" name="title" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title" required>
+      <div class="form-group" id="divColumn" style='margin-top:10px; '>
+        <div class="container" id="Column1" style="margin-right: 10%;margin-left: -10px;margin-top:10px;padding-top: 10px; padding-bottom: 20px;">
+          <fieldset clase="form-box" id="Box1" style="position: relative; border-radius: 25px;background-color:rgb(10,191,211);opacity:0.8">
+            <label for="exampletextinput" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;padding-top: 10px;">Column Title </label>
+            <input type="text" name="ColumnTitle1" class="form-control" id="textinput1" style="width: 92%; margin-left: 4%; margin-right: 4%;" aria-describedby="tablename" placeholder="Enter Title" required></br>
+            <div class="form-group" style="margin-bottom: 2%;"><label for="exampleSelect1" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;">Unit of Measurement</label>
+              <select name="ColumnType1" class="form-control" id="selectinput1" style="width: 92%; margin-left: 4%; margin-right: 4%;">
+                <option value="VARCHAR(255)">Text</option>
+                <option value="INT(11)"># Numbers</option>
+                <option value="percentage">% Percentage</option>
+              </select>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
+      <div class="form-group" id="divButtons" style = "margin-top: 10px;">
+        <button type="button" class="btn btn-primary1" id="btn_ResetColumn" onclick="ResetValue();">Reset Column</button>
+        <button type="button" class="btn btn-primary1" onClick='Submission();' >Submit</button>
+        <button type="submit" class="btn btn-primary1" id='create_table' style="display:none;">Submit</button>
       </div>
     </div>
-
-    <div class="form-group" id="divColumn" style='margin-top:10px;'>
-      <div class="container" id="Column1" style="margin-right: 10%;margin-left: -10px;margin-top:10px;padding-top: 10px; padding-bottom: 20px;">
-        <fieldset clase="form-box" id="Box1" style="position: relative; border-radius: 25px;background-color:rgb(10,191,211);opacity:0.8">
-          <label for="exampletextinput" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;padding-top: 10px;">Column Title </label>
-          <input type="text" name="ColumnTitle1" class="form-control" id="textinput1" style="width: 92%; margin-left: 4%; margin-right: 4%;" aria-describedby="tablename" placeholder="Enter Title" required></br>
-          <div class="form-group" style="margin-bottom: 2%;"><label for="exampleSelect1" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;">Unit of Measurement</label>
-            <select name="ColumnType1" class="form-control" id="selectinput1" style="width: 92%; margin-left: 4%; margin-right: 4%;">
-              <option value="VARCHAR(255)">Text</option>
-              <option value="INT(11)"># Numbers</option>
-              <option value="percentage">% Percentage</option>
-            </select>
-          </div>
-        </fieldset>
-      </div>
-    </div>
-    <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
-    <div class="form-group" id="divButtons" style = "margin-top: 10px;">
-      <button type="button" class="btn btn-primary1" id="btn_ResetColumn" onclick="ResetValue();">Reset Column</button>
-      <button type="button" class="btn btn-primary1" onClick='Submission();' >Submit</button>
-      <button type="submit" class="btn btn-primary1" id='create_table' style="display:none;">Submit</button>
-    </div>
-  </div>
-</form>
+  </form>
 </body>
+</html>

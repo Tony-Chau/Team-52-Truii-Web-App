@@ -1,14 +1,18 @@
 <?php
   include("sql/mysql.inc");
+  include("inc/NavBar.inc");
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/getcolumns.php");
 
-
-
+  if (!is_log()){
+    header('location: Index.php');
+  }
+  CheckRequestLogout();
+  navBarCreate('rgb(31,194,222)','Data');
 
   $output = '';
   for($i = 1; $i < $size; $i+=1){
-      $cName = $arr['rows'][$i]['COLUMN_NAME'];
+      $cName = $arr['rows'][$i]['FieldName'];
       $output .= '<option value="'.$cName.'">'.$cName.'</option>';
   }
 
@@ -25,6 +29,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://font.googleapis.com/css?family-Source+San+Pro:300,400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src='js/Functions/Link.js'></script>
   <style>
     body
     {
@@ -42,17 +48,29 @@
       border-radius:5px;
     }
 
+    .btn-info {
+      color: #fff;
+      background-color: rgb(31,194,222);
+      border-color: #46b8da;
+    }
+
     .table-responsive .bootgrid-table td
     {
       white-space: nowrap !important;
     }
 
+    .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+      z-index: 3;
+      color: #fff;
+      cursor: default;
+      background-color: rgb(31,194,222);
+      border-color: rgb(31,194,222);
+    }
   </style>
 </head>
 <body>
 
-  <div class="box">
-    <h1 align="center">Data Page</h1>
+  <div class="box" style="margin-top: 50px">
     <br />
     <div align="right">
       <?php
@@ -65,7 +83,6 @@
         echo $addData;
 
         echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\">Add Column</button>";
-
 
         $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\"";
         if ($size <= 1){
@@ -84,19 +101,18 @@
     </div>
     <div class="table-responsive" style="overflow-x: scroll">
       <table id="test_data" class="table table-bordered table-striped">
-        <thead style="">
-          <tr style="">
+        <thead>
+          <tr>
             <?php
-            for($i = 0; $i < $size; $i+=1){
+            $col = '';
+            $col .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
+            $col .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
+            echo $col;
+
+            for($i = 1; $i < $size; $i+=1){
                 $col = '';
-                $col .= "<th data-column-id='" . $arr["rows"][$i]["COLUMN_NAME"] . "' ";
-                if ($i == 0){
-                    $col .= "data-type='numeric'>";
-                }
-                else{
-                    $col .= ">";
-                }
-                $col .= $arr["rows"][$i]["COLUMN_NAME"] . "</th>";
+                $col .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
+                $col .= $arr['rows'][$i]['FieldName'] . "</th>";
                 echo $col;
             }
              ?>
@@ -166,7 +182,7 @@ $(document).ready(function(){
   //$aColumns = array();
   $aColumn = "var aColumns = ['";
   for($i = 1; $i < $size; $i+=1){
-    $aColumn .= $arr['rows'][$i]['COLUMN_NAME'];
+    $aColumn .= $arr['rows'][$i]['FieldName'];
     if ($i < $size-1){
       $aColumn .= "', '";
     }
@@ -354,7 +370,7 @@ $(document).ready(function(){
         <div class="modal-body">
           <?php
           for($i = 1; $i < $size; $i+=1){
-              $col = $arr["rows"][$i]["COLUMN_NAME"];
+              $col = $arr['rows'][$i]['FieldName'];
               echo "<label>Enter " . $col . "</label>";
               echo "<input type='text' name='$col' id='$col' class='form-control' />";
               echo "<br />";
@@ -364,7 +380,7 @@ $(document).ready(function(){
         </div>
         <div class="modal-footer">
           <?php
-          $id = $arr["rows"][0]["COLUMN_NAME"];
+          $id = $arr['rows'][0]['COLUMN_NAME'];
           echo "<input type='hidden' name='$id' id='$id' />";
            ?>
           <input type="hidden" name="operation" id="operation" />

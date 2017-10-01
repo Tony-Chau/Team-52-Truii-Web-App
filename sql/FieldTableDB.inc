@@ -1,19 +1,17 @@
 <?php
 //Creates Table
 function EnterFieldTable($TableID, $fieldname, $DataType){
-  $dateTime = GetCurrentTime();
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query("INSERT INTO FieldTable(FieldName, TableID, DataType) VALUES(\"" . $fieldname . "\", " . $TableID . ", \"" . $DataType . "\");");
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
+  return "INSERT INTO FieldTable(FieldName, TableID, DataType) VALUES(\"" . $fieldname . "\", " . $TableID . ", \"" . $DataType . "\");";
 }
+
+function EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType){
+  $sql = "";
+  for ($i = 0; $i < count($ArrayOfFields); $i += 1){
+    $sql .= "INSERT INTO FieldTable(FieldName, TableID, DataType) VALUES(\"" . $ArrayOfFields[$i] . "\", " . $TableID . ", \"" . $DataType[$i] . "\");";
+  }
+  return $sql;
+}
+
 
 //Presents the list of tables
 function GetFieldTableList($TableID){
@@ -66,17 +64,7 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
 }
 
 function DeleteField($TableID, $FieldName){
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query("DELETE FROM FieldTable WHERE TableID = " . $TableID . "& FieldName = " . $FieldName . ";" );
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo = null;
+  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . "& FieldName = " . $FieldName . ";";
 }
 
 function DeleteFieldTable($TableID){
@@ -113,17 +101,7 @@ function GetFieldID($TableID, $FieldName){
 }
 
 function ChangeField($FieldID, $NewFieldName, $NewFieldType){
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query();
-  }catch (PDOException $e){
-    echo $e->getMessage("UPDATE FieldTable SET FieldName= \"" . $NewFieldName . "\" & DataType=\"" . $NewFieldType . "\" WHERE FieldID=" . $FieldID . ";");
-  }
-  $pdo=null;
+  return "UPDATE FieldTable SET FieldName= \"" . $NewFieldName . "\" & DataType=\"" . $NewFieldType . "\" WHERE FieldID=" . $FieldID . ";";
 }
 
 ?>

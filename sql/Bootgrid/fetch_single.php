@@ -5,7 +5,7 @@
 
   //started using getcolumns.
   include("getcolumns.php");
-  $id = $arr["rows"][0]["COLUMN_NAME"];
+  $id = $arr['rows'][0]['COLUMN_NAME'];
   if(isset($_POST[$id]))
   {
       $query = "SELECT * FROM " . $table . " WHERE " . $id . " = '".$_POST[$id]."'";
@@ -13,7 +13,7 @@
       while($row = mysqli_fetch_array($result))
       {
           for($i = 1; $i < $size; $i+=1){
-              $col = $arr["rows"][$i]["COLUMN_NAME"];
+              $col = $arr['rows'][$i]['FieldName'];
               $output[$col] = $row[$col];
           }
       }

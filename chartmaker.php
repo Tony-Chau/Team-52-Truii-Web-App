@@ -1,9 +1,11 @@
 <?php
-  include './sql/mysql.inc';
+  include 'sql/mysql.inc';
+  include 'inc/NavBar.inc';
   if (!is_log()){
     header('location: Index.php');
   }
   CheckRequestLogout();
+  navBarCreate('rgb(252, 103, 25)', 'Chart Maker');
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,9 +17,11 @@
  <link rel="stylesheet" href="css/style.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://font.googleapis.com/css?family-Source+San+Pro:300,400,600,700" rel="stylesheet">
+
 </head>
 
 <body>
+<<<<<<< HEAD
 <ul>
 
 
@@ -27,6 +31,19 @@
 <li style="float:left;padding: 2%;"><a class="active" href="#about">Chart Maker</a></li>
 </ul>
 </body>
+=======
+  <!--
+  <ul class="chartpages">
+    <!-
+    <li><a href="#home">Home</a></li>
+    <li><a href="#news">fa-angle-left</a></li>
+    ->
+    <li style="float:right"><a class="active" href="#about">Chart Maker</a></li>
+    <li class="fa fa-angle-left fa-4x" onclick="goBack()"></li>
+    <a href="chartmaker.php"><li class="fa fa-bar-chart fa-4x"></li></a>
+    <a href="recorddatapageAddDelete.php"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
+  </ul>-->
+>>>>>>> 96c96403f8c25fab08d61e1c12a05909dc8a7aca
 
 
 

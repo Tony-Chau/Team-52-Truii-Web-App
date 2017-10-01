@@ -5,7 +5,7 @@
 
   //started using getcolumns.php
   include("getcolumns.php");
-  $id = $arr["rows"][0]["COLUMN_NAME"];
+  $id = $arr['rows'][0]['COLUMN_NAME'];
   if(isset($_POST[$id]))
   {
       $query = "DELETE FROM " . $table . " WHERE " . $id . " = '".$_POST[$id]."'";

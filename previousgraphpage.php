@@ -1,3 +1,15 @@
+<?php
+  include 'sql/mysql.inc';
+  include 'inc/NavBar.inc';
+  if (!is_log()){
+    header('location: Index.php');
+  }
+  CheckRequestLogout();
+  navBarCreate('rgb(252, 103, 25)', 'Chart Library');
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,31 +20,32 @@
  <link rel="stylesheet" href="css/style.css">
  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
  <link href="https://font.googleapis.com/css?family-Source+San+Pro:300,400,600,700" rel="stylesheet">
-
+ <style>
+   .col-sm-12, col-md-4 {
+      position: static !important;
+   }
+ </style>
 </head>
 <body>
 
-<ul>
   <!--
-  <li><a href="home.php">Home</a></li>
-  <li><a href="chartmaker.php">Back</a></li>
--->
-  <li style="float:right"><a class="active" href="#about">Truii Chart Library</a></li>
-  <li class ="fa fa-angle-left fa-4x"></i>
-  <li class ="fa fa-bar-chart fa-4x"></li>
-  <li class ="fa  fa-pencil-square-o fa-4x"></li>
-  </ul>
+  <ul class="chartpages">
+    <!-
+    <li><a href="home.php">Home</a></li>
+    <li><a href="chartmaker.php">Back</a></li>
+    ->
+    <li style="float:right"><a class="active" href="#about">Truii Chart Library</a></li>
+    <li class="fa fa-angle-left fa-4x" onclick="goBack()"></li>
+    <a href="chartmaker.php"><li class="fa fa-bar-chart fa-4x"></li></a>
+    <a href="recorddatapageAddDelete.php"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
+  </ul>-->
 
 
 
-</body>
 
 
   <div id ="Homebutton">
-    <div class= "container">
-       <center><img src="images/truii-full-colour-white.png" alt="Truii" width="200" height="128"></center>
-
-
+    <div class="container">
 
       <div class="row">
 

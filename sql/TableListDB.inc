@@ -2,19 +2,10 @@
 //Creates Table
 function EnterTable($TableName){
   $dateTime = GetCurrentTime();
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $sql = "INSERT INTO TableList(TableName, UserID, DateCreated) VALUES (\"" . $TableName . "\", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");";
-  try{
-    $result = $pdo->query($sql);
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
+  return "INSERT INTO TableList(TableName, UserID, DateCreated) VALUES (\"" . $TableName . "\", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");";
 }
+
+
 //Presents the list of tables
 function GetTableList(){
   $dbUser = get_dbUsername();
@@ -62,9 +53,9 @@ function GetTableIDLastNumber(){
   }
   $pdo = null;
   foreach($result as $data){
-    return $data['TableID'];
+    return $data['TableID'] + 1;
   }
-  return -1;
+  return 1;
 }
 
 ?>

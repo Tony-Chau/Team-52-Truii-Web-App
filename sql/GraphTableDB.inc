@@ -1,19 +1,9 @@
 <?php
 //Creates Table
-function EnterGraphTable($FieldID, $GraphID, $ColourCode){
-  $username = RequestUserDetail($_SESSION['UserID'], 'Username');
+function EnterGraphTable($tableId){
   $dateTime = GetCurrentTime();
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query("INSERT INTO GraphTable(FieldID, GraphID, ColourCode) VALUES(" . $FieldID . ", " . $GraphID . ", \"" . $ColourCode . "\");");
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
+  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");";
+  CallDatabase($sql);
 }
 
 //Presents the list of tables
