@@ -24,7 +24,7 @@
 <li class ="fa fa-angle-left fa-4x"></li>
 <li class ="fa  fa-pencil-square-o fa-4x"></li>
 <li class ="fa fa-bar-chart fa-4x"></li>
-<li style="float:left"><a class="active" href="#about">Chart Maker</a></li>
+<li style="float:left;padding: 2%;"><a class="active" href="#about">Chart Maker</a></li>
 </ul>
 </body>
 
