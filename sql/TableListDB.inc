@@ -53,7 +53,7 @@ function GetTableIDLastNumber(){
   }
   $pdo = null;
   foreach($result as $data){
-    return $data['TableID'];
+    return $data['TableID'] + 1;
   }
   return 1;
 }
