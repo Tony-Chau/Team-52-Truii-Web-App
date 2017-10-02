@@ -55,7 +55,7 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT " . $requestfield . " FROM FieldTable;");
+    $result = $pdo->query("SELECT " . $requestfield . " FROM FieldTable WHERE FieldID = " . $FieldID . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }

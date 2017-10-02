@@ -14,21 +14,6 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
   $sql .= EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType);
   CallDatabase($sql);
 }
-//Sorry I need to know the name of this, which is why i left it empty
-function SortDataType($DataStringList){
-  $NewDataString = array();
-  for ($i = 0; $i < count($DataStringList); $i += 1){
-    if($DataStringList[$i] == ''){
-      array_push($NewDataString, 'INT');
-    }
-    else if ($DataStringList[$i] == ''){
-      array_push($NewDataString, 'DATETIME');
-    }else{
-      array_push($NewDataString, 'VARCHAR(255)');
-    }
-  }
-  return $NewDataString;
-}
 
 function GetVariousTable($TableID){
   $dbUser = get_dbUsername();
@@ -104,6 +89,16 @@ function EnterVariousTable($TableID, $Array_of_FieldName, $array_of_data, $array
       $sql .= sqlInsertionString($array_of_data[$i], $array_of_type[$i]) . ",";
     }
   }
+  CallDatabase($sql);
+}
+
+function RemoveValueVariousTable($TableID, $FieldName, $Value, $FieldType){
+  $sql = "DELETE FROM " . NumberToWordsFormat($TableID) . " WHERE " . $FieldName . "=" . sqlInsertionString($Value, $FieldType) . ";";
+  CallDatabase($sql);
+}
+
+function ResetValueVariousTable($TableID){
+  $sql = "TRUNCATE TABLE " . NumberToWordsFormat($TableID) . ";";
   CallDatabase($sql);
 }
 
