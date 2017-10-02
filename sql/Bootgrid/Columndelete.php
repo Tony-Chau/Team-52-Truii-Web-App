@@ -7,7 +7,7 @@
   include("getcolumns.php");
   if(isset($_POST["operation"]))
   {
-      $cName = $_POST['column_selected'];
+      $cName = $_POST['delete_column_selected'];
       DeleteColumn($tableid, $cName);
       echo 'Column Deleted';
   }

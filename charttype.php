@@ -40,21 +40,21 @@
 
   <div class= "container1">
 
-        <a href="graph.php" style="text-decoration:none">
+        <a href="choosedatapage.php" style="text-decoration:none">
       <div align="center">
         <br><input type="image" src="images//piechart.png" name="image" width="180" height="180"><br>
         <h1 style="color:#EF6724;"> Pie Chart </h1>
       </div></a>
 
 
-          <a href="recorddatapage.php" style="text-decoration:none">
+          <a href="choosedatapage.php" style="text-decoration:none">
       <div align="center">
 
         <br><input type="image" src="images//bargraph.png" name="image" width="180" height="180"><br>
         <h1 style="color:#EF6724;">Bar Chart</h1>
       </div></a>
 
-        <a href="recorddatapage.php" style="text-decoration:none">
+        <a href="choosedatapage.php" style="text-decoration:none">
       <div align="center">
         <br><input type="image" src="images//linegraph.png" name="image" width="180" height="180"><br>
         <h1 style="color:#EF6724;">Line Chart</h1>

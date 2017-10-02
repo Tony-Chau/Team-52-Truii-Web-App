@@ -303,11 +303,11 @@ $(document).ready(function(){
     }
   });
 
-  /*
+
   $(document).on('submit', '#column_editform', function(event){
     event.preventDefault();
-    var column_name = $('#column_name').val();
-    var column_selected = $('#column_selected').val();
+    var column_name = $('#edit_column_name').val();
+    var column_selected = $('#edit_column_selected').val();
     var form_data = $(this).serialize();
     if(column_name != '' && column_selected != '')
     {
@@ -328,11 +328,11 @@ $(document).ready(function(){
     {
       alert("All Fields are Required");
     }
-  });*/
+  });
 
   $(document).on('submit', '#column_deleteform', function(event){
     event.preventDefault();
-    var column_selected = $('#column_selected').val();
+    var column_selected = $('#delete_column_selected').val();
     var form_data = $(this).serialize();
     if(column_selected != '')
     {
@@ -397,11 +397,11 @@ $(document).ready(function(){
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Test</h4>
+          <h4 class="modal-title">Add Column Test</h4>
         </div>
         <div class="modal-body">
           <label>Enter Column Name</label>
-          <input type='text' name='column_name' id='column_name' class='form-control' />
+          <input type='text' name='add_column_name' id='add_column_name' class='form-control' />
           <br />
         </div>
         <div class="modal-footer">
@@ -413,24 +413,24 @@ $(document).ready(function(){
   </div>
 </div>
 
-<!--
+
 <div id="columnEditModal" class="modal fade">
   <div class="modal-dialog">
     <form method="post" id="column_editform">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Edit Test</h4>
+          <h4 class="modal-title">Edit Column Test</h4>
         </div>
         <div class="modal-body">
           <label>Select Column</label>
-          <select name="column_selected" id="column_selected" class="form-control">
+          <select name="edit_column_selected" id="edit_column_selected" class="form-control">
             <option value="">Select Column</option>
-            <?php //echo $output ?>
+            <?php echo $output ?>
           </select>
           <br />
           <label>Enter Column Name</label>
-          <input type='text' name='column_name' id='column_name' class='form-control' />
+          <input type='text' name='edit_column_name' id='edit_column_name' class='form-control' />
           <br />
         </div>
         <div class="modal-footer">
@@ -440,7 +440,7 @@ $(document).ready(function(){
       </div>
     </form>
   </div>
-</div>-->
+</div>-
 
 <div id="columnDeleteModal" class="modal fade">
   <div class="modal-dialog">
@@ -448,11 +448,11 @@ $(document).ready(function(){
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Delete Test</h4>
+          <h4 class="modal-title">Delete Column Test</h4>
         </div>
         <div class="modal-body">
           <label>Select Column</label>
-          <select name="column_selected" id="column_selected" class="form-control">
+          <select name="delete_column_selected" id="delete_column_selected" class="form-control">
             <option value="">Select Column</option>
             <?php echo $output ?>
           </select>

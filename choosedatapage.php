@@ -1,12 +1,20 @@
 <?php
   include 'sql/mysql.inc';
+  include 'inc/NavBar.inc';
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/gettable.php");
 
+  if (!is_log()){
+    header('location: Index.php');
+  }
+  CheckRequestLogout();
+  navBarCreate('rgb(31,194,222)', 'Choose Data Page');
+
   $output = '';
   for($i = 0; $i < $tsize; $i+=1){
-      $tName = $tIDsarr['rows'][$i]['TableID'];
-      $output .= '<option value='.$tName.'>'.$tName.'</option>';
+      $tID = $tIDsarr['rows'][$i]['TableID'];
+      $tName = $tIDsarr['rows'][$i]['TableName'];
+      $output .= '<option value='.$tID.'>'.$tID.' '. $tName .'</option>';
   }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -52,19 +60,7 @@
 </head>
 
 <body>
-<ul>
-  <!--
-  <li><a href="#home">Home</a></li>
-  <li><a href="#news">fa-angle-left</a></li>
-  -->
-  <li style="float:right"><a class="active" href="#about">Chart Maker</a></li>
 
-
-<li class ="fa fa-angle-left fa-4x"></i>
-<li class ="fa fa-bar-chart fa-4x"></li>
-<li class ="fa  fa-pencil-square-o fa-4x"></li>
-</ul>
-</body>
 
   <header id="titlelogo1">
     <div class="container1">

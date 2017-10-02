@@ -8,10 +8,16 @@
   if(isset($_POST["operation"]))
   {
 
-      $oldcName = $_POST['column_selected'];
-      $cName = $_POST['column_name'];
+      $oldcName = $_POST['edit_column_selected'];
+      for($i = 1; $i < $size; $i+=1){
+          if ($oldcName == $arr['rows'][$i]['FieldName']){
+              $oldID = $arr['rows'][$i]['FieldID'];
+          }
+      }
+
+      $cName = $_POST['edit_column_name'];
       $dType = 'VARCHAR(255)';
-      RenameColumn($tableid, $oldcName, $cName, $dType);
+      RenameColumn($tableid, $oldID, $cName, $dType);
       echo 'Column Renamed';
   }
 ?>

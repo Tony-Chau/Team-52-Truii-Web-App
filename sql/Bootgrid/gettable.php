@@ -2,7 +2,7 @@
 //include after <include("connection.php");>
 
 $tsize = 0;
-$TablesIDQuery = "SELECT TableID FROM TableList";
+$TablesIDQuery = "SELECT TableID, TableName FROM TableList";
 
 $gotTableID = mysqli_query($connection, $TablesIDQuery);
 while($tID = mysqli_fetch_assoc($gotTableID))
@@ -11,10 +11,15 @@ while($tID = mysqli_fetch_assoc($gotTableID))
     $tsize += 1;
 }
 
-$tIDsoutput = array( 'rows' => $tIDs );
+if(!empty($tIDs)){
 
-$json = json_encode($tIDsoutput);
-$tIDsarr = (json_decode($json, true));
+    $tIDsoutput = array( 'rows' => $tIDs );
+    $json = json_encode($tIDsoutput);
+    $tIDsarr = (json_decode($json, true));
+
+}else{
+    header('location: recorddatapageAddDelete.php');
+}
 
 
  ?>

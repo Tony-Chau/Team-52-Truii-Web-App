@@ -7,7 +7,7 @@
   include("getcolumns.php");
   if(isset($_POST["operation"]))
   {
-      $cName = $_POST['column_name'];
+      $cName = $_POST['add_column_name'];
       $dType = 'VARCHAR(255)';
       AddColumn($tableid, $cName, $dType);
 
