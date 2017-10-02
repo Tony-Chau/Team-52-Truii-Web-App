@@ -12,8 +12,6 @@
 
 //  echo "</header>";
 
-$added = false;
-
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['title'])){
           $columnNumber = $_POST["columnNumber"];
@@ -31,16 +29,9 @@ $added = false;
           $latest = $tsize;
           $tID = $tIDsarr['rows'][$latest]['TableID'];
           $_SESSION['tableid'] = $tID;
-          $added = true;
-          //header('location: datapage.php');
+          echo "<script>window.location.href = 'datapage.php'; </script>";
       }
   }
-  echo "<script>
-  var check = " . $added . ";
-  if (". $added."){
-    window.location.href = 'datapage.php';
-  }
-  </script>";
     navBarCreate('rgb(31,194,222)','Record Data');
 ?>
 

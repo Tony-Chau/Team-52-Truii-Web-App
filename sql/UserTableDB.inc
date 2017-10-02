@@ -20,17 +20,8 @@ function LogUser($username, $password){
 }
 //Creates an account for the user
 function CreateUser($Username, $password){
-  $dbUser = get_dbUsername();
-  $dbPassword = get_dbPassword();
-  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
-  $pdo = new PDO($link, $dbUser, $dbPassword);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  try{
-    $result = $pdo->query("INSERT INTO UserTable(Username, Password) VALUES(\"" . $Username . "\", \"" . $password . "\");");
-  }catch (PDOException $e){
-    echo $e->getMessage();
-  }
-  $pdo=null;
+  $sql = "INSERT INTO UserTable(Username, Password) VALUES(\"" . $Username . "\", \"" . $password . "\");";
+  CallDatabase($sql);
 }
 //Check if the account exist
 function CheckUser($username){

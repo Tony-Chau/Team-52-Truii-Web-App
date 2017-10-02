@@ -1,6 +1,7 @@
 <?php
   include("sql/mysql.inc");
   include("inc/NavBar.inc");
+  include ("inc/ChartValidator.inc");
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/getcolumns.php");
 
