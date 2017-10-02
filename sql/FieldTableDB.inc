@@ -64,7 +64,7 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
 }
 
 function DeleteField($TableID, $FieldName){
-  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . "& FieldName = " . $FieldName . ";";
+  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . " & FieldName = \"" . $FieldName . "\";";
 }
 
 function DeleteFieldTable($TableID){
@@ -78,7 +78,7 @@ function GetFieldID($TableID, $FieldName){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT FieldID FROM FieldTable WHERE TableID=" . $TableID . "&FieldName=" . $FieldName . ";");
+    $result = $pdo->query("SELECT FieldID FROM FieldTable WHERE TableID=" . $TableID . "& FieldName=" . $FieldName . ";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -90,7 +90,6 @@ function GetFieldID($TableID, $FieldName){
 }
 
 function ChangeField($FieldID, $NewFieldName, $NewFieldType){
-  return "UPDATE FieldTable SET FieldName= \"" . $NewFieldName . "\" & DataType=\"" . $NewFieldType . "\" WHERE FieldID=" . $FieldID . ";";
+  return "UPDATE FieldTable SET FieldName= \"" . $NewFieldName . "\", DataType=\"" . $NewFieldType . "\" WHERE FieldID=" . $FieldID . ";";
 }
-
 ?>
