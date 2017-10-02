@@ -59,7 +59,7 @@
      div += "<input type=\"text\" name=\"ColumnTitle" + i + "\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" required></br>";
      div += "<div class=\"form-group\" style=\"margin-bottom: 2%;\"><label for=\"exampleSelect1\" style=\"margin-left: 4%; margin-right: 4%;color: #FFFFFF;\">Unit of Measurement</label>";
      div += "<select name=\"ColumnType" + i + "\" class=\"form-control\" id=\"selectinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\">";
-     div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"INT(11)\"># Numbers</option><option value=\"percentage\">% Percentage</option></select></div></fieldset>";
+     div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"INT\"># Numbers</option><option value=\"FLOAT\">% Percentage</option><option value\"DATETIME\">&#128467 DateTime</option></select></div></fieldset>";
      div += "</div>";
      $('#divColumn').append(div);
     $(number).animate({height: 'toggle', display: 'block'}, 500);
@@ -100,8 +100,9 @@
             <div class="form-group" style="margin-bottom: 2%;"><label for="exampleSelect1" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;">Unit of Measurement</label>
               <select name="ColumnType1" class="form-control" id="selectinput1" style="width: 92%; margin-left: 4%; margin-right: 4%;">
                 <option value="VARCHAR(255)">Text</option>
-                <option value="INT(11)"># Numbers</option>
-                <option value="percentage">% Percentage</option>
+                <option value="INT"># Numbers</option>
+                <option value="FLOAT">% Percentage</option>
+                <option value"DATETIME">&#128467 DateTime</option>
               </select>
             </div>
           </fieldset>
