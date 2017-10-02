@@ -68,7 +68,7 @@ function DeleteField($TableID, $FieldName){
 }
 
 function DeleteFieldTable($TableID){
-  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . ";"
+  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . ";";
 }
 
 function GetFieldID($TableID, $FieldName){
