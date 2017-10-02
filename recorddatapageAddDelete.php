@@ -62,12 +62,12 @@
      div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"INT\"># Numbers</option><option value=\"FLOAT\">% Percentage</option><option value\"DATETIME\">&#128467 DateTime</option></select></div></fieldset>";
      div += "</div>";
      $('#divColumn').append(div);
-    $(number).animate({height: 'toggle', display: 'block'}, 500);
-    $(number).animate({opacity: 1}, 500);
+    $(number).animate({height: 'toggle', display: 'block'}, 250);
+    $(number).animate({opacity: 1}, 250);
    }
    function deleteField(column){
-     $('#Column' + column).animate({opacity: 0}, 500);
-     $('#Column' + column).animate({display:'none', height: 'toggle'}, 500);
+     $('#Column' + column).animate({opacity: 0}, 250);
+     $('#Column' + column).animate({display:'none', height: 'toggle'}, 250);
      document.getElementById("textinput" + column).required = false;
      document.getElementById("textinput" + column).value = '';
    }
