@@ -5,7 +5,6 @@ $sql = "TRUNCATE TABLE TableList;
         TRUNCATE TABLE UserTable;
         TRUNCATE TABLE GraphTable;
         TRUNCATE TABLE CustomFieldTable;";
-$TableID_Array = array();
 $dbUser = get_dbUsername();
 $dbPassword = get_dbPassword();
 $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
@@ -17,10 +16,7 @@ try{
   echo $e->getMessage();
   }
   foreach($result as $data){
-    array_push($TableID_Array, $data['TableID']);
-  }
-  for ($i = 0; $i < count($TableID_Array); $i += 1){
-    $sql .= "DROP TABLE " . NumberToWordsFormat($TableID_Array[$i]) . ";";
+    $sql .= "DROP TABLE " . NumberToWordsFormat($data['TableID']) . ";";
   }
 CallDatabase($sql);
 echo "All Data has been erased";

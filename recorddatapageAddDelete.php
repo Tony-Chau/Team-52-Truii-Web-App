@@ -52,7 +52,7 @@
      columnNumber += 1;
      var i = columnNumber;
      var number = '#Column' + i;
-     var div = "<div class=\"container\" id=\"Column" + i + "\" style=\"margin-right: 10%;margin-left: -10px;margin-top:10px;display:none;padding-top: 10px; padding-bottom: 10px;\">";
+     var div = "<div class=\"container\" id=\"Column" + i + "\" style=\"display:none;opacity:0;margin-right: 10%;margin-left: -10px;margin-top:10px;padding-top: 10px; padding-bottom: 10px;\">";
      div += "<fieldset clase=\"form-box\" id=\"Box" + i + "\" style=\"position: relative; border-radius: 25px;background-color:rgb(10,191,211);opacity:0.8\">";
      div += "<button style=\"position: absolute;right: 10px; top:-15px;text-align: right;\" type=\"button\" onClick=\"deleteField("+ i +");\" class=\"btn btn-primary\" id=\"DeleteColumn"+ i +"\">X</button>";
      div += "<label for=\"exampletextinput\" style=\"color: #FFFFFF;margin-left: 4%; margin-right: 4%;padding-top: 10px;\">Column Title </label>";
@@ -62,18 +62,14 @@
      div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"INT(11)\"># Numbers</option><option value=\"percentage\">% Percentage</option></select></div></fieldset>";
      div += "</div>";
      $('#divColumn').append(div);
-     $(number).animate({height: 'toggle', display:'block'}, 500);
+    $(number).animate({height: 'toggle', display: 'block'}, 500);
+    $(number).animate({opacity: 1}, 500);
    }
    function deleteField(column){
+     $('#Column' + column).animate({opacity: 0}, 500);
      $('#Column' + column).animate({display:'none', height: 'toggle'}, 500);
      document.getElementById("textinput" + column).required = false;
      document.getElementById("textinput" + column).value = '';
-   }
-   function ResetValue(){
-     document.getElementById('xampletextinput').value = '';
-     for (var i = 1; i < (columnNumber + 1); i += 1){
-        document.getElementById('textinput' + i).value = '';
-     }
    }
 
    function Submission(){
@@ -86,14 +82,6 @@
 
 </head>
 <body>
-
-  <!--
-  <ul class="recorddatapages">
-    <li style="float:right"><a class="active1" href="#about">Record Data</a></li>
-    <li class="fa fa-angle-left fa-4x" onclick="goBack()"></li>
-    <a href="chartmaker.php"><li class="fa fa-bar-chart fa-4x"></li></a>
-    <a href="recorddatapageAddDelete.php"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
-  </ul>-->
 
   <form method=POST>
     <div id ="recordform">
@@ -119,9 +107,8 @@
           </fieldset>
         </div>
       </div>
-      <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 6%;">Add Column</button>
-      <div class="form-group" id="divButtons" style = "margin-top: 10px;">
-        <button type="button" class="btn btn-primary1" id="btn_ResetColumn" onclick="ResetValue();">Reset Column</button>
+      <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 2%;">Add Column</button>
+      <div class="form-group" id="divButtons" style = "margin-top: 10px;margin-left: 4%;">
         <button type="button" class="btn btn-primary1" onClick='Submission();' >Submit</button>
         <button type="submit" class="btn btn-primary1" id='create_table' style="display:none;">Submit</button>
       </div>
