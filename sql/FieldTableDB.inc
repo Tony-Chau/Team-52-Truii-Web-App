@@ -12,7 +12,6 @@ function EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType){
   return $sql;
 }
 
-
 //Presents the list of tables
 function GetFieldTableList($TableID){
   $dbUser = get_dbUsername();

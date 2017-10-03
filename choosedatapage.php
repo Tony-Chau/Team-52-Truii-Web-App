@@ -1,6 +1,6 @@
 <?php
   include 'sql/mysql.inc';
-  include 'inc/NavBar.inc';
+  include 'inc/tools.inc';
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/gettable.php");
 

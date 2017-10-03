@@ -1,6 +1,6 @@
 <?php
   include 'sql/mysql.inc';
-  include 'inc/NavBar.inc';
+  include 'inc/tools.inc';
   include("sql/Bootgrid/connection.php");
 
 
@@ -11,12 +11,12 @@
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['title'])){
           $columnNumber = $_POST["columnNumber"];
-          $table_name = ($_POST["title"]);
+          $table_name = SpaceCancel($_POST["title"]);
           $aFields = array();
           $dTypes = array();
           for ($i = 1; $i < ($columnNumber + 1); $i+=1){
               if (!empty($_POST["ColumnTitle{$i}"])){
-                  array_push($aFields, $_POST["ColumnTitle{$i}"]);
+                  array_push($aFields, SpaceCancel($_POST["ColumnTitle{$i}"]));
                   array_push($dTypes, $_POST["ColumnType{$i}"]);
               }
           }
