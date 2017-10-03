@@ -25,7 +25,7 @@
           $latest = $tsize;
           $tID = $tIDsarr['rows'][$latest]['TableID'];
           $_SESSION['tableid'] = $tID;
-          echo "<script>window.location.href = 'datapage.php'; </script>";
+          gotoPage('datapage.php');
       }
   }
     navBarCreate('rgb(31,194,222)','Record Data');

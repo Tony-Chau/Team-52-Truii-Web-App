@@ -34,7 +34,7 @@
 
           if ($table_exist){
               $_SESSION['tableid'] = $_POST['table_selected'];
-              header('location: datapage.php');
+              gotoPage('datapage.php');
           }
           else {
               echo "<script language='javascript'>";
