@@ -42,13 +42,14 @@ $query .= " FROM " . $table . " ";
 if(!empty($_POST["searchPhrase"]))
 {
     $query .= 'WHERE (';
-    $query .= $table . '.' . $arr["rows"][0]["COLUMN_NAME"] . ' ';
+    $query .= $table . '.' . $arr["rows"][0]["COLUMN_NAME"];
+    $query .= ' LIKE "%'.$_POST["searchPhrase"].'%" ';
     for($i = 1; $i < $size; $i+=1){
         if ($i < $size){
             $query .= 'OR ';
         }
         $query .= $table . '.' . $arr["rows"][$i]["FieldName"];
-        $query .= 'LIKE "%'.$_POST["searchPhrase"].'%" ';
+        $query .= ' LIKE "%'.$_POST["searchPhrase"].'%" ';
     }
     $query .= ') ';
 }
