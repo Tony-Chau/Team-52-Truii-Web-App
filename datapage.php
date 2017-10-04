@@ -16,6 +16,12 @@
       $output .= '<option value="'.$cName.'">'.$cName.'</option>';
   }
 
+  $datatypes = '';
+  $datatypes .= '<option value="VARCHAR(255)">Text</option>';
+  $datatypes .= '<option value="INT"># Numbers</option>';
+  $datatypes .= '<option value="FLOAT">% Percentage</option>';
+  $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,32 +72,51 @@
       background-color: rgb(31,194,222);
       border-color: rgb(31,194,222);
     }
+
+    .pagination{
+      font-size: 200%;
+    }
+
+    .infos{
+      font-size: 150%;
+    }
+
+    .table>thead>tr>th{
+        font-size: 150%;
+        height: 10%;
+    }
+
+    .table>tbody>tr>td{
+        font-size: 150%;
+        height: 10%;
+    }
+
   </style>
 </head>
 <body>
 
-  <div class="box" style="margin-top: 50px">
+  <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw; margin-top: 50px; ">
     <br />
-    <div align="right">
+    <div align="right" style="margin-top: 10%; margin-bottom: 5%;">
       <?php
 
-        $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#testModal\" class=\"btn btn-info btn-lg\"";
+        $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#tableModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%;\"";
         if ($size <= 1){
           $addData .= " disabled";
         }
         $addData .= ">Add Data</button>";
         echo $addData;
 
-        echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\">Add Column</button>";
+        echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%;\">Add Column</button>";
 
-        $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\"";
+        $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%;\"";
         if ($size <= 1){
           $editColumn .= " disabled";
         }
         $editColumn .= ">Edit Column</button>";
         echo $editColumn;
 
-        $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info btn-lg\"";
+        $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%;\"";
         if ($size <= 1){
           $delColumn .= " disabled";
         }
@@ -100,20 +125,20 @@
        ?>
     </div>
     <div class="table-responsive" style="overflow-x: scroll">
-      <table id="test_data" class="table table-bordered table-striped">
+      <table id="table_data" class="table table-bordered table-striped">
         <thead>
           <tr>
             <?php
-            $col = '';
-            $col .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
-            $col .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
-            echo $col;
+            $coltitle = '';
+            $coltitle .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
+            $coltitle .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
+            echo $coltitle;
 
             for($i = 1; $i < $size; $i+=1){
-                $col = '';
-                $col .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
-                $col .= $arr['rows'][$i]['FieldName'] . "</th>";
-                echo $col;
+                $coltitle = '';
+                $coltitle .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
+                $coltitle .= $arr['rows'][$i]['FieldName'] . "</th>";
+                echo $coltitle;
             }
              ?>
             <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
@@ -127,7 +152,7 @@
 <script type="text/javascript" language='javascript'>
 $(document).ready(function(){
   $('#add_data_button').click(function(){
-    $('#test_form')[0].reset();
+    $('#table_form')[0].reset();
     $('.modal-title').text('Add Information');
     $('#action').val('Add Data');
     $('#operation').val('Add');
@@ -154,7 +179,7 @@ $(document).ready(function(){
     $('#operation').val('Delete');
   });
 
-  var productTable = $('#test_data').bootgrid({
+  var productTable = $('#table_data').bootgrid({
     ajax: true,
     rowSelect: true,
     multiSelect: true,
@@ -170,8 +195,8 @@ $(document).ready(function(){
       {
         var id = "row."+"<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
         var buttonID = eval(id);
-        var buttons = "<button type='button' class='btn btn-warning btn-xs update' data-row-id='"+buttonID+"'>Edit</button>"+
-              "&nbsp; <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+buttonID+"'>Delete</button>";
+        var buttons = "<button type='button' class='btn btn-warning btn-xs update' data-row-id='"+buttonID+"' style=\"font-size: 75%;\">Edit</button>"+
+              "&nbsp; <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+buttonID+"' style=\"font-size: 75%;\">Delete</button>";
         return buttons;
       }
     }
@@ -192,7 +217,7 @@ $(document).ready(function(){
   var aCol = "<?php echo $aColumn?>"
   eval(aCol);
 
-  $(document).on('submit', '#test_form', function(event){
+  $(document).on('submit', '#table_form', function(event){
     event.preventDefault();
     var form_correct = true;
     for (var i = 0; i < colSize; i+=1){
@@ -214,9 +239,9 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
-          $('#test_form')[0].reset();
-          $('#testModal').modal('hide');
-          $('#test_data').bootgrid('reload');
+          $('#table_form')[0].reset();
+          $('#tableModal').modal('hide');
+          $('#table_data').bootgrid('reload');
         }
       });
     }
@@ -239,7 +264,7 @@ $(document).ready(function(){
         "dataType:'json'," +
         "success:function(data)" +
         "{" +
-          "$('#testModal').modal('show');";
+          "$('#tableModal').modal('show');";
           for (var i = 0; i < colSize; i+=1){
             rowUpdate += "$('#"+aColumns[i]+"').val(data."+aColumns[i]+");";
           }
@@ -267,7 +292,7 @@ $(document).ready(function(){
           "data:{"+col+":"+col+"}, "+
           "success:function(data){" +
             "alert(data);" +
-            "$('#test_data').bootgrid('reload');" +
+            "$('#table_data').bootgrid('reload');" +
           "}" +
         "});";
         eval(rowDelete);
@@ -280,9 +305,10 @@ $(document).ready(function(){
 
   $(document).on('submit', '#column_addform', function(event){
     event.preventDefault();
-    var column_name = $('#column_name').val();
+    var column_name = $('#add_column_name').val();
+    var datatype_selected = $('#datatype_selected').val();
     var form_data = $(this).serialize();
-    if(column_name != '')
+    if(column_name != '' && datatype_selected != '')
     {
       $.ajax({
         url:"sql/Bootgrid/Columninsert.php",
@@ -359,20 +385,28 @@ $(document).ready(function(){
 </script>
 
 
-<div id="testModal" class="modal fade">
+<div id="tableModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="test_form">
+    <form method="post" id="table_form">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Test</h4>
+          <h4 class="modal-title">Add Data</h4>
         </div>
         <div class="modal-body">
           <?php
           for($i = 1; $i < $size; $i+=1){
-              $col = $arr['rows'][$i]['FieldName'];
-              echo "<label>Enter " . $col . "</label>";
-              echo "<input type='text' name='$col' id='$col' class='form-control' />";
+              $colname = $arr['rows'][$i]['FieldName'];
+              echo "<label>Enter " . $colname . "</label>";
+
+              if ('INT' == $arr['rows'][$i]['DataType']){
+                  $coltype = 'number';
+              }
+              else {
+                  $coltype = 'text';
+              }
+
+              echo "<input type='$coltype' name='$colname' id='$colname' class='form-control' />";
               echo "<br />";
           }
            ?>
@@ -391,18 +425,24 @@ $(document).ready(function(){
   </div>
 </div>
 
+
 <div id="columnAddModal" class="modal fade">
   <div class="modal-dialog">
     <form method="post" id="column_addform">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Column Test</h4>
+          <h4 class="modal-title">Add Column</h4>
         </div>
         <div class="modal-body">
           <label>Enter Column Name</label>
           <input type='text' name='add_column_name' id='add_column_name' class='form-control' />
           <br />
+          <label>Select DataType</label>
+          <select name="datatype_selected" id="datatype_selected" class="form-control">
+            <option value="">Select DataType</option>
+            <?php echo $datatypes; ?>
+          </select>
         </div>
         <div class="modal-footer">
           <input type="hidden" name="operation" id="operation" />
@@ -420,13 +460,13 @@ $(document).ready(function(){
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Edit Column Test</h4>
+          <h4 class="modal-title">Edit Column</h4>
         </div>
         <div class="modal-body">
           <label>Select Column</label>
           <select name="edit_column_selected" id="edit_column_selected" class="form-control">
             <option value="">Select Column</option>
-            <?php echo $output ?>
+            <?php echo $output; ?>
           </select>
           <br />
           <label>Enter Column Name</label>
@@ -440,7 +480,8 @@ $(document).ready(function(){
       </div>
     </form>
   </div>
-</div>-
+</div>
+
 
 <div id="columnDeleteModal" class="modal fade">
   <div class="modal-dialog">
@@ -448,7 +489,7 @@ $(document).ready(function(){
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Delete Column Test</h4>
+          <h4 class="modal-title">Delete Column</h4>
         </div>
         <div class="modal-body">
           <label>Select Column</label>

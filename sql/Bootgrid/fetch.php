@@ -42,9 +42,9 @@ $query .= " FROM " . $table . " ";
 if(!empty($_POST["searchPhrase"]))
 {
     $query .= 'WHERE (';
-    $query .= $table . '.' . $arr["rows"][0]["COLUMN_NAME"];
+    $query .= $table . '.' . $arr["rows"][0]["COLUMN_NAME"] . ' ';
     for($i = 1; $i < $size; $i+=1){
-        if ($i > 0){
+        if ($i < $size){
             $query .= 'OR ';
         }
         $query .= $table . '.' . $arr["rows"][$i]["FieldName"];
@@ -86,9 +86,9 @@ if(!empty($result)){
         $data[] = $row;
     }
 
-    $query1 = "SELECT * FROM " . $table;
-    $result1 = mysqli_query($connection, $query1);
-    $total_records = mysqli_num_rows($result);
+    $query_row = "SELECT * FROM " . $table;
+    $result_row = mysqli_query($connection, $query_row);
+    $total_records = mysqli_num_rows($result_row);
 
 }else{
     $total_records = 0;

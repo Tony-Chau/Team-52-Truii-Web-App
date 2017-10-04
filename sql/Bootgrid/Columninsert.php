@@ -8,7 +8,7 @@
   if(isset($_POST["operation"]))
   {
       $cName = $_POST['add_column_name'];
-      $dType = 'VARCHAR(255)';
+      $dType = $_POST['datatype_selected'];
       AddColumn($tableid, $cName, $dType);
 
       echo 'Column Inserted';
