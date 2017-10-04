@@ -63,7 +63,7 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
 }
 
 function DeleteField($TableID, $FieldName){
-  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . " & FieldName = \"" . $FieldName . "\";";
+  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . " AND FieldName = \"" . $FieldName . "\";";
 }
 
 function DeleteFieldTable($TableID){
