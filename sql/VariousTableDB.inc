@@ -92,16 +92,6 @@ function EnterVariousTable($TableID, $Array_of_FieldName, $array_of_data, $array
   CallDatabase($sql);
 }
 
-function RemoveValueVariousTable($TableID, $FieldName, $Value, $FieldType){
-  $sql = "DELETE FROM " . NumberToWordsFormat($TableID) . " WHERE " . $FieldName . "=" . sqlInsertionString($Value, $FieldType) . ";";
-  CallDatabase($sql);
-}
-
-function ResetValueVariousTable($TableID){
-  $sql = "TRUNCATE TABLE " . NumberToWordsFormat($TableID) . ";";
-  CallDatabase($sql);
-}
-
 function EditValueVariousTable($TableID, $VariousID_Array, $Field_Array, $Value_Array){
   $TableName = RequestTableDetail($TableID, "TableName");
   $sql = "UPDATE " . NumberToWordsFormat($TableID) . " SET ";
@@ -111,6 +101,15 @@ function EditValueVariousTable($TableID, $VariousID_Array, $Field_Array, $Value_
   CallDatabase($sql);
 }
 
+function RemoveValueVariousTable($TableID, $FieldName, $Value, $FieldType){
+  $sql = "DELETE FROM " . NumberToWordsFormat($TableID) . " WHERE " . $FieldName . "=" . sqlInsertionString($Value, $FieldType) . ";";
+  CallDatabase($sql);
+}
+
+function ResetValueVariousTable($TableID){
+  $sql = "TRUNCATE TABLE " . NumberToWordsFormat($TableID) . ";";
+  CallDatabase($sql);
+}
 
 function sqlInsertionString($data, $type){
   if ($type == 'VARCHAR(255)'){

@@ -222,16 +222,14 @@ $(document).ready(function(){
     var form_correct = true;
     for (var i = 0; i < colSize; i+=1){
       var col = $('#'+aColumns[i]).val();
-      if (col != ''){
-        form_correct = true;
-      }
-      else {
+      if (col == ''){
         form_correct = false;
       }
     }
     var form_data = $(this).serialize();
     if(form_correct)
     {
+      document.getElementById('action').disabled = true;
       $.ajax({
         url:"sql/Bootgrid/insert.php",
         method:"POST",
@@ -239,6 +237,7 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
+          document.getElementById('action').disabled = false;
           $('#table_form')[0].reset();
           $('#tableModal').modal('hide');
           $('#table_data').bootgrid('reload');
@@ -257,13 +256,15 @@ $(document).ready(function(){
     {
       var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
       eval("var " + col + " = $(this).data('row-id');");
-      var rowUpdate = "$.ajax({" +
+      var rowUpdate = "document.getElementById('action').disabled = true; " +
+        "$.ajax({" +
         "url:'sql/Bootgrid/fetch_single.php'," +
         "method:'POST'," +
         "data:{"+col+":"+col+"}," +
         "dataType:'json'," +
         "success:function(data)" +
         "{" +
+          "document.getElementById('action').disabled = false; " +
           "$('#tableModal').modal('show');";
           for (var i = 0; i < colSize; i+=1){
             rowUpdate += "$('#"+aColumns[i]+"').val(data."+aColumns[i]+");";
@@ -286,12 +287,14 @@ $(document).ready(function(){
       {
         var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
         eval("var " + col + " = $(this).data('row-id');");
-        var rowDelete = "$.ajax({"+
+        var rowDelete = "document.getElementById('action').disabled = true; " +
+          "$.ajax({" +
           "url:'sql/Bootgrid/delete.php'," +
           "method:'POST'," +
           "data:{"+col+":"+col+"}, "+
           "success:function(data){" +
             "alert(data);" +
+            "document.getElementById('action').disabled = false;" +
             "$('#table_data').bootgrid('reload');" +
           "}" +
         "});";
@@ -305,11 +308,18 @@ $(document).ready(function(){
 
   $(document).on('submit', '#column_addform', function(event){
     event.preventDefault();
+    var form_correct = false;
     var column_name = $('#add_column_name').val();
     var datatype_selected = $('#datatype_selected').val();
-    var form_data = $(this).serialize();
     if(column_name != '' && datatype_selected != '')
     {
+        form_correct = true;
+    }
+    var form_data = $(this).serialize();
+    if(form_correct)
+    {
+      document.getElementById('action').disabled = true;
+
       $.ajax({
         url:"sql/Bootgrid/Columninsert.php",
         method:"POST",
@@ -317,6 +327,7 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
+          document.getElementById('action').disabled = false;
           $('#column_addform')[0].reset();
           $('#columnAddModal').modal('hide');
           location.reload();
@@ -332,11 +343,18 @@ $(document).ready(function(){
 
   $(document).on('submit', '#column_editform', function(event){
     event.preventDefault();
+    var form_correct = false;
     var column_name = $('#edit_column_name').val();
     var column_selected = $('#edit_column_selected').val();
+    if(column_name != '' && column_selected != '')
+    {
+        form_correct = true;
+    }
     var form_data = $(this).serialize();
     if(column_name != '' && column_selected != '')
     {
+      document.getElementById('action').disabled = true;
+
       $.ajax({
         url:"sql/Bootgrid/Columnedit.php",
         method:"POST",
@@ -344,6 +362,7 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
+          document.getElementById('action').disabled = false;
           $('#column_deleteform')[0].reset();
           $('#columnDeleteModal').modal('hide');
           location.reload();
@@ -362,6 +381,7 @@ $(document).ready(function(){
     var form_data = $(this).serialize();
     if(column_selected != '')
     {
+      document.getElementById('action').disabled = true;
       $.ajax({
         url:"sql/Bootgrid/Columndelete.php",
         method:"POST",
@@ -369,6 +389,7 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
+          document.getElementById('action').disabled = false;
           $('#column_deleteform')[0].reset();
           $('#columnDeleteModal').modal('hide');
           location.reload();

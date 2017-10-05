@@ -19,6 +19,12 @@
       //$output .= '<option value="{\'id\':'.$colNum. '\', \'name\':'.$cName.'}">'.$cName.'</option>';
   }
 
+  $datatypes = '';
+  $datatypes .= '<option value="VARCHAR(255)">Text</option>';
+  $datatypes .= '<option value="INT"># Numbers</option>';
+  $datatypes .= '<option value="FLOAT">% Percentage</option>';
+  $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -336,9 +342,17 @@ $(document).ready(function(){
         <div class="modal-body">
           <?php
           for($i = 1; $i < $size; $i+=1){
-              $col = $arr['rows'][$i]['FieldName'];
-              echo "<label>Enter " . $col . "</label>";
-              echo "<input type='text' name='$col' id='$col' class='form-control' />";
+              $colname = $arr['rows'][$i]['FieldName'];
+              echo "<label>Enter " . $colname . "</label>";
+
+              if ('INT' == $arr['rows'][$i]['DataType']){
+                  $coltype = 'number';
+              }
+              else {
+                  $coltype = 'text';
+              }
+
+              echo "<input type='$coltype' name='$colname' id='$colname' class='form-control' />";
               echo "<br />";
           }
            ?>
