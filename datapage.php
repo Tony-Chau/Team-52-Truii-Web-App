@@ -83,12 +83,10 @@
 
     .table>thead>tr>th{
         font-size: 150%;
-        height: 10%;
     }
 
     .table>tbody>tr>td{
         font-size: 150%;
-        height: 10%;
     }
 
   </style>
@@ -129,11 +127,12 @@
         <thead>
           <tr>
             <?php
+            /*
             $coltitle = '';
             $coltitle .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
             $coltitle .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
             echo $coltitle;
-
+            */
             for($i = 1; $i < $size; $i+=1){
                 $coltitle = '';
                 $coltitle .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
@@ -285,6 +284,7 @@ $(document).ready(function(){
       {
         $(':input[type="submit"]').prop('disabled', true);
         var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
+        //var col = "<?php //echo $arr['rows'][1]['FieldName']; ?>";
         eval("var " + col + " = $(this).data('row-id');");
         var rowDelete = "$.ajax({" +
           "url:'sql/Bootgrid/delete.php'," +

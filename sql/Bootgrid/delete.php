@@ -6,6 +6,7 @@
   //started using getcolumns.php
   include("getcolumns.php");
   $id = $arr['rows'][0]['COLUMN_NAME'];
+  //$fname = $arr['rows'][1]['FieldName'];
   if(isset($_POST[$id]))
   {
       $query = "DELETE FROM " . $table . " WHERE " . $id . " = '".$_POST[$id]."'";
@@ -13,6 +14,6 @@
       {
           echo 'Value Deleted';
       }
-      
+      //RemoveValueVariousTable($tableid, $Field, $Data, $Type);
   }
 ?>

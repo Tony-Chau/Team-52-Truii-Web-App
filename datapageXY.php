@@ -14,9 +14,7 @@
   $output = '';
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $colNum = $i;
-      $output .= '<option value='.$colNum.'>'.$cName.'</option>';
-      //$output .= '<option value="{\'id\':'.$colNum. '\', \'name\':'.$cName.'}">'.$cName.'</option>';
+      $output .= '<option value="'.$cName.'">'.$cName.'</option>';
   }
 
   $datatypes = '';
@@ -86,12 +84,10 @@
 
     .table>thead>tr>th{
         font-size: 150%;
-        height: 10%;
     }
 
     .table>tbody>tr>td{
         font-size: 150%;
-        height: 10%;
     }
 
   </style>
@@ -151,16 +147,16 @@
           <tr>
             <?php
             /*
-            $col = '';
-            $col .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
-            $col .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
-            echo $col;
+            $coltitle = '';
+            $coltitle .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
+            $coltitle .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
+            echo $coltitle;
             */
             for($i = 1; $i < $size; $i+=1){
-                $col = '';
-                $col .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
-                $col .= $arr['rows'][$i]['FieldName'] . "</th>";
-                echo $col;
+                $coltitle = '';
+                $coltitle .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
+                $coltitle .= $arr['rows'][$i]['FieldName'] . "</th>";
+                echo $coltitle;
             }
              ?>
             <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
@@ -240,6 +236,39 @@ $(document).ready(function(){
   var aCol = "<?php echo $aColumn?>"
   eval(aCol);
 
+  $(document).on('submit', '#table_form', function(event){
+    event.preventDefault();
+    var form_correct = true;
+    for (var i = 0; i < colSize; i+=1){
+      var col = $('#'+aColumns[i]).val();
+      if (col == ''){
+        form_correct = false;
+      }
+    }
+    var form_data = $(this).serialize();
+    if(form_correct)
+    {
+      $(':input[type="submit"]').prop('disabled', true);
+      $.ajax({
+        url:"sql/Bootgrid/insert.php",
+        method:"POST",
+        data:form_data,
+        success:function(data)
+        {
+          alert(data);
+          $(':input[type="submit"]').prop('disabled', false);
+          $('#table_form')[0].reset();
+          $('#tableModal').modal('hide');
+          $('#table_data').bootgrid('reload');
+        }
+      });
+    }
+    else
+    {
+      alert("All Fields are Required");
+    }
+  });
+
   $(document).on("loaded.rs.jquery.bootgrid", function()
   {
     productTable.find(".update").on("click", function(event)
@@ -267,54 +296,23 @@ $(document).ready(function(){
     });
   });
 
-  $(document).on('submit', '#table_form', function(event){
-    event.preventDefault();
-    var form_correct = true;
-    for (var i = 0; i < colSize; i+=1){
-      var col = $('#'+aColumns[i]).val();
-      if (col != ''){
-        form_correct = true;
-      }
-      else {
-        form_correct = false;
-      }
-    }
-    var form_data = $(this).serialize();
-    if(form_correct)
-    {
-      $.ajax({
-        url:"sql/Bootgrid/insert.php",
-        method:"POST",
-        data:form_data,
-        success:function(data)
-        {
-          alert(data);
-          $('#table_form')[0].reset();
-          $('#tableModal').modal('hide');
-          $('#table_data').bootgrid('reload');
-        }
-      });
-    }
-    else
-    {
-      alert("All Fields are Required");
-    }
-  });
-
   $(document).on("loaded.rs.jquery.bootgrid", function()
   {
     productTable.find(".delete").on("click", function(event)
     {
       if(confirm("Are you sure you want to delete this?"))
       {
+        $(':input[type="submit"]').prop('disabled', true);
         var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
+        //var col = "<?php //echo $arr['rows'][1]['FieldName']; ?>";
         eval("var " + col + " = $(this).data('row-id');");
-        var rowDelete = "$.ajax({"+
+        var rowDelete = "$.ajax({" +
           "url:'sql/Bootgrid/delete.php'," +
           "method:'POST'," +
           "data:{"+col+":"+col+"}, "+
           "success:function(data){" +
             "alert(data);" +
+            "$(':input[type=\"submit\"]').prop('disabled', false);" +
             "$('#table_data').bootgrid('reload');" +
           "}" +
         "});";
