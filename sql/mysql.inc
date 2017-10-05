@@ -1,6 +1,5 @@
 <?php
   session_start();
-//include("../inc/tools.inc");
 include 'UserTableDB.inc';
 include 'TableListDB.inc';
 include 'FieldTableDB.inc';
@@ -41,12 +40,6 @@ function CheckRequestLogout(){
     }
   }
 }
-function GetCurrentTime(){
-  $time = new DateTimeZone('Australia/Brisbane');
-  $datetime = new DateTime();
-  $datetime->setTimezone($time);
-  return $datetime;
-}
 
 function NumberToWordsFormat($Number){
   $format = new NumberFormatter("en", NumberFormatter::SPELLOUT);
@@ -55,8 +48,16 @@ function NumberToWordsFormat($Number){
   return str_replace("-", "_", $NewFormNumber);
 }
 
+function GetCurrentTime(){
+  $time = new DateTimeZone('Australia/Brisbane');
+  $datetime = new DateTime();
+  $datetime->setTimezone($time);
+  return $datetime;
+}
+
 function SpaceCancel($string){
-  $NewFormNumber = str_replace(" ", "_", $FormNumber);
+  $NewFormNumber = str_replace(" ", "_", $string);
+  $NewFormNumber = str_replace('+', '_', $NewFormNumber);
   return str_replace("-", "_", $NewFormNumber);
 }
 
@@ -72,7 +73,5 @@ function CallDatabase($sql){
     echo $e->getMessage();
   }
   $pdo=null;
-
 }
-
 ?>

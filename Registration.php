@@ -1,5 +1,6 @@
 <?php
   include './sql/mysql.inc';
+    include 'inc/tools.inc';
   if (is_log()){
     header('location: home.php');
   }

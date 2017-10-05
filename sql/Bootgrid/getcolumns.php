@@ -23,15 +23,6 @@ $columnID = mysqli_fetch_assoc($gotcolumnsID);
 $columns[] = $columnID;
 $size+=1;
 
-/*
-$fieldName = GetFieldTableList($tableid);
-while($column = $fieldName->fetch(PDO::FETCH_ASSOC))
-{
-    $columns[] = $column;
-    $size+=1;
-}
-*/
-
 $fieldQuery = "SELECT * FROM FieldTable WHERE TableID = " . $tableid . ";";
 $gotfields = mysqli_query($connection, $fieldQuery);
 if(!empty($gotfields)){

@@ -1,5 +1,6 @@
 <?php
   include './sql/mysql.inc';
+    include 'inc/tools.inc';
   //Leaving this part to allow people to automatically log-in, so u don't need to type down ur email and password again
   log_in(1);
   if (!is_log()){

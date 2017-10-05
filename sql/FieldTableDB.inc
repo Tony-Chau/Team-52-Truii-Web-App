@@ -12,7 +12,6 @@ function EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType){
   return $sql;
 }
 
-
 //Presents the list of tables
 function GetFieldTableList($TableID){
   $dbUser = get_dbUsername();
@@ -64,7 +63,7 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
 }
 
 function DeleteField($TableID, $FieldName){
-  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . " & FieldName = \"" . $FieldName . "\";";
+  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . " AND FieldName = \"" . $FieldName . "\";";
 }
 
 function DeleteFieldTable($TableID){

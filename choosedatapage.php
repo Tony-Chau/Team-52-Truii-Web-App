@@ -1,6 +1,6 @@
 <?php
   include 'sql/mysql.inc';
-  include 'inc/NavBar.inc';
+  include 'inc/tools.inc';
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/gettable.php");
 
@@ -34,7 +34,7 @@
 
           if ($table_exist){
               $_SESSION['tableid'] = $_POST['table_selected'];
-              header('location: datapage.php');
+              gotoPage('datapage.php');
           }
           else {
               echo "<script language='javascript'>";

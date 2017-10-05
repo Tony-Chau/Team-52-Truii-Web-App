@@ -1,11 +1,8 @@
 <?php
 include "sql/mysql.inc";
+  include 'inc/tools.inc';
   if (isset($_GET['method'])){
-    $sql = "TRUNCATE TABLE TableList;
-            TRUNCATE TABLE FieldTable;
-            TRUNCATE TABLE UserTable;
-            TRUNCATE TABLE GraphTable;
-            TRUNCATE TABLE CustomFieldTable;";
+    $sql = "";
     $dbUser = get_dbUsername();
     $dbPassword = get_dbPassword();
     $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
@@ -19,6 +16,12 @@ include "sql/mysql.inc";
       foreach($result as $data){
         $sql .= "DROP TABLE " . NumberToWordsFormat($data['TableID']) . ";";
       }
+      $sql .="TRUNCATE TABLE TableList;
+              TRUNCATE TABLE FieldTable;
+              TRUNCATE TABLE UserTable;
+              TRUNCATE TABLE GraphTable;
+              TRUNCATE TABLE CustomFieldTable;";
+    CallTestAlert($sql);
     CallDatabase($sql);
     echo "<script> alert('All Data has been erased'); </script>";
 }

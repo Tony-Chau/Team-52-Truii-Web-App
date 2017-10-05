@@ -1,9 +1,8 @@
 <?php
 //Generates tables
 function CreateTable($TableName, $ArrayOfFields, $DataType){
-  $sql = EnterTable($TableName);
   $TableID = GetTableIDLastNumber();
-  $sql .= "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
+  $sql = "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
       $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", PRIMARY KEY(" . $TableName . "ID));";
@@ -11,6 +10,7 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
       $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", ";
     }
   }
+  $sql .= EnterTable($TableName);
   $sql .= EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType);
   CallDatabase($sql);
 }
@@ -47,27 +47,27 @@ function RequestVariousTableAsList($TableID, $requestfield){
 }
 
 function DeleteTable($TableID){
-  $sql = "DROP TABLE " . NumberToWordsFormat($TableID) . ";";
-  $sql .= DeleteFieldTable($TableID);
+  $sql = DeleteFieldTable($TableID);
+  $sql .= "DROP TABLE " . NumberToWordsFormat($TableID) . ";";
   CallDatabase($sql);
 }
 
 function AddColumn($TableID, $FieldName, $DataType){
-  $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . " ADD " .  $FieldName . " " . $DataType . ";";
-  $sql .= EnterFieldTable($TableID, $FieldName, $DataType);
+  $sql = EnterFieldTable($TableID, $FieldName, $DataType);
+  $sql .= "ALTER TABLE " . NumberToWordsFormat($TableID) . " ADD " .  $FieldName . " " . $DataType . ";";
   CallDatabase($sql);
 }
 
 function DeleteColumn($TableID, $FieldName){
-  $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . " DROP " .  $FieldName . ";";
-  $sql .= DeleteField($TableID, $FieldName);
+  $sql = DeleteField($TableID, $FieldName);
+  $sql .= "ALTER TABLE " . NumberToWordsFormat($TableID) . " DROP " .  $FieldName . ";";
   CallDatabase($sql);
 }
 
 function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){
   $OldFieldName = RequestFieldTableDetail($FieldID, "FieldName");
-  $sql = "ALTER TABLE " . NumberToWordsFormat($TableID) . " CHANGE " . $OldFieldName . " " . $NewFieldName . " " . $NewFieldType . ";";
-  $sql .= ChangeField($FieldID, $NewFieldName, $NewFieldType);
+  $sql = ChangeField($FieldID, $NewFieldName, $NewFieldType);
+  $sql .= "ALTER TABLE " . NumberToWordsFormat($TableID) . " CHANGE " . $OldFieldName . " " . $NewFieldName . " " . $NewFieldType . ";";
   CallDatabase($sql);
 }
 
@@ -92,16 +92,6 @@ function EnterVariousTable($TableID, $Array_of_FieldName, $array_of_data, $array
   CallDatabase($sql);
 }
 
-function RemoveValueVariousTable($TableID, $FieldName, $Value, $FieldType){
-  $sql = "DELETE FROM " . NumberToWordsFormat($TableID) . " WHERE " . $FieldName . "=" . sqlInsertionString($Value, $FieldType) . ";";
-  CallDatabase($sql);
-}
-
-function ResetValueVariousTable($TableID){
-  $sql = "TRUNCATE TABLE " . NumberToWordsFormat($TableID) . ";";
-  CallDatabase($sql);
-}
-
 function EditValueVariousTable($TableID, $VariousID_Array, $Field_Array, $Value_Array){
   $TableName = RequestTableDetail($TableID, "TableName");
   $sql = "UPDATE " . NumberToWordsFormat($TableID) . " SET ";
@@ -111,6 +101,15 @@ function EditValueVariousTable($TableID, $VariousID_Array, $Field_Array, $Value_
   CallDatabase($sql);
 }
 
+function RemoveValueVariousTable($TableID, $FieldName, $Value, $FieldType){
+  $sql = "DELETE FROM " . NumberToWordsFormat($TableID) . " WHERE " . $FieldName . "=" . sqlInsertionString($Value, $FieldType) . ";";
+  CallDatabase($sql);
+}
+
+function ResetValueVariousTable($TableID){
+  $sql = "TRUNCATE TABLE " . NumberToWordsFormat($TableID) . ";";
+  CallDatabase($sql);
+}
 
 function sqlInsertionString($data, $type){
   if ($type == 'VARCHAR(255)'){
