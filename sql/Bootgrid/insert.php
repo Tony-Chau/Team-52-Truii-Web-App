@@ -31,13 +31,15 @@
           $variousid = $_POST[$arr["rows"][0]["COLUMN_NAME"]];
           $Fields = array();
           $Datas = array();
+          $Types = array();
           for($i = 1; $i < $size; $i+=1){
               $col = $arr['rows'][$i]['FieldName'];
               array_push($Fields, $col);
               array_push($Datas, $_POST[$col]);
+              array_push($Types, $arr['rows'][$i]['DataType']);
           }
 
-          EditValueVariousTable($tableid, $variousid, $Fields, $Datas);
+          EditValueVariousTable($tableid, $variousid, $Fields, $Datas, $Types);
           echo 'Value Updated';
 
       }
