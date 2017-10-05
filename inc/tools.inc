@@ -31,4 +31,26 @@ echo '<ul class="navbar" style="background-color:'.$ColorCode.'; z-index: 5">
 function CallTestAlert($message){
   echo "<script>alert('".$message."');</script>";
 }
+
+function ConvertDatatoCSV($FieldName_Array, $Value_Array){
+  $csv = '';
+  $length =  count($FieldName_Array);
+  for ($i = 0; $i < $length; $i += 1){
+    if ($i == $length - 1){
+      $csv .= $FieldName_Array[$i] . "\n";
+    }else{
+      $csv .= $FieldName_Array[$i] . ', ';
+    }
+  }
+  for ($i = 0; $i < $length; $i += 1){
+    for ($j = 0; $j < $length; $j += 1){
+      if ($j == $length - 1){
+        $csv .= $Value_Array[$i][$j];
+      }else{
+        $csv .= $Value_Array[$i][$j] . ', ';
+      }
+    }
+  }
+  return $csv;
+}
  ?>

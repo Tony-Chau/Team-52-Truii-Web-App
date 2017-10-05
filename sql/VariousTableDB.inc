@@ -15,6 +15,7 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
   CallDatabase($sql);
 }
 
+//returns the whole table as an array format
 function GetVariousTable($TableID){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -46,24 +47,29 @@ function RequestVariousTableAsList($TableID, $requestfield){
   return $result;
 }
 
+//Deletes the table and updates FieldTable and TableList database to match the changes
 function DeleteTable($TableID){
   $sql = DeleteFieldTable($TableID);
+  $sql .= DeleteTable($TableID);
   $sql .= "DROP TABLE " . NumberToWordsFormat($TableID) . ";";
   CallDatabase($sql);
 }
 
+//Add columns to the customise table
 function AddColumn($TableID, $FieldName, $DataType){
   $sql = EnterFieldTable($TableID, $FieldName, $DataType);
   $sql .= "ALTER TABLE " . NumberToWordsFormat($TableID) . " ADD " .  $FieldName . " " . $DataType . ";";
   CallDatabase($sql);
 }
 
+//Removes the columns from the customise table
 function DeleteColumn($TableID, $FieldName){
   $sql = DeleteField($TableID, $FieldName);
   $sql .= "ALTER TABLE " . NumberToWordsFormat($TableID) . " DROP " .  $FieldName . ";";
   CallDatabase($sql);
 }
 
+//Rename the columns for the customise table
 function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){
   $OldFieldName = RequestFieldTableDetail($FieldID, "FieldName");
   $sql = ChangeField($FieldID, $NewFieldName, $NewFieldType);
@@ -71,7 +77,7 @@ function RenameColumn($TableID, $FieldID, $NewFieldName, $NewFieldType){
   CallDatabase($sql);
 }
 
-
+//Enter data of the customise table
 function EnterVariousTable($TableID, $Array_of_FieldName, $array_of_data, $array_of_type){
   $sql = "INSERT INTO " . NumberToWordsFormat($TableID) . "(";
   for ($i = 0; $i < count($Array_of_FieldName); $i += 1){
@@ -92,6 +98,7 @@ function EnterVariousTable($TableID, $Array_of_FieldName, $array_of_data, $array
   CallDatabase($sql);
 }
 
+//Edit the value of the customise table
 function EditValueVariousTable($TableID, $VariousID, $Field_Array, $Value_Array, $type_array){
   $TableName = RequestTableDetail($TableID, "TableName");
   $sql = '';
@@ -102,16 +109,19 @@ function EditValueVariousTable($TableID, $VariousID, $Field_Array, $Value_Array,
   CallDatabase($sql);
 }
 
+//Remove specific data row from the customise table
 function RemoveValueVariousTable($TableID, $FieldName, $Value, $FieldType){
   $sql = "DELETE FROM " . NumberToWordsFormat($TableID) . " WHERE " . $FieldName . "=" . sqlInsertionString($Value, $FieldType) . ";";
   CallDatabase($sql);
 }
 
+//Resets all the data within the customise table
 function ResetValueVariousTable($TableID){
   $sql = "TRUNCATE TABLE " . NumberToWordsFormat($TableID) . ";";
   CallDatabase($sql);
 }
 
+//A small function that returns the correct type out query depending on the data type
 function sqlInsertionString($data, $type){
   if ($type == 'VARCHAR(255)'){
     return "\" " . $data . "\"";

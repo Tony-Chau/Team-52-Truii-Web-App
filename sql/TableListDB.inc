@@ -5,6 +5,10 @@ function EnterTable($TableName){
   return "INSERT INTO TableList(TableName, UserID, DateCreated) VALUES (\"" . $TableName . "\", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");";
 }
 
+function DeleteTable($TableID){
+  return "DELETE FROM TableList WHERE TableID = " . $TableID . ";";
+}
+
 
 //Presents the list of tables
 function GetTableList(){

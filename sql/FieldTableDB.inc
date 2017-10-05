@@ -62,14 +62,16 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
   return $result;
 }
 
+//Returns the string of a query that removes the fieldname data from a specific row (this is called from varioustableDB)
 function DeleteField($TableID, $FieldName){
   return "DELETE FROM FieldTable WHERE TableID = " . $TableID . " AND FieldName = \"" . $FieldName . "\";";
 }
-
+//Returns the string of a query deletes all the data that relates to the table that is being deleted
 function DeleteFieldTable($TableID){
   return "DELETE FROM FieldTable WHERE TableID = " . $TableID . ";";
 }
 
+//returns the FieldID
 function GetFieldID($TableID, $FieldName){
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -88,6 +90,7 @@ function GetFieldID($TableID, $FieldName){
 
 }
 
+//Returns the string of a query that changes data of a specific FieldnName and dataType
 function ChangeField($FieldID, $NewFieldName, $NewFieldType){
   return "UPDATE FieldTable SET FieldName= \"" . $NewFieldName . "\", DataType=\"" . $NewFieldType . "\" WHERE FieldID=" . $FieldID . ";";
 }
