@@ -28,19 +28,16 @@
       if($_POST["operation"] == "Edit")
       {
 
-          $variousID = array();
+          $variousid = $_POST[$arr["rows"][0]["COLUMN_NAME"]];
           $Fields = array();
           $Datas = array();
           for($i = 1; $i < $size; $i+=1){
-
-              array_push($variousID, $_POST[$arr["rows"][0]["COLUMN_NAME"]]);
-
               $col = $arr['rows'][$i]['FieldName'];
               array_push($Fields, $col);
               array_push($Datas, $_POST[$col]);
           }
 
-          EditValueVariousTable($tableid, $variousID, $Fields, $Datas);
+          EditValueVariousTable($tableid, $variousid, $Fields, $Datas);
           echo 'Value Updated';
 
       }

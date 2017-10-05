@@ -229,7 +229,7 @@ $(document).ready(function(){
     var form_data = $(this).serialize();
     if(form_correct)
     {
-      document.getElementById('action').disabled = true;
+      $(':input[type="submit"]').prop('disabled', true);
       $.ajax({
         url:"sql/Bootgrid/insert.php",
         method:"POST",
@@ -237,7 +237,7 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
-          document.getElementById('action').disabled = false;
+          $(':input[type="submit"]').prop('disabled', false);
           $('#table_form')[0].reset();
           $('#tableModal').modal('hide');
           $('#table_data').bootgrid('reload');
@@ -256,15 +256,13 @@ $(document).ready(function(){
     {
       var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
       eval("var " + col + " = $(this).data('row-id');");
-      var rowUpdate = "document.getElementById('action').disabled = true; " +
-        "$.ajax({" +
+      var rowUpdate = "$.ajax({" +
         "url:'sql/Bootgrid/fetch_single.php'," +
         "method:'POST'," +
         "data:{"+col+":"+col+"}," +
         "dataType:'json'," +
         "success:function(data)" +
         "{" +
-          "document.getElementById('action').disabled = false; " +
           "$('#tableModal').modal('show');";
           for (var i = 0; i < colSize; i+=1){
             rowUpdate += "$('#"+aColumns[i]+"').val(data."+aColumns[i]+");";
@@ -285,16 +283,16 @@ $(document).ready(function(){
     {
       if(confirm("Are you sure you want to delete this?"))
       {
+        $(':input[type="submit"]').prop('disabled', true);
         var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
         eval("var " + col + " = $(this).data('row-id');");
-        var rowDelete = "document.getElementById('action').disabled = true; " +
-          "$.ajax({" +
+        var rowDelete = "$.ajax({" +
           "url:'sql/Bootgrid/delete.php'," +
           "method:'POST'," +
           "data:{"+col+":"+col+"}, "+
           "success:function(data){" +
             "alert(data);" +
-            "document.getElementById('action').disabled = false;" +
+            "$(':input[type=\"submit\"]').prop('disabled', false);" +
             "$('#table_data').bootgrid('reload');" +
           "}" +
         "});";
@@ -318,8 +316,7 @@ $(document).ready(function(){
     var form_data = $(this).serialize();
     if(form_correct)
     {
-      document.getElementById('action').disabled = true;
-
+      $(':input[type="submit"]').prop('disabled', true);
       $.ajax({
         url:"sql/Bootgrid/Columninsert.php",
         method:"POST",
@@ -327,7 +324,6 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
-          document.getElementById('action').disabled = false;
           $('#column_addform')[0].reset();
           $('#columnAddModal').modal('hide');
           location.reload();
@@ -353,8 +349,7 @@ $(document).ready(function(){
     var form_data = $(this).serialize();
     if(column_name != '' && column_selected != '')
     {
-      document.getElementById('action').disabled = true;
-
+      $(':input[type="submit"]').prop('disabled', true);
       $.ajax({
         url:"sql/Bootgrid/Columnedit.php",
         method:"POST",
@@ -362,7 +357,6 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
-          document.getElementById('action').disabled = false;
           $('#column_deleteform')[0].reset();
           $('#columnDeleteModal').modal('hide');
           location.reload();
@@ -381,7 +375,7 @@ $(document).ready(function(){
     var form_data = $(this).serialize();
     if(column_selected != '')
     {
-      document.getElementById('action').disabled = true;
+      $(':input[type="submit"]').prop('disabled', true);
       $.ajax({
         url:"sql/Bootgrid/Columndelete.php",
         method:"POST",
@@ -389,7 +383,6 @@ $(document).ready(function(){
         success:function(data)
         {
           alert(data);
-          document.getElementById('action').disabled = false;
           $('#column_deleteform')[0].reset();
           $('#columnDeleteModal').modal('hide');
           location.reload();
