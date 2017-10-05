@@ -92,11 +92,11 @@ function EnterVariousTable($TableID, $Array_of_FieldName, $array_of_data, $array
   CallDatabase($sql);
 }
 
-function EditValueVariousTable($TableID, $VariousID_Array, $Field_Array, $Value_Array){
+function EditValueVariousTable($TableID, $VariousID, $Field_Array, $Value_Array){
   $TableName = RequestTableDetail($TableID, "TableName");
-  $sql = "UPDATE " . NumberToWordsFormat($TableID) . " SET ";
   for ($i = 0; $i < count($VariousID_Array); $i += 1){
-    $sql .= $Field_Array[$i] . " = " . $Value_Array[$i] . " WHERE " . $TableName . "ID = " . $VariousID_Array[$i] . ";";
+    $sql .= "UPDATE " . NumberToWordsFormat($TableID) . " SET " . $Field_Array[$i] . " = " . $Value_Array[$i];
+    $sql .= " WHERE " . $TableName . "ID = " . $VariousID . ";";
   }
   CallDatabase($sql);
 }
