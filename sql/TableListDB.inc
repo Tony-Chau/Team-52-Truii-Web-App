@@ -30,7 +30,7 @@ function RequestTableDetail($TableID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM TableList WHERE TableID = " . $TableID . ");" );
+    $result = $pdo->query("SELECT * FROM TableList WHERE TableID = " . $TableID . ";" );
   }catch (PDOException $e){
     echo $e->getMessage();
   }
