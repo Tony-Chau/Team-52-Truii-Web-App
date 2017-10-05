@@ -94,7 +94,7 @@ function EnterVariousTable($TableID, $Array_of_FieldName, $array_of_data, $array
 
 function EditValueVariousTable($TableID, $VariousID, $Field_Array, $Value_Array){
   $TableName = RequestTableDetail($TableID, "TableName");
-  for ($i = 0; $i < count($VariousID_Array); $i += 1){
+  for ($i = 0; $i < count($Field_Array); $i += 1){
     $sql .= "UPDATE " . NumberToWordsFormat($TableID) . " SET " . $Field_Array[$i] . " = " . $Value_Array[$i];
     $sql .= " WHERE " . $TableName . "ID = " . $VariousID . ";";
   }
