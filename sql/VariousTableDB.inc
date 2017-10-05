@@ -50,7 +50,7 @@ function RequestVariousTableAsList($TableID, $requestfield){
 //Deletes the table and updates FieldTable and TableList database to match the changes
 function DeleteTable($TableID){
   $sql = DeleteFieldTable($TableID);
-  $sql .= DeleteTable($TableID);
+  $sql .= DeleteTableInTableList($TableID);
   $sql .= "DROP TABLE " . NumberToWordsFormat($TableID) . ";";
   CallDatabase($sql);
 }
