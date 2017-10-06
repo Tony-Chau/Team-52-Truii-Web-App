@@ -2,7 +2,7 @@
 //include after <include("connection.php");>
 
 $tsize = 0;
-$TablesIDQuery = "SELECT TableID, TableName FROM TableList";
+$TablesIDQuery = "SELECT TableID, TableName FROM TableList WHERE UserID = '" . $_SESSION['UserID'] . "'";
 
 $gotTableID = mysqli_query($connection, $TablesIDQuery);
 while($tID = mysqli_fetch_assoc($gotTableID))

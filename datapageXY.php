@@ -22,6 +22,8 @@ include 'sql/Bootgrid/getcolumns.php';
       $outputy .= '<option value="'.$cName.'" id="'.'y-'.$cName.'">'.$cName.'</option>';
   }
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +67,6 @@ include 'sql/Bootgrid/getcolumns.php';
           <td>
             <div class="container" id="XYSelector">
 
-              <br />
               <div class="input-group">
               <select name="Chart" id="ChartOption" onChange="ChartSelected();" class="form-control">
                   <option>Please select a chart</option>
@@ -82,13 +83,16 @@ include 'sql/Bootgrid/getcolumns.php';
               </div>
               <br/>
               <div class="input-group">
-                <select name="x_column_selected" id="X_column_selected1" onChange="Xdataselected('1');" disabled class="form-control">
+                <select name="X_column_selected" id="X_column_selected1" onChange="Xdataselected('1');" disabled class="form-control">
                   <option value=0>Select X Value</option>
                   <?php echo $outputx ?>
                 </select>
                 <span class="input-group-btn">
                   <button class="btn btn-default" type="button" id='buttonx' disabled> X </button>
                 </span>
+              </div>
+              <br/>
+              <div class="input-group">
                 <select name="Y_column_selected" id="Y_column_selected1" onChange="Ydataselected();" disabled class="form-control">
                   <option value=0>Select Y Value</option>
                   <?php echo $outputy ?>
