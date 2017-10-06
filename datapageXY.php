@@ -178,6 +178,8 @@ function ChartSelected(){
     EnabledOrDisableOption('x', true);
     EnabledOrDisableOption('y', true);
   }
+  document.getElementById('X_column_selected1').selectedIndex = 0;
+  document.getElementById('Y_column_selected1').selectedIndex = 0;
 }
 
 function Xdataselected(num){
@@ -202,7 +204,6 @@ function Xdataselected(num){
     document.getElementById('y-' + Value).disabled = true;
     x_select[num] = 'y-' + Value;
   }
-
 }
 
 function Ydataselected(){
