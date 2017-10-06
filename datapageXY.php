@@ -1,9 +1,9 @@
 <?php
-  include("sql/mysql.inc");
-  include 'inc/tools.inc';
-  include ("inc/ChartValidator.inc");
-  include("sql/Bootgrid/connection.php");
-  include("sql/Bootgrid/getcolumns.php");
+include 'sql/mysql.inc';
+include 'inc/tools.inc';
+include 'inc/ChartValidator.inc';
+include 'sql/Bootgrid/connection.php';
+include 'sql/Bootgrid/getcolumns.php';
 
   if (!is_log()){
     header('location: Index.php');
@@ -11,23 +11,21 @@
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)','Data XY');
 
-  $output = '';
+  $outputx = '';
+  $outputy = '';
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $output .= '<option value="'.$cName.'">'.$cName.'</option>';
+      $outputx .= '<option value="'.$cName.'" id="'.'x-'.$cName.'">'.$cName.'</option>';
   }
-
-  $datatypes = '';
-  $datatypes .= '<option value="VARCHAR(255)">Text</option>';
-  $datatypes .= '<option value="INT"># Numbers</option>';
-  $datatypes .= '<option value="FLOAT">% Percentage</option>';
-  $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
-
+  for($i = 1; $i < $size; $i+=1){
+      $cName = $arr['rows'][$i]['FieldName'];
+      $outputy .= '<option value="'.$cName.'" id="'.'y-'.$cName.'">'.$cName.'</option>';
+  }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-
+<div>
   <title>Data Page</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
@@ -38,169 +36,18 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src='js/Functions/Link.js'></script>
-  <style>
-    body
-    {
-      margin:0;
-      pAdd_Dataing:0;
-      background-color:#f1f1f1;
-    }
-
-    .box
-    {
-      min-width: 600px;
-      padding:20px;
-      background-color:#fff;
-      border:1px solid #ccc;
-      border-radius:5px;
-    }
-
-    .btn-info {
-      color: #fff;
-      background-color: rgb(31,194,222);
-      border-color: #46b8da;
-    }
-
-    .table-responsive .bootgrid-table td
-    {
-      white-space: nowrap !important;
-    }
-
-    .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-      z-index: 3;
-      color: #fff;
-      cursor: default;
-      background-color: rgb(31,194,222);
-      border-color: rgb(31,194,222);
-    }
-
-    .pagination{
-      font-size: 200%;
-    }
-
-    .infos{
-      font-size: 150%;
-    }
-
-    .table>thead>tr>th{
-        font-size: 150%;
-    }
-
-    .table>tbody>tr>td{
-        font-size: 150%;
-    }
-
-  </style>
-
-  <script>
-    var size = "<?php echo $size; ?>";
-    //var XY_values = array();
-    var x;
-    var y;
-    function X_column(num) {
-        if (x != null){
-            $("table>thead:first-child>tr:first-child>th:nth-child(" + x + ")").css("background-color", "white");
-        }
-
-        var old_x = x;
-        x = document.getElementById("X_column_selected"+num).value;
-        if (x == 0){
-            $("table>thead:first-child>tr:first-child>th:nth-child(" + old_x + ")").css("background-color", "white");
-        }
-        else if (x > 0){
-            if (x == y){
-                y = 0;
-
-                document.getElementById("Y_column_selected"+num).value = y;
-            }
-            $("table>thead:first-child>tr:first-child>th:nth-child(" + x + ")").css("background-color", "rgb(252, 103, 25)");
-        }
-    }
-
-
-    function Y_column() {
-        if (y != null){
-            $("table>thead:first-child>tr:first-child>th:nth-child(" + y + ")").css("background-color", "white");
-        }
-
-        old_y = y;
-        y = document.getElementById("Y_column_selected"+num).value;
-        if (y == 0){
-            $("table>thead:first-child>tr:first-child>th:nth-child(" + old_y + ")").css("background-color", "white");
-        }
-        else if (y > 0){
-            if (y == x){
-                x = 0;
-                document.getElementById("X_column_selected"+num).value = x;
-            }
-            $("table>thead:first-child>tr:first-child>th:nth-child(" + y + ")").css("background-color", "rgb(31,194,222)");
-        }
-    }
-
-    function chooseFields(Primary, Secondary){
-
-      var xy = '';
-      var i = 1;
-      xy += '<div class="input-group">';
-      xy += '<select name="'+Primary+'_column_selected'+i+'" id="xy_selected_'+i+'" onchange="'+Primary+'_column('+i+')" class="form-control">';
-      xy += '<option value=0>Select '+Primary+' Value</option>';
-      xy += '<?php echo $output; ?>';
-      xy += '</select></div><br/>';
-
-      var number = '#Column' + i;
-      for (i = 2; i < size; i+=1){
-          xy += '<div class="input-group">';
-          xy += '<select name="'+Secondary+'_column_selected'+i+'" id="xy_selected_'+i+'" onchange=\"'+Secondary+'_column('+i+')" class="form-control">';
-          xy += '<option value=0>Select '+Secondary+' Value</option>';
-          xy += '<?php echo $output; ?>';
-          xy += '</select><span class="input-group-btn">';
-          xy += '<button class="btn btn-default" type="button"> X </button>';
-          xy += '</span></div><br/>';
-      }
-      $('#XYSelector').append(xy);
-
-    }
-    function deleteField(column){
-      document.getElementById("textinput" + column).required = false;
-      document.getElementById("textinput" + column).value = '';
-    }
-
-
-    function updateXY(num, val){
-      for (var i = 1; i < size; i += 1){
-        if ( i != num ){
-          var select=document.getElementById('xy_selected'+i);
-          for (var j = 1; i < select.length; i+=1) {
-            if (select.options[i].value == val) {
-              select.option[i].disabled = true;
-            }
-          }
-        }
-      }
-
-      function renewXY(){
-        //for (var i = 1; i < size){}
-      }
-    }
-
-  </script>
-
+  <link rel="stylesheet" href="css/datapage.css"/>
+  <!-- <script src='js/Functions/datapagexy.js'></script> -->
+</div>
 </head>
 <body>
 
   <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw; margin-top: 50px; ">
-
     <div class="table-responsive" style="overflow-x: scroll">
       <table id="table_data" class="table table-bordered table-striped">
         <thead>
           <tr>
             <?php
-            /*
-            $coltitle = '';
-            $coltitle .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
-            $coltitle .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
-            echo $coltitle;
-            */
             for($i = 1; $i < $size; $i+=1){
                 $coltitle = '';
                 $coltitle .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
@@ -222,12 +69,19 @@
               <br />
 
               <div class="input-group">
-                <select name="x_column_selected" id="X_column_selected1" onchange="X_column(1)" class="form-control">
+                <select name="x_column_selected" id="X_column_selected1" onChange="Xdataselected('1');" class="form-control">
                   <option value=0>Select X Value</option>
-                  <?php echo $output ?>
+                  <?php echo $outputx ?>
                 </select>
                 <span class="input-group-btn">
                   <button class="btn btn-default" type="button"> X </button>
+                </span>
+                <select name="Y_column_selected" id="Y_column_selected1" onChange="Ydataselected();" class="form-control">
+                  <option value=0>Select Y Value</option>
+                  <?php echo $outputy ?>
+                </select>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button"> Y </button>
                 </span>
               </div>
               <br />
@@ -237,8 +91,85 @@
       </tbody>
     </table>
   </div>
+
+
+<div id="tableModal" class="modal fade">
+  <div class="modal-dialog">
+    <form method="post" id="table_form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Data</h4>
+        </div>
+        <div class="modal-body">
+          <?php
+            for($i = 1; $i < $size; $i+=1){
+              $colname = $arr['rows'][$i]['FieldName'];
+              echo "<label>Enter " . $colname . "</label>";
+
+              if ('INT' == $arr['rows'][$i]['DataType']){
+                  $coltype = 'number';
+              }
+              else {
+                  $coltype = 'text';
+              }
+
+              echo "<input type='$coltype' name='$colname' id='$colname' class='form-control' />";
+              echo "<br />";
+            }
+           ?>
+          <br />
+        </div>
+        <div class="modal-footer">
+          <?php
+          $id = $arr['rows'][0]['COLUMN_NAME'];
+          echo "<input type='hidden' name='$id' id='$id' />";
+           ?>
+          <input type="hidden" name="operation" id="operation" />
+          <input type="submit" name="action" id="action" class="btn btn-success" value="Add Data" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 </body>
 </html>
+<script>
+var size = Number("<?php echo $size;?>");
+var x_select = [size];
+for (var i = 1; i < size; i += 1){
+  x_select[i] = '';
+}
+
+function Xdataselected(num){
+  var select = document.getElementById('X_column_selected'+num);
+  x_select[num] = '';
+  for (var i = 1; i < size; i += 1){
+    var option = select.options;
+    document.getElementById('y-' + option[i].text).disabled = false;
+  }
+  for (var i = 1; i < size; i += 1){
+    if (x_select[i] != ''){
+      document.getElementById(x_select[i]).disabled = true;
+    }
+  }
+  var index = select.selectedIndex;
+  var selectedOption = select.options;
+  var Value = selectedOption[index].text;
+  document.getElementById('y-' + Value).disabled = true;
+  x_select[num] = 'y-' + Value;
+}
+
+function Ydataselected(){
+  var select = document.getElementById('Y_column_selected1');
+  for (var i = 1; i < size; i += 1){
+    document.getElementById('x-' + select.options[i].text).disabled = false;
+  }
+  var index = select.selectedIndex;
+  document.getElementById('x-' + select.options[index].text).disabled = true;
+}
+</script>
+
 <script type="text/javascript" language='javascript'>
 $(document).ready(function(){
   $('#add_data_button').click(function(){
@@ -272,6 +203,7 @@ $(document).ready(function(){
   });
 
   var colSize = "<?php echo $size-1 ?>";
+
   <?php
   //$aColumns = array();
   $aColumn = "var aColumns = ['";
@@ -377,44 +309,3 @@ $(document).ready(function(){
 
 });
 </script>
-
-
-<div id="tableModal" class="modal fade">
-  <div class="modal-dialog">
-    <form method="post" id="table_form">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Data</h4>
-        </div>
-        <div class="modal-body">
-          <?php
-            for($i = 1; $i < $size; $i+=1){
-              $colname = $arr['rows'][$i]['FieldName'];
-              echo "<label>Enter " . $colname . "</label>";
-
-              if ('INT' == $arr['rows'][$i]['DataType']){
-                  $coltype = 'number';
-              }
-              else {
-                  $coltype = 'text';
-              }
-
-              echo "<input type='$coltype' name='$colname' id='$colname' class='form-control' />";
-              echo "<br />";
-            }
-           ?>
-          <br />
-        </div>
-        <div class="modal-footer">
-          <?php
-          $id = $arr['rows'][0]['COLUMN_NAME'];
-          echo "<input type='hidden' name='$id' id='$id' />";
-           ?>
-          <input type="hidden" name="operation" id="operation" />
-          <input type="submit" name="action" id="action" class="btn btn-success" value="Add Data" />
-        </div>
-      </div>
-    </form>
-  </div>
-</div>

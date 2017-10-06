@@ -37,59 +37,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src='js/Functions/Link.js'></script>
-  <style>
-    body
-    {
-      margin:0;
-      pAdd_Dataing:0;
-      background-color:#f1f1f1;
-    }
-
-    .box
-    {
-      min-width: 600px;
-      padding:20px;
-      background-color:#fff;
-      border:1px solid #ccc;
-      border-radius:5px;
-    }
-
-    .btn-info {
-      color: #fff;
-      background-color: rgb(31,194,222);
-      border-color: #46b8da;
-    }
-
-    .table-responsive .bootgrid-table td
-    {
-      white-space: nowrap !important;
-    }
-
-    .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-      z-index: 3;
-      color: #fff;
-      cursor: default;
-      background-color: rgb(31,194,222);
-      border-color: rgb(31,194,222);
-    }
-
-    .pagination{
-      font-size: 200%;
-    }
-
-    .infos{
-      font-size: 150%;
-    }
-
-    .table>thead>tr>th{
-        font-size: 150%;
-    }
-
-    .table>tbody>tr>td{
-        font-size: 150%;
-    }
-
-  </style>
+  <link rel="stylesheet" href="css/datapage.css"/>
 </head>
 <body>
 
@@ -127,12 +75,6 @@
         <thead>
           <tr>
             <?php
-            /*
-            $coltitle = '';
-            $coltitle .= "<th data-column-id='" . $arr['rows'][0]['COLUMN_NAME'] . "' data-type='numeric'>";
-            $coltitle .= $arr['rows'][0]['COLUMN_NAME'] . "</th>";
-            echo $coltitle;
-            */
             for($i = 1; $i < $size; $i+=1){
                 $coltitle = '';
                 $coltitle .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
