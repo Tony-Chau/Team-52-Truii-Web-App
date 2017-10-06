@@ -93,45 +93,94 @@
   </style>
 
   <script>
+    var size = "<?php echo $size; ?>";
+    //var XY_values = array();
     var x;
     var y;
-
-    function x_column() {
+    function X_column(num) {
         if (x != null){
-            $("table>thead>tr>th:nth-child(" + x + ")").css("background-color", "white");
+            $("table>thead:first-child>tr:first-child>th:nth-child(" + x + ")").css("background-color", "white");
         }
 
         var old_x = x;
-        x = document.getElementById("x_column_selected").value;
+        x = document.getElementById("X_column_selected"+num).value;
         if (x == 0){
-            $("table>thead>tr>th:nth-child(" + old_x + ")").css("background-color", "white");
+            $("table>thead:first-child>tr:first-child>th:nth-child(" + old_x + ")").css("background-color", "white");
         }
         else if (x > 0){
             if (x == y){
                 y = 0;
-                document.getElementById("y_column_selected").value = y;
+
+                document.getElementById("Y_column_selected"+num).value = y;
             }
-            $("table>thead>tr>th:nth-child(" + x + ")").css("background-color", "rgb(252, 103, 25)");
+            $("table>thead:first-child>tr:first-child>th:nth-child(" + x + ")").css("background-color", "rgb(252, 103, 25)");
         }
     }
 
-    function y_column() {
+
+    function Y_column() {
         if (y != null){
-            $("table>thead>tr>th:nth-child(" + y + ")").css("background-color", "white");
+            $("table>thead:first-child>tr:first-child>th:nth-child(" + y + ")").css("background-color", "white");
         }
 
         old_y = y;
-        y = document.getElementById("y_column_selected").value;
+        y = document.getElementById("Y_column_selected"+num).value;
         if (y == 0){
-            $("table>thead>tr>th:nth-child(" + old_y + ")").css("background-color", "white");
+            $("table>thead:first-child>tr:first-child>th:nth-child(" + old_y + ")").css("background-color", "white");
         }
         else if (y > 0){
             if (y == x){
                 x = 0;
-                document.getElementById("x_column_selected").value = x;
+                document.getElementById("X_column_selected"+num).value = x;
             }
-            $("table>thead>tr>th:nth-child(" + y + ")").css("background-color", "rgb(31,194,222)");
+            $("table>thead:first-child>tr:first-child>th:nth-child(" + y + ")").css("background-color", "rgb(31,194,222)");
         }
+    }
+
+    function chooseFields(Primary, Secondary){
+
+      var xy = '';
+      var i = 1;
+      xy += '<div class="input-group">';
+      xy += '<select name="'+Primary+'_column_selected'+i+'" id="xy_selected_'+i+'" onchange="'+Primary+'_column('+i+')" class="form-control">';
+      xy += '<option value=0>Select '+Primary+' Value</option>';
+      xy += '<?php echo $output; ?>';
+      xy += '</select></div><br/>';
+
+      var number = '#Column' + i;
+      for (i = 2; i < size; i+=1){
+          xy += '<div class="input-group">';
+          xy += '<select name="'+Secondary+'_column_selected'+i+'" id="xy_selected_'+i+'" onchange=\"'+Secondary+'_column('+i+')" class="form-control">';
+          xy += '<option value=0>Select '+Secondary+' Value</option>';
+          xy += '<?php echo $output; ?>';
+          xy += '</select><span class="input-group-btn">';
+          xy += '<button class="btn btn-default" type="button"> X </button>';
+          xy += '</span></div><br/>';
+      }
+      $('#XYSelector').append(xy);
+
+    }
+    function deleteField(column){
+      document.getElementById("textinput" + column).required = false;
+      document.getElementById("textinput" + column).value = '';
+    }
+
+
+    function updateXY(num, val){
+      for (var i = 1; i < size; i += 1){
+        if ( i != num ){
+          var select=document.getElementById('xy_selected'+i);
+          for (var j = 1; i < select.length; i+=1) {
+            if (select.options[i].value == val) {
+              select.option[i].disabled = true;
+            }
+          }
+        }
+      }
+
+      function renewXY(){
+        //for (var i = 1; i < size){}
+      }
     }
 
   </script>
@@ -168,20 +217,21 @@
       <tbody>
         <tr align="center">
           <td>
-            <br />
+            <div class="container" id="XYSelector">
 
-            <select name="x_column_selected" id="x_column_selected" onchange="x_column()" class="form-control">
-              <option value=0>Select X Value</option>
-              <?php echo $output ?>
-            </select>
+              <br />
 
-            <br />
-
-            <select name="y_column_selected" id="y_column_selected" onchange="y_column()" class="form-control">
-              <option value=0>Select Y Value</option>
-              <?php echo $output ?>
-            </select>
-            <br />
+              <div class="input-group">
+                <select name="x_column_selected" id="X_column_selected1" onchange="X_column(1)" class="form-control">
+                  <option value=0>Select X Value</option>
+                  <?php echo $output ?>
+                </select>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button"> X </button>
+                </span>
+              </div>
+              <br />
+            </div>
           </td>
         </tr>
       </tbody>
@@ -339,7 +389,7 @@ $(document).ready(function(){
         </div>
         <div class="modal-body">
           <?php
-          for($i = 1; $i < $size; $i+=1){
+            for($i = 1; $i < $size; $i+=1){
               $colname = $arr['rows'][$i]['FieldName'];
               echo "<label>Enter " . $colname . "</label>";
 
@@ -352,7 +402,7 @@ $(document).ready(function(){
 
               echo "<input type='$coltype' name='$colname' id='$colname' class='form-control' />";
               echo "<br />";
-          }
+            }
            ?>
           <br />
         </div>
