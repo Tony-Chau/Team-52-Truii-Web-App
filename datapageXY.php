@@ -25,7 +25,6 @@ include 'sql/Bootgrid/getcolumns.php';
 <!DOCTYPE html>
 <html>
 <head>
-<div>
   <title>Data Page</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
@@ -38,7 +37,7 @@ include 'sql/Bootgrid/getcolumns.php';
   <script src='js/Functions/Link.js'></script>
   <link rel="stylesheet" href="css/datapage.css"/>
   <!-- <script src='js/Functions/datapagexy.js'></script> -->
-</div>
+  <script src='js/Functions/ChartValidator.js'></script>
 </head>
 <body>
 
