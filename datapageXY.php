@@ -148,39 +148,33 @@ include 'sql/Bootgrid/getcolumns.php';
 </body>
 </html>
 <script>
+//Initialise some values
 var size = Number("<?php echo $size;?>");
 var chart = '';
 var x_select = [size];
 var options = [size];
+//set all x_select values as an empty string
 for (var i = 0; i < size; i += 1){
   x_select[i] = '';
 }
+//Transfer all php values to options as an javascript value
 "<?php for ($i = 1; $i < $size; $i += 1){?>";
   options[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['FieldName']?>";
 "<?php } ?>";
+//response to Chart Combobox
 function ChartSelected(){
   var select = document.getElementById('ChartOption');
   if (select.selectedIndex != 0){
     chart = select.options[select.selectedIndex].text;
-    document.getElementById('X_column_selected1').disabled = false;
-    document.getElementById('Y_column_selected1').disabled = false;
-    document.getElementById('buttonx').disabled = false;
-    document.getElementById('buttony').disabled = false;
-    EnabledOrDisableOption('x', false);
-    EnabledOrDisableOption('y', false);
+    EnableOrDiableEverything(false);
   }else{
     chart = '';
-    document.getElementById('X_column_selected1').disabled = true;
-    document.getElementById('Y_column_selected1').disabled = true;
-    document.getElementById('buttonx').disabled = true;
-    document.getElementById('buttony').disabled = true;
-    EnabledOrDisableOption('x', true);
-    EnabledOrDisableOption('y', true);
+    EnableOrDiableEverything(true);
   }
   document.getElementById('X_column_selected1').selectedIndex = 0;
   document.getElementById('Y_column_selected1').selectedIndex = 0;
 }
-
+//Response to the x-axis combo box
 function Xdataselected(num){
   var select = document.getElementById('X_column_selected'+num);
   var index = select.selectedIndex;
@@ -205,6 +199,7 @@ function Xdataselected(num){
   }
 }
 
+//Response to the y-axis combo box
 function Ydataselected(){
   var select = document.getElementById('Y_column_selected1');
   var index = select.selectedIndex;
@@ -218,10 +213,20 @@ function Ydataselected(){
   }
 }
 
+//Either enable or disable every options in the x and y combo box
 function EnabledOrDisableOption(axis, bool){
   for (var i = 1; i < size; i += 1){
     document.getElementById(axis+ '-' + options[i]).disabled = bool;
   }
+}
+//Either enable or disable everything in the x-axis, y-axis and their buttons
+function EnableOrDiableEverything(bool){
+  document.getElementById('X_column_selected1').disabled = bool;
+  document.getElementById('Y_column_selected1').disabled = bool;
+  document.getElementById('buttonx').disabled = bool;
+  document.getElementById('buttony').disabled = bool;
+  EnabledOrDisableOption('x', bool);
+  EnabledOrDisableOption('y', bool);
 }
 </script>
 
