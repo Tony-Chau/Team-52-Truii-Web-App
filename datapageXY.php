@@ -56,7 +56,6 @@ include 'sql/Bootgrid/getcolumns.php';
                 echo $coltitle;
             }
              ?>
-            <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
           </tr>
         </thead>
       </table>
@@ -82,26 +81,26 @@ include 'sql/Bootgrid/getcolumns.php';
                 </select>
               </div>
               <br/>
-              <div class="input-group">
-                <select name="X_column_selected" id="X_column_selected1" onChange="Xdataselected('1');" disabled class="form-control">
-                  <option value=0>Select X Value</option>
-                  <?php echo $outputx ?>
-                </select>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" id='buttonx' disabled> X </button>
-                </span>
-              </div>
-              <br/>
-              <div class="input-group">
+
                 <select name="Y_column_selected" id="Y_column_selected1" onChange="Ydataselected();" disabled class="form-control">
                   <option value=0>Select Y Value</option>
                   <?php echo $outputy ?>
                 </select>
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" id='buttony' disabled> Y </button>
-                </span>
-              </div>
+
               <br />
+              <div class="form-group" id="Extra_X">
+
+                  <select name="X_column_selected" id="X_column_selected1" onChange="Xdataselected('1');" disabled class="form-control">
+                    <option value=0>Select X Value</option>
+                    <?php echo $outputx ?>
+                  </select>
+
+                <br/>
+              </div>
+              <div class="input-group">
+                <button class="btn btn-default" type="button" id="buttonadd" onclick="ExtraX()"> Add Another Selection </button>
+              </div>
+
             </div>
           </td>
         </tr>
@@ -241,8 +240,33 @@ function EnableOrDiableEverything(bool){
   document.getElementById('Y_column_selected1').disabled = bool;
   document.getElementById('buttonx').disabled = bool;
   document.getElementById('buttony').disabled = bool;
+  document.getElementById('buttonadd').disabled = bool;
   EnabledOrDisableOption('x', bool);
   EnabledOrDisableOption('y', bool);
+}
+
+var num_x = 1;
+var size = <?php echo $size-2; ?>;
+function ExtraX(){
+  if (num_x < size){
+    num_x += 1;
+    var div = '';
+    div += '<div class="input-group">';
+    div += '<select name="X_column_selected" id="X_column_selected'+num_x+'" onChange="Xdataselected(\''+num_x+'\');" disabled class="form-control">';
+    div += '<option value=0>Select X Value</option>'
+    div += '<?php echo $outputx ?>';
+    div += '</select><span class="input-group-btn">';
+    div += '<button class="btn btn-default" type="button" id="buttonx" disabled> X </button>';// this is the cancel button
+    div += '</span></div><br/>';
+    $('#Extra_X').append(div);
+
+    if (num_x == size){
+      document.getElementById('buttonadd').disabled = true;
+    }
+  }
+  else {
+    document.getElementById('buttonadd').disabled = true;
+  }
 }
 
 </script>
@@ -267,16 +291,7 @@ $(document).ready(function(){
       };
     },
     url: 'sql/Bootgrid/fetch.php',
-    formatters: {
-      'commands': function(column, row)
-      {
-        var id = "row."+"<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
-        var buttonID = eval(id);
-        var buttons = "<button type='button' class='btn btn-warning btn-xs update' data-row-id='"+buttonID+"' style=\"font-size: 75%;\">Edit</button>"+
-              "&nbsp; <button type='button' class='btn btn-danger btn-xs delete' data-row-id='"+buttonID+"' style=\"font-size: 75%;\">Delete</button>";
-        return buttons;
-      }
-    }
+
   });
 
   var colSize = "<?php echo $size-1 ?>";
