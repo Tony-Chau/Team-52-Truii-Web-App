@@ -5,6 +5,7 @@ include 'TableListDB.inc';
 include 'FieldTableDB.inc';
 include 'CustomFieldTableDB.inc';
 include 'GraphTableDB.inc';
+include 'GraphColumnTableDB.inc';
 include 'VariousTableDB.inc';
 
 function get_dbServer(){

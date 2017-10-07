@@ -38,7 +38,7 @@ include 'sql/Bootgrid/getcolumns.php';
   <link rel="stylesheet" href="css/style.css">
   <script src='js/Functions/Link.js'></script>
   <link rel="stylesheet" href="css/datapage.css"/>
-  <!-- <script src='js/Functions/datapagexy.js'></script> -->
+  <script src='js/Functions/datapagexy.js'></script>
   <script src='js/Functions/ChartValidator.js'></script>
 </head>
 <body>
@@ -152,6 +152,7 @@ include 'sql/Bootgrid/getcolumns.php';
 </body>
 </html>
 <script>
+
 //Initialise some values
 var size = Number("<?php echo $size;?>");
 var chart = '';
@@ -160,6 +161,7 @@ var options = {
     FieldName: [size],
     DataType:[size]
 };
+var colourY;
 //set all x_select values as an empty string
 for (var i = 0; i < size; i += 1){
   x_select[i] = '';
@@ -183,6 +185,7 @@ function ChartSelected(){
   }
   document.getElementById('X_column_selected1').selectedIndex = 0;
   document.getElementById('Y_column_selected1').selectedIndex = 0;
+  Clear_column_colour();
 }
 //Response to the x-axis combo box
 function Xdataselected(num){
@@ -203,6 +206,7 @@ function Xdataselected(num){
       document.getElementById('y-' + Value).disabled = true;
       x_select[num] = 'y-' + Value;
     }
+    X_column(index);
 }
 
 //Response to the y-axis combo box
@@ -215,6 +219,8 @@ function Ydataselected(){
   if (index != 0){
     document.getElementById('x-' + selectedOption[index].text).disabled = true;
   }
+  Y_column(index);
+  colourY = index;
 }
 
 //Either enable or disable every options in the x and y combo box
@@ -238,6 +244,7 @@ function EnableOrDiableEverything(bool){
   EnabledOrDisableOption('x', bool);
   EnabledOrDisableOption('y', bool);
 }
+
 </script>
 
 <script type="text/javascript" language='javascript'>
