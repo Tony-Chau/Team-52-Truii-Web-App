@@ -1,5 +1,4 @@
-<?php
-
+//This function connects all the other functions below
 function ChartValidate(charttype, axis, axistype){
   if (charttype == 'Scatter plot'){
     if (axis == 'x'){
@@ -7,49 +6,49 @@ function ChartValidate(charttype, axis, axistype){
     }
     return Y_ScatterPlot_Validate(axistype);
   }
-  else if(charttype = 'Line Dash'){
+  if(charttype == 'Line Dash'){
     if (axis == 'x'){
       return X_LineDash_Validate(axistype);
     }
     return Y_LineDash_Validate(axistype);
   }
-  else if(charttype == 'Bubble'){
+  if(charttype == 'Bubble'){
     if (axis == 'x'){
       return X_Bubble_Validate(axistype);
     }
     return Y_Bubble_Validate(axistype);
   }
-  else if(charttype == 'Bar'){
+  if(charttype == 'Bar'){
     if (axis == 'x'){
       return X_Bar_Validate(axistype);
     }
     return Y_Bar_Validate(axistype);
   }
-  else if (charttype == 'Scatter'){
+  if (charttype == 'Scatter'){
     if (axis == 'x'){
       return X_ScatterPlot_Validate(axistype);
     }
     return Y_ScatterPlot_Validate(axistype);
   }
-  else if (charttype == 'Line'){
+  if (charttype == 'Line'){
     if (axis == 'x'){
       return X_LineChart_Validate(axistype);
     }
     return Y_LineChart_Validate(axistype);
   }
-  else if (charttype == 'Overlaid Area'){
+  if (charttype == 'Overlaid Area'){
     if (axis == 'x'){
       return X_OverlaidArea_Validate(axistype);
     }
     return Y_Overlaid_Validate(axistype);
   }
-  else if (charttype == 'Horizontal Bar'){
+  if (charttype == 'Horizontal Bar'){
     if (axis == 'x'){
       return X_AreaHorizontalBar_Validate(axistype);
     }
     return Y_AreaHorizontalBar_Validate(axistype);
   }
-  else if (charttype == 'Pie'){
+  if (charttype == 'Pie'){
     if (axis == 'x'){
       return X_Pie_Validate(axistype);
     }
@@ -185,4 +184,3 @@ function Y_Pie_Validate(axistype){
   }
   return false;
 }
- ?>

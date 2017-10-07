@@ -156,14 +156,18 @@ include 'sql/Bootgrid/getcolumns.php';
 var size = Number("<?php echo $size;?>");
 var chart = '';
 var x_select = [size];
-var options = [size];
+var options = {
+    FieldName: [size],
+    DataType:[size]
+};
 //set all x_select values as an empty string
 for (var i = 0; i < size; i += 1){
   x_select[i] = '';
 }
 //Transfer all php values to options as an javascript value
 "<?php for ($i = 1; $i < $size; $i += 1){?>";
-  options[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['FieldName']?>";
+  options.FieldName[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['FieldName']?>";
+  options.DataType[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['DataType']?>";
 "<?php } ?>";
 //response to Chart Combobox
 function ChartSelected(){
@@ -171,6 +175,8 @@ function ChartSelected(){
   if (select.selectedIndex != 0){
     chart = select.options[select.selectedIndex].text;
     EnableOrDiableEverything(false);
+    AxisChecker('x');
+    AxisChecker('y');
   }else{
     chart = '';
     EnableOrDiableEverything(true);
@@ -181,26 +187,22 @@ function ChartSelected(){
 //Response to the x-axis combo box
 function Xdataselected(num){
   var select = document.getElementById('X_column_selected'+num);
-  var index = select.selectedIndex;
-  var selectedOption = select.options;
-  var Value = selectedOption[index].text;
-
-  if (index == 0){
-    document.getElementById(x_select[num]).disabled = false;
-  }else{
-    x_select[num] = '';
-    for (var i = 1; i < size; i += 1){
-      var option = selectedOption;
-      document.getElementById('y-' + option[i].text).disabled = false;
-    }
-    for (var i = 1; i < size; i += 1){
-      if (x_select[i] != ''){
-        document.getElementById(x_select[i]).disabled = true;
+    var index = select.selectedIndex;
+    var selectedOption = select.options;
+    var Value = selectedOption[index].text;
+    if (index == 0){
+      document.getElementById(x_select[num]).disabled = false;
+    }else{
+      x_select[num] = '';
+      AxisChecker('y');
+      for (var i = 1; i < size; i += 1){
+        if (x_select[i] != ''){
+          document.getElementById(x_select[i]).disabled = true;
+        }
       }
+      document.getElementById('y-' + Value).disabled = true;
+      x_select[num] = 'y-' + Value;
     }
-    document.getElementById('y-' + Value).disabled = true;
-    x_select[num] = 'y-' + Value;
-  }
 }
 
 //Response to the y-axis combo box
@@ -209,9 +211,7 @@ function Ydataselected(){
   var index = select.selectedIndex;
   var selectedOption = select.options;
   var Value = selectedOption[index].text;
-  for (var i = 1; i < size; i += 1){
-    EnabledOrDisableOption('x', false);
-  }
+  AxisChecker('x');
   if (index != 0){
     document.getElementById('x-' + selectedOption[index].text).disabled = true;
   }
@@ -220,7 +220,13 @@ function Ydataselected(){
 //Either enable or disable every options in the x and y combo box
 function EnabledOrDisableOption(axis, bool){
   for (var i = 1; i < size; i += 1){
-    document.getElementById(axis+ '-' + options[i]).disabled = bool;
+    document.getElementById(axis+ '-' + options.FieldName[i]).disabled = bool;
+  }
+}
+
+function AxisChecker(axis){
+  for (var i = 1; i < size; i += 1){
+    document.getElementById(axis+ '-' + options.FieldName[i]).disabled = !ChartValidate(chart, axis, options.DataType[i]);
   }
 }
 //Either enable or disable everything in the x-axis, y-axis and their buttons
