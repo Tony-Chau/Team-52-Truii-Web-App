@@ -17,6 +17,7 @@ include "sql/mysql.inc";
         $sql .= "DROP TABLE " . NumberToWordsFormat($data['TableID']) . ";";
       }
       $sql .="TRUNCATE TABLE TableList;
+              TRUNCATE TABLE GraphColumnTable;
               TRUNCATE TABLE FieldTable;
               TRUNCATE TABLE UserTable;
               TRUNCATE TABLE GraphTable;
