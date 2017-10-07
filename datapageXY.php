@@ -263,11 +263,11 @@ function ExtraX(){
     $('#Extra_X').append(div);
     divSaver[num_x] = div;
     if (num_x == size){
-      document.getElementById('buttonadd').disabled = true;
+      $('#buttonadd').disabled = true;
     }
   }
   else {
-    document.getElementById('buttonadd').disabled = true;
+    $('#buttonadd').disabled = true;
   }
   refreshAxisDiable();
 }
@@ -284,8 +284,8 @@ function RemoveX(num){
 function refreshAxisDiable(){
   for (var i = 1; i < size; i += 1){
     var mess = 'x-' + options.FieldName[i];
-    var diabled = document.getElementById(mess).disabled
-    document.getElementById(mess).disabled = diabled;
+    var disabled = document.getElementById(mess).disabled
+    document.getElementById(mess).disabled = disabled;
   }
 }
 
