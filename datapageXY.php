@@ -134,7 +134,6 @@ include 'sql/Bootgrid/getcolumns.php';
               echo "<br />";
             }
            ?>
-          <br />
         </div>
         <div class="modal-footer">
           <?php
@@ -170,6 +169,8 @@ for (var i = 0; i < size; i += 1){
   options.FieldName[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['FieldName']?>";
   options.DataType[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['DataType']?>";
 "<?php } ?>";
+var num_x = 1;
+var sizes = size - 2;
 //response to Chart Combobox
 function ChartSelected(){
   var select = document.getElementById('ChartOption');
@@ -182,8 +183,10 @@ function ChartSelected(){
     chart = '';
     EnableOrDiableEverything(true);
   }
-  document.getElementById('X_column_selected1').selectedIndex = 0;
-  document.getElementById('Y_column_selected1').selectedIndex = 0;
+  for (var i = 0; i < num_x; i += 1){
+    $('select#X_column_selected' + i).prop('selectedIndex', 0);
+  }
+  $('select#Y_column_selected1').prop('selectedIndex', 0);
   Clear_column_colour();
 }
 //Response to the x-axis combo box
@@ -236,36 +239,53 @@ function AxisChecker(axis){
 }
 //Either enable or disable everything in the x-axis, y-axis and their buttons
 function EnableOrDiableEverything(bool){
-  document.getElementById('X_column_selected1').disabled = bool;
-  document.getElementById('Y_column_selected1').disabled = bool;
-  document.getElementById('buttonx').disabled = bool;
-  document.getElementById('buttony').disabled = bool;
-  document.getElementById('buttonadd').disabled = bool;
+  for (var i = 1; i <= num_x; i += 1){
+    var mess = '#X_column_selected' + i;
+    $(mess).prop('disabled', bool);
+  }
+  $('#Y_column_selected1').prop('disabled', bool);
+  $('#buttonadd').prop('disabled', bool);
   EnabledOrDisableOption('x', bool);
   EnabledOrDisableOption('y', bool);
 }
-
-var num_x = 1;
-var size = <?php echo $size-2; ?>;
+var divSaver = [sizes];
 function ExtraX(){
-  if (num_x < size){
+  if (num_x < sizes){
     num_x += 1;
     var div = '';
-    div += '<div class="input-group">';
-    div += '<select name="X_column_selected" id="X_column_selected'+num_x+'" onChange="Xdataselected(\''+num_x+'\');" disabled class="form-control">';
-    div += '<option value=0>Select X Value</option>'
+    div += '<div class="input-group" id="Axis-X-'+num_x+'" style="margin-top:50px;">';
+    div += '<select name="X_column_selected" id="X_column_selected'+num_x+'" onChange="Xdataselected(\''+num_x+'\');" class="form-control">';
+    div += '<option>Select X Value</option>'
     div += '<?php echo $outputx ?>';
     div += '</select><span class="input-group-btn">';
-    div += '<button class="btn btn-default" type="button" id="buttonx" disabled> X </button>';// this is the cancel button
-    div += '</span></div><br/>';
+    div += '<button onClick="RemoveX('+num_x+');" class="btn btn-default" type="button" id="buttonx"> X </button>';// this is the cancel button
+    div += '</span></div>';
     $('#Extra_X').append(div);
-
+    divSaver[num_x] = div;
     if (num_x == size){
       document.getElementById('buttonadd').disabled = true;
     }
   }
   else {
     document.getElementById('buttonadd').disabled = true;
+  }
+  refreshAxisDiable();
+}
+
+function RemoveX(num){
+  num_x -= 1;
+  $('#Axis-X-' + num).remove();
+  var button = document.getElementById('buttonadd');
+  if (button.disabled){
+    button.disabled = false;
+  }
+}
+
+function refreshAxisDiable(){
+  for (var i = 1; i < size; i += 1){
+    var mess = 'x-' + options.FieldName[i];
+    var diabled = document.getElementById(mess).disabled
+    document.getElementById(mess).disabled = diabled;
   }
 }
 
