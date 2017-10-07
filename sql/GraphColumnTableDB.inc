@@ -20,4 +20,14 @@ function getGraphColumn($tableID){
   return $result;
 }
 
+//Removes Graph column that links with the graphID
+function DeleteGraphColumn($GraphID){
+  return "DELETE FROM GraphColumnTable WHERE GraphID =" . $GraphID . ";";
+}
+
+//Changes the values within the ChangeGraphColumn table
+function ChangeGraphColumn($GraphID, $FieldID, $axis){
+  return "UPDATE GraphColumnTable SET FieldID = " . $FieldID .", Axis=\"".$axis."\" WHERE GraphID=" . $GraphID . ";";
+}
+
  ?>
