@@ -24,7 +24,7 @@ function ChartValidate(charttype, axis, axistype){
     }
     return Y_Bar_Validate(axistype);
   }
-  if (charttype == 'Scatter'){
+  if (charttype == 'Scatter Line'){
     if (axis == 'x'){
       return X_ScatterPlot_Validate(axistype);
     }

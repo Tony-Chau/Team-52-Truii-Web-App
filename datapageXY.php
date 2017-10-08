@@ -17,7 +17,7 @@ include 'sql/Bootgrid/getcolumns.php';
   $bps = 3;
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $outputx .= '<td><div data-toggle="buttons"><label class="btn btn-default original-btn" id="x-axis-buttons" style="width: 100%" disabled><input type="checkbox" value="'.$cName.'" name="'.'x-'.$cName.'" id="'.'x-'.$cName.'"><span style="font-size: 125%;">'.$cName.'</span></input></label></div></td>';
+      $outputx .= '<td><div data-toggle="buttons"><label class="btn btn-default original-btn" id="x-axis-button'.$i.'" style="width: 100%" disabled><input type="checkbox" value="'.$cName.'" name="'.'x-'.$cName.'" id="'.'x-'.$cName.'"><span style="font-size: 125%;">'.$cName.'</span></input></label></div></td>';
       if ($i == $size-1){
         $outputx .= '</tr>';
       }
@@ -30,7 +30,7 @@ include 'sql/Bootgrid/getcolumns.php';
   $bps = 3;
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $outputy .= '<td><div data-toggle="buttons"><label class="btn btn-default original-btn" id="y-axis-buttons" style="width: 100%" disabled><input type="checkbox" value="'.$cName.'" name="'.'y-'.$cName.'" id="'.'y-'.$cName.'"><span style="font-size: 125%;">'.$cName.'</span></input></label></div></td>';
+      $outputy .= '<td><div data-toggle="buttons"><label class="btn btn-default original-btn" id="y-axis-button'.$i.'" style="width: 100%" disabled><input type="checkbox" value="'.$cName.'" name="'.'y-'.$cName.'" id="'.'y-'.$cName.'"><span style="font-size: 125%;">'.$cName.'</span></input></label></div></td>';
       if ($i == $size-1){
         $outputy .= '</tr>';
       }
@@ -145,11 +145,18 @@ function charts_reset(num){
     }
   }
   $(".original-btn").removeAttr('disabled');
+  for (var i = 1; i < size; i += 1){
+    if (!ChartValidate(chart_list[num], 'x', options.DataType[i])){
+      $('#x-axis-button' + i).attr('disabled','disabled');
+    }
+    if (!ChartValidate(chart_list[num], 'y', options.DataType[i])){
+      $('#y-axis-button' + i).attr('disabled','disabled');
+    }
+  }
 }
-
 function XY_Buttons(){
   var num_of_columns;
-  var XYsize = "<?php echo $size; ?>";
+  var XYsize = Number("<?php echo $size; ?>");
   var div = '';
   for (num_of_columns = 1; num_of_columns < XYsize; num_of_columns+=1){
     div += '<th><span class="input-group-btn">';
