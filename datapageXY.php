@@ -11,15 +11,33 @@ include 'sql/Bootgrid/getcolumns.php';
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)','Data XY');
 
-  $outputx = '';
-  $outputy = '';
+  $BreakPoints = 3;
+
+  $outputx = '<tr>';
+  $bps = 3;
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $outputx .= '<option value="'.$cName.'" id="'.'x-'.$cName.'">'.$cName.'</option>';
+      $outputx .= '<td><div data-toggle="buttons"><label class="btn btn-default original-btn" style="width: 100%" disable><input type="checkbox" value="'.$cName.'" name="'.'x-'.$cName.'" id="'.'x-'.$cName.'" disable><span style="font-size: 125%;">'.$cName.'</span></input></label></div></td>';
+      if ($i == $size-1){
+        $outputx .= '</tr>';
+      }
+      else if ($i == $bps){
+        $outputx .= '</tr><tr>';
+        $bps += $BreakPoints;
+      }
   }
+  $outputy = '<tr>';
+  $bps = 3;
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $outputy .= '<option value="'.$cName.'" id="'.'y-'.$cName.'">'.$cName.'</option>';
+      $outputy .= '<td><div data-toggle="buttons"><label class="btn btn-default original-btn" style="width: 100%" disable><input type="checkbox" value="'.$cName.'" name="'.'y-'.$cName.'" id="'.'y-'.$cName.'" disable><span style="font-size: 125%;">'.$cName.'</span></input></label></div></td>';
+      if ($i == $size-1){
+        $outputy .= '</tr>';
+      }
+      else if ($i == $bps){
+        $outputy .= '</tr><tr>';
+        $bps += $BreakPoints;
+      }
   }
 ?>
 
@@ -27,7 +45,7 @@ include 'sql/Bootgrid/getcolumns.php';
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Data Page</title>
+  <title>DataPage XY</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -44,111 +62,45 @@ include 'sql/Bootgrid/getcolumns.php';
 <body>
 
   <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw; margin-top: 50px; ">
-    <div class="table-responsive" style="overflow-x: scroll">
-      <table id="table_data" class="table table-bordered table-striped">
+    <div class="table-responsive" >
+
+
+      <table class="table" style="overflow-x:auto; table-layout: fixed;">
         <thead>
+          <tr><th><span style="margin-left:5px"> Please select a chart </span></th></tr>
+        </thead>
+        <tbody id="ChartsList">
+        </tbody>
+
+        <thead >
           <tr>
-            <?php
-            for($i = 1; $i < $size; $i+=1){
-                $coltitle = '';
-                $coltitle .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
-                $coltitle .= $arr['rows'][$i]['FieldName'] . "</th>";
-                echo $coltitle;
-            }
-             ?>
+            <th style="width: 100px"><span style="margin-left:5px"> X-Axis </span></th>
           </tr>
         </thead>
+        <tbody id="X">
+          <?php echo $outputx ?>
+        </tbody>
+
+        <thead >
+          <tr>
+            <th style="width: 100px"><span style="margin-left:5px"> Y-Axis </span></th>
+          </tr>
+        </thead>
+        <tbody id="Y">
+          <?php echo $outputy ?>
+        </tbody>
+
       </table>
     </div>
-    <table class="table table-bordered table-striped">
-      <tbody>
-        <tr align="center">
-          <td>
-            <div class="container" id="XYSelector">
 
-              <div class="input-group">
-              <select name="Chart" id="ChartOption" onChange="ChartSelected();" class="form-control">
-                  <option>Please select a chart</option>
-                  <option>Scatter plot</option>
-                  <option>Line Dash</option>
-                  <option>Bubble</option>
-                  <option>Bar</option>
-                  <option>Scatter Line</option>
-                  <option>Line</option>
-                  <option>Overlaid Area</option>
-                  <option>Horizontal Bar</option>
-                  <option>Pie</option>
-                </select>
-              </div>
-              <br/>
-
-                <select name="Y_column_selected" id="Y_column_selected1" onChange="Ydataselected();" disabled class="form-control">
-                  <option value=0>Select Y Value</option>
-                  <?php echo $outputy ?>
-                </select>
-
-              <br />
-              <div class="form-group" id="Extra_X">
-
-                  <select name="X_column_selected" id="X_column_selected1" onChange="Xdataselected('1');" disabled class="form-control">
-                    <option value=0>Select X Value</option>
-                    <?php echo $outputx ?>
-                  </select>
-
-                <br/>
-              </div>
-              <div class="input-group">
-                <button class="btn btn-default" type="button" id="buttonadd" onclick="ExtraX()"> Add Another Selection </button>
-              </div>
-
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="input-group" align="center">
+      <button class="btn btn-default" type="button" id="buttonadd" onclick="XY_Buttons();"> Create Chart </button>
+    </div>
   </div>
 
-
-<div id="tableModal" class="modal fade">
-  <div class="modal-dialog">
-    <form method="post" id="table_form">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Data</h4>
-        </div>
-        <div class="modal-body">
-          <?php
-            for($i = 1; $i < $size; $i+=1){
-              $colname = $arr['rows'][$i]['FieldName'];
-              echo "<label>Enter " . $colname . "</label>";
-
-              if ('INT' == $arr['rows'][$i]['DataType']){
-                  $coltype = 'number';
-              }
-              else {
-                  $coltype = 'text';
-              }
-
-              echo "<input type='$coltype' name='$colname' id='$colname' class='form-control' />";
-              echo "<br />";
-            }
-           ?>
-        </div>
-        <div class="modal-footer">
-          <?php
-          $id = $arr['rows'][0]['COLUMN_NAME'];
-          echo "<input type='hidden' name='$id' id='$id' />";
-           ?>
-          <input type="hidden" name="operation" id="operation" />
-          <input type="submit" name="action" id="action" class="btn btn-success" value="Add Data" />
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
 </body>
 </html>
+
 <script>
 
 //Initialise some values
@@ -169,8 +121,6 @@ for (var i = 0; i < size; i += 1){
   options.FieldName[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['FieldName']?>";
   options.DataType[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['DataType']?>";
 "<?php } ?>";
-var num_x = 1;
-var sizes = size - 2;
 //response to Chart Combobox
 function ChartSelected(){
   var select = document.getElementById('ChartOption');
@@ -182,11 +132,10 @@ function ChartSelected(){
   }else{
     chart = '';
     EnableOrDiableEverything(true);
+    XYButtons('XY');
   }
-  for (var i = 0; i < num_x; i += 1){
-    $('select#X_column_selected' + i).prop('selectedIndex', 0);
-  }
-  $('select#Y_column_selected1').prop('selectedIndex', 0);
+  document.getElementById('X_column_selected1').selectedIndex = 0;
+  document.getElementById('Y_column_selected1').selectedIndex = 0;
   Clear_column_colour();
 }
 //Response to the x-axis combo box
@@ -239,185 +188,60 @@ function AxisChecker(axis){
 }
 //Either enable or disable everything in the x-axis, y-axis and their buttons
 function EnableOrDiableEverything(bool){
-  for (var i = 1; i <= num_x; i += 1){
-    var mess = '#X_column_selected' + i;
-    $(mess).prop('disabled', bool);
-  }
-  $('#Y_column_selected1').prop('disabled', bool);
-  $('#buttonadd').prop('disabled', bool);
+  document.getElementById('X_column_selected1').disabled = bool;
+  document.getElementById('Y_column_selected1').disabled = bool;
+  //document.getElementById('buttonx').disabled = bool;
+  //document.getElementById('buttony').disabled = bool;
+  //document.getElementById('buttonadd').disabled = bool;
   EnabledOrDisableOption('x', bool);
   EnabledOrDisableOption('y', bool);
 }
-var divSaver = [sizes];
-function ExtraX(){
-  if (num_x < sizes){
-    num_x += 1;
-    var div = '';
-    div += '<div class="input-group" id="Axis-X-'+num_x+'" style="margin-top:50px;">';
-    div += '<select name="X_column_selected" id="X_column_selected'+num_x+'" onChange="Xdataselected(\''+num_x+'\');" class="form-control">';
-    div += '<option>Select X Value</option>'
-    div += '<?php echo $outputx ?>';
-    div += '</select><span class="input-group-btn">';
-    div += '<button onClick="RemoveX('+num_x+');" class="btn btn-default" type="button" id="buttonx"> X </button>';// this is the cancel button
-    div += '</span></div>';
-    $('#Extra_X').append(div);
-    divSaver[num_x] = div;
-    if (num_x == size){
-      $('#buttonadd').disabled = true;
-    }
-  }
-  else {
-    $('#buttonadd').disabled = true;
-  }
-  refreshAxisDiable();
-}
 
-function RemoveX(num){
-  num_x -= 1;
-  $('#Axis-X-' + num).remove();
-  var button = document.getElementById('buttonadd');
-  if (button.disabled){
-    button.disabled = false;
+var chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
+var BreakPoints = 3;
+var bps = 2;
+var charts = '<tr>';
+for (var i = 0; i < chart_list.length; i+=1) {
+  charts += '<td><div data-toggle="buttons"><label class="btn btn-default original-btn-chart" id="chart'+i+'" style="width: 100%"><input type="radio" value="#" name="chartType" onclick="charts_reset('+i+')"><span style="font-size: 125%;">'+chart_list[i]+'</span></input></label></div></td>';
+  if (i == chart_list.length-1){
+    charts += '</tr>';
+  }
+  else if (i == bps){
+    charts += '</tr><tr>';
+    bps += BreakPoints;
+  }
+}
+$('#ChartsList').append(charts);
+
+function charts_reset(num){
+  for (var i = 0; i < chart_list.length; i+=1){
+    if (i != num){
+      $('.original-btn-chart').removeClass('active');
+    }
   }
 }
 
-function refreshAxisDiable(){
-  for (var i = 1; i < size; i += 1){
-    var mess = 'x-' + options.FieldName[i];
-    var disabled = document.getElementById(mess).disabled
-    document.getElementById(mess).disabled = disabled;
+/*
+$('div label').click(function(e) {
+   e.preventDefault();
+   $('label').removeClass('active');
+   $(this).addClass('active');
+});*/
+
+function XY_Buttons(){
+  var num_of_columns;
+  var XYsize = <?php echo $size; ?>;
+  var div = '';
+  for (num_of_columns = 1; num_of_columns < XYsize; num_of_columns+=1){
+    div += '<th><span class="input-group-btn">';
+    div += '';
+    div += '<div data-toggle="buttons"><label class="btn btn-default"><input type="checkbox" value="#"><span>Choose As Y</span></input></label></div>';
+
+    //div += '<button class="btn btn-default" type="button" id="X_button_'+num_of_columns+'" disabled> Choose as X </button></br>';
+    //div += '<button class="btn btn-default" type="button" id="Y_button_'+num_of_columns+'" disabled> Choose as Y </button>';
+    div += '</span></th>';
   }
+  $('#XY').append(div);
 }
 
-</script>
-
-<script type="text/javascript" language='javascript'>
-$(document).ready(function(){
-  $('#add_data_button').click(function(){
-    $('#table_form')[0].reset();
-    $('.modal-title').text('Add Information');
-    $('#action').val('Add Data');
-    $('#operation').val('Add');
-  });
-
-  var productTable = $('#table_data').bootgrid({
-    ajax: true,
-    rowSelect: true,
-    multiSelect: true,
-    post: function()
-    {
-      return{
-        id: 'b0df282a-0d67-40e5-8558-c9e93b7befed'
-      };
-    },
-    url: 'sql/Bootgrid/fetch.php',
-
-  });
-
-  var colSize = "<?php echo $size-1 ?>";
-
-  <?php
-  //$aColumns = array();
-  $aColumn = "var aColumns = ['";
-  for($i = 1; $i < $size; $i+=1){
-    $aColumn .= $arr['rows'][$i]['FieldName'];
-    if ($i < $size-1){
-      $aColumn .= "', '";
-    }
-  }
-  $aColumn .= "'];";
-  ?>;
-  var aCol = "<?php echo $aColumn?>"
-  eval(aCol);
-
-  $(document).on('submit', '#table_form', function(event){
-    event.preventDefault();
-    var form_correct = true;
-    for (var i = 0; i < colSize; i+=1){
-      var col = $('#'+aColumns[i]).val();
-      if (col == ''){
-        form_correct = false;
-      }
-    }
-    var form_data = $(this).serialize();
-    if(form_correct)
-    {
-      $(':input[type="submit"]').prop('disabled', true);
-      $.ajax({
-        url:"sql/Bootgrid/insert.php",
-        method:"POST",
-        data:form_data,
-        success:function(data)
-        {
-          alert(data);
-          $(':input[type="submit"]').prop('disabled', false);
-          $('#table_form')[0].reset();
-          $('#tableModal').modal('hide');
-          $('#table_data').bootgrid('reload');
-        }
-      });
-    }
-    else
-    {
-      alert("All Fields are Required");
-    }
-  });
-
-  $(document).on("loaded.rs.jquery.bootgrid", function()
-  {
-    productTable.find(".update").on("click", function(event)
-    {
-      var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
-      eval("var " + col + " = $(this).data('row-id');");
-      var rowUpdate = "$.ajax({" +
-        "url:'sql/Bootgrid/fetch_single.php'," +
-        "method:'POST'," +
-        "data:{"+col+":"+col+"}," +
-        "dataType:'json'," +
-        "success:function(data)" +
-        "{" +
-          "$('#tableModal').modal('show');";
-          for (var i = 0; i < colSize; i+=1){
-            rowUpdate += "$('#"+aColumns[i]+"').val(data."+aColumns[i]+");";
-          }
-          rowUpdate += "$('.modal-title').text('Edit Product');"+
-          "$('#"+col+"').val("+col+");" +
-          "$('#action').val('Edit');" +
-          "$('#operation').val('Edit');" +
-        "}" +
-      "});";
-      eval(rowUpdate);
-    });
-  });
-
-  $(document).on("loaded.rs.jquery.bootgrid", function()
-  {
-    productTable.find(".delete").on("click", function(event)
-    {
-      if(confirm("Are you sure you want to delete this?"))
-      {
-        $(':input[type="submit"]').prop('disabled', true);
-        var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
-        //var col = "<?php //echo $arr['rows'][1]['FieldName']; ?>";
-        eval("var " + col + " = $(this).data('row-id');");
-        var rowDelete = "$.ajax({" +
-          "url:'sql/Bootgrid/delete.php'," +
-          "method:'POST'," +
-          "data:{"+col+":"+col+"}, "+
-          "success:function(data){" +
-            "alert(data);" +
-            "$(':input[type=\"submit\"]').prop('disabled', false);" +
-            "$('#table_data').bootgrid('reload');" +
-          "}" +
-        "});";
-        eval(rowDelete);
-      }
-      else{
-        return false;
-      }
-    });
-  });
-
-
-});
 </script>
