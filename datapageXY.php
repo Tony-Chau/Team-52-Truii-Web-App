@@ -17,7 +17,7 @@ include 'sql/Bootgrid/getcolumns.php';
   $bps = 3;
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $outputx .= '<td><div data-toggle="buttons"><label class="btn btn-default original-btn" id="x-axis-button'.$i.'" style="width: 100%" disabled><input type="checkbox" value="'.$cName.'" name="'.'x-'.$cName.'" id="'.'x-'.$cName.'"><span style="font-size: 125%;">'.$cName.'</span></input></label></div></td>';
+      $outputx .= '<td><button type="button" class="btn btn-default original-btn" id="x-axis-button'.$i.'" style="width: 100%" disabled><input type="checkbox" value="'.$cName.'" name="'.'x-'.$cName.'" id="'.'x-'.$cName.'" disabled><span style="font-size: 125%;">'.$cName.'</span></input></button></td>';
       if ($i == $size-1){
         $outputx .= '</tr>';
       }
@@ -30,7 +30,7 @@ include 'sql/Bootgrid/getcolumns.php';
   $bps = 3;
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $outputy .= '<td><div data-toggle="buttons"><label class="btn btn-default original-btn" id="y-axis-button'.$i.'" style="width: 100%" disabled><input type="checkbox" value="'.$cName.'" name="'.'y-'.$cName.'" id="'.'y-'.$cName.'"><span style="font-size: 125%;">'.$cName.'</span></input></label></div></td>';
+      $outputy .= '<td><button type="button" class="btn btn-default original-btn" id="y-axis-button'.$i.'" style="width: 100%" disabled><input type="checkbox" value="'.$cName.'" name="'.'y-'.$cName.'" id="'.'y-'.$cName.'" disabled><span style="font-size: 125%;">'.$cName.'</span></input></button></td>';
       if ($i == $size-1){
         $outputy .= '</tr>';
       }
@@ -127,7 +127,7 @@ var BreakPoints = 3;
 var bps = 2;
 var charts = '<tr>';
 for (var i = 0; i < chart_list.length; i+=1) {
-  charts += '<td><div data-toggle="buttons"><label onClick="charts_reset('+i+');" class="btn btn-default original-btn-chart" id="chart'+i+'" style="width: 100%"><input type="radio" value="#" name="chartType"><span style="font-size: 125%;">'+chart_list[i]+'</span></input></label></div></td>';
+  charts += '<td><button type="button" onClick="charts_reset('+i+');" class="btn btn-default original-btn-chart" id="chart'+i+'" style="width: 100%"><input type="radio" value="#" name="chartType"><span style="font-size: 125%;">'+chart_list[i]+'</span></input></button></td>';
   if (i == chart_list.length-1){
     charts += '</tr>';
   }
