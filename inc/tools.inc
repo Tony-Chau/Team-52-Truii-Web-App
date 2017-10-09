@@ -6,9 +6,11 @@ function gotoPage($page){
 }
 
 function navBarCreate($ColorCode, $currentpage){
-echo '<ul class="navbar" style="background-color:'.$ColorCode.'; z-index: 5">
-        <a href="" onclick="window.history.back();return false;"><li class="fa fa-angle-left fa-4x"></li></a>
-        <li><a href="home.php">'.$currentpage.'</a></li>
+  $nav =  '<ul class="navbar" style="background-color:'.$ColorCode.'; z-index: 5">';
+  if ($currentpage != 'Home'){
+    $nav .= '<a href="" onclick="window.history.back();return false;"><li class="fa fa-angle-left fa-4x"></li></a>';
+  }
+  echo $nav . '<li><a href="home.php">'.$currentpage.'</a></li>
         <a href="chartmaker.php"><li class="fa fa-bar-chart fa-4x"></li></a>
         <a href="recorddatapageAddDelete.php"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
         <li style="float:right;">
