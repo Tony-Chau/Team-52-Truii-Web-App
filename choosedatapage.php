@@ -14,7 +14,7 @@
   for($i = 0; $i < $tsize; $i+=1){
       $tID = $tIDsarr['rows'][$i]['TableID'];
       $tName = $tIDsarr['rows'][$i]['TableName'];
-      $output .= '<option style="font-size: 200%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" value='.$tID.'> Table '.$tID.': '. $tName .'</option>';
+      $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" name="table_selected" value='.$tID.'> Table '.$tID.': '. $tName .'</button>';
   }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -62,24 +62,24 @@
 <body>
 
 
-  <header id="titlelogo1">
-    <div class="container1">
-      <span class="logo1"></span>
-    </div>
-  </header>
+
 
 
   <div id ="Homebutton">
-    <div class= "container1">
 
-      <form method="POST" >
-        <div align="center">
-          <select name="table_selected" id="table_selected" class="form-control" size="8">
-            <?php echo $output ?>
-          </select>
-          <input type="submit" name="create_table" class="submit"><br>
-        </div>
-      </form>
+    <div class= "container">
+      <div align="center" style="width: 100% margin-bottom: 50%">
+        <span class="logo1"></span>
+      </div>
+
+
+      <div class="row" style="background-color: white; padding: 15px; border-radius: 15px">
+        <form method="POST">
+          <?php echo $output ?>
+        </form>
+
+      </div>
+
 
     </div>
   </div>

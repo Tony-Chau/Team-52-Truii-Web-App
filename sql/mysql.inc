@@ -30,7 +30,7 @@ function log_in($value){
   $_SESSION['UserID'] = $value;
 }
 function log_out(){
-  unset($_SESSION['UserID']);
+  session_destroy();
 }
 
 function CheckRequestLogout(){

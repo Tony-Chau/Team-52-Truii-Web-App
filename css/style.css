@@ -132,12 +132,11 @@ body .active1 {
 
 .logo1 {
   display: inline-block;
-  width: 40px;
   height: 80px;
   padding-left: 20%;
   background:url('../images/truii-full-colour-white.png') center center no-repeat;
   background-size: contain;
-  float: left;
+  float: center;
 }
 
 #Homebutton {

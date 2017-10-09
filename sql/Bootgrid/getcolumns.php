@@ -23,7 +23,7 @@ $columnID = mysqli_fetch_assoc($gotcolumnsID);
 $columns[] = $columnID;
 $size+=1;
 
-$fieldQuery = "SELECT * FROM FieldTable WHERE TableID = " . $tableid . ";";
+$fieldQuery = "SELECT * FROM FieldTable WHERE TableID = " . $tableid . " ORDER BY FieldID ASC;";
 $gotfields = mysqli_query($connection, $fieldQuery);
 if(!empty($gotfields)){
 

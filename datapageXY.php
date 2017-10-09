@@ -93,8 +93,8 @@ include 'sql/Bootgrid/getcolumns.php';
       </table>
     </div>
 
-    <div class="input-group" align="center">
-      <button class="btn btn-default" type="button" id="buttonadd" onclick="XY_Buttons();" disabled> Create Chart </button>
+    <div class="input-group" style="width: 100%;" align="center">
+      <button class="btn btn-default" type="button" id="buttonadd" style="float: right" onclick="XY_Buttons();" disabled> Create Chart </button>
     </div>
   </div>
 
@@ -144,6 +144,8 @@ function charts_reset(num){
   $('#chart' + num).css('background-color', '#fc6719');
   $('.original-btn-x').removeAttr('disabled');
   $('.original-btn-y').removeAttr('disabled');
+  $('.original-btn-x').css('background-color', 'white');
+  $('.original-btn-y').css('background-color', 'white');
   chart = chart_list[num];
   for (var i = 1; i < size; i += 1){
     if (!ChartValidate(chart, 'x', options.DataType[i])){
@@ -153,9 +155,19 @@ function charts_reset(num){
       $('#y-axis-button' + i).attr('disabled', 'disabled');
     }
   }
+  current_x = null;
+  current_y = null;
+  $('#buttonadd').attr('disabled', 'disabled');
 }
+var current_x;
 function x_selection(num){
-
+  $('#x-axis-button' + num).attr('disabled', 'disabled');
+  $('#y-axis-button' + num).attr('disabled', 'disabled');
+  $('#x-axis-button' + num).css('background-color', '#1fc2de');
+  current_x = num;
+  if (current_x != null && current_y != null){
+    $('#buttonadd').removeAttr('disabled');
+  }
 }
 var current_y;
 function y_selection(num){
@@ -171,6 +183,9 @@ function y_selection(num){
    $('#y-axis-button' + num).css('background-color', '#fc6719');
    $('#x-axis-button' + num).attr('disabled', 'disabled');
    current_y = num;
+   if (current_x != null && current_y != null){
+     $('#buttonadd').removeAttr('disabled');
+   }
 }
 function XY_Buttons(){
   var num_of_columns;
