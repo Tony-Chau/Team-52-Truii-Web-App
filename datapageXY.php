@@ -17,7 +17,7 @@ include 'sql/Bootgrid/getcolumns.php';
   $bps = 3;
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $outputx .= '<td><button disabled class="btn btn-default original-btn-x" value="'.$cName.'" name="'.'x-'.$cName.'" id="x-axis-button'.$i.'" style="width: 100%" disabled><span style="font-size: 125%;">'.$cName.'</span></button></td>';
+      $outputx .= '<td><button onClick="x_selection('.$i.');" class="btn btn-default original-btn-x" value="'.$cName.'" name="'.'x-'.$cName.'" id="x-axis-button'.$i.'" style="width: 100%" disabled><span style="font-size: 125%;" disabled>'.$cName.'</span></button></td>';
       if ($i == $size-1){
         $outputx .= '</tr>';
       }
@@ -30,7 +30,7 @@ include 'sql/Bootgrid/getcolumns.php';
   $bps = 3;
   for($i = 1; $i < $size; $i+=1){
       $cName = $arr['rows'][$i]['FieldName'];
-      $outputy .= '<td><button disabled class="btn btn-default original-btn-y" value="'.$cName.'" name="'.'x-'.$cName.'" id="y-axis-button'.$i.'" style="width: 100%" disabled><span style="font-size: 125%;">'.$cName.'</span></button></td>';
+      $outputy .= '<td><button onClick="y_selection('.$i.');" class="btn btn-default original-btn-y" value="'.$cName.'" name="'.'x-'.$cName.'" id="y-axis-button'.$i.'" style="width: 100%" disabled><span style="font-size: 125%;" disabled>'.$cName.'</span></button></td>';
       if ($i == $size-1){
         $outputy .= '</tr>';
       }
@@ -141,7 +141,7 @@ function charts_reset(num){
   $('.original-btn-chart').removeAttr('disabled');
   $('.original-btn-chart').css('background-color', 'white');
   $('#chart' + num).attr('disabled', 'disabled');
-  $('#chart' + num).css('background-color', 'green');
+  $('#chart' + num).css('background-color', '#fc6719');
   $('.original-btn-x').removeAttr('disabled');
   $('.original-btn-y').removeAttr('disabled');
   chart = chart_list[num];
@@ -153,6 +153,24 @@ function charts_reset(num){
       $('#y-axis-button' + i).attr('disabled', 'disabled');
     }
   }
+}
+function x_selection(num){
+
+}
+var current_y;
+function y_selection(num){
+ if (current_y != null){
+   $('#y-axis-button' + current_y).removeAttr('disabled');
+   $('#y-axis-button' + current_y).css('background-color', 'white');
+   $('#x-axis-button' + current_y).removeAttr('disabled');
+   if (!ChartValidate(chart, 'x', options.DataType[current_y])){
+     $('#x-axis-button' + current_y).attr('disabled');
+   }
+ }
+   $('#y-axis-button' + num).attr('disabled', 'disabled');
+   $('#y-axis-button' + num).css('background-color', '#fc6719');
+   $('#x-axis-button' + num).attr('disabled', 'disabled');
+   current_y = num;
 }
 function XY_Buttons(){
   var num_of_columns;
