@@ -14,7 +14,7 @@
   for($i = 0; $i < $tsize; $i+=1){
       $tID = $tIDsarr['rows'][$i]['TableID'];
       $tName = $tIDsarr['rows'][$i]['TableName'];
-      $output .= '<option value='.$tID.'>'.$tID.' '. $tName .'</option>';
+      $output .= '<option style="font-size: 200%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" value='.$tID.'> Table '.$tID.': '. $tName .'</option>';
   }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -74,8 +74,7 @@
 
       <form method="POST" >
         <div align="center">
-          <select name="table_selected" id="table_selected" class="form-control">
-            <option value="">Select Table</option>
+          <select name="table_selected" id="table_selected" class="form-control" size="8">
             <?php echo $output ?>
           </select>
           <input type="submit" name="create_table" class="submit"><br>

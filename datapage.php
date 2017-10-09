@@ -22,6 +22,9 @@
   $datatypes .= '<option value="FLOAT">% Percentage</option>';
   $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
 
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      gotoPage('datapageXY.php');
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -87,6 +90,12 @@
         </thead>
       </table>
     </div>
+    <br/>
+    <form method="POST">
+      <div align="center">
+        <input type="submit" name="GotoXY" class="submit" style="font-size: 200%; padding: 25px; border-radius: 25px;" value="Go to Datapage XY"><br>
+      </div>
+    </form>
   </div>
 </body>
 </html>
