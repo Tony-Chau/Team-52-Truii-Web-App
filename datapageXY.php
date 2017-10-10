@@ -132,7 +132,7 @@ function Create_Axis(axis){
   var outputx = '<tr>';
   for (var i = 1; i < size; i += 1){
     var cName = options.FieldName[i];
-    if (!ChartValidate(chart, axis, options.DataType[i])){
+    if (ChartValidate(chart, axis, options.DataType[i])){
       if (x_disabled[i]){
         point += 1;
         outputx  += '<td><button onclick="'+axis+'_selection(' + i + ');" class="btn btn-default original-btn-'+axis+'" value="'+ cName +'" name="'+axis+'-'+ cName +'" id="'+axis+'-axis-button' + i +'" style="width: 100%"><span style="font-size: 125%;" disabled>'+ cName + '</span></button></td>';
@@ -141,7 +141,7 @@ function Create_Axis(axis){
     if(point == size - 1){
       $outputx += '</tr>';
     }else if (point == bps){
-      output += '</tr><tr>';
+      outputx += '</tr><tr>';
       breakpoints += bps;
     }
   }
@@ -236,7 +236,7 @@ function back(){
     previous_y = -1;
     for (var i = 0; i < size; i += 1){
       x_highlight[i] = false;
-      if (!ChartValidate(chart, 'x', options.DataType[i])){
+      if (ChartValidate(chart, 'x', options.DataType[i])){
         x_disabled[i] = true;
       }
     }
@@ -264,6 +264,5 @@ function next(){
     checkbutton();
   }
 }
-var kim = [size];
 Create_Chart();
 </script>
