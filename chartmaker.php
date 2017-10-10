@@ -2,7 +2,7 @@
   include 'sql/mysql.inc';
   include 'inc/tools.inc';
   if (!is_log()){
-    header('location: Index.php');
+    header('location: Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(252, 103, 25)', 'Chart Maker');

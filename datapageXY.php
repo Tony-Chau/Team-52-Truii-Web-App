@@ -6,7 +6,7 @@ include 'sql/Bootgrid/connection.php';
 include 'sql/Bootgrid/getcolumns.php';
 
   if (!is_log()){
-    header('location: Index.php');
+    header('location: Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)','Data XY');

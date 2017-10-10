@@ -1,11 +1,11 @@
 <?php
   include 'sql/mysql.inc';
   include 'inc/tools.inc';
-  include("sql/Bootgrid/connection.php");
+  include("sql/Bootgrid/connection");
 
 
   if (!is_log()){
-    header('location: Index.php');
+    header('location: Index');
   }
   CheckRequestLogout();
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -21,11 +21,11 @@
               }
           }
           CreateTable($table_name, $aFields, $dTypes);
-          include("sql/Bootgrid/gettable.php");
+          include("sql/Bootgrid/gettable");
           $latest = $tsize;
           $tID = $tIDsarr['rows'][$latest]['TableID'];
           $_SESSION['tableid'] = $tID;
-          gotoPage('datapage.php');
+          gotoPage('datapage');
       }
   }
     navBarCreate('rgb(31,194,222)','Record Data');

@@ -5,7 +5,7 @@
   include("sql/Bootgrid/getcolumns.php");
 
   if (!is_log()){
-    header('location: Index.php');
+    header('location: Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)','Data');
@@ -23,7 +23,7 @@
   $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      gotoPage('datapageXY.php');
+      gotoPage('datapageXY');
   }
 ?>
 <!DOCTYPE html>

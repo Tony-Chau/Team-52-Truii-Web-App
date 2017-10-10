@@ -5,7 +5,7 @@
   include("sql/Bootgrid/gettable.php");
 
   if (!is_log()){
-    header('location: Index.php');
+    header('location: Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)', 'Choose Data Page');
@@ -34,7 +34,7 @@
 
           if ($table_exist){
               $_SESSION['tableid'] = $_POST['table_selected'];
-              gotoPage('datapage.php');
+              gotoPage('datapage');
           }
           else {
               echo "<script language='javascript'>";

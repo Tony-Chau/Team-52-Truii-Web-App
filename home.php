@@ -2,7 +2,7 @@
   include 'sql/mysql.inc';
   include 'inc/tools.inc';
   if (!is_log()){
-    header('location: Index.php');
+    header('location: Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(252, 103, 25)', 'Home');
@@ -34,14 +34,14 @@
         <div align="center">
 
             <div class="big1">
-          <br><a href='chartmaker.php' style="text-decoration:none"><div><input type="image" src="images//graphmarker.png" name="image" href='chartmaker.php'><br> </div>
+          <br><a href='chartmaker' style="text-decoration:none"><div><input type="image" src="images//graphmarker.png" name="image" href='chartmaker.php'><br> </div>
           <h1 style="color:#EF6724;"> Chart Marker </h1></div></a>
         </div>
 <br unselectable="on">
 
         <div align="center">
            <div class="big2">
-           <a href='recorddatapageAddDelete.php' style="text-decoration:none"><div>
+           <a href='recorddatapageAddDelete' style="text-decoration:none"><div>
           <br><input type="image" src="images//recorddata.png" name="image"><br> </div>
           <h1 style="color:#0ABFDD;" style="width:50%;"> Record Data</h1></div></a>
         </div>

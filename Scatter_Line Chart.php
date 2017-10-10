@@ -1,8 +1,8 @@
 <?php
   include 'sql/mysql.inc';
     include 'inc/tools.inc';
-  include("sql/Bootgrid/connection.php");
-  include("sql/Bootgrid/getcolumns.php");
+  include("sql/Bootgrid/connection");
+  include("sql/Bootgrid/getcolumns");
 
  ?>
 

@@ -2,7 +2,7 @@
   include './sql/mysql.inc';
     include 'inc/tools.inc';
   if (is_log()){
-    header('location: home.php');
+    header('location: home');
   }
 ?>
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ background-size:100% 100%; background-repeat: no-repeat; background-attachment: 
   <div class="centered" align="center">
     <div class="container-fluid">
 
-        <form action="action.php">
+        <form action="action">
           <div class="row-top">
             <label class="label">Email</label><br>
             <input type="email" name="email" class="input" required>

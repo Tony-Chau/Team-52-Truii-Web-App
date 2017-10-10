@@ -7,7 +7,7 @@
       echo "<script>alert('yo')</script>";
   }
   if (is_log()){
-    header('location: home.php');
+    header('location: home');
   }
   $log_username = "";
   $reg_username = "";
@@ -17,7 +17,7 @@
           if(CheckUser($_POST['log_username'])){
             if (CheckUserAndPassword($_POST['log_username'], $_POST['log_password'])){
               LogUser($_POST['log_username'], $_POST['log_password']);
-              header('location: Index.php');
+              header('location: Index');
             }
           }
           echo "<script>alert('Sorry but the login details you have entered do not match within our database, please retype your password');</script>";
@@ -30,7 +30,7 @@
             if (!CheckUser($_POST['reg_username'])){
               CreateUser($_POST['reg_username'], $_POST['reg_confirmpassword']);
               LogUser($_POST['reg_username'], $_POST['reg_password']);
-              header('location: Index.php');
+              header('location: Index');
             }
               echo "<script>alert('Sorry, but this email has already been registered. Please use a different email account');</script>";
           }
