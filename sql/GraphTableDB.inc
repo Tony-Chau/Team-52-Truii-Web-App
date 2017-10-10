@@ -1,10 +1,8 @@
 <?php
 //Creates Table
-function EnterGraphTable($tableId, $image_url){
+function EnterGraphTable($tableId, $Image){
   $dateTime = GetCurrentTime();
-  $image = mysql_real_escape_string($image_url);
-  $rawImage = file_get_contents($image);
-  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, Image) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", '" . $rawImage ."');";
+  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, Image) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", '" . $Image ."');";
   CallDatabase($sql);
 }
 
@@ -64,10 +62,8 @@ function UpdateColourCodeGraphTable($GraphID, $ColourCode){
   return "UPDATE GraphTable SET ColourCode = " . $ColourCode . " WHERE GraphID = " . $GraphID . ";";
 }
 
-function UpdateImageGraphTable($GraphID, $Image_url){
-  $image = mysql_real_escape_string($image_url);
-  $rawImage = file_get_contents($image);
-  return "UPDATE GraphTable SET Image = '" . $rawImage . "' WHERE GraphID = " . $GraphID . ";";
+function UpdateImageGraphTable($GraphID, $Image){
+  return "UPDATE GraphTable SET Image = '" . $Image . "' WHERE GraphID = " . $GraphID . ";";
 }
 
 function GetGraphImage($TableID){
