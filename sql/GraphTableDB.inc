@@ -1,8 +1,8 @@
 <?php
 //Creates Table
-function EnterGraphTable($tableId){
+function EnterGraphTable($tableId, $image){
   $dateTime = GetCurrentTime();
-  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");";
+  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, Image) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", '" . $image ."');";
   CallDatabase($sql);
 }
 
@@ -59,18 +59,25 @@ function RequestGraphTableDetailAsList($GraphID, $requestfield){
 }
 
 function UpdateGraphTableColourCode($GraphID, $ColourCode){
-  $sql = "UPDATE GraphTable SET ColourCode = " . $ColourCode . " WHERE GraphID = " . $GraphID . ";";
+  return "UPDATE GraphTable SET ColourCode = " . $ColourCode . " WHERE GraphID = " . $GraphID . ";";
+}
+
+function GetGraphImage($TableID){
+  $image = array();
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query($sql);
+    $result = $pdo->query("SELECT Image FROM GraphTable WHERE TableID=" . $TableID .";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
-  $pdo=null;
+  foreach($result as $data){
+    array_push($image, 'data:image;base64,"' . $data['Image'] . '"');
+  }
+  return $image;
 }
 
  ?>
