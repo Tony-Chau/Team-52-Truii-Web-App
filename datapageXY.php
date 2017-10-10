@@ -15,17 +15,7 @@ include 'sql/Bootgrid/getcolumns.php';
 
   $outputx = '<tr>';
   $bps = 3;
-  for($i = 1; $i < $size; $i+=1){
-      $cName = $arr['rows'][$i]['FieldName'];
-      $outputx .= '<td><button onClick="x_selection('.$i.');" class="btn btn-default original-btn-x" value="'.$cName.'" name="'.'x-'.$cName.'" id="x-axis-button'.$i.'" style="width: 100%" disabled><span style="font-size: 125%;" disabled>'.$cName.'</span></button></td>';
-      if ($i == $size-1){
-        $outputx .= '</tr>';
-      }
-      else if ($i == $bps){
-        $outputx .= '</tr><tr>';
-        $bps += $BreakPoints;
-      }
-  }
+
   $outputy = '<tr>';
   $bps = 3;
   for($i = 1; $i < $size; $i+=1){
@@ -65,36 +55,17 @@ include 'sql/Bootgrid/getcolumns.php';
     <div class="table-responsive" >
 
 
-      <table class="table" style="overflow-x:auto; table-layout: fixed;">
-        <thead>
-          <tr><th><span style="margin-left:5px"> Please select a chart </span></th></tr>
+      <table class="table"  style="overflow-x:auto; table-layout: fixed;">
+        <thead id="title-chart">
+          <tr><th><span style="margin-left:5px" id='title'> Please select a chart </span></th></tr>
         </thead>
-        <tbody id="ChartsList">
+        <tbody id="table-button">
         </tbody>
-
-        <thead >
-          <tr>
-            <th style="width: 100px"><span style="margin-left:5px"> X-Axis </span></th>
-          </tr>
-        </thead>
-        <tbody id="X">
-          <?php echo $outputx ?>
-        </tbody>
-
-        <thead >
-          <tr>
-            <th style="width: 100px"><span style="margin-left:5px"> Y-Axis </span></th>
-          </tr>
-        </thead>
-        <tbody id="Y">
-          <?php echo $outputy ?>
-        </tbody>
-
       </table>
     </div>
-
     <div class="input-group" style="width: 100%;" align="center">
-      <button class="btn btn-default" type="button" id="buttonadd" style="float: right" onclick="XY_Buttons();" disabled> Create Chart </button>
+      <button class="btn btn-default" type="button" id="buttonback" style="float: left" onclick="back();" disabled> Back </button>
+      <button class="btn btn-default" type="button" id="buttonadd" style="float: right" onclick="next();" disabled> Next </button>
     </div>
   </div>
 
@@ -105,16 +76,17 @@ include 'sql/Bootgrid/getcolumns.php';
 
 //Initialise some values
 var size = Number("<?php echo $size;?>");
-var chart = '';
-var x_select = [size];
+var chart;
+var page = 1;
 var options = {
     FieldName: [size],
     DataType:[size]
 };
-//set all x_select values as an empty string
+var x_disabled = [size];
 for (var i = 0; i < size; i += 1){
-  x_select[i] = '';
+  x_disabled = true;
 }
+
 //Transfer all php values to options as an javascript value
 "<?php for ($i = 1; $i < $size; $i += 1){?>";
   options.FieldName[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['FieldName']?>";
@@ -122,85 +94,124 @@ for (var i = 0; i < size; i += 1){
 "<?php } ?>";
 
 var chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
-var BreakPoints = 3;
-var bps = 2;
-var charts = '<tr>';
-for (var i = 0; i < chart_list.length; i+=1) {
-  charts += '<td><button onClick="charts_reset('+i+');" class="btn btn-default original-btn-chart" id="chart'+i+'" style="width: 100%"><span style="font-size: 125%;">'+chart_list[i]+'</span></button></td>';
-  if (i == chart_list.length-1){
-    charts += '</tr>';
+function Create_Chart(){
+  var BreakPoints = 3;
+  var bps = 2;
+  var charts = '<tr>';
+  for (var i = 0; i < chart_list.length; i+=1) {
+    charts += '<td><button onClick="charts_reset('+i+');" class="btn btn-default original-btn-chart" id="chart'+i+'" style="width: 100%"><span style="font-size: 125%;">'+chart_list[i]+'</span></button></td>';
+    if (i == chart_list.length-1){
+      charts += '</tr>';
+    }
+    else if (i == bps){
+      charts += '</tr><tr>';
+      bps += BreakPoints;
+    }
   }
-  else if (i == bps){
-    charts += '</tr><tr>';
-    bps += BreakPoints;
-  }
+  $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> Please select a chart </span></th></tr>');
+  $('#table-button').html(charts);
 }
-$('#ChartsList').append(charts);
 
 function charts_reset(num){
-  $('.original-btn-chart').removeAttr('disabled');
-  $('.original-btn-chart').css('background-color', 'white');
-  $('#chart' + num).attr('disabled', 'disabled');
-  $('#chart' + num).css('background-color', '#fc6719');
-  $('.original-btn-x').removeAttr('disabled');
-  $('.original-btn-y').removeAttr('disabled');
-  $('.original-btn-x').css('background-color', 'white');
-  $('.original-btn-y').css('background-color', 'white');
   chart = chart_list[num];
+  $('.original-btn-chart').removeAttr('disabled');
+  $('.original-btn-chart').css('background-color', '#FFFFFF');
+  $('#chart' + num).css('background-color', '#EE6724');
+  $('#chart' + num).attr('disabled', 'disabled');
+  $('#buttonadd').removeAttr('disabled');
+}
+
+function Create_Axis(axis){
+  var breakpoints = 3;
+  var bps = 3;
+  var point = 0;
+  var outputx = '<tr>';
   for (var i = 1; i < size; i += 1){
-    if (!ChartValidate(chart, 'x', options.DataType[i])){
-      $('#x-axis-button' + i).attr('disabled', 'disabled');
+    var cName = options.FieldName[i];
+    if (!ChartValidate(chart, axis, options.DataType[i])){
+      if (x_disabled[i]){
+        point += 1;
+        outputx  += '<td><button onclick="'+axis+'_selection(' + i + ');" class="btn btn-default original-btn-'+axis+'" value="'+ cName +'" name="'+axis+'-'+ cName +'" id="'+axis+'-axis-button' + i +'" style="width: 100%"><span style="font-size: 125%;" disabled>'+ cName + '</span></button></td>';
+      }
     }
-    if (!ChartValidate(chart, 'y', options.DataType[i])){
-      $('#y-axis-button' + i).attr('disabled', 'disabled');
+    if(point == size - 1){
+      $outputx += '</tr>';
+    }else if (point == bps){
+      output += '</tr><tr>';
+      breakpoints += bps;
     }
   }
-  current_x = null;
-  current_y = null;
-  $('#buttonadd').attr('disabled', 'disabled');
+  $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
+  $('#table-button').html(outputx);
 }
-var current_x;
+
+function checkbutton(){
+  if (page == 1){
+    $('#buttonback').attr('disabled', 'disabled');
+    $('#buttonadd').attr('disabled', 'disabled');
+    $('#title-chart').fadeOut('slow');
+    $('#table-button').fadeOut('slow');
+    setTimeout(function(){
+      Create_Chart();
+      $('#title-chart').fadeIn('slow');
+      $('#table-button').fadeIn('slow');
+    }, 500);
+  }else if (page == 2){
+    $('#buttonback').removeAttr('disabled');
+    $('#buttonadd').html('Next');
+    $('#title-chart').fadeOut('slow');
+    $('#table-button').fadeOut('slow');
+    $('#buttonadd').attr('disabled', 'disabled');
+    setTimeout(function(){
+      Create_Axis('x');
+      $('#title-chart').fadeIn('slow');
+      $('#table-button').fadeIn('slow');
+    }, 500);
+  }else{
+    Create_Axis('y');
+    $('#buttonadd').attr('disabled', 'disabled');
+    $('#buttonadd').html('Create Chart');
+  }
+}
+
+
 function x_selection(num){
   $('#x-axis-button' + num).attr('disabled', 'disabled');
-  $('#y-axis-button' + num).attr('disabled', 'disabled');
-  $('#x-axis-button' + num).css('background-color', '#1fc2de');
-  current_x = num;
-  if (current_x != null && current_y != null){
-    $('#buttonadd').removeAttr('disabled');
-  }
+  $('#x-axis-button' + num).css('background-color', 'rgb(31,194,222)');
+  x_selected[num] = false;
+  $('#buttonadd').removeAttr('disabled');
 }
-var current_y;
+
 function y_selection(num){
- if (current_y != null){
-   $('#y-axis-button' + current_y).removeAttr('disabled');
-   $('#y-axis-button' + current_y).css('background-color', 'white');
-   $('#x-axis-button' + current_y).removeAttr('disabled');
-   if (!ChartValidate(chart, 'x', options.DataType[current_y])){
-     $('#x-axis-button' + current_y).attr('disabled');
-   }
- }
-   $('#y-axis-button' + num).attr('disabled', 'disabled');
-   $('#y-axis-button' + num).css('background-color', '#fc6719');
-   $('#x-axis-button' + num).attr('disabled', 'disabled');
-   current_y = num;
-   if (current_x != null && current_y != null){
-     $('#buttonadd').removeAttr('disabled');
-   }
-}
-function XY_Buttons(){
-  var num_of_columns;
-  var XYsize = Number("<?php echo $size; ?>");
-  var div = '';
-  for (num_of_columns = 1; num_of_columns < XYsize; num_of_columns+=1){
-    div += '<th><span class="input-group-btn">';
-    div += '';
-    div += '<div data-toggle="buttons" style="display:none; important!"><label class="btn btn-default"><input type="checkbox" value="#" disabled><span>Choose As Y</span></input></label></div>';
 
-    //div += '<button class="btn btn-default" type="button" id="X_button_'+num_of_columns+'" disabled> Choose as X </button></br>';
-    //div += '<button class="btn btn-default" type="button" id="Y_button_'+num_of_columns+'" disabled> Choose as Y </button>';
-    div += '</span></th>';
+}
+
+function back(){
+  page -= 1;
+  checkbutton();
+}
+
+function next(){
+  if (page == 3){
+    checkbutton();
+    var num_of_columns;
+    var XYsize = Number("<?php echo $size; ?>");
+    var div = '';
+    for (num_of_columns = 1; num_of_columns < XYsize; num_of_columns+=1){
+      div += '<th><span class="input-group-btn">';
+      div += '';
+      div += '<div data-toggle="buttons" style="display:none; important!"><label class="btn btn-default"><input type="checkbox" value="#" disabled><span>Choose As Y</span></input></label></div>';
+
+      //div += '<button class="btn btn-default" type="button" id="X_button_'+num_of_columns+'" disabled> Choose as X </button></br>';
+      //div += '<button class="btn btn-default" type="button" id="Y_button_'+num_of_columns+'" disabled> Choose as Y </button>';
+      div += '</span></th>';
+    }
+    $('#XY').append(div);
+  }else{
+    page += 1;
+    checkbutton();
   }
-  $('#XY').append(div);
 }
 
+Create_Chart();
 </script>
