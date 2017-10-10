@@ -68,7 +68,11 @@ include 'sql/Bootgrid/getcolumns.php';
       <button class="btn btn-default" type="button" id="buttonadd" style="float: right" onclick="next();" disabled> Next </button>
     </div>
   </div>
-
+  <div>
+    <form method="POST" id="XY">
+      <input type="submit" id="xy_submit" style="display: none;">
+    </form>
+  </div>
 </body>
 </html>
 
@@ -83,9 +87,6 @@ var options = {
     DataType:[size]
 };
 var x_disabled = [size];
-for (var i = 0; i < size; i += 1){
-  x_disabled = true;
-}
 
 //Transfer all php values to options as an javascript value
 "<?php for ($i = 1; $i < $size; $i += 1){?>";
@@ -107,6 +108,9 @@ function Create_Chart(){
       charts += '</tr><tr>';
       bps += BreakPoints;
     }
+  }
+  for (var i = 0; i < size; i += 1){
+    x_disabled[i] = true;
   }
   $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> Please select a chart </span></th></tr>');
   $('#table-button').html(charts);
@@ -168,50 +172,98 @@ function checkbutton(){
       $('#table-button').fadeIn('slow');
     }, 500);
   }else{
-    Create_Axis('y');
     $('#buttonadd').attr('disabled', 'disabled');
     $('#buttonadd').html('Create Chart');
+    $('#title-chart').fadeOut('slow');
+    $('#table-button').fadeOut('slow');
+    setTimeout(function(){
+      Create_Axis('y');
+      $('#title-chart').fadeIn('slow');
+      $('#table-button').fadeIn('slow');
+    }, 500);
   }
 }
 
-
-function x_selection(num){
-  $('#x-axis-button' + num).attr('disabled', 'disabled');
-  $('#x-axis-button' + num).css('background-color', 'rgb(31,194,222)');
-  x_selected[num] = false;
-  $('#buttonadd').removeAttr('disabled');
+var x_selected = 0;
+var x_highlight = [size];
+for (var i = 0; i < size; i += 1){
+  x_highlight[i] = false;
 }
-
+function x_selection(num){
+  if (x_disabled[num]){
+    $('#x-axis-button' + num).css('background-color', 'rgb(31,194,222)');
+    x_disabled[num] = false;
+    x_highlight[num] = true;
+    x_selected += 1;
+  }else{
+    $('#x-axis-button' + num).css('background-color', '#FFFFFF');
+    x_disabled[num] = true;
+    x_highlight[num] = false;
+    x_selected -= 1;
+  }
+  if (x_selected >= 1){
+    $('#buttonadd').removeAttr('disabled');
+  }
+}
+var y_selected = false;
+var previous_y = -1;
 function y_selection(num){
-
+  $('.original-btn-y').css('background-color', '#FFFFFF');
+  if (previous_y == -1){
+    $('#y-axis-button' + num).attr('disabled', 'disabled');
+    $('#y-axis-button' + num).css('background-color', 'rgb(31,194,222)');
+    previous_y = num;
+    x_disabled[num] = true;
+    y_selected = true;
+  }else{
+    $('#y-axis-button' + previous_y).attr('disabled', 'disabled');
+    $('#y-axis-button' + num).removeAttr('disabled');
+    x_disabled[num] = true;
+    x_disabled[previous_y] = false;
+    previous_y = num;
+    y_selected = false;
+  }
+  if (y_selected){
+    $('#buttonadd').removeAttr('disabled');
+  }else{
+    $('#buttonadd').attr('disabled', 'disabled');
+  }
 }
 
 function back(){
+  if (page == 3){
+    x_disabled[previous_y] = false;
+    previous_y = -1;
+    for (var i = 0; i < size; i += 1){
+      x_highlight[i] = false;
+      if (!ChartValidate(chart, 'x', options.DataType[i])){
+        x_disabled[i] = true;
+      }
+    }
+  }
   page -= 1;
   checkbutton();
 }
 
 function next(){
   if (page == 3){
-    checkbutton();
-    var num_of_columns;
-    var XYsize = Number("<?php echo $size; ?>");
-    var div = '';
-    for (num_of_columns = 1; num_of_columns < XYsize; num_of_columns+=1){
-      div += '<th><span class="input-group-btn">';
-      div += '';
-      div += '<div data-toggle="buttons" style="display:none; important!"><label class="btn btn-default"><input type="checkbox" value="#" disabled><span>Choose As Y</span></input></label></div>';
-
-      //div += '<button class="btn btn-default" type="button" id="X_button_'+num_of_columns+'" disabled> Choose as X </button></br>';
-      //div += '<button class="btn btn-default" type="button" id="Y_button_'+num_of_columns+'" disabled> Choose as Y </button>';
-      div += '</span></th>';
+    var div = "<input type='text' name='size' value='"+size+"' style='display:none !important;'/>";
+    div += "<input type='text' name='chart' value='"+chart+"' style='display:none !important;'/>";
+    for (var i = 1; i < size; i += 1){
+      if (x_highlight[i]){
+        div += "<input type='text' name='x_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
+      }
+      if (i == previous_y){
+        div += "<input type='text' name='y_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
+      }
     }
     $('#XY').append(div);
+    $('#xy_submit').click();
   }else{
     page += 1;
     checkbutton();
   }
 }
-
+var kim = [size];
 Create_Chart();
 </script>

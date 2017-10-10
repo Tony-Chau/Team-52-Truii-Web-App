@@ -2,7 +2,7 @@
 //Creates Table
 function EnterGraphTable($tableId, $Image){
   $dateTime = GetCurrentTime();
-  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, Image) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", '" . $Image ."');";
+  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, Image) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", \"" . $Image ."\");";
   CallDatabase($sql);
 }
 
@@ -63,7 +63,7 @@ function UpdateColourCodeGraphTable($GraphID, $ColourCode){
 }
 
 function UpdateImageGraphTable($GraphID, $Image){
-  return "UPDATE GraphTable SET Image = '" . $Image . "' WHERE GraphID = " . $GraphID . ";";
+  return "UPDATE GraphTable SET Image = \"" . $Image . "\" WHERE GraphID = " . $GraphID . ";";
 }
 
 function GetGraphImage($TableID){
@@ -79,7 +79,7 @@ function GetGraphImage($TableID){
     echo $e->getMessage();
   }
   foreach($result as $data){
-    array_push($image, 'data:image;base64,"' . $data['Image'] . '"');
+    array_push($image, "data:image;base64, \"". $data['Image'] . "\"");
   }
   return $image;
 }
