@@ -1,6 +1,8 @@
 <?php
   include 'sql/mysql.inc';
   include 'inc/tools.inc';
+  include 'inc/styles_and_scripts.inc';
+
   if (!is_log()){
     header('location: Index');
   }
@@ -12,14 +14,6 @@
 <head>
 
  <title>Truii Home</title>
- <link rel="stylesheet" href="css/bootstrap.min.css">
- <link rel="stylesheet" href="css/bootstrap-theme.min.css">
- <link rel="stylesheet" href="css/style.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-
 
 </head>
 <body>
@@ -34,15 +28,15 @@
         <div align="center">
 
             <div class="big1">
-          <br><a href='chartmaker' style="text-decoration:none"><div><input type="image" src="images//graphmarker.png" name="image" href='chartmaker.php'><br> </div>
+          <br><a href='chartmaker' style="text-decoration:none"><div><input type="image" src="images//graphmarker.png" name="image" href='chartmaker'><br> </div>
           <h1 style="color:#EF6724;"> Chart Marker </h1></div></a>
         </div>
-<br unselectable="on">
+        <br unselectable="on">
 
         <div align="center">
            <div class="big2">
            <a href='recorddatapageAddDelete' style="text-decoration:none"><div>
-          <br><input type="image" src="images//recorddata.png" name="image"><br> </div>
+          <br><input type="image" src="images//recorddata.png" name="image" href='recorddatapageAddDelete'><br> </div>
           <h1 style="color:#0ABFDD;" style="width:50%;"> Record Data</h1></div></a>
         </div>
 

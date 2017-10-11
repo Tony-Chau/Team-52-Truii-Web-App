@@ -1,6 +1,7 @@
 <?php
   include '../sql/mysql.inc';
   include '../inc/tools.inc';
+  include("../sql/Bootgrid/connection.php");
   if (!is_log()){
     header('location: ../Index.php');
   }
@@ -8,8 +9,22 @@
   //navBarCreate('rgb(252, 103, 25)', 'Chart Library');
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $_SESSION['Graph_Temp'] = $_POST['temp'];
-      gotoPage('previousgraphpage_testing.php');
+      if(isset($_POST['temp'])){
+        $temp = $_POST['temp'];
+        $query = UpdateImageGraphTable(1, $temp);
+
+        if(mysqli_query($connection, $query))
+        {
+            echo "<script language='javascript'>";
+            echo "alert('success');";
+            echo "</script>";
+            gotoPage('previousgraphpage');
+        }
+
+        echo "<script language='javascript'>";
+        echo "alert('$temp');";
+        echo "</script>";
+      }
   }
 
 ?>
@@ -44,7 +59,7 @@
       <button type="button" onclick="canvasstart()">Start</button>
 
       <form method=POST>
-        <input type="hidden" name="temp" id="temp" />
+        <input type="hidden" name="temp" id="temp" value="" />
         <input type="submit" name="action" id="action" class="btn btn-success" value=" Send " />
       </form>
       <script>
@@ -168,7 +183,7 @@
             showline: false
           },
           width: (window.innerWidth / 1.2),
-          height: 500
+          height: 300
         };
 
         var data = [trace1, trace2, trace3, trace4, trace5, trace6, trace7];
@@ -183,13 +198,30 @@
           height: 300
         });
 
-        function canvasstart() {
+        /*
+        function cleandataURL(dataURI) {
+            var byteString = atob(dataURI.split(',')[1]);
+            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+            var ab = new ArrayBuffer(byteString.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            var blob = new Blob([ab], {type: mimeString});
+            return byteString;
+        }*/
 
+        function cleandataURL(dataurl) {
+            var arr = dataurl.split(','), url = arr[1];
+            return url;
+        }
+
+        function canvasstart() {
             var canvas = document.getElementById('graph');
             var pngCanvas = canvas.toDataURL();
             // console.log(pngCanvas);
             //alert(pngCanvas);
-            document.getElementById('temp').value = pngCanvas;
+            document.getElementById('temp').value = cleandataURL(pngCanvas);
             alert(document.getElementById('temp').value);
         }
 

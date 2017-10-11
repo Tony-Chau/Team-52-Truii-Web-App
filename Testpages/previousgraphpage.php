@@ -7,7 +7,7 @@
   CheckRequestLogout();
   //navBarCreate('rgb(252, 103, 25)', 'Chart Library');
 
-  $graph_temp = $_SESSION['Graph_Temp'];
+  $graph_temp = GetGraphImage(0);
 ?>
 
 
@@ -60,7 +60,8 @@ var pngCanvas;
 
         var DOMURL = window.URL || window.webkitURL || window;
 
-        pngCanvas = '<?php echo $graph_temp; ?>';
+        pngCanvas = '<?php echo $graph_temp[0]; ?>';
+        alert(pngCanvas);
         var img = new Image();
         var svg = dataURLtoBlob(pngCanvas);
         var url = DOMURL.createObjectURL(svg);
@@ -121,11 +122,11 @@ var pngCanvas;
 
         <div class="col-sm-12 col-md-4">
           <div class="thumbnail">
-            <canvas id="graph" width="300" height="300"></canvas>
+            <canvas id="graph" width="300" height="300" style="margin-top: -50px"></canvas>
             <div class="caption">
               <h3>Chart 4</h3>
               <p>Student Overall Results During HighSchool</p>
-              <p><a href="results_overtime(Scatter+Line Chart)_test.php" class="btn btn-primary" role="button">View</a> </p>
+              <p><a href="results_overtime(ScatterLineChart)" class="btn btn-primary" role="button">View</a> </p>
             </div>
           </div>
         </div>

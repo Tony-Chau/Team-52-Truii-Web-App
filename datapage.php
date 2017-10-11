@@ -1,6 +1,7 @@
 <?php
   include "sql/mysql.inc";
   include 'inc/tools.inc';
+  include 'inc/styles_and_scripts.inc';
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/getcolumns.php");
 
@@ -31,16 +32,7 @@
 <head>
 
   <title>Data Page</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <script src='js/Functions/Link.js'></script>
-  <link rel="stylesheet" href="css/datapage.css"/>
+
 </head>
 <body>
 

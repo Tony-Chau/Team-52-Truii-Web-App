@@ -1,6 +1,6 @@
-/* main css */
+/* login css */
 
-.logo {
+#logo {
     width: 200px;
     height: 15%;
     margin-left: -10px;
@@ -8,18 +8,20 @@
     margin-bottom: 1%;
 }
 
-.centered {
+#centered {
   margin: auto;
 }
 
-.container-fluid {
+
+#login-container {
     display: inline-block;
     background: rgba(253, 103, 26, 0.8);
     border-radius: 25px;
     padding: 2%;
 }
 
-.row-top {
+
+#row-top {
     width: 95%;
     margin: auto;
     margin-top: 10%;
@@ -27,7 +29,7 @@
     text-align: center;
 }
 
-.row-mid {
+#row-mid {
     width: 95%;
     margin: auto;
     margin-top: 5%;
@@ -35,7 +37,7 @@
     text-align: center;
 }
 
-.row-button {
+#row-button {
     width: 95%;
     margin: auto;
     margin-top: 15%;
@@ -44,7 +46,7 @@
 
 }
 
-.row-bottom {
+#row-bottom {
     width: 95%;
     margin: auto;
     margin-top: 15%;
@@ -53,13 +55,13 @@
 
 }
 
-.label {
+#label {
     display: inline-block;
     font-size: 125%;
     color: #FFFFFF;
 }
 
-.input {
+#input {
     width: 100%;
     border-radius: 5px;
     padding-left: 2%;
@@ -68,7 +70,25 @@
 
 }
 
-.submit {
+#submit {
+width: 100%;
+border-radius: 5px;
+font-size: 150%;
+background: rgb(10,191,211);
+border-color: rgb(0, 205, 228);
+color: #FFFFFF;
+}
+
+#btnRegister {
+width: 100%;
+border-radius: 5px;
+font-size: 150%;
+background: rgb(10,191,211);
+border-color: rgb(0, 205, 228);
+color: #FFFFFF;
+}
+
+#btnLog {
 width: 100%;
 border-radius: 5px;
 font-size: 150%;

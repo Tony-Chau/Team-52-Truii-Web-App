@@ -1,6 +1,7 @@
 <?php
-  include './sql/mysql.inc';
-    include 'inc/tools.inc';
+  include 'sql/mysql.inc';
+  include 'inc/tools.inc';
+  include 'inc/styles_and_scripts.inc';
   //Leaving this part to allow people to automatically log-in, so u don't need to type down ur email and password again
   log_in(1);
   if (!is_log()){
@@ -46,64 +47,62 @@
 <html>
 <head>
   <title>Truii</title>
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/bootstrap-theme.css">
-  <link rel="stylesheet" href="css/main.css">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body style="background-image: url('BackGround/StartCropBackGround.jpg');
 background-size:100% 100%; background-repeat: no-repeat; background-attachment: fixed;">
 
-  <div class="centered" align="center">
-    <img src="Logo/truii-full-colour-white.png" class="logo" alt="TruiiLogo">
+  <div class="centered" align="center" id="centered">
+    <img src="Logo/truii-full-colour-white.png" class="logo" id="logo" alt="TruiiLogo">
   </div>
 
-  <div class="centered" align="center">
-    <div class="container-fluid">
+  <div class="centered" align="center" id="centered">
+    <div class="container-fluid" id="login-container">
 
         <form method=POST>
-          <div id = "log">
-          <div class="row-top">
-            <label class="label">Username</label><br>
-            <?php echo "<input type=\"email\" name=\"log_username\" class=\"input\" value=\"" . $log_username . "\" required>" ?>
+          <div id="log">
+          <div class="row-top" id="row-top">
+            <label class="label" id="label">Username</label><br>
+            <?php echo "<input type=\"email\" name=\"log_username\" class=\"input\" id=\"input\" value=\"" . $log_username . "\" required>" ?>
           </div>
 
-          <div class="row-mid">
-            <label class="label">Password</label><br>
-            <input type="password" name="log_password" class="input" required>
+          <div class="row-mid" id="row-mid">
+            <label class="label" id="label">Password</label><br>
+            <input type="password" name="log_password" class="input" id="input" required>
           </div>
 
-          <div class="row-button">
-            <input type="submit" value="Login" class="submit">
+          <div class="row-button" id="row-button">
+            <input type="submit" value="Login" class="submit" id="submit">
           </div>
         </form>
 
-          <div class="row-bottom">
-              <input type="button" value="Register" class="submit"  id= "btnRegister">
+          <div class="row-bottom" id="row-bottom">
+              <input type="button" value="Register" class="submit" id="btnRegister">
           </div>
         </div>
           <form method=POST style="display: none;" id="Register">
             <div id ="Register">
-            <div class="row-top" >
-              <label class="label">Email</label><br>
-              <?php echo "<input type=\"email\" name=\"reg_username\" class=\"input\" value=\"" . $reg_username . "\" required>"; ?>
+            <div class="row-top" id="row-top">
+              <label class="label" id="label">Email</label><br>
+              <?php echo "<input type=\"email\" name=\"reg_username\" class=\"input\" id=\"input\" value=\"" . $reg_username . "\" required>"; ?>
             </div>
 
-            <div class="row-mid">
-              <label class="label">Password</label><br>
-              <input type="password" name="reg_password" class="input">
+            <div class="row-mid" id="row-mid">
+              <label class="label" id="label">Password</label><br>
+              <input type="password" name="reg_password" class="input" id="input">
             </div>
 
-            <div class="row-mid">
-              <label class="label">Confirm Password</label><br>
-              <input type="password" name="reg_confirmpassword" class="input" required>
+            <div class="row-mid" id="row-mid">
+              <label class="label" id="label">Confirm Password</label><br>
+              <input type="password" name="reg_confirmpassword" class="input" id="input" required>
             </div>
 
-            <div class="row-bottom">
-              <input type="submit" value="Register" class="submit">
+            <div class="row-bottom" id="row-bottom">
+              <input type="submit" value="Register" class="submit" id="submit">
             </div>
-            <div class="row-bottom">
+            <div class="row-bottom" id="row-bottom">
               <input type="button" value="Back" id="btnLog" class="submit">
             </div>
           </div>

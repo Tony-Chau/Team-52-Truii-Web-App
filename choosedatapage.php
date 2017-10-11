@@ -1,6 +1,7 @@
 <?php
   include 'sql/mysql.inc';
   include 'inc/tools.inc';
+  include 'inc/styles_and_scripts.inc';
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/gettable.php");
 
@@ -51,19 +52,10 @@
 <head>
 
  <title>Truii Home</title>
- <link rel="stylesheet" href="css/bootstrap.min.css">
- <link rel="stylesheet" href="css/bootstrap-theme.min.css">
- <link rel="stylesheet" href="css/style.css">
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 
 </head>
 
 <body>
-
-
-
-
 
   <div id ="Homebutton">
 
@@ -73,7 +65,7 @@
       </div>
 
 
-      <div class="row" style="background-color: white; padding: 15px; border-radius: 15px">
+      <div class="row" style="height: 70%; overflow-y: scroll; background-color: white; padding: 15px; border-radius: 15px">
         <form method="POST">
           <?php echo $output ?>
         </form>

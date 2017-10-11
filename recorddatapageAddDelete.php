@@ -1,13 +1,16 @@
 <?php
-  include 'sql/mysql.inc';
+  include "sql/mysql.inc";
   include 'inc/tools.inc';
-  include("sql/Bootgrid/connection");
+  include 'inc/styles_and_scripts.inc';
+  include("sql/Bootgrid/connection.php");
 
 
   if (!is_log()){
     header('location: Index');
   }
   CheckRequestLogout();
+  navBarCreate('rgb(31,194,222)','RecordData');
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['title'])){
           $columnNumber = $_POST["columnNumber"];
@@ -21,28 +24,20 @@
               }
           }
           CreateTable($table_name, $aFields, $dTypes);
-          include("sql/Bootgrid/gettable");
-          $latest = $tsize;
-          $tID = $tIDsarr['rows'][$latest]['TableID'];
-          $_SESSION['tableid'] = $tID;
+
+          $_SESSION['tableid'] = GetTableIDLastNumber()-1;
           gotoPage('datapage');
       }
   }
-    navBarCreate('rgb(31,194,222)','Record Data');
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
+
  <title>Truii Record Page</title>
- <link rel="stylesheet" href="css/bootstrap.min.css">
- <link rel="stylesheet" href="css/bootstrap-theme.min.css">
- <link rel="stylesheet" href="css/style.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script src='js/Functions/Link.js'></script>
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
- <script>
+
+<script>
     var columnNumber = 1;
    function addField(){
      columnNumber += 1;
@@ -80,7 +75,7 @@
 <body>
 
   <form method=POST>
-    <div id ="recordform">
+    <div id="recordform">
       <div class="container1" id="divCreate">
         <div class="form-group" style="margin-right: 10%;">
           <label for="exampletextinput">Title </label>
