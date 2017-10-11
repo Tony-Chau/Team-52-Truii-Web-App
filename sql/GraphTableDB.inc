@@ -79,7 +79,7 @@ function GetGraphImage($TableID){
     echo $e->getMessage();
   }
   foreach($result as $data){
-    array_push($image, "data:image;base64, \"". $data['Image'] . "\"");
+    array_push($image, ("data:image;base64," . $data['Image']));
   }
   return $image;
 }
