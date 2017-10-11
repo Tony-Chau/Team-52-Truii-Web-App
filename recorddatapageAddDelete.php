@@ -24,7 +24,6 @@
               }
           }
           CreateTable($table_name, $aFields, $dTypes);
-
           $_SESSION['tableid'] = GetTableIDLastNumber()-1;
           gotoPage('datapage');
       }
