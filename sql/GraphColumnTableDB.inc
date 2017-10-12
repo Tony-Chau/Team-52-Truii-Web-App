@@ -1,7 +1,6 @@
 <?php
 function EnterGraphColumnTable($GraphID, $FieldID, $Axis){
   $sql = "INSERT INTO GraphColumnTable(GraphID, FieldID, Axis) VALUES(".$GraphID.", ".$FieldID.", \"".$Axis."\");";
-  CallDatabase($sql);
 }
 
 function getGraphColumn($tableID){
