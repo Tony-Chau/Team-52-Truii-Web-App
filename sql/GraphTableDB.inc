@@ -1,8 +1,8 @@
 <?php
 //Creates Table
-function EnterGraphTable($tableId, $Image){
+function EnterGraphTable($tableId, $GraphType, $Image){
   $dateTime = GetCurrentTime();
-  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, Image) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", \"" . $Image ."\");";
+  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, GraphType, Image) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", \"" . $GraphType ."\", \"" . $Image ."\");";
   CallDatabase($sql);
 }
 

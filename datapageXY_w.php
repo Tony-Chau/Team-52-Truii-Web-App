@@ -1,7 +1,6 @@
 <?php
 include 'sql/mysql.inc';
 include 'inc/tools.inc';
-include 'inc/styles_and_scripts.inc';
 include 'inc/ChartValidator.inc';
 include 'sql/Bootgrid/connection.php';
 include 'sql/Bootgrid/getcolumns.php';
@@ -30,43 +29,25 @@ include 'sql/Bootgrid/getcolumns.php';
         $bps += $BreakPoints;
       }
   }
-
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      if (isset($_POST['chart'])){
-          $charttype = $_POST['chart'];
-          $ID_Graph = 1;
-          //$GID = array();
-          //$FIDs = array();
-          //$Axis_Array = array();
-          for ($i = 1; $i < $size; $i+=1){
-              if (isset($_POST["x_axis{$i}"])){
-                  //array_push($GID, $ID_Graph);
-                  //array_push($FIDS, $arr['rows'][$i]['FieldID']);
-                  //array_push($Axis_Array, "X");
-                  $Xquery = EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "X");
-                  mysqli_query($connection, $Xquery);
-              }
-              if (isset($_POST["y_axis{$i}"])){
-                  //array_push($GID, $ID_Graph);
-                  //array_push($FIDS, $arr['rows'][$i]['FieldID']);
-                  //array_push($Axis_Array, "Y");
-                  $Yquery = EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "Y");
-                  mysqli_query($connection, $Yquery);
-              }
-          }
-          //EnterGraphColumnTable($GID, $FIDs, $Axis_Array);
-      }
-
-  }
 ?>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-
   <title>DataPage XY</title>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src='js/Functions/Link.js'></script>
+  <link rel="stylesheet" href="css/datapage.css"/>
+  <script src='js/Functions/datapagexy.js'></script>
+  <script src='js/Functions/ChartValidator.js'></script>
 </head>
 <body>
 
@@ -89,6 +70,7 @@ include 'sql/Bootgrid/getcolumns.php';
   </div>
   <div>
     <form method="POST" id="XY">
+      
       <input type="submit" id="xy_submit" style="display: none;">
     </form>
   </div>
