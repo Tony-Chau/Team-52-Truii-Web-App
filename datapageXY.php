@@ -34,29 +34,19 @@ include 'sql/Bootgrid/getcolumns.php';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['chart'])){
           $charttype = $_POST['chart'];
-          $ID_Graph = 1;
-          //$GID = array();
-          //$FIDs = array();
-          //$Axis_Array = array();
-          $sql = '';
+          $ID_Graph = GetLastGraphTableID();
+          $sql = EnterGraphTable($_SESSION['tableid'], $charttype);
           for ($i = 1; $i < $size; $i+=1){
               if (isset($_POST["x_axis{$i}"])){
-                  //array_push($GID, $ID_Graph);
-                  //array_push($FIDS, $arr['rows'][$i]['FieldID']);
-                  //array_push($Axis_Array, "X");
                   $sql .= EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "x");
               }
               if (isset($_POST["y_axis{$i}"])){
-                  //array_push($GID, $ID_Graph);
-                  //array_push($FIDS, $arr['rows'][$i]['FieldID']);
-                  //array_push($Axis_Array, "Y");
                   $sql .= EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "y");
               }
           }
           CallDatabase($sql);
-          //EnterGraphColumnTable($GID, $FIDs, $Axis_Array);
+          //gotoPage('');
       }
-
   }
 ?>
 

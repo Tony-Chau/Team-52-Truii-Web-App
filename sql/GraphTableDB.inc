@@ -1,8 +1,14 @@
 <?php
+
 //Creates Table
-function EnterGraphTable($tableId, $GraphType, $Image){
+function EnterGraphTable($tableId, $GraphType){
   $dateTime = GetCurrentTime();
-  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, GraphType, Image) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", \"" . $GraphType ."\", \"" . $Image ."\");";
+  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, GraphType) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", \"" . $GraphType ."\");";
+  CallDatabase($sql);
+}
+
+function InsertImage($GraphID, $Image){
+  $sql = "UPDATE GraphTable SET Image=\"".$Image."\" WHERE GraphID=".$GraphID.";";
   CallDatabase($sql);
 }
 
@@ -66,7 +72,7 @@ function UpdateImageGraphTable($GraphID, $Image){
   return "UPDATE GraphTable SET Image = \"" . $Image . "\" WHERE GraphID = " . $GraphID . ";";
 }
 
-function GetGraphImage($TableID){
+function GetGraphImage($GraphID){
   $image = array();
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
@@ -74,7 +80,7 @@ function GetGraphImage($TableID){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT Image FROM GraphTable WHERE TableID=" . $TableID .";");
+    $result = $pdo->query("SELECT Image FROM GraphTable WHERE GraphID=" . $GraphID .";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -82,6 +88,23 @@ function GetGraphImage($TableID){
     array_push($image, ("data:image;base64," . $data['Image']));
   }
   return $image;
+}
+
+function GetLastGraphTableID(){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("SELECT GraphID FROM GraphTable ORDER BY GraphID DESC LIMIT 1;");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  foreach ($result as $data){
+    return $data['GraphID'] + 1;
+  }
+  return 1;
 }
 
  ?>
