@@ -7,7 +7,7 @@ include 'sql/Bootgrid/connection.php';
 include 'sql/Bootgrid/getcolumns.php';
 
   if (!is_log()){
-    header('location: Index');
+    gotoPage('Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)','Graph Page');
@@ -25,7 +25,7 @@ include 'sql/Bootgrid/getcolumns.php';
 <body>
 
   <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw; margin-top: 50px; ">
-    
+
   </div>
 </body>
 </html>

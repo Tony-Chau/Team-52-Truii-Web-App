@@ -2,12 +2,12 @@
   include './sql/mysql.inc';
     include 'inc/tools.inc';
   if (!is_log()){
-    header('location: Index');
+    gotoPage('Index');
   }
   if($_SERVER['REQUEST_METHOD'] == "POST") {
     if (is_log()){
       log_out();
-      header('location: Index.php');
+      gotoPage('Index');
     }
   }
 ?>

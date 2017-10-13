@@ -6,7 +6,7 @@
 
 
   if (!is_log()){
-    header('location: Index');
+    gotoPage('Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)','RecordData');

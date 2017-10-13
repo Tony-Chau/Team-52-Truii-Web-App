@@ -7,7 +7,7 @@ include 'sql/Bootgrid/connection.php';
 include 'sql/Bootgrid/getcolumns.php';
 
   if (!is_log()){
-    header('location: Index');
+    gotoPage('Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)','Data XY');
@@ -38,22 +38,22 @@ include 'sql/Bootgrid/getcolumns.php';
           //$GID = array();
           //$FIDs = array();
           //$Axis_Array = array();
+          $sql = '';
           for ($i = 1; $i < $size; $i+=1){
               if (isset($_POST["x_axis{$i}"])){
                   //array_push($GID, $ID_Graph);
                   //array_push($FIDS, $arr['rows'][$i]['FieldID']);
                   //array_push($Axis_Array, "X");
-                  $Xquery = EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "X");
-                  mysqli_query($connection, $Xquery);
+                  $sql .= EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "x");
               }
               if (isset($_POST["y_axis{$i}"])){
                   //array_push($GID, $ID_Graph);
                   //array_push($FIDS, $arr['rows'][$i]['FieldID']);
                   //array_push($Axis_Array, "Y");
-                  $Yquery = EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "Y");
-                  mysqli_query($connection, $Yquery);
+                  $sql .= EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "y");
               }
           }
+          CallDatabase($sql);
           //EnterGraphColumnTable($GID, $FIDs, $Axis_Array);
       }
 

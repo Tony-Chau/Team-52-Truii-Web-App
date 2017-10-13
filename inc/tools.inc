@@ -1,6 +1,4 @@
 <?php
-
-
 function gotoPage($page){
   echo "<script>window.location.href = '". $page ."'; </script>";
 }

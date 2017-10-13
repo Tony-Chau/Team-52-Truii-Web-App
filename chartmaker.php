@@ -4,7 +4,7 @@
   include 'inc/styles_and_scripts.inc';
 
   if (!is_log()){
-    header('location: Index');
+    gotoPage('Index');
   }
   CheckRequestLogout();
   navBarCreate('rgb(252, 103, 25)', 'Chart Maker');
