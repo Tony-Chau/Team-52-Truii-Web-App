@@ -15,8 +15,8 @@ function GraphColumnSwitchAxis($result){
   CallDatabase($sql);
 }
 
-function getGraphColumn($tableID){
-  $sql = "SELECT * FROM getGraphColumn WHERE TableID =".$tableID.";";
+function getGraphColumn($GraphID){
+  $sql = "SELECT * FROM GraphColumnTable WHERE GraphID =".$GraphID.";";
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
