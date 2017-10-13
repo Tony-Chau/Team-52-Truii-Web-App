@@ -3,6 +3,18 @@ function EnterGraphColumnTable($GraphID, $FieldID, $Axis){
   return "INSERT INTO GraphColumnTable(GraphID, FieldID, Axis) VALUES(".$GraphID.", ".$FieldID.", \"".$Axis."\");";
 }
 
+function GraphColumnSwitchAxis($result){
+  $sql = '';
+  foreach ($result as $data){
+    if ($data['Axis'] == 'x'){
+      $sql .= "UPDATE GraphColumnTable SET Axis=\"y\" WHERE GraphColumnID=\"".$data['GraphColumnID']."\";";
+    }else{
+      $sql .= "UPDATE GraphColumnTable SET Axis=\"x\" WHERE GraphColumnID=\"".$data['GraphColumnID']."\";";
+    }
+  }
+  CallDatabase($sql);
+}
+
 function getGraphColumn($tableID){
   $sql = "SELECT * FROM getGraphColumn WHERE TableID =".$tableID.";";
   $dbUser = get_dbUsername();
