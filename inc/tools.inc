@@ -8,8 +8,7 @@ function navBarCreate($ColorCode, $currentpage){
   if ($currentpage != 'Home'){
     $nav .= '<a href="" onclick="window.history.back();return false;"><li class="fa fa-angle-left fa-4x"></li></a>';
   }
-  echo $nav . '<li><a href="home">'.$currentpage.'</a></li>
-        <a href="chartmaker"><li class="fa fa-bar-chart fa-4x"></li></a>
+  echo $nav . '<a href="chartmaker"><li class="fa fa-bar-chart fa-4x"></li></a>
         <a href="recorddatapageAddDelete"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
         <li style="float:right;">
           <a href="" onClick=logout();>Logout <span class="glyphicon glyphicon-log-out"></span></a>
