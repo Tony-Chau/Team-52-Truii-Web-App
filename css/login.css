@@ -75,7 +75,6 @@ width: 100%;
 border-radius: 5px;
 font-size: 150%;
 background: rgb(10,191,211);
-border-color: rgb(0, 205, 228);
 color: #FFFFFF;
 }
 
@@ -83,8 +82,7 @@ color: #FFFFFF;
 width: 100%;
 border-radius: 5px;
 font-size: 150%;
-background: rgb(10,191,211);
-border-color: rgb(0, 205, 228);
+background: rgb(238,103,36);
 color: #FFFFFF;
 }
 
@@ -93,6 +91,5 @@ width: 100%;
 border-radius: 5px;
 font-size: 150%;
 background: rgb(10,191,211);
-border-color: rgb(0, 205, 228);
 color: #FFFFFF;
 }
