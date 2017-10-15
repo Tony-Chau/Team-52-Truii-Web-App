@@ -157,12 +157,13 @@ $(document).ready(function(){
 
   $(document).on('submit', '#table_form', function(event){
     event.preventDefault();
-    var form_correct = true;
+    var form_correct = false;
     for (var i = 0; i < colSize; i+=1){
       var col = $('#'+aColumns[i]).val();
-      if (col == ''){
-        form_correct = false;
+      if (col != undefined){
+        form_correct = true;
       }
+      //else if
     }
     var form_data = $(this).serialize();
     if(form_correct)

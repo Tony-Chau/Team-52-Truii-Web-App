@@ -15,8 +15,14 @@
           $Types = array();
           for($i = 1; $i < $size; $i+=1){
               $col = $arr['rows'][$i]['FieldName'];
+              if (isset($_POST[$col])){
+                  $colPost = $_POST[$col];
+              }
+              else {
+                  $colPost = NULL;
+              }
               array_push($Fields, $col);
-              array_push($Datas, $_POST[$col]);
+              array_push($Datas, $colPost);
               array_push($Types, $arr['rows'][$i]['DataType']);
           }
 
@@ -34,8 +40,14 @@
           $Types = array();
           for($i = 1; $i < $size; $i+=1){
               $col = $arr['rows'][$i]['FieldName'];
+              if (isempty($_POST[$col])){
+                  $colPost = $_POST[$col];
+              }
+              else {
+                  $colPost = NULL;
+              }
               array_push($Fields, $col);
-              array_push($Datas, $_POST[$col]);
+              array_push($Datas, $colPost);
               array_push($Types, $arr['rows'][$i]['DataType']);
           }
 

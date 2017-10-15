@@ -11,7 +11,21 @@ include 'sql/Bootgrid/getcolumns.php';
   }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)','Graph Page');
+  $_SESSION['graphid'] = 2;
+  $graphsize = 0;
+  $graph_query = getGraphColumn($_SESSION['graphid']);
+  while($graphfields = $graph_query->fetch(PDO::FETCH_ASSOC);)
+  {
+      $graphcolumns[] = $graphfields;
+      $graphsize+=1;
+  }
 
+}
+
+$columnsoutput = array( 'rows' => $columns );
+
+$json = json_encode($columnsoutput);
+$arr = (json_decode($json, true));
 ?>
 
 
@@ -24,9 +38,11 @@ include 'sql/Bootgrid/getcolumns.php';
 </head>
 <body>
 
+  <!--
   <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw; margin-top: 50px; ">
+  </div>-->
+  <div id="Results"></div>
 
-  </div>
 </body>
 </html>
 

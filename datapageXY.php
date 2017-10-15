@@ -45,7 +45,7 @@ include 'sql/Bootgrid/getcolumns.php';
               }
           }
           CallDatabase($sql);
-          //gotoPage('');
+          gotoPage('GraphPage');
       }
   }
 ?>

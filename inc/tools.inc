@@ -6,7 +6,7 @@ function gotoPage($page){
 function navBarCreate($ColorCode, $currentpage){
   $chartmakerdistance = '0%';
   $recorddatapageAddDeletedistance = '15%';
-  $nav = " <nav class='navbar navbar-default' style='background-color:".$ColorCode.";padding-bottom:1.5%;'>
+  $nav = " <nav class='navbar navbar-default' style='background-color:".$ColorCode.";padding-bottom:1.5%; z-index: 5 !important;'>
               <div class='container-fluid'>";
               if ($currentpage != 'Home'){
                 $nav .= "<div>
