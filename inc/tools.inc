@@ -1,28 +1,27 @@
 <?php
 function gotoPage($page){
-  echo "<script>window.location.href = '". $page ."'; </script>";
+  echo "<script>window.location.href = '". $page .".php'; </script>";
 }
 
 function navBarCreate($ColorCode, $currentpage){
-  $chartmakerdistance = '0%';
-  $recorddatapageAddDeletedistance = '15%';
-  $nav = " <nav class='navbar navbar-default' style='background-color:".$ColorCode.";padding-bottom:1.5%; z-index: 5 !important;'>
+  $distance = '0%';
+  $nav = " <nav class='navbar navbar-default' style='background-color:".$ColorCode.";padding-bottom:1.5%;height:12%; z-index: 5 !important;'>
               <div class='container-fluid'>";
               if ($currentpage != 'Home'){
                 $nav .= "<div>
                 <a href='' onclick='window.history.back();return false;'>
-                        <ul><li class='fa fa-angle-left fa-4x'></li></ul></a></div>";
-                $chartmakerdistance = '15%';
-                $recorddatapageAddDeletedistance = '30%';
+                        <ul><li class='fa fa-angle-left fa-4x'></li></ul></a></div>
+                        <div style='margin-left:15%;margin-bottom:1%;'>
+                        <a href='chartmaker'>
+                                <ul><li class='fa fa-bar-chart fa-4x'></br></li></ul></a></div>
+                        <div style='margin-left:30%;margin-top:1%;'>
+                        <a href='recorddatapageAddDelete'>
+                                <ul><li class='fa  fa-pencil-square-o fa-4x'></br></li></ul></a></div>";
+                $distance = '-1%';
               }
-  $nav .= "<div style='margin-left:".$chartmakerdistance.";margin-bottom:1%;'>
-  <a href='chartmaker'>
-          <ul><li class='fa fa-bar-chart fa-4x'></br></li></ul></a></div>
-  <div style='margin-left:".$recorddatapageAddDeletedistance.";margin-top:1%;'>
+  $nav .= "<div style='margin-top:".$distance.";float:right;'>
   <a href='recorddatapageAddDelete'>
-          <ul><li class='fa  fa-pencil-square-o fa-4x'></br></li></ul></a></div>
-  <div style='float:right;text-decoration:none;font-size:15pt;margin-top:0.7%;'>
-  <a href='' onClick='logout();' style='color:#FFFFFF;'>Account <span class='glyphicon glyphicon-wrench'></span></a></div>
+          <ul><li class='fa fa-gear fa-4x'></br></li></ul></a></div>
           <form method=POST>
             <div align='center'>
               <input type='submit' id='logsub' name='logout' style='display:none;'>
