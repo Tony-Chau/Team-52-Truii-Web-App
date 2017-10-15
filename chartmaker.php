@@ -28,22 +28,22 @@
   <div id ="Homebutton">
     <div class= "container">
 
-      <a href="choosedatapage" style="text-decoration:none">
-        <div align="center">
-            <div class="big1">
-              <br><input type="image" src="images//addnew.png" name="image" ><br></div>
-          <h1 style="color:#EF6724;"> New Chart </h1>
-        </div>
-      </a>
 
-      <a href="previousgraphpage" style="text-decoration:none">
+        <div align="center">
+          <div class="big1">
+          <a href="choosedatapage" style="text-decoration:none"><div>
+              <br><input type="image" src="images//addnew.png" name="image" ><br></div>
+          <h1 style="color:#EF6724;"> New Chart </h1></div></a>
+        </div>
+
+
+
         <div align="center">
           <div class="big2">
+            <a href="previousgraphpage" style="text-decoration:none"><div>
             <br><input type="image" src="images//viewold.png" name="image"><br></div>
           <h1 style="color:#EF6724;"> View Previous Charts</h1>
-        </div>
-      </a>
-
+        </div></div></a>
     </div>
   </div>
 </body>

@@ -74,15 +74,15 @@
 <body>
 
   <form method=POST>
-    <div id="recordform">
-      <div class="container1" id="divCreate">
-        <div class="form-group" style="margin-right: 10%;">
+    <div id="recordform" style="margin-left:7.5%;">
+      <div class="container1" id="divCreate" style="margin-left:5%;margin-right:20%">
+        <div class="form-group" style=>
           <label for="exampletextinput">Title </label>
           <input type="text" name="title" class="form-control" id="xampletextinput" aria-describedby="tablename" placeholder="Enter Title" required>
         </div>
       </div>
 
-      <div class="form-group" id="divColumn" style='margin-top:10px; '>
+      <div class="form-group" id="divColumn" style='margin-top:10px;margin-left:5%;'>
         <div class="container" id="Column1" style="margin-right: 10%;margin-left: -10px;margin-top:10px;padding-top: 10px; padding-bottom: 20px;">
           <fieldset clase="form-box" id="Box1" style="position: relative; border-radius: 25px;background-color:rgb(10,191,211);opacity:0.8">
             <label for="exampletextinput" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;padding-top: 10px;">Column Title </label>
@@ -98,10 +98,10 @@
           </fieldset>
         </div>
       </div>
-      <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 2%;">Add Column</button>
-      <div class="form-group" id="divButtons" style = "margin-top: 10px;margin-left: 4%;">
+      <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 5%;display: inline-block;">Add Column</button>
+      <div class="form-group" id="divButtons" style = "margin-top: 1%;margin-right: 21%;display: inline-block;float:right;">
         <button type="button" class="btn btn-primary1" onClick='Submission();' >Submit</button>
-        <button type="submit" class="btn btn-primary1" id='create_table' style="display:none;">Submit</button>
+        <button type="button" class="btn btn-primary1" id='create_table' style="display:none;">Submit</button>
       </div>
     </div>
   </form>

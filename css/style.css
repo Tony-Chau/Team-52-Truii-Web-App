@@ -6,6 +6,8 @@
 
 body {
      font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+      margin:auto;
+      top:5%;
 }
 h1 {
   font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
@@ -42,7 +44,6 @@ a {
   max-width: 1024px;
   margin: 0 auto;
   padding: 0, 5px;
-
 }
 
 /*
@@ -115,7 +116,7 @@ body .active1 {
 
 
 #recordform {
-      padding: 100px;
+      /*padding: 100px;*/
       margin-top: 10%;
 }
 
@@ -207,6 +208,7 @@ margin-top: 10%;
   padding-right: 10px;
   margin-left: 30%;
   margin-right: 30%;
+  margin-top: 5%;
 }
 
 .big1 img {
@@ -226,7 +228,32 @@ margin-top: 10%;
   height: 50%;
   width: 70%;
   margin-top: 5%
+}
 
+.big1_chart {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 22.5%;
+  margin-right: 22.5%;
+}
+
+.big1_chart img {
+  height: 50%;
+  width: 70%;
+  margin-top: 10%;
+}
+
+.big2_chart {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.big2_chart img {
+  height: 50%;
+  width: 70%;
+  margin-top: 5%
 }
 
 .icon img {

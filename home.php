@@ -26,10 +26,10 @@
 
 
         <div align="center">
-
             <div class="big1">
-          <br><a href='chartmaker' style="text-decoration:none"><div><input type="image" src="images//graphmarker.png" name="image" href='chartmaker'><br>
-          <h1 style="color:#EF6724;"> Chart Marker </h1></div></a></div>
+          <a href='chartmaker' style="text-decoration:none"><div>
+            <input type="image" src="images//graphmarker.png" name="image" href='chartmaker'><br>
+          <h1 style="color:#EF6724;" style='margin-left:5%;'> Chart Marker </h1></div></a></div>
         </div>
         <br unselectable="on">
 
@@ -37,7 +37,7 @@
            <div class="big2">
            <a href='recorddatapageAddDelete' style="text-decoration:none"><div>
           <br><input type="image" src="images//recorddata.png" name="image" href='recorddatapageAddDelete'><br> </div>
-          <h1 style="color:#0ABFDD;" style="width:50%;"> Record Data</h1></div></a>
+          <h1 style="color:#0ABFDD;" style='margin-left:5%;'> Record Data</h1></div></a>
         </div>
 
     </div>

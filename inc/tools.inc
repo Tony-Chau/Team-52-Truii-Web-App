@@ -5,22 +5,23 @@ function gotoPage($page){
 
 function navBarCreate($ColorCode, $currentpage){
   $chartmakerdistance = '0%';
-  $recorddatapageAddDeletedistance = '12.5%';
-  $nav = " <nav class='navbar navbar-default' style='background-color:".$ColorCode.";padding-bottom:1%;'>
+  $recorddatapageAddDeletedistance = '15%';
+  $nav = " <nav class='navbar navbar-default' style='background-color:".$ColorCode.";padding-bottom:1.5%;'>
               <div class='container-fluid'>";
               if ($currentpage != 'Home'){
-                $nav .= "<a href='' onclick='window.history.back();return false;'>
-                        <ul><li class='fa fa-angle-left fa-4x'></li></ul></a>";
-                $chartmakerdistance = '12.5%';
+                $nav .= "<div>
+                <a href='' onclick='window.history.back();return false;'>
+                        <ul><li class='fa fa-angle-left fa-4x'></li></ul></a></div>";
+                $chartmakerdistance = '15%';
                 $recorddatapageAddDeletedistance = '30%';
               }
-  $nav .= "<div style='margin-left:".$chartmakerdistance.";'>
+  $nav .= "<div style='margin-left:".$chartmakerdistance.";margin-bottom:1%;'>
   <a href='chartmaker'>
           <ul><li class='fa fa-bar-chart fa-4x'></br></li></ul></a></div>
-  <div style='margin-left:".$recorddatapageAddDeletedistance.";'>
+  <div style='margin-left:".$recorddatapageAddDeletedistance.";margin-top:1%;'>
   <a href='recorddatapageAddDelete'>
           <ul><li class='fa  fa-pencil-square-o fa-4x'></br></li></ul></a></div>
-  <div style='float:right;text-decoration:none;padding-top:1%;font-size:15pt;'>
+  <div style='float:right;text-decoration:none;font-size:15pt;margin-top:0.7%;'>
   <a href='' onClick='logout();' style='color:#FFFFFF;'>Account <span class='glyphicon glyphicon-wrench'></span></a></div>
           <form method=POST>
             <div align='center'>
