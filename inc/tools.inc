@@ -20,7 +20,7 @@ function navBarCreate($ColorCode, $currentpage){
                 $distance = '-1%';
               }
   $nav .= "<div style='margin-top:".$distance.";float:right;'>
-  <a href='recorddatapageAddDelete'>
+  <a href='' onClick='logout();'>
           <ul><li class='fa fa-gear fa-4x'></br></li></ul></a></div>
           <form method=POST>
             <div align='center'>

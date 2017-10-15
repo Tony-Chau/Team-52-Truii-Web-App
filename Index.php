@@ -3,7 +3,7 @@
   include 'inc/tools.inc';
   include 'inc/styles_and_scripts.inc';
   //Leaving this part to allow people to automatically log-in, so u don't need to type down ur email and password again
-  log_in(1);
+  //log_in(1);
   if (is_log()){
     header('location: home');
   }
@@ -51,7 +51,7 @@
 
 </head>
 <body style="background-image: url('BackGround/StartCropBackGround.jpg');
- background-repeat: no-repeat; background-attachment: fixed;">
+ background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
 
   <div class="centered" align="center" id="centered">
     <img src="Logo/truii-full-colour-white.png" class="logo" id="logo" alt="TruiiLogo">
@@ -61,7 +61,7 @@
     <div class="container-fluid" id="login-container">
 
         <form method=POST>
-          <div id="log">
+          <div id="log" style="display:block; opacity:1;">
           <div class="row-top" id="row-top">
             <label class="label" id="label">Username</label><br>
             <?php echo "<input type=\"email\" name=\"log_username\" class=\"input\" id=\"input\" value=\"" . $log_username . "\" required>" ?>
@@ -78,11 +78,11 @@
         </form>
 
           <div class="row-bottom" id="row-bottom">
-              <input type="button" value="Register" class="submit" id="btnRegister">
+              <input type="button" value="Register" class="submit" id="btnRegister" onclick="toRegiter();">
           </div>
         </div>
-          <form method=POST style="display: none;" id="Register">
-            <div id ="Register">
+          <form method=POST >
+            <div id ="Register" style="opacity:0;display:none;" id="Register">
             <div class="row-top" id="row-top">
               <label class="label" id="label">Email</label><br>
               <?php echo "<input type=\"email\" name=\"reg_username\" class=\"input\" id=\"input\" value=\"" . $reg_username . "\" required>"; ?>
@@ -102,7 +102,7 @@
               <input type="submit" value="Register" class="submit" id="submit">
             </div>
             <div class="row-bottom" id="row-bottom">
-              <input type="button" value="Back" id="btnLog" class="submit">
+              <input type="button" value="Back" id="btnLog" class="submit" onclick="toLog();">
             </div>
           </div>
           </form>
@@ -110,16 +110,17 @@
   </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $("#btnRegister").click(function(){
-            $("#log").animate({height: 'toggle', opacity: "0"}, "slow");
-            $("#Register").animate({height: 'toggle', opacity: "100"}, "slow");
-        }),
-        $("#btnLog").click(function(){
-        $("#Register").animate({ height: 'toggle' ,opacity: '0'}, "slow");
-          $("#log").animate({height: 'toggle' , opacity: '100' }, "slow");
-        })
-    });
+function toRegiter(){
+  $("#log").animate({height: 'toggle', opacity: "0", display:'none'}, "slow");
+  $("#Register").animate({height: 'toggle'}, "slow");
+  $('#Register').animate({opacity: "1", display:'block'}, "slow");
+}
+
+function toLog(){
+  $("#Register").animate({height: 'toggle', opacity: "0", display:'none'}, "slow");
+  $("#log").animate({height: 'toggle'}, "slow");
+  $('#log').animate({opacity: "1", display:'block'}, "slow");
+}
 </script>
   <!-- JavaScript files should be linked at the bottom of the page  -->
   <script src="js/jquery.min.js"></script>

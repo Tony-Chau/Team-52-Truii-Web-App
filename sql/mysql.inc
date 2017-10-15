@@ -37,7 +37,7 @@ function CheckRequestLogout(){
   if($_SERVER['REQUEST_METHOD'] == "POST") {
     if(isset($_POST['logout']) && is_log()){
         log_out();
-        header('location: Index.php');
+        gotoPage('Index');
     }
   }
 }
