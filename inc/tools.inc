@@ -4,16 +4,20 @@ function gotoPage($page){
 }
 
 function navBarCreate($ColorCode, $currentpage){
+  $chartmakerdistance = '0%';
+  $recorddatapageAddDeletedistance = '12.5%';
   $nav = " <nav class='navbar navbar-default' style='background-color:".$ColorCode.";padding-bottom:1%;'>
               <div class='container-fluid'>";
               if ($currentpage != 'Home'){
                 $nav .= "<a href='' onclick='window.history.back();return false;'>
                         <ul><li class='fa fa-angle-left fa-4x'></li></ul></a>";
+                $chartmakerdistance = '12.5%';
+                $recorddatapageAddDeletedistance = '30%';
               }
-  $nav .= "<div style='margin-left:12.5%;'>
+  $nav .= "<div style='margin-left:".$chartmakerdistance.";'>
   <a href='chartmaker'>
           <ul><li class='fa fa-bar-chart fa-4x'></br></li></ul></a></div>
-  <div style='margin-left:30%;'>
+  <div style='margin-left:".$recorddatapageAddDeletedistance.";'>
   <a href='recorddatapageAddDelete'>
           <ul><li class='fa  fa-pencil-square-o fa-4x'></br></li></ul></a></div>
   <div style='float:right;text-decoration:none;padding-top:1%;font-size:15pt;'>
@@ -33,18 +37,6 @@ function navBarCreate($ColorCode, $currentpage){
   ";
   echo $nav;
 }
-// <nav class="navbar navbar-default">
-// <div class="container-fluid">
-// <div class="navbar-header">
-// <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#myNavbar">
-// <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-// </button>
-// <a href="/">
-// <input class="navbar-brand" type="image" src="assets/logo.png"/></a></div>
-// <div class="collapse navbar-collapse" id="myNavbar"><form class="navbar-form navbar-right" action="/Search" method="GET"><div class="form-group">
-// <input class="form-control" type="text" placeholder="Search" name="qry"/>
-// </div><button class="btn btn-default" type="submit">Submit</button></form></div></div></nav>
-// }
 
 function CallTestAlert($message){
   echo "<script>alert('".$message."');</script>";

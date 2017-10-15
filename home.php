@@ -28,8 +28,8 @@
         <div align="center">
 
             <div class="big1">
-          <br><a href='chartmaker' style="text-decoration:none"><div><input type="image" src="images//graphmarker.png" name="image" href='chartmaker'><br> </div>
-          <h1 style="color:#EF6724;"> Chart Marker </h1></div></a>
+          <br><a href='chartmaker' style="text-decoration:none"><div><input type="image" src="images//graphmarker.png" name="image" href='chartmaker'><br>
+          <h1 style="color:#EF6724;"> Chart Marker </h1></div></a></div>
         </div>
         <br unselectable="on">
 
