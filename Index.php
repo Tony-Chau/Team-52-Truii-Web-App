@@ -42,14 +42,16 @@
  ?>
 <!DOCTYPE html>
 <html>
+
 <head>
+  <link rel="stylesheet" href="css/login.css">
   <title>Truii</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body style="background-image: url('BackGround/StartCropBackGround.jpg');
-background-size:100% 100%; background-repeat: no-repeat; background-attachment: fixed;">
+ background-repeat: no-repeat; background-attachment: fixed;">
 
   <div class="centered" align="center" id="centered">
     <img src="Logo/truii-full-colour-white.png" class="logo" id="logo" alt="TruiiLogo">

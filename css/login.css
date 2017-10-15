@@ -1,5 +1,38 @@
 /* login css */
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+     font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+      margin:auto;
+      top:5%;
+}
+h1 {
+  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+  font-size: 5vw;
+}
+
+p {
+  font-size: 3vw;
+  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;;
+  font-weight: 300;
+
+}
+a {
+  font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+}
+
+
+
+
+
+
+
+
 #logo {
     width: 200px;
     height: 15%;
@@ -15,7 +48,7 @@
 
 #login-container {
     display: inline-block;
-    background: rgba(253, 103, 26, 0.8);
+    background: rgba(253, 103, 26, 0.6);
     border-radius: 25px;
     padding: 2%;
 }
@@ -75,7 +108,9 @@ width: 100%;
 border-radius: 5px;
 font-size: 150%;
 background: rgb(10,191,211);
+border-color: rgb(10, 191, 211);
 color: #FFFFFF;
+border-style: none;
 }
 
 #btnRegister {
@@ -83,6 +118,8 @@ width: 100%;
 border-radius: 5px;
 font-size: 150%;
 background: rgb(238,103,36);
+border-style: none;
+border-color: rgb(238, 103, 36);
 color: #FFFFFF;
 }
 
@@ -91,5 +128,7 @@ width: 100%;
 border-radius: 5px;
 font-size: 150%;
 background: rgb(10,191,211);
+border-style: none;
+border-color: rgb(10, 191, 211);
 color: #FFFFFF;
 }
