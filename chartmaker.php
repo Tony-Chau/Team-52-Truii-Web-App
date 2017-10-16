@@ -2,8 +2,8 @@
   include 'sql/mysql.inc';
   include 'inc/tools.inc';
   include 'inc/styles_and_scripts.inc';
-
   if (!is_log()){
+    log_out();
     gotoPage('Index');
   }
   CheckRequestLogout();

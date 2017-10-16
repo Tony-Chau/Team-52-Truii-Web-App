@@ -13,7 +13,7 @@ function navBarCreate($ColorCode, $currentpage){
                         <ul><li class='fa fa-angle-left fa-4x'></li></ul></a></div>
                         <div style='margin-left:15%;margin-bottom:1%;'>
                         <a href='chartmaker'>
-                                <ul><li class='fa fa-bar-chart fa-4x'></br></li></ul></a></div>
+                                <ul><li class='fa fa-table fa-4x'></br></li></ul></a></div>
                         <div style='margin-left:30%;margin-top:1%;'>
                         <a href='recorddatapageAddDelete'>
                                 <ul><li class='fa  fa-pencil-square-o fa-4x'></br></li></ul></a></div>";
