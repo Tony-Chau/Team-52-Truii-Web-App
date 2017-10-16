@@ -32,21 +32,21 @@
 </head>
 <body>
 
-  <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw; margin-top: 50px; ">
+  <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw;">
     <br />
-    <div align="right" style="margin-top: 10%; margin-bottom: 5%;">
+    <div align="left" style="margin-top: 15%; margin-bottom: 5%;">
       <?php
 
-        $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#tableModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%;\"";
+        $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#tableModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%; margin-right: 1%;\"";
         if ($size <= 1){
           $addData .= " disabled";
         }
         $addData .= ">Add Data</button>";
         echo $addData;
 
-        echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%;\">Add Column</button>";
+        echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%; margin-right: 1%;\">Add Column</button>";
 
-        $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%;\"";
+        $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%; margin-right: 1%;\"";
         if ($size <= 1){
           $editColumn .= " disabled";
         }
@@ -127,6 +127,7 @@ $(document).ready(function(){
     ajax: true,
     rowSelect: true,
     multiSelect: true,
+    rowCount : 5,
     post: function()
     {
       return{

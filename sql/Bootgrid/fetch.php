@@ -4,7 +4,7 @@ include("../mysql.inc");
 include("connection.php");
 $query = '';
 $data = array();
-$records_per_page = 10;
+$records_per_page = 5;
 $start_from = 0;
 $current_page_number = 0;
 if(isset($_POST["rowCount"]))
@@ -13,7 +13,7 @@ if(isset($_POST["rowCount"]))
 }
 else
 {
-    $records_per_page = 10;
+    $records_per_page = 5;
 }
 
 if(isset($_POST["current"]))
@@ -97,7 +97,7 @@ if(!empty($result)){
 
 $output = array(
     'current'     => intval($_POST["current"]),
-    'rowCount'    => 10,
+    'rowCount'    => 5,
     'total'       => intval($total_records),
     'rows'        => $data
 );

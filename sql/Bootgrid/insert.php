@@ -16,14 +16,10 @@
           for($i = 1; $i < $size; $i+=1){
               $col = $arr['rows'][$i]['FieldName'];
               if (isset($_POST[$col])){
-                  $colPost = $_POST[$col];
+                  array_push($Fields, $col);
+                  array_push($Datas, $_POST[$col]);
+                  array_push($Types, $arr['rows'][$i]['DataType']);
               }
-              else {
-                  $colPost = NULL;
-              }
-              array_push($Fields, $col);
-              array_push($Datas, $colPost);
-              array_push($Types, $arr['rows'][$i]['DataType']);
           }
 
           EnterVariousTable($tableid, $Fields, $Datas, $Types);
@@ -40,15 +36,11 @@
           $Types = array();
           for($i = 1; $i < $size; $i+=1){
               $col = $arr['rows'][$i]['FieldName'];
-              if (isempty($_POST[$col])){
-                  $colPost = $_POST[$col];
+              if (isset($_POST[$col])){
+                  array_push($Fields, $col);
+                  array_push($Datas, $_POST[$col]);
+                  array_push($Types, $arr['rows'][$i]['DataType']);
               }
-              else {
-                  $colPost = NULL;
-              }
-              array_push($Fields, $col);
-              array_push($Datas, $colPost);
-              array_push($Types, $arr['rows'][$i]['DataType']);
           }
 
           EditValueVariousTable($tableid, $variousid, $Fields, $Datas, $Types);
