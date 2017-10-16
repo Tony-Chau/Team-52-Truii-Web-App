@@ -1,13 +1,13 @@
 <?php
 //Creates Table
 function EnterFieldTable($TableID, $fieldname, $DataType){
-  return "INSERT INTO FieldTable(FieldName, TableID, DataType) VALUES(\"" . $fieldname . "\", " . $TableID . ", \"" . $DataType . "\");";
+  return "INSERT INTO FieldTable(FieldName, TableID, DataType) VALUES(\"$fieldname\", $TableID, \"$DataType\");";
 }
 
 function EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType){
   $sql = "";
   for ($i = 0; $i < count($ArrayOfFields); $i += 1){
-    $sql .= "INSERT INTO FieldTable(FieldName, TableID, DataType) VALUES(\"" . $ArrayOfFields[$i] . "\", " . $TableID . ", \"" . $DataType[$i] . "\");";
+    $sql .= "INSERT INTO FieldTable(FieldName, TableID, DataType) VALUES(\"$ArrayOfFields[$i]\", $TableID, \"$DataType[$i]\");";
   }
   return $sql;
 }
@@ -20,7 +20,7 @@ function GetFieldTableList($TableID){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM FieldTable WHERE TableID = " . $TableID . ";");
+    $result = $pdo->query("SELECT * FROM FieldTable WHERE TableID = $TableID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -36,7 +36,7 @@ function RequestFieldTableDetail($FieldID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM FieldTable WHERE FieldID = " . $FieldID . ";" );
+    $result = $pdo->query("SELECT * FROM FieldTable WHERE FieldID = $FieldID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -54,7 +54,7 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT " . $requestfield . " FROM FieldTable WHERE FieldID = " . $FieldID . ";");
+    $result = $pdo->query("SELECT $requestfield FROM FieldTable WHERE FieldID = $FieldID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -64,11 +64,11 @@ function RequestFieldTableDetailAsList($FieldID, $requestfield){
 
 //Returns the string of a query that removes the fieldname data from a specific row (this is called from varioustableDB)
 function DeleteField($TableID, $FieldName){
-  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . " AND FieldName = \"" . $FieldName . "\";";
+  return "DELETE FROM FieldTable WHERE TableID = $TableID AND FieldName =\"$FieldName\";";
 }
 //Returns the string of a query deletes all the data that relates to the table that is being deleted
 function DeleteFieldTable($TableID){
-  return "DELETE FROM FieldTable WHERE TableID = " . $TableID . ";";
+  return "DELETE FROM FieldTable WHERE TableID = $TableID;";
 }
 
 //returns the FieldID
@@ -79,7 +79,7 @@ function GetFieldID($TableID, $FieldName){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT FieldID FROM FieldTable WHERE TableID=" . $TableID . "& FieldName=" . $FieldName . ";");
+    $result = $pdo->query("SELECT FieldID FROM FieldTable WHERE TableID=$TableID & FieldName=$FieldName;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -92,6 +92,6 @@ function GetFieldID($TableID, $FieldName){
 
 //Returns the string of a query that changes data of a specific FieldnName and dataType
 function ChangeField($FieldID, $NewFieldName, $NewFieldType){
-  return "UPDATE FieldTable SET FieldName= \"" . $NewFieldName . "\", DataType=\"" . $NewFieldType . "\" WHERE FieldID=" . $FieldID . ";";
+  return "UPDATE FieldTable SET FieldName= \"$NewFieldName\", DataType=\"$NewFieldType\" WHERE FieldID=$FieldID;";
 }
 ?>

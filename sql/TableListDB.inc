@@ -1,24 +1,27 @@
 <?php
 //Creates Table
 function EnterTable($TableName){
+  $userid = $_SESSION['UserID'];
   $dateTime = GetCurrentTime();
-  return "INSERT INTO TableList(TableName, UserID, DateCreated) VALUES (\"" . $TableName . "\", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\");";
+  $dateTimeFormat = $dateTime->format('Y-m-d H:i:s');
+  return "INSERT INTO TableList(TableName, UserID, DateCreated) VALUES (\"$TableName\", $userid, \"$dateTimeFormat\");";
 }
 
 function DeleteTableInTableList($TableID){
-  return "DELETE FROM TableList WHERE TableID = " . $TableID . ";";
+  return "DELETE FROM TableList WHERE TableID = $TableID;";
 }
 
 
 //Presents the list of tables
 function GetTableList(){
+  $userid = $_SESSION['UserID'];
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM TableList WHERE UserID = " . $_SESSION['UserID'] . ";");
+    $result = $pdo->query("SELECT * FROM TableList WHERE UserID = $userid;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -34,7 +37,7 @@ function RequestTableDetail($TableID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM TableList WHERE TableID = " . $TableID . ";" );
+    $result = $pdo->query("SELECT * FROM TableList WHERE TableID = $TableID;" );
   }catch (PDOException $e){
     echo $e->getMessage();
   }

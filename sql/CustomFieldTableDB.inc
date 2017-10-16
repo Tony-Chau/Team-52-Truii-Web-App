@@ -1,7 +1,7 @@
 <?php
 //Creates Table
 function EnterCustomFieldTable($FieldID, $GraphID, $ColourCode){
-  $sql = "INSERT INTO CustomFieldTable(FieldID, GraphID, ColourCode) VALUES(" . $FieldID . ", " . $GraphID . ", \"" . $ColourCode . "\");";
+  $sql = "INSERT INTO CustomFieldTable(FieldID, GraphID, ColourCode) VALUES($FieldID, $GraphID, \"$ColourCode\");";
   CallDatabase($sql);
 }
 
@@ -13,7 +13,7 @@ function GetCustomFieldTableList($GraphID){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM CustomFieldTable WHERE GraphID = " . $GraphID . ";");
+    $result = $pdo->query("SELECT * FROM CustomFieldTable WHERE GraphID =$GraphID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -29,7 +29,7 @@ function RequestCustomFieldTableDetail($CustomFieldID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM CustomFieldTable WHERE CustomFieldID = " . $CustomFieldID . ";" );
+    $result = $pdo->query("SELECT * FROM CustomFieldTable WHERE CustomFieldID =$CustomFieldID;" );
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -46,7 +46,7 @@ function RequestCustomFieldTableDetailAsList($CustomFieldID, $requestfield){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT " . $requestfield . " FROM CustomFieldTable WHERE CustomerFieldID = " . $CustomFieldID . ";");
+    $result = $pdo->query("SELECT $requestfield FROM CustomFieldTable WHERE CustomerFieldID = $CustomFieldID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }

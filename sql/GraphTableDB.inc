@@ -2,25 +2,27 @@
 
 //Creates Table
 function EnterGraphTable($tableId, $GraphType){
+  $userid = $_SESSION['UserID'];
   $dateTime = GetCurrentTime();
-  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, GraphType) VALUES(" . $tableId . ", " . $_SESSION['UserID'] . ", \"" . $dateTime->format('Y-m-d H:i:s') . "\", \"" . $GraphType ."\");";
+  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, GraphType) VALUES($tableId, $userid, \"$dateTime->format('Y-m-d H:i:s')\", \"$GraphType\");";
   CallDatabase($sql);
 }
 
 function InsertImage($GraphID, $Image){
-  $sql = "UPDATE GraphTable SET Image=\"".$Image."\" WHERE GraphID=".$GraphID.";";
+  $sql = "UPDATE GraphTable SET Image=\"$Image\" WHERE GraphID=$GraphID;";
   CallDatabase($sql);
 }
 
 //Presents the list of tables
 function GetGraphTableList(){
+  $userid = $_SESSION['UserID'];
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM GraphTable WHERE UserID = " . $_SESSION['UserID'] . ";");
+    $result = $pdo->query("SELECT * FROM GraphTable WHERE UserID =$userid;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -36,7 +38,7 @@ function RequestGraphTableDetail($GraphID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM GraphTable WHERE GraphID = " . $GraphID . ";" );
+    $result = $pdo->query("SELECT * FROM GraphTable WHERE GraphID = $GraphID;" );
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -54,7 +56,7 @@ function RequestGraphTableDetailAsList($GraphID, $requestfield){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT " . $requestfield . " FROM GraphTable;");
+    $result = $pdo->query("SELECT $requestfield FROM GraphTable;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -65,11 +67,11 @@ function RequestGraphTableDetailAsList($GraphID, $requestfield){
 }
 
 function UpdateColourCodeGraphTable($GraphID, $ColourCode){
-  return "UPDATE GraphTable SET ColourCode = " . $ColourCode . " WHERE GraphID = " . $GraphID . ";";
+  return "UPDATE GraphTable SET ColourCode = $ColourCode WHERE GraphID = $GraphID;";
 }
 
 function UpdateImageGraphTable($GraphID, $Image){
-  return "UPDATE GraphTable SET Image = \"" . $Image . "\" WHERE GraphID = " . $GraphID . ";";
+  return "UPDATE GraphTable SET Image = \"$Image\" WHERE GraphID = $GraphID;";
 }
 
 function GetGraphImage($GraphID){
@@ -80,7 +82,7 @@ function GetGraphImage($GraphID){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT Image FROM GraphTable WHERE GraphID=" . $GraphID .";");
+    $result = $pdo->query("SELECT Image FROM GraphTable WHERE GraphID=$GraphID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }

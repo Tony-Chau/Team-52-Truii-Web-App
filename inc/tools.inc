@@ -1,25 +1,27 @@
 <?php
 function gotoPage($page){
-  echo "<script>window.location.href = '". $page .".php'; </script>";
+  echo "<script>window.location.href = '$page.php'; </script>";
 }
 
 function navBarCreate($ColorCode, $currentpage){
   $distance = '0%';
-  $nav = " <nav class='navbar navbar-default' style='background-color:".$ColorCode.";padding-bottom:1.5%;height:12%; z-index: 5 !important;'>
+  $nav = " <nav class='navbar navbar-default' style='background-color:$ColorCode;padding-bottom:1.5%;height:10%; z-index: 5 !important;'>
               <div class='container-fluid'>";
               if ($currentpage != 'Home'){
                 $nav .= "<div>
                 <a href='' onclick='window.history.back();return false;'>
-                        <ul><li class='fa fa-angle-left fa-4x'></li></ul></a></div>
-                        <div style='margin-left:15%;margin-bottom:1%;'>
-                        <a href='chartmaker'>
-                                <ul><li class='fa fa-table fa-4x'></br></li></ul></a></div>
-                        <div style='margin-left:30%;margin-top:1%;'>
+                        <ul><li style='margin-top:-0.6%;' class='fa fa-angle-left fa-4x'></li></ul></a></div>
+                        <div style='margin-left:25%;margin-bottom:1%;'>
                         <a href='recorddatapageAddDelete'>
-                                <ul><li class='fa  fa-pencil-square-o fa-4x'></br></li></ul></a></div>";
-                $distance = '-1%';
+                                <ul><li class='fa fa-table fa-4x'></br></li></ul></a>
+                        </div>
+                        <div style='margin-left:60%;'>
+                        <a href='chartmaker'>
+                                <ul><li class='fa fa-bar-chart fa-4x'></br></li></ul></a>
+                      </div>";
+                $distance = '-2%';
               }
-  $nav .= "<div style='margin-top:".$distance.";float:right;'>
+  $nav .= "<div style='margin-top:$distance;float:right;'>
   <a href='' onClick='logout();'>
           <ul><li class='fa fa-gear fa-4x'></br></li></ul></a></div>
           <form method=POST>

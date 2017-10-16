@@ -7,7 +7,7 @@ function LogUser($username, $password){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM UserTable WHERE Username = '" . $username . "'");
+    $result = $pdo->query("SELECT * FROM UserTable WHERE Username = \"$username\";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -20,7 +20,7 @@ function LogUser($username, $password){
 }
 //Creates an account for the user
 function CreateUser($Username, $password){
-  $sql = "INSERT INTO UserTable(Username, Password) VALUES(\"" . $Username . "\", \"" . $password . "\");";
+  $sql = "INSERT INTO UserTable(Username, Password) VALUES(\"$Username\", \"$password\");";
   CallDatabase($sql);
 }
 //Check if the account exist
@@ -75,7 +75,7 @@ function RequestUserDetail($userID, $request){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM UserTable WHERE UserID = " . $userID . ");" );
+    $result = $pdo->query("SELECT * FROM UserTable WHERE UserID = $userID);");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
