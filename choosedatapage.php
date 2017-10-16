@@ -65,7 +65,7 @@
       </div>
 
 
-      <div class="row" style="height: 70%; overflow-y: scroll; background-color: white; padding: 15px; border-radius: 15px">
+      <div class="row" style="padding: 15px; border-radius: 15px">
         <form method="POST">
           <?php echo $output ?>
         </form>

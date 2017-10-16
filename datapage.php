@@ -83,7 +83,7 @@
       </table>
     </div>
     <br/>
-    <a href='datapagexy'><button name="GotoXY" class="submit" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button></a>
+    <a href='datapagexy.php'><button name="GotoXY" class="submit" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button></a>
   </div>
 </body>
 </html>

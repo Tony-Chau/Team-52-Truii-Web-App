@@ -10,7 +10,7 @@ include 'sql/Bootgrid/getcolumns.php';
     gotoPage('Index');
   }
   CheckRequestLogout();
-  navBarCreate('rgb(31,194,222)','Data XY');
+  navBarCreate('#EE6724','Data XY');
 
   $BreakPoints = 3;
 
@@ -73,8 +73,8 @@ include 'sql/Bootgrid/getcolumns.php';
       </table>
     </div>
     <div class="input-group" style="width: 100%;" align="center">
-      <button class="btn btn-default" type="button" id="buttonback" style="float: left" onclick="back();" disabled> Back </button>
-      <button class="btn btn-default" type="button" id="buttonadd" style="float: right" onclick="next();" disabled> Next </button>
+      <button class="btn btn-default" type="button" id="buttonback" style="float: left;background-color:#EE6724;color:#FFFFFF;" onclick="back();" disabled> Back </button>
+      <button class="btn btn-default" type="button" id="buttonadd" style="float: right;background-color:#EE6724;color:#FFFFFF;" onclick="next();" disabled> Next </button>
     </div>
   </div>
   <div>
