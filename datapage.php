@@ -22,10 +22,6 @@
   $datatypes .= '<option value="INT"># Numbers</option>';
   $datatypes .= '<option value="FLOAT">% Percentage</option>';
   $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
-
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      gotoPage('datapageXY');
-  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +79,7 @@
       </table>
     </div>
     <br/>
-    <a href='datapagexy.php'><button name="GotoXY" class="submit" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button></a>
+    <button id="datapagexy" name="GotoXY" class="submit" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button>
   </div>
 </body>
 </html>
@@ -94,6 +90,16 @@ $(document).ready(function(){
     $('.modal-title').text('Add Information');
     $('#action').val('Add Data');
     $('#operation').val('Add');
+  });
+
+  $('#datapageXY').click(function(){
+    //Please make numberofdata equals to the number of data or rows inserted
+    //var numberofdata = ???
+    if (numberofdata < 3){
+      alert('Please have at least 3 data types before proceeding');
+    }else{
+      window.location.href = 'datapageXY.php';
+    }
   });
 
   $('#add_column_button').click(function(){
