@@ -17,3 +17,4 @@
 <script src='js/Functions/datapagexy.js'></script>
 <script src='js/Functions/ChartValidator.js'></script>
 <meta name="viewport" content="width=device-width, initial-scale=0.75, user-scalable=no">
+<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">

@@ -57,9 +57,9 @@ a {
 .container1{
   max-width: 1024px;
   margin-top: 10%;
-  margin-left: -30%;
+  margin-left: -5%;
   padding: 0, 5px;
-  position:inherit;
+  position:absolute;
 }
 
 /*
