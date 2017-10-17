@@ -346,7 +346,7 @@ $(document).ready(function(){
 </script>
 
 
-<div id="tableModal" class="modal fade">
+<div id="tableModal" class="modal fade" style="margin: 5%;">
   <div class="modal-dialog">
     <form method="post" id="table_form">
       <div class="modal-content">
@@ -354,7 +354,7 @@ $(document).ready(function(){
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Data</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="overflow-y: scroll !important">
           <?php
           for($i = 1; $i < $size; $i+=1){
               $colname = $arr['rows'][$i]['FieldName'];
@@ -387,7 +387,7 @@ $(document).ready(function(){
 </div>
 
 
-<div id="columnAddModal" class="modal fade">
+<div id="columnAddModal" class="modal fade" style="margin: 5%;;">
   <div class="modal-dialog">
     <form method="post" id="column_addform">
       <div class="modal-content">
@@ -395,7 +395,7 @@ $(document).ready(function(){
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Column</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="overflow-y: scroll;">
           <label>Enter Column Name</label>
           <input type='text' name='add_column_name' id='add_column_name' class='form-control' />
           <br />
@@ -415,7 +415,7 @@ $(document).ready(function(){
 </div>
 
 
-<div id="columnEditModal" class="modal fade">
+<div id="columnEditModal" class="modal fade" style="margin: 5%;">
   <div class="modal-dialog">
     <form method="post" id="column_editform">
       <div class="modal-content">
@@ -423,7 +423,7 @@ $(document).ready(function(){
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Edit Column</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="overflow-y: scroll;">
           <label>Select Column</label>
           <select name="edit_column_selected" id="edit_column_selected" class="form-control">
             <option value="">Select Column</option>
@@ -444,7 +444,7 @@ $(document).ready(function(){
 </div>
 
 
-<div id="columnDeleteModal" class="modal fade">
+<div id="columnDeleteModal" class="modal fade" style="margin: 5%;">
   <div class="modal-dialog">
     <form method="post" id="column_deleteform">
       <div class="modal-content">
@@ -452,7 +452,7 @@ $(document).ready(function(){
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Delete Column</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="overflow-y: scroll;">
           <label>Select Column</label>
           <select name="delete_column_selected" id="delete_column_selected" class="form-control">
             <option value="">Select Column</option>

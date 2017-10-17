@@ -10,8 +10,8 @@ include 'sql/Bootgrid/getcolumns.php';
     gotoPage('Index');
   }
   CheckRequestLogout();
-  //navBarCreate('rgb(31,194,222)','Graph Page');
-  
+  navBarCreate('rgb(31,194,222)','Graph Page');
+
   $graphid = 2; //$_SESSION['graphid'] = 2;
   $graphtype = 'Scatter Line'; //$_SESSION['graphtype'] = 'ScatterLine';
 
@@ -100,10 +100,11 @@ $dataarr = (json_decode($json, true));
 </head>
 <body>
 
-  <!--
-  <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw; margin-top: 50px; ">
-  </div>-->
-  <div id="Results"></div>
+  <div id ="Homebutton">
+    <div class= "container" align="center" style="margin-top: 10%">
+      <div id="Results"></div>
+    </div>
+  </div>
   <?php
   $graph = "";
   $x_num = 0;
@@ -171,46 +172,46 @@ $dataarr = (json_decode($json, true));
           $graph .= ", ";
       }
   }
-  $graph .= "];";
+  $graph .= "]; ";
 
   /*
-  $graph .= "var layout = {
-      title: 'Record of Student Results',
-      xaxis: {
-        title: 'Year',
-        showgrid: false,
-        zeroline: false
-      },
-      yaxis: {
-        title: 'Overall Grade',
-        showline: false
-      },
-      width: (window.innerWidth / 1.2),
-      height: 300
-  };";
+  $layout = "var layout = {" +
+      "title: 'Record of Student Results'," +
+      "xaxis: {" +
+        "title: 'Overall Grade'," +
+        "showgrid: false," +
+        "zeroline: false" +
+      "}," +
+      "yaxis: {" +
+        "title: 'Year'," +
+        "showline: false" +
+      "}," +
+      "width: (window.innerWidth / 1.2)," +
+      "height: 300" +
+  "};";*/
 
-  $graph .= "Plotly.newPlot('Results', data, layout);";
-  */
    ?>
   <script>
     var Graph = "<?php echo $graph; ?>";
-    eval(Graph);
-
+    eval(Graph);/*
+    var graphlayout = "<?php echo $layout; ?>";
+    eval(graphlayout);*/
     var layout = {
-        title: 'Record of Student Results',
-        xaxis: {
-          title: 'Year',
-          showgrid: false,
-          zeroline: false
-        },
-        yaxis: {
-          title: 'Overall Grade',
-          showline: false
-        },
-        width: (window.innerWidth / 1.2),
-        height: 300
+      title: 'Record of Student Results',
+      xaxis: {
+        title: 'Overall Grade',
+        showgrid: false,
+        zeroline: false,
+        fixedrange: true
+      },
+      yaxis: {
+        title: 'Year',
+        showline: false,
+        fixedrange: true
+      },
+      width: (window.innerWidth / 1.2),
+      height: 300
     };
-
     Plotly.newPlot('Results', data, layout);
   </script>
 
