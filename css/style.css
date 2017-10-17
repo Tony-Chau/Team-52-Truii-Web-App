@@ -34,6 +34,20 @@ a {
 }
 */
 
+.addGraph{
+  height: 100px;
+  width: 100px;
+  bottom: 2%;
+  right: 2%;
+  border-radius: 50%;
+  font-size: 80px;
+  color: #FFFFFF;
+  background-color: rgb(252, 103, 25);
+  position: fixed;
+  text-align: center;
+  z-index: 5 !important;
+}
+
 .container{
   max-width: 1024px;
   margin: 0 auto;
@@ -42,8 +56,10 @@ a {
 
 .container1{
   max-width: 1024px;
-  margin: 0 auto;
+  margin-top: 10%;
+  margin-left: -30%;
   padding: 0, 5px;
+  position:inherit;
 }
 
 /*

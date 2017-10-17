@@ -16,7 +16,4 @@
 <link rel="stylesheet" href="css/datapage.css"/>
 <script src='js/Functions/datapagexy.js'></script>
 <script src='js/Functions/ChartValidator.js'></script>
-<meta
-     name='viewport'
-     content='width=1000, height=10, initial-scale=0.7, user-scalable=no,user-scalable=0'
-/>
+<meta name="viewport" content="width=device-width, initial-scale=0.75, user-scalable=no">

@@ -25,23 +25,6 @@
  </style>
 </head>
 <body>
-
-  <!--
-  <ul class="chartpages">
-    <!-
-    <li><a href="home">Home</a></li>
-    <li><a href="chartmaker">Back</a></li>
-    ->
-    <li style="float:right"><a class="active" href="#about">Truii Chart Library</a></li>
-    <li class="fa fa-angle-left fa-4x" onclick="goBack()"></li>
-    <a href="chartmaker"><li class="fa fa-bar-chart fa-4x"></li></a>
-    <a href="recorddatapageAddDelete"><li class="fa  fa-pencil-square-o fa-4x"></li></a>
-  </ul>-->
-
-
-
-
-
   <div id ="Homebutton">
     <div class="container">
 
@@ -156,6 +139,6 @@
 
     </div>
   </div>
-
+<a href=""><div class="addGraph">+</div></a>
 </body>
 </html>

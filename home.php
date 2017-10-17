@@ -26,16 +26,16 @@
 
         <div align="center">
             <div class="big1">
-          <a href='chartmaker' style="text-decoration:none"><div>
-            <input type="image" src="images//graphmarker.png" name="image" href='chartmaker'><br>
+          <a href='previousgraphpage.php' style="text-decoration:none"><div>
+            <input type="image" src="images//graphmarker.png" name="image"><br>
           <h1 style="color:#EF6724;" style='margin-left:5%;'> Chart Marker </h1></div></a></div>
         </div>
         <br unselectable="on">
 
         <div align="center">
            <div class="big2">
-           <a href='recorddatapageAddDelete' style="text-decoration:none"><div>
-          <br><input type="image" src="images//recorddata.png" name="image" href='recorddatapageAddDelete'><br> </div>
+           <a href='recorddatapageAddDelete.php' style="text-decoration:none"><div>
+          <br><input type="image" src="images//recorddata.png" name="image"><br> </div>
           <h1 style="color:#0ABFDD;" style='margin-left:5%;'> Record Data</h1></div></a>
         </div>
 
