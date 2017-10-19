@@ -10,20 +10,20 @@ function navBarCreate($ColorCode, $currentpage){
               if ($currentpage != 'Home'){
                 $nav .= "<div>
                 <a href='' onclick='window.history.back();return false;'>
-                        <ul><li style='margin-top:-0.6%;' class='fa fa-angle-left fa-4x'></li></ul></a></div>
+                        <ul><li style='margin-top:-0.5%;' class='fa fa-angle-left fa-3x'></li></ul></a></div>
                         <div style='margin-left:25%;margin-bottom:1%;'>
                         <a href='recorddatapageAddDelete'>
-                                <ul><li class='fa fa-table fa-4x'></br></li></ul></a>
+                                <ul><li style='margin-top:0.5%;' class='fa fa-table fa-3x'></br></li></ul></a>
                         </div>
                         <div style='margin-left:60%;'>
                         <a href='chartmaker'>
-                                <ul><li class='fa fa-bar-chart fa-4x'></br></li></ul></a>
+                                <ul><li style='margin-top:0.5%;' class='fa fa-bar-chart fa-3x'></br></li></ul></a>
                       </div>";
-                $distance = '-1.3%';
+                $distance = '-2.5%';
               }
-  $nav .= "<div style='margin-top:$distance;float:right;'>
+  $nav .= "<div style='margin-top:$distance;float:right;margin-right:2%;'>
   <a href='' onClick='logout();'>
-          <ul><li class='fa fa-gear fa-4x'></br></li></ul></a></div>
+          <ul><li class='fa fa-gear fa-3x'></br></li></ul></a></div>
           <form method=POST>
             <div align='center'>
               <input type='submit' id='logsub' name='logout' style='display:none;'>

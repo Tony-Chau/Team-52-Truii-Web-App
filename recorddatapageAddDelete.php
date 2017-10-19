@@ -82,7 +82,7 @@
         </div>
       </div>
 
-      <div class="form-group" id="divColumn" style='margin-top:10px;margin-left:5%;'>
+      <div class="form-group" id="divColumn" style='margin-top:10%;margin-left:5%;'>
         <div class="container" id="Column1" style="margin-right: 10%;margin-left: -10px;margin-top:10px;padding-top: 10px; padding-bottom: 20px;">
           <fieldset clase="form-box" id="Box1" style="position: relative; border-radius: 25px;background-color:rgb(10,191,211);opacity:0.8">
             <label for="exampletextinput" style="color: #FFFFFF;margin-left: 4%; margin-right: 4%;padding-top: 10px;">Column Title </label>

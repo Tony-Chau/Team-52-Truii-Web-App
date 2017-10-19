@@ -1,6 +1,6 @@
 
 
-<meta name="viewport" content="width=device-width, initial-scale=0.75, user-scalable=no">
+<meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css">->I dont know how but this negatively affects the xy page-->
