@@ -21,24 +21,32 @@
 
 
   <div id ="Homebutton">
-    <div class= "container1">
+    <div class= "container">
+      <div class="row">
+        <div class="col">
 
+          <div align="center">
+              <a href='previousgraphpage.php' style="text-decoration:none">
+                <input type="image" src="images//graphmarker.png" name="image" style="width: 75%; height: 30%"><br>
+                <h1 style="color:#EF6724;" style='margin-left:5%;'> Chart Marker </h1>
+              </a>
+          </div>
+          <br unselectable="on">
 
-        <div align="center">
-            <div class="big1">
-          <a href='previousgraphpage.php' style="text-decoration:none"><div>
-            <input type="image" src="images//graphmarker.png" name="image"><br>
-          <h1 style="color:#EF6724;" style='margin-left:5%;'> Chart Marker </h1></div></a></div>
         </div>
-        <br unselectable="on">
+      </div>
+      <div class="row">
+        <div class="col">
 
-        <div align="center">
-           <div class="big2">
-           <a href='recorddatapageAddDelete.php' style="text-decoration:none"><div>
-          <br><input type="image" src="images//recorddata.png" name="image"><br> </div>
-          <h1 style="color:#0ABFDD;" style='margin-left:5%;'> Record Data</h1></div></a>
+          <div align="center">
+               <a href='recorddatapageAddDelete.php' style="text-decoration:none">
+                 <br><input type="image" src="images//recorddata.png" name="image" style="width: 75%; height: 30%"><br>
+                 <h1 style="color:#0ABFDD;" style='margin-left:5%;'> Record Data</h1>
+               </a>
+          </div>
+
         </div>
-
+      </div>
     </div>
   </div>
 </body>
