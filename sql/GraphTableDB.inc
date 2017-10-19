@@ -116,7 +116,7 @@ function GetGraphID($TableID){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT GraphID FROM GraphTable WHERE TableID=$TableID");
+    $result = $pdo->query("SELECT GraphID FROM GraphTable WHERE TableID=$TableID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }

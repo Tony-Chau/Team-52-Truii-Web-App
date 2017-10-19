@@ -10,7 +10,7 @@ include 'sql/Bootgrid/getcolumns.php';
     gotoPage('Index');
   }
   CheckRequestLogout();
-  //navBarCreate('rgb(31,194,222)','Graph Page');
+  navBarCreate('rgb(252, 103, 25)','Graph Page');
   $tablegraphIDs = GetGraphID($_SESSION['tableid']);
   if (in_array($_SESSION['graphid'], $tablegraphIDs)){
       $graphid = $_SESSION['graphid'];
