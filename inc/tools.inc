@@ -5,17 +5,17 @@ function gotoPage($page){
 
 function navBarCreate($ColorCode, $currentpage){
   $distance = '0%';
-  $nav = " <nav class='navbar navbar-default' style='background-color:$ColorCode;padding-bottom:1.5%;height:12%; z-index: 5;margin-left:-20px;margin-right:-20px;'>
+  $nav = " <nav class='navbar navbar-default' style='width: 100%; position: absolute; background-color:$ColorCode;padding-bottom:1.5%;height:12%; z-index: 5;margin-left:-20px;margin-right:-20px; list-style-type: none;'>
               <div class='container-fluid'>";
               if ($currentpage != 'Home'){
                 $nav .= "<div>
                 <a href='' onclick='window.history.back();return false;'>
                         <ul><li style='margin-top:-0.5%;' class='fa fa-angle-left fa-3x'></li></ul></a></div>
-                        <div style='margin-left:25%;margin-bottom:1%;'>
+                        <div style='margin-left:22.5%;margin-bottom:1%;'>
                         <a href='recorddatapageAddDelete'>
                                 <ul><li style='margin-top:0.5%;' class='fa fa-table fa-3x'></br></li></ul></a>
                         </div>
-                        <div style='margin-left:60%;'>
+                        <div style='margin-left:55%;'>
                         <a href='chartmaker'>
                                 <ul><li style='margin-top:0.5%;' class='fa fa-bar-chart fa-3x'></br></li></ul></a>
                       </div>";

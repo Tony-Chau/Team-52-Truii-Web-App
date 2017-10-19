@@ -40,7 +40,7 @@ a {
   bottom: 2%;
   right: 2%;
   border-radius: 50%;
-  font-size: 80px;
+  font-size: 250%;
   color: #FFFFFF;
   background-color: rgb(252, 103, 25);
   position: fixed;
@@ -67,12 +67,6 @@ a {
   margin: 5px 0px;
 }
 */
-
-.navbar{
-  width: 100%;
-  position: fixed;
-  list-style-type: none;
-}
 
 body li {
     float: left;
@@ -124,14 +118,6 @@ body .active1 {
         text-decoration: none;
 }
 
-
-
-
-#recordform {
-      /*padding: 100px;*/
-      margin-top: 10%;
-}
-
 /*
 
 #titlelogo1 {
@@ -153,7 +139,6 @@ body .active1 {
 }
 
 #Homebutton {
-padding: 5px;
 font-family: SourceSansPro-Regular;
 font-size: 5vw;
 margin-top: 10%;
@@ -173,7 +158,7 @@ margin-top: 10%;
 .btn-primary.active,
 .btn-primary {
   color: #ffffff;
-  background-color: rgba(238, 86, 36, 0.5);
+  background-color: rgb(238, 86, 36);
   background: #EE6724;
   border-color: #EE6724;
 }
