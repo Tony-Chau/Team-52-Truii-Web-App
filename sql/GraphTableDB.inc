@@ -109,4 +109,22 @@ function GetLastGraphTableID(){
   return 1;
 }
 
+function GetGraphID($TableID){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("SELECT GraphID FROM GraphTable WHERE TableID=$TableID");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  $GraphIDArray = array();
+  foreach ($result as $data){
+    array_push($GraphIDArray, $data['GraphID']);
+  }
+  return $GraphIDArray;
+}
+
  ?>
