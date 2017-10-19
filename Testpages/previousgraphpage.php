@@ -7,7 +7,7 @@
   CheckRequestLogout();
   //navBarCreate('rgb(252, 103, 25)', 'Chart Library');
 
-  $graph_temp = GetGraphImage(0);
+  $graph_temp = GetGraphImage(1);
 ?>
 
 
@@ -26,55 +26,7 @@
       position: static !important;
    }
  </style>
- <script>
 
-var pngCanvas;
-
-
-    function canvasstart() {
-        var canvas = document.getElementById('canvas');
-        var ctx = canvas.getContext("2d");
-        ctx.font = "30px Arial";
-        ctx.fillText("Hello World",10,50);
-
-        pngCanvas = canvas.toDataURL(/*'image/jpeg', 0.5*/);
-        // console.log(dataURL);
-        // "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNby
-        // blAAAADElEQVQImWNgoBMAAABpAAFEI8ARAAAAAElFTkSuQmCC"
-        alert(pngCanvas);
-
-    }
-
-    function dataURLtoBlob(dataurl) {
-        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-        while(n--){
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new Blob([u8arr], {type:mime});
-    }
-
-    function canvascopy(){
-        var canvas = document.getElementById('graph');
-        var ctx = canvas.getContext('2d');
-
-        var DOMURL = window.URL || window.webkitURL || window;
-
-        pngCanvas = '<?php echo $graph_temp[0]; ?>';
-        alert(pngCanvas);
-        var img = new Image();
-        var svg = dataURLtoBlob(pngCanvas);
-        var url = DOMURL.createObjectURL(svg);
-
-        img.onload = function() {
-          ctx.drawImage(img, 0, 0);
-          DOMURL.revokeObjectURL(url);
-        }
-
-        img.src = url;
-    }
-
- </script>
 </head>
 <body>
 
@@ -194,7 +146,55 @@ var pngCanvas;
       <button type="button" onclick="canvasstart()">Start</button>-->
       <button type="button" onclick="canvascopy()">Copy</button>
       <!--<canvas id="copy" width="100px" height="100px" ></canvas>-->
+      <script>
 
+     var pngCanvas;
+
+
+         function canvasstart() {
+             var canvas = document.getElementById('canvas');
+             var ctx = canvas.getContext("2d");
+             ctx.font = "30px Arial";
+             ctx.fillText("Hello World",10,50);
+
+             pngCanvas = canvas.toDataURL(/*'image/jpeg', 0.5*/);
+             // console.log(dataURL);
+             // "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNby
+             // blAAAADElEQVQImWNgoBMAAABpAAFEI8ARAAAAAElFTkSuQmCC"
+             alert(pngCanvas);
+
+         }
+
+         function dataURLtoBlob(dataurl) {
+             var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                 bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+             while(n--){
+                 u8arr[n] = bstr.charCodeAt(n);
+             }
+             return new Blob([u8arr], {type:mime});
+         }
+
+         function canvascopy(){
+             var canvas = document.getElementById('graph');
+             var ctx = canvas.getContext('2d');
+
+             var DOMURL = window.URL || window.webkitURL || window;
+
+             pngCanvas = "<?php echo $graph_temp[0]; ?>";
+             alert(pngCanvas);
+             var img = new Image();
+             var svg = dataURLtoBlob(pngCanvas);
+             var url = DOMURL.createObjectURL(svg);
+
+             img.onload = function() {
+               ctx.drawImage(img, 0, 0);
+               DOMURL.revokeObjectURL(url);
+             }
+
+             img.src = url;
+         }
+
+      </script>
 
     </div>
   </div>

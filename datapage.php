@@ -167,7 +167,9 @@ $(document).ready(function(){
     var form_correct = false;
     for (var i = 0; i < colSize; i+=1){
       var col = $('#'+aColumns[i]).val();
-      if (col != undefined){
+      if (col == undefined || !col){
+      }
+      else{
         form_correct = true;
       }
       //else if
@@ -192,7 +194,7 @@ $(document).ready(function(){
     }
     else
     {
-      alert("All Fields are Required");
+      alert("One Fields are Required");
     }
   });
 

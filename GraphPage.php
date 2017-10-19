@@ -10,9 +10,14 @@ include 'sql/Bootgrid/getcolumns.php';
     gotoPage('Index');
   }
   CheckRequestLogout();
-  navBarCreate('rgb(31,194,222)','Graph Page');
-
-  $graphid = 2; //$_SESSION['graphid'] = 2;
+  //navBarCreate('rgb(31,194,222)','Graph Page');
+  $tablegraphIDs = GetGraphID($_SESSION['tableid']);
+  if (in_array($_SESSION['graphid'], $tablegraphIDs)){
+      $graphid = $_SESSION['graphid'];
+  }
+  else {
+    gotoPage('previousgraphpage');
+  }
   $graphtype = 'Scatter Line'; //$_SESSION['graphtype'] = 'ScatterLine';
 
   $graphsize = 0;
@@ -98,14 +103,21 @@ $dataarr = (json_decode($json, true));
   <script src="js/html2canvas.min.js"></script>
 
 </head>
-<body>
+<body onresize="Redo_Graph()">
 
   <div id ="Homebutton">
-    <div class= "container" align="center" style="margin-top: 10%">
-      <div id="Results"></div>
+    <div class= "container" align="center">
+      <div class="row">
+        <div class="col">
+
+          <div id="Results" style="margin-top: 10%"></div>
+
+        </div>
+      </div>
     </div>
   </div>
   <?php
+
   $graph = "";
   $x_num = 0;
   $y_num = 0;
@@ -147,6 +159,59 @@ $dataarr = (json_decode($json, true));
               $graph .= ", ";
           }
       }
+      $graph .= "],";
+
+      /****************************************************/
+      $chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
+      if ($graphtype == $chart_list[0]){
+          $graph .= "mode: 'markers', ";
+          $graph .= "type: 'scatter', ";
+      }
+      else if ($graphtype == $chart_list[1]){
+          "mode: 'lines', ";
+          "line: { dash: 'solid', width: 4}, ";
+      }
+      else if ($graphtype == $chart_list[2]){
+          "mode: 'markers', ";
+          "marker: { size: [";
+              for ($j=0; $j < $total_records; $j+=1) {
+                  if ($base == 'x'){
+                      $graph .= $dataarr["rows"][$j][$y_axis[$y_num]];
+                  }
+                  else{
+                      $graph .= $dataarr["rows"][$j][$x_axis[$x_num]];
+                  }
+                  if ($j < $total_records-1){
+                      $graph .= ", ";
+                  }
+              }
+          "]}, ";
+      }
+      else if ($graphtype == $chart_list[3]){
+          "type: 'bar', ";
+          "marker: { color: 'rgb(31,194,222)' }, ";
+      }
+      else if ($graphtype == $chart_list[4]){
+          "mode: 'scatter', ";
+      }
+      else if ($graphtype == $chart_list[5]){
+          "mode: 'lines', ";
+          "type: 'scatter', ";
+      }
+      else if ($graphtype == $chart_list[6]){
+          //"fill: 'tozeroy', ";
+          "type: 'scatter', ";
+      }
+      else if ($graphtype == $chart_list[7]){
+          "type: 'bar', ";
+          "marker: { color: 'rgb(31,194,222)' }, ";
+          "orientation: 'h', ";
+      }
+      else if ($graphtype == $chart_list[8]){
+          "type: 'pie', ";
+      }
+
+      $graph .= "};";
 
       if ($base == 'x'){
           $y_num+=1;
@@ -154,15 +219,6 @@ $dataarr = (json_decode($json, true));
       else {
           $x_num+=1;
       }
-      $graph .= "],";
-
-      /****************************************************/
-
-      if ($graphtype == 'Scatter Line'){
-          $graph .= "mode: 'scatter' ";
-      }
-
-      $graph .= "};";
   }
 
   $graph .= "var data = [";
@@ -174,45 +230,38 @@ $dataarr = (json_decode($json, true));
   }
   $graph .= "]; ";
 
-  /*
-  $layout = "var layout = {" +
-      "title: 'Record of Student Results'," +
-      "xaxis: {" +
-        "title: 'Overall Grade'," +
-        "showgrid: false," +
-        "zeroline: false" +
-      "}," +
-      "yaxis: {" +
-        "title: 'Year'," +
-        "showline: false" +
-      "}," +
-      "width: (window.innerWidth / 1.2)," +
-      "height: 300" +
-  "};";*/
+
+  $layout = "var layout = {";
+  $layout .= "title: 'Record of Student Results', ";
+  $layout .= "xaxis: {";
+  $layout .= "title: 'Overall Grade', ";
+  $layout .= "showgrid: false, ";
+  $layout .= "zeroline: false,";
+  $layout .= "fixedrange: true";
+  $layout .= "}, ";
+  $layout .= "yaxis: {";
+  $layout .= "title: 'Year', ";
+  $layout .= "showline: false,";
+  $layout .= "zeroline: false,";
+  $layout .= "fixedrange: true";
+  $layout .= "}, ";
+  $layout .= "width: (window.innerWidth / 1.25), ";
+  $layout .= "height: (window.innerHeight / 1.5) ";
+  $layout .= "};";
 
    ?>
   <script>
     var Graph = "<?php echo $graph; ?>";
-    eval(Graph);/*
+    eval(Graph);
     var graphlayout = "<?php echo $layout; ?>";
-    eval(graphlayout);*/
-    var layout = {
-      title: 'Record of Student Results',
-      xaxis: {
-        title: 'Overall Grade',
-        showgrid: false,
-        zeroline: false,
-        fixedrange: true
-      },
-      yaxis: {
-        title: 'Year',
-        showline: false,
-        fixedrange: true
-      },
-      width: (window.innerWidth / 1.2),
-      height: 300
-    };
+    eval(graphlayout);
     Plotly.newPlot('Results', data, layout);
+
+    function Redo_Graph(){
+      layout.width = (window.innerWidth / 1.25);
+      layout.height = (window.innerHeight / 1.5);
+      Plotly.newPlot('Results', data, layout);
+    }
   </script>
 
 </body>
