@@ -81,12 +81,22 @@ for($i = 1; $i < $size; $i+=1){
         $listquery .= ", ";
     }
 }
+
 $listquery .= " FROM " . $table . " ORDER BY " . $arr["rows"][0]["COLUMN_NAME"];
 $listresult = mysqli_query($connection, $listquery);
-while($listrow = mysqli_fetch_assoc($listresult))
-{
-    $listdata[] = $listrow;
+if(!empty($listresult)){
+    while($listrow = mysqli_fetch_assoc($listresult))
+    {
+        $listdata[] = $listrow;
+    }
 }
+else{
+    echo "<script language='javascript'>";
+    echo "alert('Table possesses no variables, please include atleast 1 row')";
+    echo "</script>";
+    gotoPage('datapage');
+}
+
 $listoutput = array('rows' => $listdata);
 $json = json_encode($listoutput);
 $dataarr = (json_decode($json, true));
