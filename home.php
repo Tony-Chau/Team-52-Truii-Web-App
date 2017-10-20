@@ -2,6 +2,7 @@
   include 'sql/mysql.inc';
   include 'inc/tools.inc';
   include 'inc/styles_and_scripts.inc';
+  //CheckMobile();
   if (!is_log()){
     gotoPage('Index');
   }
