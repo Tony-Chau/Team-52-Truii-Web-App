@@ -84,4 +84,10 @@ function RequestUserDetail($userID, $request){
     return $data[$request];
   }
 }
+
+function ChangeUserPassword($password){
+  $id = $_SESSION['UserID'];
+  $sql = "UPDATE UserTable SET Password=\"$password\" WHERE UserID=\"$id\";";
+  CallDatabase($sql);
+}
  ?>

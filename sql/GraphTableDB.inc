@@ -16,18 +16,25 @@ function InsertImage($GraphID, $Image){
 //Presents the list of tables
 function GetGraphTableList(){
   $userid = $_SESSION['UserID'];
+  $exist = false;
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM GraphTable WHERE UserID =$userid;");
+    $result = $pdo->query("SELECT * FROM GraphTable WHERE UserID =$userid ORDER BY GraphID ASC;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
   $pdo=null;
-  return $result;
+  foreach($result as $data){
+    $exist = true;
+  }
+  if ($exist){
+    return $result;
+  }
+  return null;
 }
 
 //Ask an request to obtain any details
