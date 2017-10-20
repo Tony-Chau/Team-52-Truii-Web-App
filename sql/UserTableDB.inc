@@ -31,17 +31,15 @@ function CheckUser($username){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM UserTable");
+    $result = $pdo->query("SELECT * FROM UserTable WHERE Username=\"$username\";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
-  foreach($result as $data){
-    if ($data['Username'] == $username){
-      $pdo= null;
-      return true;
-    }
+  $row_count =  $result->rowCount();
+  $pdo = null;
+  if ($row_count == 1){
+    return true;
   }
-  $pdo=null;
   return false;
 }
 //Checks if Username and password matches
@@ -52,17 +50,15 @@ function CheckUserAndPassword($username, $password){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM UserTable");
+    $result = $pdo->query("SELECT * FROM UserTable WHERE Username=\"$username\" AND Password=\"$password\";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
-  foreach($result as $data){
-    if ($data['Username'] == $username && $data['Password'] == $password){
-      $pdo= null;
-      return true;
-    }
+  $row_count =  $result->rowCount();
+  $pdo = null;
+  if ($row_count == 1){
+    return true;
   }
-  $pdo=null;
   return false;
 }
 

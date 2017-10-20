@@ -16,7 +16,6 @@ function InsertImage($GraphID, $Image){
 //Presents the list of tables
 function GetGraphTableList(){
   $userid = $_SESSION['UserID'];
-  $exist = false;
   $dbUser = get_dbUsername();
   $dbPassword = get_dbPassword();
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
@@ -27,11 +26,9 @@ function GetGraphTableList(){
   }catch (PDOException $e){
     echo $e->getMessage();
   }
-  $pdo=null;
-  foreach($result as $data){
-    $exist = true;
-  }
-  if ($exist){
+  $row_count =  $result->rowCount();
+  $pdo = null;
+  if ($row_count >= 1){
     return $result;
   }
   return null;
