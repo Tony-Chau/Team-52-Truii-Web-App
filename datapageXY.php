@@ -286,6 +286,10 @@ function next(){
         if (x_highlight[i]){
           div += "<input type='text' name='x_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
         }
+      }else{
+        if (i == previous_x){
+          div += "<input type='text' name='x_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
+        }
       }
         if (i == previous_y){
           div += "<input type='text' name='y_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
