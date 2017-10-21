@@ -154,7 +154,12 @@ function Create_Axis(axis){
       breakpoints += bps;
     }
   }
-  $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
+  if (chart == 'Pie'){
+    $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title">Please Select Your Value</span></th></tr>');
+  }else{
+    $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
+  }
+
   $('#table-button').html(outputx);
 }
 
@@ -171,7 +176,11 @@ function checkbutton(){
     }, 500);
   }else if (page == 2){
     $('#buttonback').removeAttr('disabled');
-    $('#buttonadd').html('Next');
+    if (chart == 'Pie'){
+      $('#buttonadd').html('Create Chart');
+    }else{
+      $('#buttonadd').html('Next');
+    }
     $('#title-chart').fadeOut('slow');
     $('#table-button').fadeOut('slow');
     $('#buttonadd').attr('disabled', 'disabled');
@@ -255,15 +264,17 @@ function back(){
 }
 
 function next(){
-  if (page == 3){
+  if (page == 3 || (chart == 'Pie' && page == 2)){
     var div = "<input type='text' name='size' value='"+size+"' style='display:none !important;'/>";
     div += "<input type='text' name='chart' value='"+chart+"' style='display:none !important;'/>";
     for (var i = 1; i < size; i += 1){
       if (x_highlight[i]){
         div += "<input type='text' name='x_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
       }
-      if (i == previous_y){
-        div += "<input type='text' name='y_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
+      if (chart != 'Pie'){
+        if (i == previous_y){
+          div += "<input type='text' name='y_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
+        }
       }
     }
     $('#XY').append(div);
