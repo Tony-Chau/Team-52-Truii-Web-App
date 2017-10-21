@@ -17,3 +17,4 @@
 <script src='js/Functions/datapagexy.js'></script>
 <script src='js/Functions/ChartValidator.js'></script>
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link rel="icon" href='Logo/TruiiLogoIcon.png'>
