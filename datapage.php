@@ -23,24 +23,13 @@
   $datatypes .= '<option value="FLOAT">% Percentage</option>';
   $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $INTColumns = 0;
-      $enoughINTColumns = 2;
-      for ($i = 1; $i < $size; $i+=1){
-          if ('INT' == $arr['rows'][$i]['DataType']){
-              $INTColumns += 1;
-          }
-      }
-
-      if ($enoughINTColumns >= 2){
-          gotoPage("datapageXY");
-      }
-      else{
-          echo "<script language='javascript'>";
-          echo "alert('Sorry, Not Enough INT Columns')";
-          echo "</script>";
+  $INTColumns = 0;
+  for ($i = 1; $i < $size; $i+=1){
+      if ('INT' == $arr['rows'][$i]['DataType']){
+          $INTColumns += 1;
       }
   }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -98,7 +87,7 @@
       </table>
     </div>
     <br/>
-    <button id="datapagexy" name="GotoXY" class="submit" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button>
+    <button id="datapageXY" name="GotoXY" class="button" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button>
   </div>
 </body>
 </html>
@@ -113,11 +102,11 @@ $(document).ready(function(){
 
   $('#datapageXY').click(function(){
     //Please make numberofdata equals to the number of data or rows inserted
-    //var numberofdata = ???
-    if (numberofdata < 3){
-      alert('Please have at least 3 data types before proceeding');
-    }else{
+    var numberofdata = <?php echo $INTColumns; ?>;
+    if (numberofdata >= 3){
       window.location.href = 'datapageXY.php';
+    }else{
+      alert('Please have at least 3 data types before proceeding');
     }
   });
 

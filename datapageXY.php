@@ -45,6 +45,7 @@ include 'sql/Bootgrid/getcolumns.php';
               }
           }
           CallDatabase($sql);
+          $_SESSION['graphid'] = $ID_Graph;
           gotoPage('GraphPage');
       }
   }

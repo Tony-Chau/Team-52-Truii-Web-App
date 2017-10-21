@@ -18,7 +18,8 @@ include 'sql/Bootgrid/getcolumns.php';
   else {
     gotoPage('previousgraphpage');
   }
-  $graphtype = 'Scatter Line'; //$_SESSION['graphtype'] = 'ScatterLine';
+
+  $graphtype = RequestGraphTableDetail($graphid, 'GraphType');
 
   $graphsize = 0;
   $graph_query = getGraphColumn($graphid);
@@ -31,38 +32,50 @@ include 'sql/Bootgrid/getcolumns.php';
 $graphoutput = array( 'rows' => $graphcolumns );
 $json = json_encode($graphoutput);
 $grapharr = (json_decode($json, true));
-//echo $grapharr['rows'][0]['FieldID'];
 
-$query_row = "SELECT * FROM " . $table;
-$result_row = mysqli_query($connection, $query_row);
-$total_records = mysqli_num_rows($result_row);
 
 
 $x_axis = array();
 $x_size = 0;
 $y_axis = array();
 $y_size = 0;
+// if ($graphsize == 1){
+//     for ($i=1; $i < $size; $i+=1) {
+//         if ($grapharr['rows'][0]['FieldID'] == $arr['rows'][$i]['FieldID']){
+//             $fname = $arr['rows'][$i]['FieldName'];
+//         }
+//     }
+//     array_push($y_axis, $fname);
+//     $y_size += 1;
+// }
+// else {
+    for ($i = 0; $i < $graphsize; $i+=1){
+        if ($grapharr['rows'][$i]['Axis'] == 'x'){
+            for ($j=1; $j < $size; $j+=1) {
+                if ($grapharr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
+                    $fname = $arr['rows'][$j]['FieldName'];
+                }
+            }
+            array_push($x_axis, $fname);
+            $x_size += 1;
+        }
+        else if ($grapharr['rows'][$i]['Axis'] == 'y'){
+            for ($j=1; $j < $size; $j+=1) {
+                if ($grapharr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
+                    $fname = $arr['rows'][$j]['FieldName'];
+                }
+            }
+            array_push($y_axis, $fname);
+            $y_size += 1;
+        }
+    }
+// }
 
-for ($i = 0; $i < $graphsize; $i+=1){
-    if ($grapharr['rows'][$i]['Axis'] == 'x'){
-        for ($j=1; $j < $size; $j+=1) {
-            if ($grapharr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
-                $fname = $arr['rows'][$j]['FieldName'];
-            }
-        }
-        array_push($x_axis, $fname);
-        $x_size += 1;
-    }
-    else if ($grapharr['rows'][$i]['Axis'] == 'y'){
-        for ($j=1; $j < $size; $j+=1) {
-            if ($grapharr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
-                $fname = $arr['rows'][$j]['FieldName'];
-            }
-        }
-        array_push($y_axis, $fname);
-        $y_size += 1;
-    }
-}
+
+$query_row = "SELECT $y_axis[0] FROM " . $table;
+$result_row = mysqli_query($connection, $query_row);
+$total_records = mysqli_num_rows($result_row);
+
 
 $xy_size = 0;
 if ($x_size < $y_size){
@@ -129,135 +142,203 @@ $dataarr = (json_decode($json, true));
   <?php
 
   $graph = "";
+  $layout = "";
   $x_num = 0;
   $y_num = 0;
-  for ($i = 0; $i < $xy_size; $i+=1) {
-      $graph .= " var trace" . $i . " = {";
-      if ($base == 'x'){
+  $chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
+  if ($graphtype == $chart_list[8]){
+      $graph .= "var data = [{";
+      $graph .= "type: 'pie', ";
+      $graph .= "values:[";
+      for ($i=0; $i < $total_records; $i+=1) {
+          $graph .= $dataarr["rows"][$i][$x_axis[$x_num]];
+          if ($i < $total_records-1){
+              $graph .= ", ";
+          }
+      }
+      $graph .= "], ";
+      $graph .= "labels:['";
+      for ($i=0; $i < $total_records; $i+=1) {
+          $graph .= $dataarr["rows"][$i][$y_axis[$y_num]];
+          if ($i < $total_records-1){
+              $graph .= "', '";
+          }
+      }
+      $graph .= "'] }]; ";
+
+      $layout .= "var layout = {";
+      $layout .= "title: 'Record of Student Results', ";
+      $layout .= "width: (window.innerWidth / 1.25), ";
+      $layout .= "height: (window.innerHeight / 1.5) ";
+      $layout .= "};";
+
+
+  }
+  else if ($graphtype == $chart_list[3] || $graphtype == $chart_list[7]){
+      $graph .= "var data = [{";
+      $graph .= "type: 'bar', ";
+      if ($graphtype == 'Bar'){
           $graph .= "x:[";
       }
       else {
           $graph .= "y:[";
       }
-      for ($j=0; $j < $total_records; $j+=1) {
-          if ($base == 'x'){
-              $graph .= $dataarr["rows"][$j][$x_axis[$x_num]];
-          }
-          else{
-              $graph .= $dataarr["rows"][$j][$y_axis[$y_num]];
-          }
-          if ($j < $total_records-1){
+      for ($i=0; $i < $total_records; $i+=1) {
+          $graph .= $dataarr["rows"][$i][$x_axis[$x_num]];
+          if ($i < $total_records-1){
               $graph .= ", ";
           }
       }
-      $graph .= "],";
-
-      if ($base == 'x'){
-          $graph .= "y:[";
+      $graph .= "], ";
+      if ($graphtype == 'Bar'){
+          $graph .= "y:['";
       }
       else {
-          $graph .= "x:[";
+          $graph .= "x:['";
       }
-      for ($j=0; $j < $total_records; $j+=1) {
-          if ($base == 'x'){
-              $graph .= $dataarr["rows"][$j][$y_axis[$y_num]];
-          }
-          else{
-              $graph .= $dataarr["rows"][$j][$x_axis[$x_num]];
-          }
-          if ($j < $total_records-1){
-              $graph .= ", ";
+      for ($i=0; $i < $total_records; $i+=1) {
+          $graph .= $dataarr["rows"][$i][$y_axis[$y_num]];
+          if ($i < $total_records-1){
+              $graph .= "', '";
           }
       }
-      $graph .= "],";
+      $graph .= "'], ";
 
-      /****************************************************/
-      $chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
-      if ($graphtype == $chart_list[0]){
-          $graph .= "mode: 'markers', ";
-          $graph .= "type: 'scatter', ";
+      $graph .= "marker: { color: 'rgb(31,194,222)' }, ";
+      if ($graphtype == 'Horizontal Bar'){
+          $graph .= "orientation: 'h', ";
       }
-      else if ($graphtype == $chart_list[1]){
-          "mode: 'lines', ";
-          "line: { dash: 'solid', width: 4}, ";
-      }
-      else if ($graphtype == $chart_list[2]){
-          "mode: 'markers', ";
-          "marker: { size: [";
-              for ($j=0; $j < $total_records; $j+=1) {
-                  if ($base == 'x'){
-                      $graph .= $dataarr["rows"][$j][$y_axis[$y_num]];
-                  }
-                  else{
-                      $graph .= $dataarr["rows"][$j][$x_axis[$x_num]];
-                  }
-                  if ($j < $total_records-1){
-                      $graph .= ", ";
-                  }
+
+      $graph .= " }]; ";
+
+      $layout .= "var layout = {";
+      $layout .= "title: 'Record of Student Results', ";
+      $layout .= "width: (window.innerWidth / 1.25), ";
+      $layout .= "height: (window.innerHeight / 1.5) ";
+      $layout .= "};";
+  }
+
+  else {
+      for ($i = 0; $i < $xy_size; $i+=1) {
+          $graph .= " var trace" . $i . " = {";
+          if ($base == 'x'){
+              $graph .= "x:[";
+          }
+          else {
+              $graph .= "y:[";
+          }
+          for ($j=0; $j < $total_records; $j+=1) {
+              if ($base == 'x'){
+                  $graph .= $dataarr["rows"][$j][$x_axis[$x_num]];
               }
-          "]}, ";
-      }
-      else if ($graphtype == $chart_list[3]){
-          "type: 'bar', ";
-          "marker: { color: 'rgb(31,194,222)' }, ";
-      }
-      else if ($graphtype == $chart_list[4]){
-          "mode: 'scatter', ";
-      }
-      else if ($graphtype == $chart_list[5]){
-          "mode: 'lines', ";
-          "type: 'scatter', ";
-      }
-      else if ($graphtype == $chart_list[6]){
-          //"fill: 'tozeroy', ";
-          "type: 'scatter', ";
-      }
-      else if ($graphtype == $chart_list[7]){
-          "type: 'bar', ";
-          "marker: { color: 'rgb(31,194,222)' }, ";
-          "orientation: 'h', ";
-      }
-      else if ($graphtype == $chart_list[8]){
-          "type: 'pie', ";
+              else{
+                  $graph .= $dataarr["rows"][$j][$y_axis[$y_num]];
+              }
+              if ($j < $total_records-1){
+                  $graph .= ", ";
+              }
+          }
+          $graph .= "],";
+
+          if ($base == 'x'){
+              $graph .= "y:[";
+          }
+          else {
+              $graph .= "x:[";
+          }
+          for ($j=0; $j < $total_records; $j+=1) {
+              if ($base == 'x'){
+                  $graph .= $dataarr["rows"][$j][$y_axis[$y_num]];
+              }
+              else{
+                  $graph .= $dataarr["rows"][$j][$x_axis[$x_num]];
+              }
+              if ($j < $total_records-1){
+                  $graph .= ", ";
+              }
+          }
+          $graph .= "],";
+
+          /****************************************************/
+
+          if ($graphtype == $chart_list[0]){
+              $graph .= "mode: 'markers', ";
+              $graph .= "type: 'scatter', ";
+          }
+          else if ($graphtype == $chart_list[1]){
+              "mode: 'lines', ";
+              "line: { dash: 'solid', width: 4}, ";
+          }
+          else if ($graphtype == $chart_list[2]){
+              "mode: 'markers', ";
+              "marker: { size: [";
+                  for ($j=0; $j < $total_records; $j+=1) {
+                      if ($base == 'x'){
+                          $graph .= $dataarr["rows"][$j][$y_axis[$y_num]];
+                      }
+                      else{
+                          $graph .= $dataarr["rows"][$j][$x_axis[$x_num]];
+                      }
+                      if ($j < $total_records-1){
+                          $graph .= ", ";
+                      }
+                  }
+              "]}, ";
+          }
+          else if ($graphtype == $chart_list[4]){
+              "mode: 'scatter', ";
+          }
+          else if ($graphtype == $chart_list[5]){
+              "mode: 'lines', ";
+              "type: 'scatter', ";
+          }
+          else if ($graphtype == $chart_list[6]){
+              //"fill: 'tozeroy', ";
+              "type: 'scatter', ";
+          }
+
+          $graph .= "};";
+
+          if ($base == 'x'){
+              $y_num+=1;
+          }
+          else {
+              $x_num+=1;
+          }
       }
 
-      $graph .= "};";
+      $graph .= "var data = [";
+      for ($i=0; $i < $xy_size; $i+=1) {
+          $graph .= "trace" . $i;
+          if ($i < $xy_size-1){
+              $graph .= ", ";
+          }
+      }
+      $graph .= "]; ";
 
-      if ($base == 'x'){
-          $y_num+=1;
-      }
-      else {
-          $x_num+=1;
-      }
+      $layout .= "var layout = {";
+      $layout .= "title: 'Record of Student Results', ";
+      $layout .= "xaxis: {";
+      $layout .= "title: 'Overall Grade', ";
+      $layout .= "showgrid: false, ";
+      $layout .= "zeroline: false,";
+      $layout .= "fixedrange: true";
+      $layout .= "}, ";
+      $layout .= "yaxis: {";
+      $layout .= "title: 'Year', ";
+      $layout .= "showline: false,";
+      $layout .= "zeroline: false,";
+      $layout .= "fixedrange: true";
+      $layout .= "}, ";
+      $layout .= "width: (window.innerWidth / 1.25), ";
+      $layout .= "height: (window.innerHeight / 1.5) ";
+      $layout .= "};";
   }
 
-  $graph .= "var data = [";
-  for ($i=0; $i < $xy_size; $i+=1) {
-      $graph .= "trace" . $i;
-      if ($i < $xy_size-1){
-          $graph .= ", ";
-      }
-  }
-  $graph .= "]; ";
 
 
-  $layout = "var layout = {";
-  $layout .= "title: 'Record of Student Results', ";
-  $layout .= "xaxis: {";
-  $layout .= "title: 'Overall Grade', ";
-  $layout .= "showgrid: false, ";
-  $layout .= "zeroline: false,";
-  $layout .= "fixedrange: true";
-  $layout .= "}, ";
-  $layout .= "yaxis: {";
-  $layout .= "title: 'Year', ";
-  $layout .= "showline: false,";
-  $layout .= "zeroline: false,";
-  $layout .= "fixedrange: true";
-  $layout .= "}, ";
-  $layout .= "width: (window.innerWidth / 1.25), ";
-  $layout .= "height: (window.innerHeight / 1.5) ";
-  $layout .= "};";
+
+
 
    ?>
   <script>
