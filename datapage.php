@@ -22,6 +22,25 @@
   $datatypes .= '<option value="INT"># Numbers</option>';
   $datatypes .= '<option value="FLOAT">% Percentage</option>';
   $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
+
+  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $INTColumns = 0;
+      $enoughINTColumns = 2;
+      for ($i = 1; $i < $size; $i+=1){
+          if ('INT' == $arr['rows'][$i]['DataType']){
+              $INTColumns += 1;
+          }
+      }
+
+      if ($enoughINTColumns >= 2){
+          gotoPage("datapageXY");
+      }
+      else{
+          echo "<script language='javascript'>";
+          echo "alert('Sorry, Not Enough INT Columns')";
+          echo "</script>";
+      }
+  }
 ?>
 <!DOCTYPE html>
 <html>

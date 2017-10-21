@@ -12,10 +12,9 @@
   navBarCreate('rgb(252, 103, 25)', 'Chart Library');
 
   $gsize = 0;
-  $graphlist_Query = "SELECT * FROM GraphTable WHERE UserID = " . $_SESSION['UserID'] . " ORDER BY GraphID ASC;";
-  $gotgraphlist = mysqli_query($connection, $graphlist_Query);
+  $gotgraphlist = GetGraphTableList();
   if(!empty($gotgraphlist)){
-      while($graph = mysqli_fetch_assoc($gotgraphlist)){
+      while($graph = $gotgraphlist->fetch(PDO::FETCH_ASSOC)){
           $graphlist_columns[] = $graph;
           $gsize += 1;
       }
