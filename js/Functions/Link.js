@@ -23,3 +23,25 @@ function isset(val){
   }
   return true;
 }
+
+function ConvertDatatoCSV(FieldName_Array, Value_Array){
+  var csv = '';
+  var length = FieldName_Array.length;
+  for (var i = 0; i < length; i += 1){
+    if (i == length - 1){
+      csv += FieldName_Array[i] + "\n";
+    }else{
+      csv += FieldName_Array[i] + ", ";
+    }
+  }
+  for (var i = 0; i < length; i += 1){
+    for (var j = 0; j < length; j += 1){
+      if (j == length - 1){
+        csv += Value_Array[i][j];
+      }else{
+        csv += Value_Array[i][j] + ', ';
+      }
+    }
+  }
+  return csv;
+}
