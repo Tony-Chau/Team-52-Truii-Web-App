@@ -172,7 +172,7 @@ function Y_AreaHorizontalBar_Validate(axistype){
 }
 
 function X_Pie_Validate(axistype){
-  if (axistype == 'INT' || axistype == 'FLOAT'){
+  if (axistype == 'VARCHAR(255)' || axistype == 'VARCHAR(255)'){
     return true;
   }
   return false;

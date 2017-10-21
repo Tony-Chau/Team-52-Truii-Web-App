@@ -154,12 +154,7 @@ function Create_Axis(axis){
       breakpoints += bps;
     }
   }
-  if (chart == 'Pie'){
-    $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title">Please Select A Value</span></th></tr>');
-  }else{
-    $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
-  }
-
+  $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
   $('#table-button').html(outputx);
 }
 
@@ -203,17 +198,40 @@ var x_highlight = [size];
 for (var i = 0; i < size; i += 1){
   x_highlight[i] = false;
 }
+var previous_x = -1;
 function x_selection(num){
-  if (x_disabled[num]){
-    $('#x-axis-button' + num).css('background-color', 'rgb(31,194,222)');
-    x_disabled[num] = false;
-    x_highlight[num] = true;
-    x_selected += 1;
+  if (chart != 'Pie'){
+    if (x_disabled[num]){
+      $('#x-axis-button' + num).css('background-color', 'rgb(31,194,222)');
+      x_disabled[num] = false;
+      x_highlight[num] = true;
+      x_selected += 1;
+    }else{
+      $('#x-axis-button' + num).css('background-color', '#FFFFFF');
+      x_disabled[num] = true;
+      x_highlight[num] = false;
+      x_selected -= 1;
+    }
+    if (x_selected >= 1){
+      $('#buttonadd').removeAttr('disabled');
+    }
   }else{
-    $('#x-axis-button' + num).css('background-color', '#FFFFFF');
-    x_disabled[num] = true;
-    x_highlight[num] = false;
-    x_selected -= 1;
+    $('.original-btn-x').css('background-color', '#FFFFFF');
+    if (previous_x == -1){
+      $('#x-axis-button' + num).attr('disabled', 'disabled');
+      $('#x-axis-button' + num).css('background-color', 'rgb(31,194,222)');
+      previous_x = num;
+      x_disabled[num] = true;
+      x_selected = 1;
+    }else{
+      $('#x-axis-button' + num).attr('disabled', 'disabled');
+      $('#x-axis-button' + previous_x).removeAttr('disabled');
+      $('#x-axis-button' + num).css('background-color', 'rgb(31,194,222)');
+      x_disabled[num] = true;
+      x_disabled[previous_x] = false;
+      previous_x = num;
+      x_selected = 1;
+    }
   }
   if (x_selected >= 1){
     $('#buttonadd').removeAttr('disabled');
@@ -276,11 +294,7 @@ function next(){
     $('#XY').append(div);
     $('#xy_submit').click();
   }else{
-    if (chart == 'Pie'){
-      page = 3;
-    }else{
-      page += 1;
-    }
+    page += 1;
     checkbutton();
   }
 }
