@@ -17,6 +17,7 @@ CheckRequestLogout();
   $ValueResult = array(array());
   $count = 0;
   foreach ($VariousTable as $data){
+    array_push($ValueResult, $count);
     foreach ($VariousTable as $result) {
       array_push($ValueResult[$count], $result[$count]);
     }
