@@ -4,7 +4,8 @@
 function EnterGraphTable($tableId, $GraphType){
   $userid = $_SESSION['UserID'];
   $dateTime = GetCurrentTime();
-  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, GraphType) VALUES($tableId, $userid, \"$dateTime->format('Y-m-d H:i:s')\", \"$GraphType\");";
+  $dateTimeFormat = $dateTime->format('Y-m-d H:i:s');
+  $sql = "INSERT INTO GraphTable(TableID, UserID, DateCreated, GraphType) VALUES($tableId, $userid, \"$dateTimeFormat\", \"$GraphType\");";
   CallDatabase($sql);
 }
 

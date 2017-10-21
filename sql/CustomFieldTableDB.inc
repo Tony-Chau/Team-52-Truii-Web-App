@@ -5,6 +5,12 @@ function EnterCustomFieldTable($FieldID, $GraphID, $ColourCode){
   CallDatabase($sql);
 }
 
+//Update the colour code
+function UpdateCustomFieldColourCode($FieldID, $CustomFieldID){
+  $sql = "UPDATE CustomFieldTable SET ColourCode=\"$ColourCode\" WHERE CustomFieldID=$CustomFieldID);";
+  CallDatabase($sql);
+}
+
 //Presents the list of tables
 function GetCustomFieldTableList($GraphID){
   $dbUser = get_dbUsername();
