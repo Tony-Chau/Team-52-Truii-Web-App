@@ -200,7 +200,7 @@ for (var i = 0; i < size; i += 1){
 }
 var previous_x = -1;
 function x_selection(num){
-  if (chart != 'Pie' || chart != 'Bar' || chart != "Horizontal Bar"){
+  if (!(chart == 'Pie' || chart == 'Bar' || chart == "Horizontal Bar")){
     if (x_disabled[num]){
       $('#x-axis-button' + num).css('background-color', 'rgb(31,194,222)');
       x_disabled[num] = false;
@@ -282,7 +282,7 @@ function next(){
     var div = "<input type='text' name='size' value='"+size+"' style='display:none !important;'/>";
     div += "<input type='text' name='chart' value='"+chart+"' style='display:none !important;'/>";
     for (var i = 1; i < size; i += 1){
-      if (chart != 'Pie' || chart != 'Bar' || chart != "Horizontal Bar"){
+      if (!(chart == 'Pie' || chart == 'Bar' || chart == "Horizontal Bar")){
         if (x_highlight[i]){
           div += "<input type='text' name='x_axis" + i + "' value='"+options.FieldName[i]+"' style='display:none !important;'/>";
         }
