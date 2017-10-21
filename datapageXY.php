@@ -225,12 +225,12 @@ function y_selection(num){
     x_disabled[num] = true;
     y_selected = true;
   }else{
-    $('#y-axis-button' + previous_y).attr('disabled', 'disabled');
-    $('#y-axis-button' + num).removeAttr('disabled');
+    $('#y-axis-button' + num).attr('disabled', 'disabled');
+    $('#y-axis-button' + previous_y).removeAttr('disabled');
+    $('#y-axis-button' + num).css('background-color', 'rgb(31,194,222)');
     x_disabled[num] = true;
     x_disabled[previous_y] = false;
     previous_y = num;
-    y_selected = false;
   }
   if (y_selected){
     $('#buttonadd').removeAttr('disabled');
