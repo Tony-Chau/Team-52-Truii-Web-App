@@ -37,7 +37,7 @@ CheckRequestLogout();
   $TableNames = 'file';//RequestTableDetail($TableID, 'TableName');
   $json = '' . json_encode($ValueResult);
   $json_dec = json_decode ($json);
-  $filename = $TableNames . '.csv';
+  $filename =  rand(100000,999999) . '.csv';
   $handle = fopen($filename, 'w');
   foreach($json_dec as $row){
     fputcsv($handle, $row);
