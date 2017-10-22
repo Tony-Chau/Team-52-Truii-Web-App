@@ -5,7 +5,7 @@ function gotoPage($page){
 
 function navBarCreate($ColorCode, $currentpage){
   $distance = '-5px';
-  $nav = " <nav class='navbar navbar-default' style='width: 100%;position:fixed;background-color:$ColorCode;padding-bottom:2%;height:40px;z-index: 5;margin-left:-20px;margin-right:-20px;list-style-type:none;margin-top:-9%;'>
+  $nav = " <nav class='navbar navbar-default' style='width: 100%;position:fixed;background-color:$ColorCode;padding-bottom:2%;height:40px;z-index: 5;margin-left:-20px;margin-right:-20px;list-style-type:none;'>
               <div class='container-fluid'>";
               if ($currentpage != 'Home'){
                 $nav .= "<div>
@@ -16,7 +16,7 @@ function navBarCreate($ColorCode, $currentpage){
                                 <ul><li style='margin-top:-3px;' class='fa fa-table fa-3x'></br></li></ul></a>
                         </div>
                         <div style='margin-left:55%;'>
-                        <a href='chartmaker'>
+                        <a href='previousgraphpage'>
                                 <ul><li style='margin-top:-3px;' class='fa fa-bar-chart fa-3x'></br></li></ul></a>
                       </div>";
                 $distance = '-15px';
