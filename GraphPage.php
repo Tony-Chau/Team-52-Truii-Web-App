@@ -124,6 +124,7 @@ $dataarr = (json_decode($json, true));
   <title>Graph Page</title>
   <script src="js/plotly_latest.min.js"></script>
   <script src="js/html2canvas.min.js"></script>
+  <br/>
 
 </head>
 <body onresize="Redo_Graph()">
@@ -267,12 +268,12 @@ $dataarr = (json_decode($json, true));
               $graph .= "type: 'scatter', ";
           }
           else if ($graphtype == $chart_list[1]){
-              "mode: 'lines', ";
-              "line: { dash: 'solid', width: 4}, ";
+              $graph .= "mode: 'lines', ";
+              $graph .= "line: { dash: 'solid', width: 4}, ";
           }
           else if ($graphtype == $chart_list[2]){
-              "mode: 'markers', ";
-              "marker: { size: [";
+              $graph .= "mode: 'markers', ";
+              $graph .= "marker: { size: [";
                   for ($j=0; $j < $total_records; $j+=1) {
                       if ($base == 'x'){
                           $graph .= $dataarr["rows"][$j][$y_axis[$y_num]];
@@ -284,18 +285,18 @@ $dataarr = (json_decode($json, true));
                           $graph .= ", ";
                       }
                   }
-              "]}, ";
+              $graph .= "]}, ";
           }
           else if ($graphtype == $chart_list[4]){
-              "mode: 'scatter', ";
+              $graph .= "mode: 'scatter', ";
           }
           else if ($graphtype == $chart_list[5]){
-              "mode: 'lines', ";
-              "type: 'scatter', ";
+              $graph .= "mode: 'lines', ";
+              $graph .= "type: 'scatter', ";
           }
           else if ($graphtype == $chart_list[6]){
-              //"fill: 'tozeroy', ";
-              "type: 'scatter', ";
+              $graph .= "fill: 'tozeroy', ";
+              $graph .= "type: 'scatter', ";
           }
 
           $graph .= "};";
