@@ -30,8 +30,8 @@
   for($i = 1; $i < $gsize; $i+=1){
       $key = 0;
       $output .= '<form method="POST">';
-      $output .= '<div class="row">';
-      $output .= '<div class="col-sm-12 col-md-4">';
+      $output .= '<div class="row" style="margin: 0;">';
+      $output .= '<div class="col-sm-12 col-md-4" style="padding: 0; width: 100%;">';
       $output .= '<div class="thumbnail">';
       $output .= '<canvas id="graph" width="300" height="300"></canvas>';
       $output .= '<div class="caption">';
@@ -91,6 +91,7 @@
 <head>
 
  <title>Chart Library</title>
+ <br/>
 
  <style>
    .col-sm-12, col-md-4 {
@@ -100,7 +101,7 @@
 </head>
 <body>
   <div id ="Homebutton">
-    <div class="container">
+    <div class="container" style="margin-top: 15%; padding: 0;">
       <?php echo $output; ?>
     </div>
   </div>
