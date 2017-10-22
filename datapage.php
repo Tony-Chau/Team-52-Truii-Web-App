@@ -76,7 +76,7 @@
     </div></div>
 
     <div class="row" style="margin: 0;">
-      <div class="table-responsive" style="overflow-x: scroll">
+      <div class="table-responsive" style="min-height: 42%; height: auto; overflow-x: scroll">
         <table id="table_data" class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -359,27 +359,30 @@ $(document).ready(function(){
 
   $(document).on('submit', '#column_deleteform', function(event){
     event.preventDefault();
-    var column_selected = $('#delete_column_selected').val();
-    var form_data = $(this).serialize();
-    if(column_selected != '')
+    if(confirm("Are you sure you want to delete this?"))
     {
-      $(':input[type="submit"]').prop('disabled', true);
-      $.ajax({
-        url:"sql/Bootgrid/Columndelete.php",
-        method:"POST",
-        data:form_data,
-        success:function(data)
-        {
-          alert(data);
-          $('#column_deleteform')[0].reset();
-          $('#columnDeleteModal').modal('hide');
-          location.reload();
-        }
-      });
-    }
-    else
-    {
-      alert("All Fields are Required");
+      var column_selected = $('#delete_column_selected').val();
+      var form_data = $(this).serialize();
+      if(column_selected != '')
+      {
+        $(':input[type="submit"]').prop('disabled', true);
+        $.ajax({
+          url:"sql/Bootgrid/Columndelete.php",
+          method:"POST",
+          data:form_data,
+          success:function(data)
+          {
+            alert(data);
+            $('#column_deleteform')[0].reset();
+            $('#columnDeleteModal').modal('hide');
+            location.reload();
+          }
+        });
+      }
+      else
+      {
+        alert("All Fields are Required");
+      }
     }
   });
 
