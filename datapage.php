@@ -41,36 +41,36 @@
 </head>
 <body >
 
-  <div class="container" style="margin-top: 20%; padding: 0;">
-    <div class="row" style="margin: 0;">
-      <div align="left" style="margin-bottom: 5%;">
+  <div class="container" style="margin-top: 15%; padding: 0;">
+    <div class="row" style="margin: 0; margin-bottom: 1%"><div class="col">
         <?php
-
-          $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#tableModal\" class=\"btn btn-info dpBTN\" ";
-          if ($size <= 1){
-            $addData .= " disabled";
-          }
-          $addData .= ">Add Data</button>";
-          echo $addData;
-
-          echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info dpBTN\" >Add Column</button>";
-
           $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info dpBTN\" ";
           if ($size <= 1){
             $editColumn .= " disabled";
           }
-          $editColumn .= ">Edit Column</button>";
+          $editColumn .= "style=\"float: left;\"> Edit Column </button>";
           echo $editColumn;
 
-          $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info dpBTN\"";
+          echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info dpBTN\" style=\"float: right;\">Add Column</button>";
+         ?>
+    </div></div><div class="row" style="margin: 0; margin-bottom: 1%"><div class="col">
+        <?php
+          $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info dpBTN_D\"";
           if ($size <= 1){
             $delColumn .= " disabled";
           }
-          $delColumn .= ">Delete Column</button>";
+          $delColumn .= "style=\"float: left;\">Delete Column</button>";
           echo $delColumn;
+
+          $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#tableModal\" class=\"btn btn-info dpBTN_AD\" ";
+          if ($size <= 1){
+            $addData .= " disabled";
+          }
+          $addData .= "style=\"float: right;\"> Add Data </button>";
+          echo $addData;
          ?>
-      </div>
-    </div>
+    </div></div>
+
     <div class="row" style="margin: 0;">
       <div class="table-responsive" style="overflow-x: scroll">
         <table id="table_data" class="table table-bordered table-striped">
@@ -90,9 +90,11 @@
         </table>
       </div>
     </div>
-    <div class="row" style="margin: 0;">
+    <div class="row" style="margin: 0;" align="center">
       <div class="col">
-        <button id="datapageXY" name="GotoXY" class="button" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button>
+        <button id="download" name="download" class="button" style="float: left !important; font-size: 100%; padding:10px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Download</button>
+        <button id="reset" name="reset" class="button" style="margin: auto; font-size: 100%; padding:10px;border-color: Black; border-radius:10px; background-color: Black;color:white;text-align:center;">Reset Table</button>
+        <button id="datapageXY" name="GotoXY" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center;">Create Chart</button>
       </div>
     </div>
   </div>

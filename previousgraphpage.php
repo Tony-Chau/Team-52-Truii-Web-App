@@ -105,6 +105,6 @@
       <?php echo $output; ?>
     </div>
   </div>
-  <a href="choosedatapage"><div class="addGraph">+</div></a>
+  <a href="choosedatapage.php"><div class="addGraph">+</div></a>
 </body>
 </html>

@@ -12,25 +12,6 @@ include 'sql/Bootgrid/getcolumns.php';
   CheckRequestLogout();
   navBarCreate('#EE6724','Data XY');
 
-  $BreakPoints = 3;
-
-  $outputx = '<tr>';
-  $bps = 3;
-
-  $outputy = '<tr>';
-  $bps = 3;
-  for($i = 1; $i < $size; $i+=1){
-      $cName = $arr['rows'][$i]['FieldName'];
-      $outputy .= '<td><button onClick="y_selection('.$i.');" class="btn btn-default original-btn-y" value="'.$cName.'" name="'.'x-'.$cName.'" id="y-axis-button'.$i.'" style="width: 100%" disabled><span style="font-size: 125%;" disabled>'.$cName.'</span></button></td>';
-      if ($i == $size-1){
-        $outputy .= '</tr>';
-      }
-      else if ($i == $bps){
-        $outputy .= '</tr><tr>';
-        $bps += $BreakPoints;
-      }
-  }
-
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['chart'])){
           $charttype = $_POST['chart'];
@@ -146,7 +127,7 @@ function Create_Axis(axis){
     if (ChartValidate(chart, axis, options.DataType[i])){
       if (x_disabled[i]){
         point += 1;
-        outputx  += '<td><button onclick="'+axis+'_selection(' + i + ');" class="btn btn-default original-btn-'+axis+'" value="'+ cName +'" name="'+axis+'-'+ cName +'" id="'+axis+'-axis-button' + i +'" style="width: 100%"><span style="font-size: 125%;" disabled>'+ cName + '</span></button></td>';
+        outputx  += '<td><button onclick="'+axis+'_selection(' + i + ');" class="btn btn-default original-btn-'+axis+'" value="'+ cName +'" name="'+axis+'-'+ cName +'" id="'+axis+'-axis-button' + i +'" style="width: 100%"><span style="font-size: 100%;" disabled>'+ cName + '</span></button></td>';
       }
     }
     if(point == size - 1){
@@ -154,6 +135,7 @@ function Create_Axis(axis){
     }else if (point == bps){
       outputx += '</tr><tr>';
       breakpoints += bps;
+      point = 0;
     }
   }
   $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
