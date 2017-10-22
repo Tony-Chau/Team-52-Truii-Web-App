@@ -138,7 +138,15 @@ function Create_Axis(axis){
       point = 0;
     }
   }
-  $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
+  if (!(chart == 'Pie' || chart == 'Bar' || chart == "Horizontal Bar")){
+    $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
+  }else{
+    if (axis == 'x'){
+      $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> Select Value </span></th></tr>');
+    }else{
+      $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> Select Title </span></th></tr>');
+    }
+  }
   $('#table-button').html(outputx);
 }
 
