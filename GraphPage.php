@@ -134,6 +134,7 @@ $dataarr = (json_decode($json, true));
         <div class="col">
 
           <div id="Results" style="margin-top: 10%"></div>
+          <button type="button" id="ColorChange" data-toggle="modal" data-target="#tableModal" class="btn btn-info btn-lg" style="font-size: 125%; margin-right: 1%;">Change Color</button>
 
         </div>
       </div>
@@ -178,10 +179,10 @@ $dataarr = (json_decode($json, true));
       $graph .= "var data = [{";
       $graph .= "type: 'bar', ";
       if ($graphtype == 'Bar'){
-          $graph .= "x:[";
+          $graph .= "y:[";
       }
       else {
-          $graph .= "y:[";
+          $graph .= "x:[";
       }
       for ($i=0; $i < $total_records; $i+=1) {
           $graph .= $dataarr["rows"][$i][$x_axis[$x_num]];
@@ -191,10 +192,10 @@ $dataarr = (json_decode($json, true));
       }
       $graph .= "], ";
       if ($graphtype == 'Bar'){
-          $graph .= "y:['";
+          $graph .= "x:['";
       }
       else {
-          $graph .= "x:['";
+          $graph .= "y:['";
       }
       for ($i=0; $i < $total_records; $i+=1) {
           $graph .= $dataarr["rows"][$i][$y_axis[$y_num]];
@@ -353,7 +354,55 @@ $dataarr = (json_decode($json, true));
       layout.height = (window.innerHeight / 1.5);
       Plotly.newPlot('Results', data, layout);
     }
+
+    $(document).ready(function(){
+      $('#ColorChange').click(function(){
+        $('#table_form')[0].reset();
+        $('.modal-title').text('Change Color');
+      });
+    });
   </script>
 
 </body>
 </html>
+
+<div id="tableModal" class="modal fade" style="margin: 5%; overflow: hidden;">
+  <div class="modal-dialog">
+    <form method="post" id="table_form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Colors</h4>
+        </div>
+        <div class="modal-body" style="overflow-y: scroll !important;">
+          <?php
+          echo "<div class='container' style='margin: auto;'><form method='POST'>";
+          for($i = 0; $i < $graphsize - 1; $i+=1){
+              if ($base == 'x'){
+                  $colname = $y_axis[$i];
+              }
+              else {
+                  $colname = $x_axis[$i];
+              }
+              echo "<div class='row' style='margin: auto'>";
+              echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
+              echo "<div class='col' style='margin: auto; float: right;'>";
+              echo "<input type='color' name='color' id='$colname' value='#000000' style='border-radius: 5px;'/>";
+              echo "</div></div><br/>";
+          }
+          echo "</form></div>";
+           ?>
+          <br />
+        </div>
+        <div class="modal-footer">
+          <?php
+          $id = $arr['rows'][0]['COLUMN_NAME'];
+          echo "<input type='hidden' name='$id' id='$id' />";
+           ?>
+          <input type="hidden" name="operation" id="operation" />
+          <input type="submit" name="action" id="action" class="btn btn-success" value="Add Data" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
