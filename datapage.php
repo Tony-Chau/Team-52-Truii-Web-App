@@ -30,6 +30,10 @@
       }
   }
 
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+  }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,9 +96,15 @@
     </div>
     <div class="row" style="margin: 0;" align="center">
       <div class="col">
+
         <button id="download" name="download" class="button" style="float: left !important; font-size: 100%; padding:10px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Download</button>
-        <button id="reset" name="reset" class="button" style="margin: auto; font-size: 100%; padding:10px;border-color: Black; border-radius:10px; background-color: Black;color:white;text-align:center;">Reset Table</button>
+        <button id="resetbtn" name="resetbtn" class="submit" style="margin: auto; font-size: 100%; padding:10px;border-color: Black; border-radius:10px; background-color: Black;color:white;text-align:center;">Reset Table</button>
         <button id="datapageXY" name="GotoXY" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center;">Create Chart</button>
+
+        <form method="POST">
+          <input type="submit" id="reset_submit" style="display: none;">
+        </form>
+
       </div>
     </div>
   </div>
@@ -102,11 +112,16 @@
 </html>
 <script type="text/javascript" language='javascript'>
 $(document).ready(function(){
-  $('#add_data_button').click(function(){
-    $('#table_form')[0].reset();
-    $('.modal-title').text('Add Information');
-    $('#action').val('Add Data');
-    $('#operation').val('Add');
+  $('#download').click(function(){
+    window.location.href = 'download.php';
+  });
+
+  $('#resetbtn').click(function(){
+    if(confirm("Resetting this Table will purge all data in this table within the DataBase. \nAre you Sure?")){
+      if(confirm("All Data Within this table Will be lost forever. \nLast Chance")){
+        $('#reset_submit').click();
+      }
+    }
   });
 
   $('#datapageXY').click(function(){
@@ -117,6 +132,13 @@ $(document).ready(function(){
     }else{
       alert('Please have at least 3 data types before proceeding');
     }
+  });
+
+  $('#add_data_button').click(function(){
+    $('#table_form')[0].reset();
+    $('.modal-title').text('Add Information');
+    $('#action').val('Add Data');
+    $('#operation').val('Add');
   });
 
   $('#add_column_button').click(function(){
@@ -365,15 +387,15 @@ $(document).ready(function(){
 </script>
 
 
-<div id="tableModal" class="modal fade" style="margin: 5%;">
+<div id="tableModal" class="modal fade" style="margin: 1%; overflow-y: hidden;">
   <div class="modal-dialog">
     <form method="post" id="table_form">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" >
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Data</h4>
         </div>
-        <div class="modal-body" style="overflow-y: scroll !important">
+        <div class="modal-body" style="height: 70%; overflow-y: scroll !important">
           <?php
           for($i = 1; $i < $size; $i+=1){
               $colname = $arr['rows'][$i]['FieldName'];
@@ -392,7 +414,7 @@ $(document).ready(function(){
            ?>
           <br />
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" >
           <?php
           $id = $arr['rows'][0]['COLUMN_NAME'];
           echo "<input type='hidden' name='$id' id='$id' />";
