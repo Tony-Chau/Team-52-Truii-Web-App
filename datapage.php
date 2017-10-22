@@ -46,7 +46,7 @@
 <body >
 
   <div class="container" style="margin-top: 15%; padding: 0;">
-    <div class="row" style="margin: 0; margin-bottom: 1%"><div class="col">
+    <div class="row" style="margin: 0; margin-bottom: 5%"><div class="col">
         <?php
           $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info dpBTN\" ";
           if ($size <= 1){
