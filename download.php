@@ -14,25 +14,30 @@ CheckRequestLogout();
     array_push($FieldResult, $data['FieldName']);
   }
   $VariousTable = GetVariousTable($TableID);
-  $ValueResult = array(array());
+  $length = $VariousTable->rowCount();
+  $ValueResult = array();
   $count = 0;
   foreach ($VariousTable as $data){
-    array_push($ValueResult, $count);
-    foreach ($VariousTable as $result) {
-      array_push($ValueResult[$count], $result[$count]);
+    $Values = array();
+    for ($i = 0; $i < count($FieldResult); $i += 1){
+      $Field = $FieldResult[$i];
+      array_push($Values, $data[$Field]);
     }
+    array_push($ValueResult, $Values);
     $count += 1;
   }
-  print_r($ValueResult);
-  // $csv = ConvertDatatoCSV($FieldResult, $ValueResult);
-  //
-  // $TableNames = RequestTableDetail($TableID, 'TableName');
-  // $file = fopen("$TableNames" . ".csv","w");
-  //
-  // foreach ($list as $line)
-  //   {
-  //   fputcsv($file,$csv);
-  //   }
-  //
-  // fclose($file);
+  $ValueResult = array_reverse($ValueResult);
+  $TableNames = 'file';//RequestTableDetail($TableID, 'TableName');
+  $list = ConvertDatatoCSV($FieldResult, $ValueResult);
+  $filename = $TableNames . '.csv';
+  $handle = fopen($filename, 'w');
+  fwrite ($handle, $list);
+  fclose($handle);
+  header('Content-Type: application/octet-stream');
+  header('Content-Disposition: attachment; filename='.basename($filename));
+  header('Expires: 0');
+  header('Cache-Control: must-revalidate');
+  header('Pragma: public');
+  header('Content-Length: ' . filesize($filename));
+  readfile($filename);
 ?>

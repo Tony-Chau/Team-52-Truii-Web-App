@@ -44,6 +44,34 @@ function CallTestAlert($message){
   echo "<script>alert('".$message."');</script>";
 }
 
+// function ConvertDatatoCSV($FieldName_Array, $Value_Array){
+//   $csv = '';
+//   $list = array();
+//   $length =  count($FieldName_Array);
+//   for ($i = 0; $i < $length; $i += 1){
+//     if ($i == $length - 1){
+//       $csv .= $FieldName_Array[$i];
+//     }else{
+//       $csv .= $FieldName_Array[$i] . ', ';
+//     }
+//   }
+//   array_push($list, $csv);
+//   $csv = '';
+//   for ($i = 0; $i < $length; $i += 1){
+//     for ($j = 0; $j < $length; $j += 1){
+//       if ($j == $length - 1){
+//         $csv .= $Value_Array[$i][$j];
+//       }else{
+//         $csv .= $Value_Array[$i][$j] . ", ";
+//       }
+//     }
+//     array_push($list, $csv);
+//     $csv = '';
+//   }
+//   // $list = array_reverse($list);
+//   return $list;
+// }
+
 function ConvertDatatoCSV($FieldName_Array, $Value_Array){
   $csv = '';
   $length =  count($FieldName_Array);
@@ -51,19 +79,34 @@ function ConvertDatatoCSV($FieldName_Array, $Value_Array){
     if ($i == $length - 1){
       $csv .= $FieldName_Array[$i] . "\n";
     }else{
-      $csv .= $FieldName_Array[$i] . ', ';
+      $csv .= $FieldName_Array[$i] . ',';
     }
   }
   for ($i = 0; $i < $length; $i += 1){
     for ($j = 0; $j < $length; $j += 1){
       if ($j == $length - 1){
-        $csv .= $Value_Array[$i][$j];
+        $csv .= checkWord($Value_Array[$i][$j]) . "\n";
       }else{
-        $csv .= $Value_Array[$i][$j] . ', ';
+        $csv .= checkWord($Value_Array[$i][$j]) . ',';
       }
     }
   }
   return $csv;
+}
+
+function checkWord($word){
+  if (!is_numeric($word)){
+    $sub = 0;
+    $check = false;
+    for ($i = 0; $i < strlen($word); $i += 1){
+      if ($word[$i] != ' ' && !$check){
+        $sub = $i;
+        $check = true;
+      }
+    }
+    return substr($word, $sub);
+  }
+  return $word;
 }
 
 function CheckMobile(){
