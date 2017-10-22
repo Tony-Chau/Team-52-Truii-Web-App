@@ -20,18 +20,28 @@ CheckRequestLogout();
   foreach ($VariousTable as $data){
     $Values = array();
     for ($i = 0; $i < count($FieldResult); $i += 1){
-      $Field = $FieldResult[$i];
-      array_push($Values, $data[$Field]);
+        $Field = $FieldResult[$i];
+        if (!is_null($data[$Field])){
+          $info =  $data[$Field];
+          array_push($Values, $info);
+        }else{
+          array_push($Values, '');
+      }
     }
     array_push($ValueResult, $Values);
     $count += 1;
   }
+  array_push($ValueResult, $FieldResult);
   $ValueResult = array_reverse($ValueResult);
+
   $TableNames = 'file';//RequestTableDetail($TableID, 'TableName');
-  $list = ConvertDatatoCSV($FieldResult, $ValueResult);
+  $json = '' . json_encode($ValueResult);
+  $json_dec = json_decode ($json);
   $filename = $TableNames . '.csv';
   $handle = fopen($filename, 'w');
-  fwrite ($handle, $list);
+  foreach($json_dec as $row){
+    fputcsv($handle, $row);
+  }
   fclose($handle);
   header('Content-Type: application/octet-stream');
   header('Content-Disposition: attachment; filename='.basename($filename));

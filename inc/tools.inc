@@ -72,22 +72,31 @@ function CallTestAlert($message){
 //   return $list;
 // }
 
-function ConvertDatatoCSV($FieldName_Array, $Value_Array){
+function ConvertDatatoCSV($FieldName_Array, $Value_Array, $length){
   $csv = '';
-  $length =  count($FieldName_Array);
-  for ($i = 0; $i < $length; $i += 1){
+  $Fieldlength =  count($FieldName_Array);
+  for ($i = 0; $i < $Fieldlength; $i += 1){
     if ($i == $length - 1){
       $csv .= $FieldName_Array[$i] . "\n";
     }else{
       $csv .= $FieldName_Array[$i] . ',';
     }
   }
-  for ($i = 0; $i < $length; $i += 1){
+  for ($i = 0; $i < $Fieldlength; $i += 1){
     for ($j = 0; $j < $length; $j += 1){
+      $word = $Value_Array[$i][$j];
       if ($j == $length - 1){
-        $csv .= checkWord($Value_Array[$i][$j]) . "\n";
+        if ($word == ''){
+          $csv .= "\n";
+        }else{
+          $csv .= checkWord($word) . "\n";
+        }
       }else{
-        $csv .= checkWord($Value_Array[$i][$j]) . ',';
+        if ($word == ''){
+          $csv .= ",";
+        }else{
+          $csv .= checkWord($word) . ",";
+        }
       }
     }
   }
