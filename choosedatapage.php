@@ -52,6 +52,7 @@
 <head>
 
  <title>Truii Home</title>
+ <br/>
 
 </head>
 
@@ -59,13 +60,13 @@
 
   <div id ="Homebutton">
 
-    <div class= "container">
-      <div align="center" style="width: 100% margin-bottom: 50%">
+    <div class= "container" style="padding: 0;">
+      <div align="center" style="width: 100%; padding: 0;">
         <span class="logo1"></span>
       </div>
 
 
-      <div class="row" style="padding: 15px; border-radius: 15px">
+      <div class="row" style="padding: 15px; padding-top: 0;border-radius: 15px; margin: 0;">
         <form method="POST">
           <?php echo $output ?>
         </form>

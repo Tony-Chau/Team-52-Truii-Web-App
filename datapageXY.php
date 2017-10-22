@@ -57,12 +57,13 @@ include 'sql/Bootgrid/getcolumns.php';
 <head>
 
   <title>DataPage XY</title>
+  <br/>
 
 </head>
 <body>
 
-  <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw; margin-top: 50px; ">
-    <div class="table-responsive" >
+  <div class="container" style="margin-top: 20%; padding:0; ">
+    <div class="table-responsive">
 
 
       <table class="table"  style="overflow-x:auto; table-layout: fixed;">
@@ -106,11 +107,11 @@ var x_disabled = [size];
 
 var chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
 function Create_Chart(){
-  var BreakPoints = 3;
-  var bps = 2;
+  var BreakPoints = 2;
+  var bps = 1;
   var charts = '<tr>';
   for (var i = 0; i < chart_list.length; i+=1) {
-    charts += '<td><button onClick="charts_reset('+i+');" class="btn btn-default original-btn-chart" id="chart'+i+'" style="width: 100%"><span style="font-size: 125%;">'+chart_list[i]+'</span></button></td>';
+    charts += '<td><button onClick="charts_reset('+i+');" class="btn btn-default original-btn-chart" id="chart'+i+'" style="width: 100%"><span style="font-size: 100%;">'+chart_list[i]+'</span></button></td>';
     if (i == chart_list.length-1){
       charts += '</tr>';
     }
@@ -136,8 +137,8 @@ function charts_reset(num){
 }
 
 function Create_Axis(axis){
-  var breakpoints = 3;
-  var bps = 3;
+  var breakpoints = 2;
+  var bps = 2;
   var point = 0;
   var outputx = '<tr>';
   for (var i = 1; i < size; i += 1){

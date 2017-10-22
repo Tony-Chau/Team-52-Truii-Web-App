@@ -36,58 +36,65 @@
 <head>
 
   <title>Data Page</title>
+  <br/>
 
 </head>
-<body>
+<body >
 
-  <div class="box" style=" min-height: 100% !important; height: auto; width: 100vw;">
-    <br />
-    <div align="left" style="margin-top: 15%; margin-bottom: 5%;">
-      <?php
+  <div class="container" style="margin-top: 20%; padding: 0;">
+    <div class="row" style="margin: 0;">
+      <div align="left" style="margin-bottom: 5%;">
+        <?php
 
-        $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#tableModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%; margin-right: 1%;\"";
-        if ($size <= 1){
-          $addData .= " disabled";
-        }
-        $addData .= ">Add Data</button>";
-        echo $addData;
+          $addData = "<button type=\"button\" id=\"add_data_button\" data-toggle=\"modal\" data-target=\"#tableModal\" class=\"btn btn-info dpBTN\" ";
+          if ($size <= 1){
+            $addData .= " disabled";
+          }
+          $addData .= ">Add Data</button>";
+          echo $addData;
 
-        echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%; margin-right: 1%;\">Add Column</button>";
+          echo "<button type=\"button\" id=\"add_column_button\" data-toggle=\"modal\" data-target=\"#columnAddModal\" class=\"btn btn-info dpBTN\" >Add Column</button>";
 
-        $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%; margin-right: 1%;\"";
-        if ($size <= 1){
-          $editColumn .= " disabled";
-        }
-        $editColumn .= ">Edit Column</button>";
-        echo $editColumn;
+          $editColumn = "<button type=\"button\" id=\"edit_column_button\" data-toggle=\"modal\" data-target=\"#columnEditModal\" class=\"btn btn-info dpBTN\" ";
+          if ($size <= 1){
+            $editColumn .= " disabled";
+          }
+          $editColumn .= ">Edit Column</button>";
+          echo $editColumn;
 
-        $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info btn-lg\" style=\"font-size: 125%;\"";
-        if ($size <= 1){
-          $delColumn .= " disabled";
-        }
-        $delColumn .= ">Delete Column</button>";
-        echo $delColumn;
-       ?>
+          $delColumn = "<button type=\"button\" id=\"delete_column_button\" data-toggle=\"modal\" data-target=\"#columnDeleteModal\" class=\"btn btn-info dpBTN\"";
+          if ($size <= 1){
+            $delColumn .= " disabled";
+          }
+          $delColumn .= ">Delete Column</button>";
+          echo $delColumn;
+         ?>
+      </div>
     </div>
-    <div class="table-responsive" style="overflow-x: scroll">
-      <table id="table_data" class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <?php
-            for($i = 1; $i < $size; $i+=1){
-                $coltitle = '';
-                $coltitle .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
-                $coltitle .= $arr['rows'][$i]['FieldName'] . "</th>";
-                echo $coltitle;
-            }
-             ?>
-            <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
-          </tr>
-        </thead>
-      </table>
+    <div class="row" style="margin: 0;">
+      <div class="table-responsive" style="overflow-x: scroll">
+        <table id="table_data" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <?php
+              for($i = 1; $i < $size; $i+=1){
+                  $coltitle = '';
+                  $coltitle .= "<th data-column-id='" . $arr['rows'][$i]['FieldName'] . "'>";
+                  $coltitle .= $arr['rows'][$i]['FieldName'] . "</th>";
+                  echo $coltitle;
+              }
+               ?>
+              <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
-    <br/>
-    <button id="datapageXY" name="GotoXY" class="button" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button>
+    <div class="row" style="margin: 0;">
+      <div class="col">
+        <button id="datapageXY" name="GotoXY" class="button" style="font-size: 150%; padding:10px;border-color:rgb(31,194,222); border-radius:10px; float:right; background-color:rgb(31,194,222);color:white;text-align:center;">Create Chart<br></button>
+      </div>
+    </div>
   </div>
 </body>
 </html>

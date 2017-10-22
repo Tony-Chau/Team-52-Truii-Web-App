@@ -36,19 +36,22 @@ body
 }
 
 .pagination{
-  font-size: 200%;
+  font-size: 100%;
 }
 
 .infos{
-  font-size: 150%;
+  margin-top: 1%;
+  margin-right: 15px;
+  text-align: right;
+  font-size: 100%;
 }
 
 .table>thead>tr>th{
-    font-size: 150%;
+    font-size: 100%;
 }
 
 .table>tbody>tr>td{
-    font-size: 150%;
+    font-size: 100%;
 }
 
 #x-button, #y-button {
@@ -87,4 +90,32 @@ body
 
 .original-btn-chart.active {
   background-color: #EE6724 !important;
+}
+
+.col-sm-6{
+  padding: 0 !important;
+}
+
+.actionBar{
+  text-align: right !important;
+  margin-right: 15px;
+  padding: 0 !important;
+}
+
+.infoBar{
+  text-align: left !important;
+}
+
+.search{
+  margin-right: 10px !important;
+}
+
+.dpBTN{
+  border-style: line;
+  font-size: 85% !important;
+  margin-right: 1% !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
 }
