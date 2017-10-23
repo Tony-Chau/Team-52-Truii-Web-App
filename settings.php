@@ -23,6 +23,7 @@
     }else{
       CallTestAlert('Your current password do not match');
     }
+    gotoPage('settings');
   }
 
   navBarCreate('rgb(252, 103, 25)', 'settings');
@@ -50,7 +51,7 @@
       <div class="row" style="padding: 0; padding-left:10px; margin-bottom: 3%">
         <label>Email</label>
         <div class="col-sm-10" style="margin-top:-3%; ">
-          <h5><?php echo $email ?></h5>
+          <h5><?php echo $email; ?></h5>
         </div>
       </div>
 
@@ -66,7 +67,6 @@
         <label for="inputPassword">New Password</label>
         <div class="col">
           <input type="password" class="form-control" id="con_password" name='con_password' placeholder="Password">
-          <span style="color: red" id='SpanMessage'></span>
         </div>
         <input type="submit" class="btn btn-primary1" id="btnChange" style="margin-top: 5%" name='ChangePassword'>
       </div>
@@ -77,7 +77,6 @@
           <a href='#' onclick='mail();'><label style="font-size: 90%"> Contact Truii</label></a><br/>
         </div>
       </div>
-
       <div class="row" style="padding: 0; padding-left:10px; margin-bottom: 3%">
         <form method="POST">
           <input type="submit" name='logout' class="btn btn-primary" value='Logout'>
