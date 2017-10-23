@@ -19,8 +19,8 @@ function LogUser($username, $password){
   }
 }
 //Creates an account for the user
-function CreateUser($Username, $password){
-  $sql = "INSERT INTO UserTable(Username, Password) VALUES(\"$Username\", \"$password\");";
+function CreateUser($name, $Username, $password){
+  $sql = "INSERT INTO UserTable(Name, Username, Password) VALUES(\"$name\", \"$Username\", \"$password\");";
   CallDatabase($sql);
 }
 //Check if the account exist
@@ -79,6 +79,20 @@ function RequestUserDetail($userID, $request){
     $pdo = null;
     return $data[$request];
   }
+}
+
+function GetAllUserDetail($userID){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("SELECT * FROM UserTable WHERE UserID=$userID;");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  return $result;
 }
 
 function ChangeUserPassword($password){
