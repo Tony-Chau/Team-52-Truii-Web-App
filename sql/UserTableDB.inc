@@ -98,6 +98,7 @@ function GetAllUserDetail($userID){
 function ChangeUserPassword($password){
   $id = $_SESSION['UserID'];
   $sql = "UPDATE UserTable SET Password=\"$password\" WHERE UserID=\"$id\";";
-  CallDatabase($sql);
+  $connection = mysqli_connect(get_dbServer(), get_dbUsername(), get_dbPassword(), get_dbDatabase());
+  mysqli_query($connection,$sql);
 }
  ?>
