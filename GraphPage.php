@@ -19,20 +19,28 @@ include 'sql/Bootgrid/getcolumns.php';
     gotoPage('previousgraphpage');
   }
 
-  $graphtype = RequestGraphTableDetail($graphid, 'GraphType');
+$graphtype = RequestGraphTableDetail($graphid, 'GraphType');
 
-  $graphsize = 0;
-  $graph_query = getGraphColumn($graphid);
-  while($graphfields = $graph_query->fetch(PDO::FETCH_ASSOC))
-  {
-      $graphcolumns[] = $graphfields;
-      $graphsize+=1;
-  }
-
+$graphsize = 0;
+$graph_query = getGraphColumn($graphid);
+while($graphfields = $graph_query->fetch(PDO::FETCH_ASSOC))
+{
+    $graphcolumns[] = $graphfields;
+    $graphsize+=1;
+}
 $graphoutput = array( 'rows' => $graphcolumns );
 $json = json_encode($graphoutput);
 $grapharr = (json_decode($json, true));
 
+
+$custom_query = GetCustomFieldTableList($graphid);
+while($customfields = $custom_query->fetch(PDO::FETCH_ASSOC))
+{
+    $customcolumns[] = $customfields;
+}
+$customoutput = array( 'rows' => $customcolumns );
+$json = json_encode($customoutput);
+$customarr = (json_decode($json, true));
 
 
 $x_axis = array();
@@ -206,7 +214,8 @@ $dataarr = (json_decode($json, true));
       }
       $graph .= "'], ";
 
-      $graph .= "marker: { color: 'rgb(31,194,222)' }, ";
+      $graph .= "marker: { color: '";
+      $graph .= $customarr["rows"][$x_num]["ColourCode"] . "' }, ";
       if ($graphtype == 'Horizontal Bar'){
           $graph .= "orientation: 'h', ";
       }
@@ -266,10 +275,23 @@ $dataarr = (json_decode($json, true));
           if ($graphtype == $chart_list[0]){
               $graph .= "mode: 'markers', ";
               $graph .= "type: 'scatter', ";
+              $graph .= "marker: { color: '";
+              if ($base == 'x'){
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+              }
+              else {
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+              }
           }
           else if ($graphtype == $chart_list[1]){
               $graph .= "mode: 'lines', ";
-              $graph .= "line: { dash: 'solid', width: 4}, ";
+              $graph .= "line: { dash: 'solid', width: 4, color: '";
+              if ($base == 'x'){
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+              }
+              else {
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+              }
           }
           else if ($graphtype == $chart_list[2]){
               $graph .= "mode: 'markers', ";
@@ -285,17 +307,46 @@ $dataarr = (json_decode($json, true));
                           $graph .= ", ";
                       }
                   }
-              $graph .= "]}, ";
+              $graph .= "], color: '";
+              if ($base == 'x'){
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+              }
+              else {
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+              }
           }
           else if ($graphtype == $chart_list[4]){
               $graph .= "mode: 'scatter', ";
+              $graph .= "marker: { color: '";
+              if ($base == 'x'){
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+              }
+              else {
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+              }
+              $graph .= "line: { color: ";
+              if ($base == 'x'){
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+              }
+              else {
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+              }
           }
           else if ($graphtype == $chart_list[5]){
               $graph .= "mode: 'lines', ";
               $graph .= "type: 'scatter', ";
+              $graph .= "line: { color: ";
+              if ($base == 'x'){
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+              }
+              else {
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+              }
           }
           else if ($graphtype == $chart_list[6]){
-              $graph .= "fill: 'tozeroy', ";
+              $graph .= "fill: '";
+              $graph .= $customarr["rows"][$y_num]["ColourCode"];
+              $graph .= "', ";
               $graph .= "type: 'scatter', ";
           }
 

@@ -18,11 +18,14 @@ include 'sql/Bootgrid/getcolumns.php';
           $ID_Graph = GetLastGraphTableID();
           $sql = EnterGraphTable($_SESSION['tableid'], $charttype);
           for ($i = 1; $i < $size; $i+=1){
+              $fID = $arr['rows'][$i]['FieldID'];
+              $randcolour = RandomColourGenerator();
               if (isset($_POST["x_axis{$i}"])){
-                  $sql .= EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "x");
+                  $sql .= EnterGraphColumnTable($ID_Graph, $fID, "x");
+                  $sql .= EnterCustomFieldTable($fID, $ID_Graph, $randcolour);
               }
               if (isset($_POST["y_axis{$i}"])){
-                  $sql .= EnterGraphColumnTable($ID_Graph, $arr['rows'][$i]['FieldID'], "y");
+                  $sql .= EnterGraphColumnTable($ID_Graph, $fID, "y");
               }
           }
           CallDatabase($sql);

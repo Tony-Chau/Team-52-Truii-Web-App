@@ -101,6 +101,6 @@ function CheckMobile(){
 }
 
 function RandomColourGenerator(){
-  return 'rgb('. rand(0,255) . ', ' rand(0, 255) . ', ' . rand(0, 255) . ')';
+  return "rgb(".rand(0,255).", ".rand(0,255).", ".rand(0,255).")";
 }
  ?>
