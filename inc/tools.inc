@@ -22,7 +22,7 @@ function navBarCreate($ColorCode, $currentpage){
                 $distance = '-15px';
               }
   $nav .= "<div style='margin-top:$distance;float:right;margin-right:2%;'>
-  <a href='' onClick='logout();'>
+  <a href='settings.php'>
           <ul><li class='fa fa-gear fa-3x'></br></li></ul></a></div>
           <form method=POST>
             <div align='center'>
@@ -30,13 +30,7 @@ function navBarCreate($ColorCode, $currentpage){
             </div>
           </form></a>
   </div>
-  </nav>
-  <script>
-  function logout(){
-    $('#logsub').click();
-  }
-</script>
-  ";
+  </nav>";
   echo $nav;
 }
 

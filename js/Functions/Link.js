@@ -25,5 +25,5 @@ function isset(val){
 }
 
 function mail(){
-  window.location.href = "mailto:team52.truii@gmail.com?subject=help";
+  window.location.href = "mailto:team52.truii@gmail.com?subject=Truii Help";
 }

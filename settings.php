@@ -53,9 +53,7 @@
         <h1>
           Get Help
           <h1>
-            <p> contact Truii
-              <br>
-              <p>team52.truii@gmail.com </p>
+            <a href='#' onclick='mail();'><p> contact Truii</p></a>
 
           </div>
         <h1>
