@@ -33,8 +33,9 @@ $json = json_encode($graphoutput);
 $grapharr = (json_decode($json, true));
 
 
-$custom_query = GetCustomFieldTableList($graphid);
-while($customfields = $custom_query->fetch(PDO::FETCH_ASSOC))
+$custom_query = "SELECT * FROM CustomFieldTable WHERE GraphID = $graphid";
+$gotcustoms = mysqli_query($connection, $custom_query);
+while($customfields = mysqli_fetch_assoc($gotcustoms))
 {
     $customcolumns[] = $customfields;
 }
@@ -47,37 +48,29 @@ $x_axis = array();
 $x_size = 0;
 $y_axis = array();
 $y_size = 0;
-// if ($graphsize == 1){
-//     for ($i=1; $i < $size; $i+=1) {
-//         if ($grapharr['rows'][0]['FieldID'] == $arr['rows'][$i]['FieldID']){
-//             $fname = $arr['rows'][$i]['FieldName'];
-//         }
-//     }
-//     array_push($y_axis, $fname);
-//     $y_size += 1;
-// }
-// else {
-    for ($i = 0; $i < $graphsize; $i+=1){
-        if ($grapharr['rows'][$i]['Axis'] == 'x'){
-            for ($j=1; $j < $size; $j+=1) {
-                if ($grapharr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
-                    $fname = $arr['rows'][$j]['FieldName'];
-                }
+
+
+
+for ($i = 0; $i < $graphsize; $i+=1){
+    if ($grapharr['rows'][$i]['Axis'] == 'x'){
+        for ($j=1; $j < $size; $j+=1) {
+            if ($grapharr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
+                $fname = $arr['rows'][$j]['FieldName'];
             }
-            array_push($x_axis, $fname);
-            $x_size += 1;
         }
-        else if ($grapharr['rows'][$i]['Axis'] == 'y'){
-            for ($j=1; $j < $size; $j+=1) {
-                if ($grapharr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
-                    $fname = $arr['rows'][$j]['FieldName'];
-                }
-            }
-            array_push($y_axis, $fname);
-            $y_size += 1;
-        }
+        array_push($x_axis, $fname);
+        $x_size += 1;
     }
-// }
+    else if ($grapharr['rows'][$i]['Axis'] == 'y'){
+        for ($j=1; $j < $size; $j+=1) {
+            if ($grapharr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
+                $fname = $arr['rows'][$j]['FieldName'];
+            }
+        }
+        array_push($y_axis, $fname);
+        $y_size += 1;
+    }
+}
 
 
 $query_row = "SELECT $y_axis[0] FROM " . $table;
@@ -231,7 +224,7 @@ $dataarr = (json_decode($json, true));
 
   else {
       for ($i = 0; $i < $xy_size; $i+=1) {
-          $graph .= " var trace" . $i . " = {";
+          $graph .= " var trace" . $i . " = { ";
           if ($base == 'x'){
               $graph .= "x:[";
           }
@@ -249,7 +242,7 @@ $dataarr = (json_decode($json, true));
                   $graph .= ", ";
               }
           }
-          $graph .= "],";
+          $graph .= "], ";
 
           if ($base == 'x'){
               $graph .= "y:[";
@@ -268,7 +261,7 @@ $dataarr = (json_decode($json, true));
                   $graph .= ", ";
               }
           }
-          $graph .= "],";
+          $graph .= "], ";
 
           /****************************************************/
 
@@ -277,20 +270,20 @@ $dataarr = (json_decode($json, true));
               $graph .= "type: 'scatter', ";
               $graph .= "marker: { color: '";
               if ($base == 'x'){
-                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'} ";
               }
               else {
-                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'} ";
               }
           }
           else if ($graphtype == $chart_list[1]){
               $graph .= "mode: 'lines', ";
               $graph .= "line: { dash: 'solid', width: 4, color: '";
               if ($base == 'x'){
-                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'} ";
               }
               else {
-                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'} ";
               }
           }
           else if ($graphtype == $chart_list[2]){
@@ -309,38 +302,38 @@ $dataarr = (json_decode($json, true));
                   }
               $graph .= "], color: '";
               if ($base == 'x'){
-                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'} ";
               }
               else {
-                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'} ";
               }
           }
           else if ($graphtype == $chart_list[4]){
               $graph .= "mode: 'scatter', ";
               $graph .= "marker: { color: '";
               if ($base == 'x'){
-                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'} ";
               }
               else {
-                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'} ";
               }
-              $graph .= "line: { color: ";
+              $graph .= "line: { color: '";
               if ($base == 'x'){
-                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'} ";
               }
               else {
-                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'} ";
               }
           }
           else if ($graphtype == $chart_list[5]){
               $graph .= "mode: 'lines', ";
               $graph .= "type: 'scatter', ";
-              $graph .= "line: { color: ";
+              $graph .= "line: { color: '";
               if ($base == 'x'){
-                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'} ";
               }
               else {
-                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'},";
+                $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'} ";
               }
           }
           else if ($graphtype == $chart_list[6]){
@@ -374,13 +367,13 @@ $dataarr = (json_decode($json, true));
       $layout .= "xaxis: {";
       $layout .= "title: 'Overall Grade', ";
       $layout .= "showgrid: false, ";
-      $layout .= "zeroline: false,";
+      $layout .= "zeroline: false, ";
       $layout .= "fixedrange: true";
       $layout .= "}, ";
       $layout .= "yaxis: {";
       $layout .= "title: 'Year', ";
-      $layout .= "showline: false,";
-      $layout .= "zeroline: false,";
+      $layout .= "showline: false, ";
+      $layout .= "zeroline: false, ";
       $layout .= "fixedrange: true";
       $layout .= "}, ";
       $layout .= "width: (window.innerWidth / 1.25), ";
