@@ -94,7 +94,7 @@
         </table>
       </div>
     </div>
-    <div class="row" style="margin: 0;" align="center">
+    <div class="row" style="margin-bottom: 20px;" align="center">
       <div class="col">
 
         <button id="download" name="download" class="button" style="float: left !important; font-size: 100%; padding:10px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Download</button>

@@ -17,6 +17,7 @@ CheckRequestLogout();
   $length = $VariousTable->rowCount();
   $ValueResult = array();
   $count = 0;
+  array_push($ValueResult, $FieldResult);
   foreach ($VariousTable as $data){
     $Values = array();
     for ($i = 0; $i < count($FieldResult); $i += 1){
@@ -31,10 +32,8 @@ CheckRequestLogout();
     array_push($ValueResult, $Values);
     $count += 1;
   }
-  array_push($ValueResult, $FieldResult);
-  $ValueResult = array_reverse($ValueResult);
 
-  $TableNames = 'file';//RequestTableDetail($TableID, 'TableName');
+  $TableNames = 'file';
   $json = '' . json_encode($ValueResult);
   $json_dec = json_decode ($json);
   $filename =  rand(100000,999999) . '.csv';
