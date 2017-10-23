@@ -7,7 +7,7 @@ if (!empty($_SESSION['tableid'])){
     $tableid = $_SESSION['tableid'];
 }
 else {
-    header('location: choosedatapage.php');
+  gotoPage('choosedatapage');
 }
 
 

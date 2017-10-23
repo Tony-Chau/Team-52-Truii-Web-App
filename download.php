@@ -21,12 +21,14 @@ CheckRequestLogout();
   foreach ($VariousTable as $data){
     $Values = array();
     for ($i = 0; $i < count($FieldResult); $i += 1){
+      if (isset($FieldResult[$i]) && isset($data[$FieldResult[$i]])){
         $Field = $FieldResult[$i];
         if (!is_null($data[$Field])){
           $info =  $data[$Field];
           array_push($Values, $info);
         }else{
           array_push($Values, '');
+        }
       }
     }
     array_push($ValueResult, $Values);
