@@ -54,6 +54,8 @@
           Get Help
           <h1>
             <p> contact Truii
+              <br>
+              <p>team52.truii@gmail.com </p>
 
           </div>
         <h1>
