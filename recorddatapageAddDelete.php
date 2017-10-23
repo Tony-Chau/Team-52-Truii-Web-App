@@ -117,6 +117,7 @@
                   <option value="VARCHAR(255)">Text</option>
                   <option value="INT"># Numbers</option>
                   <option value="FLOAT">% Percentage</option>
+                  <option value="DATETIME">&#x1F5D3 DateTime</option>
                   <option value="DATE">&#x1F4C5 Date</option>
                   <option value="TIME">&#x231A Time</option>
                 </select>
