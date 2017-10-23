@@ -6,8 +6,7 @@ function EnterCustomFieldTable($FieldID, $GraphID, $ColourCode){
 
 //Update the colour code
 function UpdateCustomFieldColourCode($FieldID, $CustomFieldID){
-  $sql = "UPDATE CustomFieldTable SET ColourCode=\"$ColourCode\" WHERE CustomFieldID=$CustomFieldID);";
-  CallDatabase($sql);
+  return "UPDATE CustomFieldTable SET ColourCode=\"$ColourCode\" WHERE CustomFieldID=$CustomFieldID);";
 }
 
 //Presents the list of tables
