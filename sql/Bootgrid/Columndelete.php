@@ -9,6 +9,6 @@
   {
       $cName = $_POST['delete_column_selected'];
       DeleteColumn($tableid, $cName);
-      echo 'Column Deleted';
+      //echo 'Column Deleted';
   }
 ?>

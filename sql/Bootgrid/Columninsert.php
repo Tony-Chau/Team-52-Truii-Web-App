@@ -11,6 +11,6 @@
       $dType = $_POST['datatype_selected'];
       AddColumn($tableid, $cName, $dType);
 
-      echo 'Column Inserted';
+      //echo 'Column Inserted';
   }
 ?>

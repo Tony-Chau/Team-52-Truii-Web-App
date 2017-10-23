@@ -18,6 +18,6 @@
       $cName = $_POST['edit_column_name'];
       $dType = 'VARCHAR(255)';
       RenameColumn($tableid, $oldID, $cName, $dType);
-      echo 'Column Renamed';
+      //echo 'Column Renamed';
   }
 ?>

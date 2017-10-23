@@ -25,7 +25,7 @@
           }
 
           EnterVariousTable($tableid, $Fields, $Datas, $Types);
-          echo 'Value Inserted';
+          //echo 'Value Inserted';
 
       }
 
@@ -48,7 +48,7 @@
           }
 
           EditValueVariousTable($tableid, $variousid, $Fields, $Datas, $Types);
-          echo 'Value Updated';
+          //echo 'Value Updated';
 
       }
   }

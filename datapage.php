@@ -31,7 +31,7 @@
   }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
+      ResetValueVariousTable($_SESSION['tableid']);
   }
 
 ?>
@@ -223,7 +223,7 @@ $(document).ready(function(){
         data:form_data,
         success:function(data)
         {
-          alert(data);
+          //alert(data);
           $(':input[type="submit"]').prop('disabled', false);
           $('#table_form')[0].reset();
           $('#tableModal').modal('hide');
@@ -233,7 +233,7 @@ $(document).ready(function(){
     }
     else
     {
-      alert("One Fields are Required");
+      alert("One Fields Atleast is Required");
     }
   });
 
@@ -279,7 +279,7 @@ $(document).ready(function(){
           "method:'POST'," +
           "data:{"+col+":"+col+"}, "+
           "success:function(data){" +
-            "alert(data);" +
+            //"alert(data);" +
             "$(':input[type=\"submit\"]').prop('disabled', false);" +
             "$('#table_data').bootgrid('reload');" +
           "}" +
@@ -311,7 +311,7 @@ $(document).ready(function(){
         data:form_data,
         success:function(data)
         {
-          alert(data);
+          //alert(data);
           $('#column_addform')[0].reset();
           $('#columnAddModal').modal('hide');
           location.reload();
@@ -344,7 +344,7 @@ $(document).ready(function(){
         data:form_data,
         success:function(data)
         {
-          alert(data);
+          //alert(data);
           $('#column_deleteform')[0].reset();
           $('#columnDeleteModal').modal('hide');
           location.reload();
@@ -372,7 +372,7 @@ $(document).ready(function(){
           data:form_data,
           success:function(data)
           {
-            alert(data);
+            //alert(data);
             $('#column_deleteform')[0].reset();
             $('#columnDeleteModal').modal('hide');
             location.reload();
@@ -406,6 +406,9 @@ $(document).ready(function(){
 
               if ('INT' == $arr['rows'][$i]['DataType']){
                   $coltype = 'number';
+              }
+              else if ('DATETIME' == $arr['rows'][$i]['DataType']){
+                  $coltype = 'datetime-local';
               }
               else {
                   $coltype = 'text';

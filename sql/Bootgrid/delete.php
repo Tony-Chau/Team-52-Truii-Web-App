@@ -12,7 +12,7 @@
       $query = "DELETE FROM " . $table . " WHERE " . $id . " = '".$_POST[$id]."'";
       if(mysqli_query($connection, $query))
       {
-          echo 'Value Deleted';
+          //echo 'Value Deleted';
       }
       //RemoveValueVariousTable($tableid, $Field, $Data, $Type);
   }
