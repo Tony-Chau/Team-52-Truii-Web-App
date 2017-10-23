@@ -75,4 +75,12 @@ function CallDatabase($sql){
   }
   $pdo=null;
 }
+
+function TimeFormat($date){
+  return $date->format('H:i:s');
+}
+
+function DateFormat($date){
+  return $date->format('Y-m-d');
+}
 ?>
