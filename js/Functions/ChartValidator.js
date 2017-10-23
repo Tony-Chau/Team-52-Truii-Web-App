@@ -65,7 +65,7 @@ function X_Bar_Validate(axistype){
 }
 
 function Y_Bar_Validate(axistype){
-  if (axistype == 'VARCHAR(255)' || axistype == 'DATETIME'){
+  if (axistype == 'VARCHAR(255)' || axistype == 'TIME' || axistype == 'DATE'){
     return true;
   }
   return false;
@@ -165,7 +165,7 @@ function X_AreaHorizontalBar_Validate(axistype){
 }
 
 function Y_AreaHorizontalBar_Validate(axistype){
-  if (axistype == 'VARCHAR(255)' || axistype == 'DATETIME'){
+  if (axistype == 'VARCHAR(255)' || axistype == 'TIME' || axistype == 'DATE'){
     return true;
   }
   return false;
@@ -179,7 +179,7 @@ function X_Pie_Validate(axistype){
 }
 
 function Y_Pie_Validate(axistype){
-  if (axistype == 'VARCHAR(255)' || axistype == 'DATETIME'){
+  if (axistype == 'VARCHAR(255)' || axistype == 'TIME' || axistype == 'DATE'){
     return true;
   }
   return false;

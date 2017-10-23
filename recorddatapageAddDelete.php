@@ -23,9 +23,24 @@
                   array_push($dTypes, $_POST["ColumnType{$i}"]);
               }
           }
-          CreateTable($table_name, $aFields, $dTypes);
-          $_SESSION['tableid'] = GetTableIDLastNumber()-1;
-          gotoPage('datapage');
+          $valid = true;
+          for ($i = 0; $i < ($columnNumber + 1); $i += 1){
+            for ($j = 0; $j < ($columnNumber + 1); $j += 1){
+              if ($i != $j){
+                if ($aFields[$i] == $aFields[$j]){
+                  $valid = false;
+                }
+              }
+            }
+          }
+          if ($valid){
+            CreateTable($table_name, $aFields, $dTypes);
+            $_SESSION['tableid'] = GetTableIDLastNumber()-1;
+            gotoPage('datapage');
+          }else{
+            CallTestAlert('Around 2 or more tables have the same name. Please try again');
+            gotoPage('recorddatapageAddDelete');
+          }
       }
   }
 ?>
@@ -102,7 +117,8 @@
                   <option value="VARCHAR(255)">Text</option>
                   <option value="INT"># Numbers</option>
                   <option value="FLOAT">% Percentage</option>
-                  <option value="DATETIME">&#128467 DateTime</option>
+                  <option value="DATE">&#x1F4C5 Date</option>
+                  <option value="TIME">&#x231A Time</option>
                 </select>
               </div>
             </fieldset>

@@ -5,15 +5,23 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
   $sql = "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
     if ($i == count($ArrayOfFields) - 1){
-      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", PRIMARY KEY(" . $TableName . "ID));";
+      $sql .= CheckDateTime($ArrayOfFields[$i]) . " " . $DataType[$i] . ", PRIMARY KEY(" . $TableName . "ID));";
     }else{
-      $sql .= $ArrayOfFields[$i] . " " . $DataType[$i] . ", ";
+      $sql .= CheckDateTime($ArrayOfFields[$i]) . " " . $DataType[$i] . ", ";
     }
   }
   $sql .= EnterTable($TableName);
   $sql .= EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType);
   CallDatabase($sql);
 }
+
+function CheckDateTime($field){
+  if ($field == 'DATE' || $field == 'TIME'){
+    return "DATETIME";
+  }
+  return $field;
+}
+
 
 //returns the whole table as an array format
 function GetVariousTable($TableID){

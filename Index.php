@@ -15,10 +15,10 @@
           if(CheckUser($_POST['log_username'])){
             if (CheckUserAndPassword($_POST['log_username'], $_POST['log_password'])){
               LogUser($_POST['log_username'], $_POST['log_password']);
-              header('location: Index');
+              gotoPage('Index');
             }
           }
-          echo "<script>alert('Sorry but the login details you have entered do not match within our database, please retype your password');</script>";
+          CallTestAlert('Sorry but the login details you have entered do not match within our database, please retype your password');
           $log_username = $_POST['log_username'];
       }
       //Register
@@ -28,12 +28,12 @@
             if (!CheckUser($_POST['reg_username'])){
               CreateUser($_POST['reg_username'], $_POST['reg_confirmpassword']);
               LogUser($_POST['reg_username'], $_POST['reg_password']);
-              header('location: Index');
+              gotoPage('Index');
             }
-              echo "<script>alert('Sorry, but this email has already been registered. Please use a different email account');</script>";
+              CallTestAlert('Sorry, but this email has already been registered. Please use a different email account');
           }
           else{
-              echo "<script>alert('Sorry, but your passwords do not match. Please try again');</script>";
+              CallTestAlert('Sorry, but your passwords do not match. Please try again');
           }
           $reg_username = $_POST['reg_username'];
         }
