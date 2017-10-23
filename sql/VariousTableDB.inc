@@ -126,7 +126,8 @@ function sqlInsertionString($data, $type){
   if ($type == 'VARCHAR(255)'){
     return "\" " . $data . "\"";
   }else if ($type == 'DATETIME'){
-    return "\" " . $data->format('Y-m-d H:i:s') . "\"";
+    $format = new Date($data);
+    return "\" " . $format->format('Y-m-d H:i:s') . "\"";
   }else{
     return $data;
   }
