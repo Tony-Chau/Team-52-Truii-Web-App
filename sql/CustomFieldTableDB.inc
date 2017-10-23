@@ -1,8 +1,7 @@
 <?php
 //Creates Table
 function EnterCustomFieldTable($FieldID, $GraphID, $ColourCode){
-  $sql = "INSERT INTO CustomFieldTable(FieldID, GraphID, ColourCode) VALUES($FieldID, $GraphID, \"$ColourCode\");";
-  CallDatabase($sql);
+  return "INSERT INTO CustomFieldTable(FieldID, GraphID, ColourCode) VALUES($FieldID, $GraphID, \"$ColourCode\");";
 }
 
 //Update the colour code

@@ -44,33 +44,6 @@ function CallTestAlert($message){
   echo "<script>alert('".$message."');</script>";
 }
 
-// function ConvertDatatoCSV($FieldName_Array, $Value_Array){
-//   $csv = '';
-//   $list = array();
-//   $length =  count($FieldName_Array);
-//   for ($i = 0; $i < $length; $i += 1){
-//     if ($i == $length - 1){
-//       $csv .= $FieldName_Array[$i];
-//     }else{
-//       $csv .= $FieldName_Array[$i] . ', ';
-//     }
-//   }
-//   array_push($list, $csv);
-//   $csv = '';
-//   for ($i = 0; $i < $length; $i += 1){
-//     for ($j = 0; $j < $length; $j += 1){
-//       if ($j == $length - 1){
-//         $csv .= $Value_Array[$i][$j];
-//       }else{
-//         $csv .= $Value_Array[$i][$j] . ", ";
-//       }
-//     }
-//     array_push($list, $csv);
-//     $csv = '';
-//   }
-//   // $list = array_reverse($list);
-//   return $list;
-// }
 
 function ConvertDatatoCSV($FieldName_Array, $Value_Array, $length){
   $csv = '';
@@ -125,5 +98,9 @@ function CheckMobile(){
     //Create error page
     gotoPage('browserError');
   }
+}
+
+function RandomColourGenerator(){
+  return 'rgb('. rand(0,255) . ', ' rand(0, 255) . ', ' . rand(0, 255) . ')';
 }
  ?>
