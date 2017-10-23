@@ -30,7 +30,7 @@ include "sql/mysql.inc";
  <body style='background-color: black;'>
  <form method=GET>
  <div class="buttonHolder">
-   <h1 style="color: white;">By Clicking this button will delete all of the data within the database and removed all the custom table.
+   <h1 style="color: white;">By Clicking this button will delete all of the data within the database and remove all the custom table.
      If you do not wish to reset all the data, please do not click it. </br> Choose Wisely :) </h1>
    <input value="Reset now" type="submit" name='method'>
  </div>

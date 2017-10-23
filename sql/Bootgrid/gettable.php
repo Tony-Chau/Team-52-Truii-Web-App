@@ -18,8 +18,6 @@ if(!empty($tIDs)){
     $tIDsarr = (json_decode($json, true));
 
 }else{
-    header('location: recorddatapageAddDelete.php');
+    gotoPage('recorddatapageAddDelete');
 }
-
-
  ?>
