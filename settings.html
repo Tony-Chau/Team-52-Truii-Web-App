@@ -1,0 +1,29 @@
+<?php
+  include 'sql/mysql.inc';
+  include 'inc/tools.inc';
+  include 'inc/styles_and_scripts.inc';
+  //CheckMobile();
+  if (!is_log()){
+    gotoPage('Index');
+  }
+  CheckRequestLogout();
+  navBarCreate('rgb(252, 103, 25)', 'settings');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+
+ <title>My Settings</title>
+ <br/>
+
+</head>
+<body>
+
+  <P>
+    Account
+    <p/>
+
+    <p>
+      Get Help
+    </p>
+    
