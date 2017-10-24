@@ -255,8 +255,10 @@ $(document).ready(function(){
           "$('#tableModal').modal('show');";
           for (var i = 0; i < colSize; i+=1){
             if (i == 10){
-              rowUpdate += "alert(data."+aColumns[i]+");";
-              rowUpdate += "$('#"+aColumns[i]+"').val();";
+              rowUpdate += "var dates = new Date(data."+aColumns[i]+");";
+              rowUpdate += "var format = dates.toISOString();";
+              rowUpdate += "var convert = format.replace('.000Z', '');";
+              rowUpdate += "$('#"+aColumns[i]+"').val(convert);";
             }
             else {
               rowUpdate += "$('#"+aColumns[i]+"').val(data."+aColumns[i]+");";
