@@ -8,6 +8,10 @@
   if (!is_log()){
     gotoPage('Index');
   }
+
+  if ($tsize == 0){
+    gotoPage('previousgraphpage');
+  }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)', 'Choose Data Page');
 

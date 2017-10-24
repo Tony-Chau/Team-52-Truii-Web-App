@@ -20,38 +20,65 @@
       }
   }
 
-  $graphlist_output = array( 'rows' => $graphlist_columns );
-
-  $json = json_encode($graphlist_output);
-  $graphlistarr = (json_decode($json, true));
-
   $output = '';
-
-  for($i = 1; $i < $gsize; $i+=1){
-      $key = 0;
-      $output .= '<form method="POST">';
+  if ($tsize == 0 || $gsize == 0){
       $output .= '<div class="row" style="margin: 0;">';
-      $output .= '<div class="col-sm-12 col-md-4" style="padding: 0; width: 100%;">';
-      $output .= '<div class="thumbnail">';
-      $output .= '<canvas id="graph" width="300" height="300"></canvas>';
-      $output .= '<div class="caption">';
-      for ($j = 0; $j < $tsize; $j+=1){
-          $gtID = $graphlistarr['rows'][$i]['TableID'];
-          $tID = $tIDsarr['rows'][$j]['TableID'];
-          if ($gtID == $tID){
-              $key = $j;
-          }
+      $output .= '<div class="col" style="padding: 0; width: 100%;">';
+      $output .= '<label>Sorry There Are No ';
+      if ($tsize == 0){
+          $output .= 'Tables ';
       }
-      $tName = $tIDsarr['rows'][$key]['TableName'];
-      $tID = $tIDsarr['rows'][$key]['TableID'];
-      $gID = $graphlistarr['rows'][$i]['GraphID'];
-      $gType = $graphlistarr['rows'][$i]['GraphType'];
-      $output .= '<h3>Chart ' . $gType . '</h3>';
-      $output .= '<h4>Table: ' . $tName . '</h4>';
-      $output .= '<input type="number" name="graphs_tableid" value='.$tID.' style="display: none"/>';
-      $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" name="graphlist_selected" value='.$gID.'> View </button>';
-      $output .= '</div></div></div></div></form>';
+      if ($gsize == 0){
+          if ($tsize == 0){
+              $output .= 'Nor ';
+          }
+          $output .= 'Graphs ';
+      }
+      $output .= 'Avaliable';
+      if ($tsize == 0){
+          $output .= ', Please press the table icon on the navbar to create a table first before creating a graph';
+      }
+      else {
+          $output .= ', Please press the + button at the bottom right to create a graph';
+      }
+      $output .= '.</label></div></div>';
+
   }
+  else {
+
+
+      $graphlist_output = array( 'rows' => $graphlist_columns );
+
+      $json = json_encode($graphlist_output);
+      $graphlistarr = (json_decode($json, true));
+
+      for($i = 1; $i < $gsize; $i+=1){
+          $key = 0;
+          $output .= '<form method="POST">';
+          $output .= '<div class="row" style="margin: 0;">';
+          $output .= '<div class="col-sm-12 col-md-4" style="padding: 0; width: 100%;">';
+          $output .= '<div class="thumbnail">';
+          $output .= '<canvas id="graph" width="300" height="300"></canvas>';
+          $output .= '<div class="caption">';
+          for ($j = 0; $j < $tsize; $j+=1){
+              $gtID = $graphlistarr['rows'][$i]['TableID'];
+              $tID = $tIDsarr['rows'][$j]['TableID'];
+              if ($gtID == $tID){
+                  $key = $j;
+              }
+          }
+          $tName = $tIDsarr['rows'][$key]['TableName'];
+          $tID = $tIDsarr['rows'][$key]['TableID'];
+          $gID = $graphlistarr['rows'][$i]['GraphID'];
+          $gType = $graphlistarr['rows'][$i]['GraphType'];
+          $output .= '<h3>Chart ' . $gType . '</h3>';
+          $output .= '<h4>Table: ' . $tName . '</h4>';
+          $output .= '<input type="number" name="graphs_tableid" value='.$tID.' style="display: none"/>';
+          $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" name="graphlist_selected" value='.$gID.'> View </button>';
+          $output .= '</div></div></div></div></form>';
+      }
+  }
+
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['graphs_tableid']) && isset($_POST['graphlist_selected'])){

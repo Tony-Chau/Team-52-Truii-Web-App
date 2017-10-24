@@ -17,7 +17,5 @@ if(!empty($tIDs)){
     $json = json_encode($tIDsoutput);
     $tIDsarr = (json_decode($json, true));
 
-}else{
-    gotoPage('recorddatapageAddDelete');
 }
  ?>
