@@ -121,7 +121,6 @@ $dataarr = (json_decode($json, true));
 <!DOCTYPE html>
 <html>
 <head>
-
   <title>Graph Page</title>
   <script src="js/plotly_latest.min.js"></script>
   <script src="js/html2canvas.min.js"></script>
@@ -449,7 +448,12 @@ $dataarr = (json_decode($json, true));
               echo "<div class='row' style='margin: auto'>";
               echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
               echo "<div class='col' style='margin: auto; float: right;'>";
-              echo "<input type='color' name='color' id='$colname' value='#000000' style='border-radius: 5px;'/>";
+              if (checkPhone() == 'ios'){
+                echo "<input class='jscolor' name='color' id='$colname' value='#000000' style='border-radius: 5px;'/>";
+              }else{
+                echo "<input type='color' name='color' id='$colname' value='#000000' style='border-radius: 5px;'/>";
+              }
+
               echo "</div></div><br/>";
           }
           echo "</form></div>";

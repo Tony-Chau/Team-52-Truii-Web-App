@@ -97,4 +97,16 @@ function CheckMobile(){
 function RandomColourGenerator(){
   return "rgb(".rand(0,255).", ".rand(0,255).", ".rand(0,255).")";
 }
+
+function checkPhone(){
+  $useragent = $_SERVER['HTTP_USER_AGENT'];
+  $iPod    = stripos($useragent,"iPod");
+  $iPhone  = stripos($useragent,"iPhone");
+  $iPad    = stripos($useragent,"iPad");
+  if ($iPod || $iPhone || $iPad){
+    return 'ios';
+  }else{
+    return 'android';
+  }
+}
  ?>
