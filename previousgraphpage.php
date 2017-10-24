@@ -36,10 +36,10 @@
       }
       $output .= 'Avaliable';
       if ($tsize == 0){
-          $output .= ', Please press the table icon on the navbar to create a table first before creating a graph';
+          $output .= '. Please press the table icon located above to create a table first and then create a graph';
       }
       else {
-          $output .= ', Please press the + button at the bottom right to create a graph';
+          $output .= '. Please press the + button located at the bottom right of the page to create a graph';
       }
       $output .= '.</label></div></div>';
 
