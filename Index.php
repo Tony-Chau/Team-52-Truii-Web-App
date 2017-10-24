@@ -46,7 +46,6 @@
 <head>
   <link rel="stylesheet" href="css/login.css">
   <title>Truii</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
@@ -54,7 +53,7 @@
  background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
 
   <div class="centered" align="center" id="centered">
-    <img src="Logo/truii-full-colour-white.png" class="logo" id="logo" alt="TruiiLogo">
+    <img src="Logo/truii-full-colour-white.png" class="logo" id="logo" alt="TruiiLogo" style="margin-top: 2%;">
   </div>
 
   <div class="centered" align="center" id="centered">
@@ -86,6 +85,11 @@
             <div class="row-top" id="row-top">
               <label class="label" id="label">Email</label><br>
               <?php echo "<input type=\"email\" name=\"reg_username\" class=\"input\" id=\"input\" value=\"" . $reg_username . "\" required>"; ?>
+            </div>
+
+            <div class="row-top" id="row-top">
+              <label class="label" id="label">Full Name</label><br>
+              <input type="text" name="reg_name" class="input" id="input" required>
             </div>
 
             <div class="row-mid" id="row-mid">

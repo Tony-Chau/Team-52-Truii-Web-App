@@ -16,15 +16,22 @@
     $email = $data['Username'];
     $password = $data['Password'];
   }
-  if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['ChangePassword'])){
-    if ($_POST['password'] == $password){
-      ChangeUserPassword($_POST['con_password']);
-      CallTestAlert('Password has been changed');
-    }else{
-      CallTestAlert('Your current password do not match');
+  if ($_SERVER['REQUEST_METHOD'] == "POST"){
+    if (isset($_POST['Logout'])){
+
     }
-    gotoPage('settings');
+    if (isset($_POST['ChangePassword'])){
+      if ($_POST['password'] == $password){
+        ChangeUserPassword($_POST['con_password']);
+        CallTestAlert('Password has been changed');
+      }else{
+        CallTestAlert('Your current password do not match');
+      }
+      gotoPage('settings');
+    }
   }
+
+
 
   navBarCreate('rgb(252, 103, 25)', 'settings');
 ?>
@@ -78,8 +85,19 @@
         </div>
       </div>
       <div class="row" style="padding: 0; padding-left:10px; margin-bottom: 3%">
+        <button type="button" name="Logoutbtn" id="Logoutbtn">Logout</button>
         <form method="POST">
-          <input type="submit" name='logout' class="btn btn-primary" value='Logout'>
+          <input type="submit" name='Logout' id="Logout" class="btn btn-primary" value='Logout' style="display: none;">
         </form>
+        <script type="text/javascript" language='javascript'>
+          $('#Logoutbtn').click(function(){
+            if(confirm("Are You Sure You Want To Logout?")){
+              $('#Logout').click();
+            }
+          });
+        </script>
       </div>
     </div>
+  </div>
+</body>
+</html>

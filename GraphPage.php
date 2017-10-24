@@ -131,8 +131,8 @@ $dataarr = (json_decode($json, true));
 <body onresize="Redo_Graph()">
 
   <div id ="Homebutton">
-    <div class= "container" align="center">
-      <div class="row">
+    <div class= "container" align="center" style="padding:0; margin:0;">
+      <div class="row" style="padding:0; margin:0;">
         <div class="col">
 
           <div id="Results" style="margin-top: 10%"></div>
@@ -170,9 +170,7 @@ $dataarr = (json_decode($json, true));
       $graph .= "'] }]; ";
 
       $layout .= "var layout = {";
-      $layout .= "title: 'Record of Student Results', ";
-      $layout .= "width: (window.innerWidth / 1.25), ";
-      $layout .= "height: (window.innerHeight / 1.5) ";
+      $layout .= "title: 'Record of Student Results' ";
       $layout .= "};";
 
 
@@ -216,9 +214,7 @@ $dataarr = (json_decode($json, true));
       $graph .= " }]; ";
 
       $layout .= "var layout = {";
-      $layout .= "title: 'Record of Student Results', ";
-      $layout .= "width: (window.innerWidth / 1.25), ";
-      $layout .= "height: (window.innerHeight / 1.5) ";
+      $layout .= "title: 'Record of Student Results' ";
       $layout .= "};";
   }
 
@@ -368,17 +364,14 @@ $dataarr = (json_decode($json, true));
       $layout .= "title: 'Overall Grade', ";
       $layout .= "showgrid: false, ";
       $layout .= "zeroline: false, ";
-      $layout .= "fixedrange: true";
+      //$layout .= "fixedrange: true";
       $layout .= "}, ";
       $layout .= "yaxis: {";
       $layout .= "title: 'Year', ";
       $layout .= "showline: false, ";
       $layout .= "zeroline: false, ";
-      $layout .= "fixedrange: true";
-      $layout .= "}, ";
-      $layout .= "width: (window.innerWidth / 1.25), ";
-      $layout .= "height: (window.innerHeight / 1.5) ";
-      $layout .= "};";
+      //$layout .= "fixedrange: true";
+      $layout .= "} };";
   }
 
 
@@ -392,11 +385,25 @@ $dataarr = (json_decode($json, true));
     eval(Graph);
     var graphlayout = "<?php echo $layout; ?>";
     eval(graphlayout);
+    if (window.innerWidth > window.innerHeight){
+      layout.width = (window.innerWidth / 1.5);
+      layout.height = (window.innerHeight / 1);
+    }
+    else {
+      layout.width = (window.innerWidth / 1.25);
+      layout.height = (window.innerHeight / 1.5);
+    }
     Plotly.newPlot('Results', data, layout);
 
     function Redo_Graph(){
-      layout.width = (window.innerWidth / 1.25);
-      layout.height = (window.innerHeight / 1.5);
+      if (window.innerWidth > window.innerHeight){
+        layout.width = (window.innerWidth / 1.5);
+        layout.height = (window.innerHeight / 1.1);
+      }
+      else {
+        layout.width = (window.innerWidth / 1.25);
+        layout.height = (window.innerHeight / 1.5);
+      }
       Plotly.newPlot('Results', data, layout);
     }
 

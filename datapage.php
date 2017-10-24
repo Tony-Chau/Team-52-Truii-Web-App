@@ -21,7 +21,9 @@
   $datatypes .= '<option value="VARCHAR(255)">Text</option>';
   $datatypes .= '<option value="INT"># Numbers</option>';
   $datatypes .= '<option value="FLOAT">% Percentage</option>';
-  $datatypes .= '<option value="DATETIME">&#128467 DateTime</option>';
+  $datatypes .= '<option value="DATETIME">&#x1F5D3 DateTime</option>';
+  $datatypes .= '<option value="DATE">&#x1F4C5 Date</option>';
+  $datatypes .= '<option value="TIME">&#x231A Time</option>';
 
   $INTColumns = 0;
   for ($i = 1; $i < $size; $i+=1){
@@ -409,6 +411,12 @@ $(document).ready(function(){
               }
               else if ('DATETIME' == $arr['rows'][$i]['DataType']){
                   $coltype = 'datetime-local';
+              }
+              else if ('DATE' == $arr['rows'][$i]['DataType']){
+                  $coltype = 'date';
+              }
+              else if ('TIME' == $arr['rows'][$i]['DataType']){
+                  $coltype = 'time';
               }
               else {
                   $coltype = 'text';
