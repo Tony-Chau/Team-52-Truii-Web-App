@@ -95,10 +95,25 @@ function GetAllUserDetail($userID){
   return $result;
 }
 
+function GetAllUser(){
+  $dbUser = get_dbUsername();
+  $dbPassword = get_dbPassword();
+  $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
+  $pdo = new PDO($link, $dbUser, $dbPassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  try{
+    $result = $pdo->query("SELECT * FROM UserTable;");
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+  return $result;
+}
+
+
 function ChangeUserPassword($password){
   $id = $_SESSION['UserID'];
   $sql = "UPDATE UserTable SET Password=\"$password\" WHERE UserID=\"$id\";";
   $connection = mysqli_connect(get_dbServer(), get_dbUsername(), get_dbPassword(), get_dbDatabase());
   mysqli_query($connection,$sql);
 }
- ?>
+?>
