@@ -132,7 +132,7 @@ $(document).ready(function(){
     if (numberofdata >= 3){
       window.location.href = 'datapageXY.php';
     }else{
-      alert('Please have at least 3 data types before proceeding');
+      alert('Please have at least 3 numbers or floats types input and atleast 3 data entries before proceeding');
     }
   });
 
@@ -254,7 +254,13 @@ $(document).ready(function(){
         "{" +
           "$('#tableModal').modal('show');";
           for (var i = 0; i < colSize; i+=1){
-            rowUpdate += "$('#"+aColumns[i]+"').val(data."+aColumns[i]+");";
+            if (i == 10){
+              rowUpdate += "alert(data."+aColumns[i]+");";
+              rowUpdate += "$('#"+aColumns[i]+"').val();";
+            }
+            else {
+              rowUpdate += "$('#"+aColumns[i]+"').val(data."+aColumns[i]+");";
+            }
           }
           rowUpdate += "$('.modal-title').text('Edit Product');"+
           "$('#"+col+"').val("+col+");" +

@@ -127,6 +127,22 @@ $dataarr = (json_decode($json, true));
   <script src="js/html2canvas.min.js"></script>
   <br/>
 
+  <style>
+    .modebar-group{
+      margin-left: 4px !important;
+    }
+    .modebar-group:first-child{
+      margin-left: 15px !important;
+      float: right !important;
+    }
+    .modebar-group:first-child>.modebar-btn:nth-child(2) {
+      display: none !important;
+    }
+    .modebar-group:nth-child(5){
+      display: none !important;
+    }
+
+  </style>
 </head>
 <body onresize="Redo_Graph()">
 
@@ -360,6 +376,16 @@ $dataarr = (json_decode($json, true));
 
       $layout .= "var layout = {";
       $layout .= "title: 'Record of Student Results', ";
+      $layout .= "autosize: true,";
+      $layout .= "margin: {";
+      $layout .= "l	:	60, ";
+      $layout .= "r	:	20, ";
+      $layout .= "t	:	120, ";
+      $layout .= "b	:	75, ";
+      $layout .= "pad	:	0, ";
+      $layout .= "autoexpand : true,";
+      $layout .= "}, ";
+
       $layout .= "xaxis: {";
       $layout .= "title: 'Overall Grade', ";
       $layout .= "showgrid: false, ";
@@ -385,25 +411,9 @@ $dataarr = (json_decode($json, true));
     eval(Graph);
     var graphlayout = "<?php echo $layout; ?>";
     eval(graphlayout);
-    if (window.innerWidth > window.innerHeight){
-      layout.width = (window.innerWidth / 1.5);
-      layout.height = (window.innerHeight / 1);
-    }
-    else {
-      layout.width = (window.innerWidth / 1.25);
-      layout.height = (window.innerHeight / 1.5);
-    }
     Plotly.newPlot('Results', data, layout);
 
     function Redo_Graph(){
-      if (window.innerWidth > window.innerHeight){
-        layout.width = (window.innerWidth / 1.5);
-        layout.height = (window.innerHeight / 1.1);
-      }
-      else {
-        layout.width = (window.innerWidth / 1.25);
-        layout.height = (window.innerHeight / 1.5);
-      }
       Plotly.newPlot('Results', data, layout);
     }
 
