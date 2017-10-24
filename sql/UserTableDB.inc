@@ -7,21 +7,20 @@ function LogUser($username, $password){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM UserTable WHERE Username = \"$username\";");
+    $result = $pdo->query("SELECT UserID FROM UserTable WHERE Username = \"$username\" AND Password=\"$password\";");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
   foreach($result as $data){
-    if ($data['Password'] == $password){
-      log_in($data['UserID']);
-      $pdo = null;
-    }
+    log_in($data['UserID']);
+    $pdo = null;
   }
 }
 //Creates an account for the user
 function CreateUser($name, $Username, $password){
   $sql = "INSERT INTO UserTable(Name, Username, Password) VALUES(\"$name\", \"$Username\", \"$password\");";
-  CallDatabase($sql);
+  $connection = mysqli_connect(get_dbServer(), get_dbUsername(), get_dbPassword(), get_dbDatabase());
+  mysqli_query($connection,$sql);
 }
 //Check if the account exist
 function CheckUser($username){

@@ -85,9 +85,9 @@
         </div>
       </div>
       <div class="row" style="padding: 0; padding-left:10px; margin-bottom: 3%">
-        <button type="button" name="Logoutbtn" id="Logoutbtn">Logout</button>
+        <button type="button" name="Logoutbtn" id="Logoutbtn" class="btn btn-primary">Logout</button>
         <form method="POST">
-          <input type="submit" name='Logout' id="Logout" class="btn btn-primary" value='Logout' style="display: none;">
+          <input type="submit" name='logout' id="Logout" value='Logout' style="display: none;">
         </form>
         <script type="text/javascript" language='javascript'>
           $('#Logoutbtn').click(function(){

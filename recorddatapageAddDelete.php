@@ -24,8 +24,8 @@
               }
           }
           $valid = true;
-          for ($i = 0; $i < ($columnNumber + 1); $i += 1){
-            for ($j = 0; $j < ($columnNumber + 1); $j += 1){
+          for ($i = 0; $i < count($aFields); $i += 1){
+            for ($j = 0; $j < count($aFields); $j += 1){
               if ($i != $j){
                 if ($aFields[$i] == $aFields[$j]){
                   $valid = false;
@@ -39,7 +39,7 @@
             gotoPage('datapage');
           }else{
             CallTestAlert('Around 2 or more tables have the same name. Please try again');
-            gotoPage('recorddatapageAddDelete');
+            //gotoPage('recorddatapageAddDelete');
           }
       }
   }
@@ -97,7 +97,7 @@
 </head>
 <body>
   <div id ="Homebutton" style="width: 100%">
-    <form method=POST style="margin-top: 20%;">
+    <form method='POST' style="margin-top: 20%;">
       <div class="container" style="width: 100%;">
         <div class="row" id="divCreate" style="margin-top: 2%; margin-left:2%; margin-right: 2%;">
           <div class="col">
@@ -129,7 +129,7 @@
         <div class="form-group" id="divButtons" style = "margin-top: 1%;margin-right: 21%;display: inline-block;float:left;">
           <button type="button" class="btn btn-primary1" onClick="addField();" style="margin-top: 1%; margin-left: 5%;display: inline-block;">Add Column</button>
           <button type="button" class="btn btn-primary1" onClick='Submission();' style="margin-top: 1%; margin-left: 5%;display: inline-block;">Submit</button>
-          <button type="button" class="btn btn-primary1" id='create_table' style="display:none;">Submit</button>
+          <input type="submit" class="btn btn-primary1" id='create_table' style="display:none;">
         </div>
       </div>
     </form>

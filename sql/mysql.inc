@@ -30,7 +30,9 @@ function log_in($value){
   $_SESSION['UserID'] = $value;
 }
 function log_out(){
-  session_destroy();
+  unset($_SESSION['UserID']);
+  unset($_SESSION['tableid']);
+  unset($_SESSION['graphid']);
 }
 
 function CheckRequestLogout(){
