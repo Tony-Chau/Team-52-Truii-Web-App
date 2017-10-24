@@ -133,7 +133,7 @@ function ResetValueVariousTable($TableID){
 function sqlInsertionString($data, $type){
   if ($type == 'VARCHAR(255)'){
     return "\" " . $data . "\"";
-  }else if ($type == 'DATETIME'){
+  }else if ($type == 'DATETIME' || $type == 'DATE' || $type == 'TIME'){
     $format = new DateTime($data);
     return "\" " . $format->format('Y-m-d H:i:s') . "\"";
   }else{
