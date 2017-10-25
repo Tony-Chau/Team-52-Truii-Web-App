@@ -19,7 +19,7 @@
   for($i = 0; $i < $tsize; $i+=1){
       $tID = $tIDsarr['rows'][$i]['TableID'];
       $tName = $tIDsarr['rows'][$i]['TableName'];
-      $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" name="table_selected" value='.$tID.'> Table '.$tID.': '. $tName .'</button>';
+      $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" name="table_selected" value='.$tID.'>'. $tName .'</button>';
   }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
