@@ -9,6 +9,10 @@ function EnterGraphTable($tableId, $GraphType){
   CallDatabase($sql);
 }
 
+function RemoveTableInGraph($TableID){
+  return "DELETE FROM GraphTable WHERE TableID = $TableID";
+}
+
 function InsertImage($GraphID, $Image){
   $sql = "UPDATE GraphTable SET Image=\"$Image\" WHERE GraphID=$GraphID;";
   CallDatabase($sql);
