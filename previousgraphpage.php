@@ -11,6 +11,8 @@
   CheckRequestLogout();
   navBarCreate('rgb(252, 103, 25)', 'Chart Library');
 
+  $graph_temp = GetGraphImage($_SESSION['graphid']);
+
   $gsize = 0;
   $gotgraphlist = GetGraphTableList();
   if(!empty($gotgraphlist)){
@@ -46,9 +48,7 @@
   }
   else {
 
-
       $graphlist_output = array( 'rows' => $graphlist_columns );
-
       $json = json_encode($graphlist_output);
       $graphlistarr = (json_decode($json, true));
 
@@ -58,7 +58,7 @@
           $output .= '<div class="row" style="margin: 0;">';
           $output .= '<div class="col-sm-12 col-md-4" style="padding: 0; width: 100%;">';
           $output .= '<div class="thumbnail">';
-          $output .= '<canvas id="graph" width="300" height="300"></canvas>';
+          $output .= '<canvas id="graph'.$i.'" width="300" height="300"></canvas>';
           $output .= '<div class="caption">';
           for ($j = 0; $j < $tsize; $j+=1){
               $gtID = $graphlistarr['rows'][$i]['TableID'];
@@ -133,5 +133,43 @@
     </div>
   </div>
   <a href="choosedatapage.php"><div class="addGraph">+</div></a>
+
+  <script>
+
+  $(document).ready(function(){
+      var canvas = document.getElementById('graph1');
+      canvas.width = (window.innerWidth/1.2);
+      canvas.height = (window.innerHeight/2);
+      canvascopy(canvas);
+  });
+
+
+  function canvascopy(canvas){
+      var ctx = canvas.getContext('2d');
+      var DOMURL = window.URL || window.webkitURL || window;
+
+      pngCanvas = "<?php echo $graph_temp[0]; ?>";
+      //alert(pngCanvas);
+      var img = new Image();
+      var svg = dataURLtoBlob(pngCanvas);
+      var url = DOMURL.createObjectURL(svg);
+
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        DOMURL.revokeObjectURL(url);
+      }
+      img.src = url;
+  }
+
+  function dataURLtoBlob(dataurl) {
+      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      while(n--){
+          u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new Blob([u8arr], {type:mime});
+  }
+
+  </script>
 </body>
 </html>

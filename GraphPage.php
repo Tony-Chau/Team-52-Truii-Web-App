@@ -141,10 +141,6 @@ $dataarr = (json_decode($json, true));
       display: none !important;
     }
 
-    #Canvas{
-      /*display: none;*/
-    }
-
   </style>
 </head>
 <body onresize="Redo_Graph()">
@@ -156,12 +152,13 @@ $dataarr = (json_decode($json, true));
 
           <div id="Results" style="margin-top: 10%"></div>
           <button type="button" id="ColorChange" data-toggle="modal" data-target="#tableModal" class="btn btn-info btn-lg" style="font-size: 125%; margin-right: 1%;">Change Color</button>
-          <div id="Canvas">
+          <div id="H2Canvas" style="display: none;"></div>
 
-          </div>
-          <div id="">
+          <form method=POST style="display: none;" id="snapshot">
+            <input type="hidden" name="temp" id="temp" value="" />
+            <input type="submit" name="action" id="action"/>
+          </form>
 
-          </div>
         </div>
       </div>
     </div>
@@ -409,13 +406,13 @@ $dataarr = (json_decode($json, true));
       $layout .= "} };";
 
 
-      $canvas .= "var canvaslayout = {";
+      $canvas .= "var clayout = {";
       $canvas .= "autosize: true,";
       $canvas .= "margin: {";
-      $canvas .= "l	:	25, ";
+      $canvas .= "l	:	0, ";
       $canvas .= "r	:	0, ";
       $canvas .= "t	:	0, ";
-      $canvas .= "b	: 25, ";
+      $canvas .= "b	: 0, ";
       $canvas .= "pad	:	0, ";
       $canvas .= "autoexpand : true,";
       $canvas .= "} };";
@@ -434,45 +431,65 @@ $dataarr = (json_decode($json, true));
     eval(graphlayout);
     var canvaslayout = "<?php echo $canvas; ?>";
     eval(canvaslayout);
-    Plotly.newPlot('Results', data, layout);
-    Plotly.newPlot('Canvas', data, canvaslayout);
-
-    html2canvas(document.getElementById('Canvas'), {
-      onrendered: function(canvas) {
-        canvas.id = 'graph';
-        document.getElementById('Canvas').appendChild(canvas);
-      },
-      width: 300,
-      height: 300
-    });
-
-    $(document).ready(function(){
-      $('#ColorChange').click(function(){
-        $('#table_form')[0].reset();
-        $('.modal-title').text('Change Color');
-      });
-    });
-
-    function getSuccessOutput() {
-        $.ajax({
-            url:'/echo/js/?js=hello%20world!',
-            complete: function (response) {
-                $('#output').html(response.responseText);
-            },
-            error: function () {
-                $('#output').html('Bummer: there was an error!');
-            },
-        });
-        return false;
-    }
 
     function Redo_Graph(){
       Plotly.newPlot('Results', data, layout);
     }
+
+    Plotly.newPlot('Results', data, clayout);
+    html2canvas(document.getElementById('Results'), {
+      onrendered: function(canvas) {
+        canvas.id = 'graph';
+        document.getElementById('H2Canvas').appendChild(canvas);
+      },
+      width: clayout.width,
+      height: clayout.height
+    });
+    Plotly.newPlot('Results', data, layout);
+
+    setTimeout(function() {
+        canvasstart();
+    }, 1000);
+
+    $(document).ready(function(){
+        $('#ColorChange').click(function(){
+          $('#table_form')[0].reset();
+          $('.modal-title').text('Change Color');
+        });
+
+        $(document).on('submit', '#snapshot', function(event){
+            event.preventDefault();
+            var form_data = $(this).serialize();
+            $.ajax({
+                url:"BaseToDB.php",
+                method:"POST",
+                data:form_data,
+                success:function(data)
+                {
+                    alert(data);
+                }
+            });
+        });
+    });
+
+    function cleandataURL(dataurl) {
+        var arr = dataurl.split(','), url = arr[1];
+        return url;
+    }
+
+    function canvasstart() {
+        var canvas = document.getElementById('graph');
+        var pngCanvas = canvas.toDataURL();
+        document.getElementById('temp').value = cleandataURL(pngCanvas);
+        //alert(document.getElementById('temp').value);
+        document.getElementById('action').click();
+    }
+
   </script>
 
 </body>
 </html>
+
 <div id="tableModal" class="modal fade" style="margin: 5%; overflow: hidden;">
   <div class="modal-dialog">
     <form method="post" id="table_form">
@@ -502,7 +519,8 @@ $dataarr = (json_decode($json, true));
                         });
                         </script>';
                 //echo "<div class='sp-replacer sp-light sp-active'></div>";//echo "<input class='jscolor' name='color' id='$colname' value='#000000' style='border-radius: 5px; max-width: 60px' onclick='jscolor.init();'/>";
-              }else{
+              }
+              else{
                 echo "<input type='color' name='color' id='$colname' value='#000000' style='border-radius: 5px;'/>";
               }
 
