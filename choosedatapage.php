@@ -48,6 +48,9 @@
             CallTestAlert('Sorry. The selected table no longer exist. Please select another table');
           }
       }
+      else if (isset($_POST['delete_table'])){
+          DeleteTable($_POST['delete_table']);
+      }
   }
 
 ?>
@@ -75,6 +78,9 @@
           <?php echo $output ?>
         </form>
       </div>
+      <form method="POST" style="display: none;">
+        <button type="submit" name="delete_table" id="delete_table" value="">
+      </form>
 
 
     </div>
@@ -83,7 +89,9 @@
     function DeleteTable(TID){
         if(confirm("The Table will be permanantly deleted. \nAre you Sure?")){
             if(confirm("All data within the table will not be Reclaimable. \nLast Chance")){
-                alert(TID);
+                var d_t = document.getElementById('delete_table');
+                d_t.value = TID;
+                d_t.click();
             }
         }
     }
