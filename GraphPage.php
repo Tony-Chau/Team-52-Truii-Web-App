@@ -473,7 +473,6 @@ $dataarr = (json_decode($json, true));
 
 </body>
 </html>
-
 <div id="tableModal" class="modal fade" style="margin: 5%; overflow: hidden;">
   <div class="modal-dialog">
     <form method="post" id="table_form">
@@ -496,7 +495,13 @@ $dataarr = (json_decode($json, true));
               echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
               echo "<div class='col' style='margin: auto; float: right;'>";
               if (checkPhone() == 'ios'){
-                echo "<input class='jscolor' name='jscolor' id='$colname' value='#000000' style='border-radius: 5px; max-width: 60px'/>";
+                echo "<input type=\"text\" id=\"custom\"/>";
+                echo '<script>
+                        $("#custom").spectrum({
+                            color: "#f00"
+                        });
+                        </script>';
+                //echo "<div class='sp-replacer sp-light sp-active'></div>";//echo "<input class='jscolor' name='color' id='$colname' value='#000000' style='border-radius: 5px; max-width: 60px' onclick='jscolor.init();'/>";
               }else{
                 echo "<input type='color' name='color' id='$colname' value='#000000' style='border-radius: 5px;'/>";
               }
