@@ -26,9 +26,15 @@
   $datatypes .= '<option value="TIME">&#x231A Time</option>';
 
   $INTColumns = 0;
+  $DTAmount = 0;
+  $DTPlace = array();
   for ($i = 1; $i < $size; $i+=1){
       if ('INT' == $arr['rows'][$i]['DataType']){
           $INTColumns += 1;
+      }
+      else if ('DATETIME' == $arr['rows'][$i]['DataType']){
+          array_push($DTPlace, $i-1);
+          $DTAmount += 1;
       }
   }
 
@@ -200,7 +206,7 @@ $(document).ready(function(){
   }
   $aColumn .= "'];";
   ?>;
-  var aCol = "<?php echo $aColumn?>"
+  var aCol = "<?php echo $aColumn?>";
   eval(aCol);
 
   $(document).on('submit', '#table_form', function(event){
@@ -239,6 +245,9 @@ $(document).ready(function(){
     }
   });
 
+
+  var DTAmount = "<?php echo $DTAmount ?>";
+  var DTPlace = <?php echo json_encode($DTPlace); ?>;
   $(document).on("loaded.rs.jquery.bootgrid", function()
   {
     productTable.find(".update").on("click", function(event)
@@ -254,10 +263,19 @@ $(document).ready(function(){
         "{" +
           "$('#tableModal').modal('show');";
           for (var i = 0; i < colSize; i+=1){
-            if (i == 10){
+            var DTTrue = false;
+            for (var j = 0; j < DTAmount; j+=1){
+              if (DTPlace[j] == i){
+                j = DTAmount;
+                DTTrue = true;
+              }
+            }
+            if (DTTrue){
               rowUpdate += "var value = data." + aColumns[i] + ";";
               rowUpdate += "if (!(value == null || value == '')){";
               rowUpdate += "var dates = new Date(value);";
+              //rowUpdate += "dates.setHours(22, -dates.getTimezoneOffset(), 0, 0);";
+              rowUpdate += "alert(dates);";
               rowUpdate += "var format = dates.toISOString();";
               rowUpdate += "var convert = format.replace('.000Z', '');";
               rowUpdate += "$('#"+aColumns[i]+"').val(convert);}";

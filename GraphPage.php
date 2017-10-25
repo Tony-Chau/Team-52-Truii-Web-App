@@ -141,6 +141,10 @@ $dataarr = (json_decode($json, true));
       display: none !important;
     }
 
+    #Canvas{
+      /*display: none;*/
+    }
+
   </style>
 </head>
 <body onresize="Redo_Graph()">
@@ -152,7 +156,12 @@ $dataarr = (json_decode($json, true));
 
           <div id="Results" style="margin-top: 10%"></div>
           <button type="button" id="ColorChange" data-toggle="modal" data-target="#tableModal" class="btn btn-info btn-lg" style="font-size: 125%; margin-right: 1%;">Change Color</button>
+          <div id="Canvas">
 
+          </div>
+          <div id="">
+
+          </div>
         </div>
       </div>
     </div>
@@ -161,6 +170,7 @@ $dataarr = (json_decode($json, true));
 
   $graph = "";
   $layout = "";
+  $canvas = "";
   $x_num = 0;
   $y_num = 0;
   $chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
@@ -397,6 +407,18 @@ $dataarr = (json_decode($json, true));
       $layout .= "zeroline: false, ";
       //$layout .= "fixedrange: true";
       $layout .= "} };";
+
+
+      $canvas .= "var canvaslayout = {";
+      $canvas .= "autosize: true,";
+      $canvas .= "margin: {";
+      $canvas .= "l	:	25, ";
+      $canvas .= "r	:	0, ";
+      $canvas .= "t	:	0, ";
+      $canvas .= "b	: 25, ";
+      $canvas .= "pad	:	0, ";
+      $canvas .= "autoexpand : true,";
+      $canvas .= "} };";
   }
 
 
@@ -410,11 +432,19 @@ $dataarr = (json_decode($json, true));
     eval(Graph);
     var graphlayout = "<?php echo $layout; ?>";
     eval(graphlayout);
+    var canvaslayout = "<?php echo $canvas; ?>";
+    eval(canvaslayout);
     Plotly.newPlot('Results', data, layout);
+    Plotly.newPlot('Canvas', data, canvaslayout);
 
-    function Redo_Graph(){
-      Plotly.newPlot('Results', data, layout);
-    }
+    html2canvas(document.getElementById('Canvas'), {
+      onrendered: function(canvas) {
+        canvas.id = 'graph';
+        document.getElementById('Canvas').appendChild(canvas);
+      },
+      width: 300,
+      height: 300
+    });
 
     $(document).ready(function(){
       $('#ColorChange').click(function(){
@@ -422,6 +452,23 @@ $dataarr = (json_decode($json, true));
         $('.modal-title').text('Change Color');
       });
     });
+
+    function getSuccessOutput() {
+        $.ajax({
+            url:'/echo/js/?js=hello%20world!',
+            complete: function (response) {
+                $('#output').html(response.responseText);
+            },
+            error: function () {
+                $('#output').html('Bummer: there was an error!');
+            },
+        });
+        return false;
+    }
+
+    function Redo_Graph(){
+      Plotly.newPlot('Results', data, layout);
+    }
   </script>
 
 </body>
@@ -449,7 +496,7 @@ $dataarr = (json_decode($json, true));
               echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
               echo "<div class='col' style='margin: auto; float: right;'>";
               if (checkPhone() == 'ios'){
-                echo "<input class='jscolor' name='color' id='$colname' value='#000000' style='border-radius: 5px;'/>";
+                echo "<input class='jscolor' name='jscolor' id='$colname' value='#000000' style='border-radius: 5px; max-width: 60px'/>";
               }else{
                 echo "<input type='color' name='color' id='$colname' value='#000000' style='border-radius: 5px;'/>";
               }
