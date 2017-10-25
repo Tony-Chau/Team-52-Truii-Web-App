@@ -42,11 +42,8 @@
               gotoPage('datapage');
           }
           else {
-              echo "<script language='javascript'>";
-              echo "alert('Sorry, Selected Table No Longer Exists, Please Select Another Table')";
-              echo "</script>";
+            CallTestAlert('Sorry. The selected table no longer exist. Please select another table');
           }
-
       }
   }
 
