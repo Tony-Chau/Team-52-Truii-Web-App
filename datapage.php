@@ -107,7 +107,7 @@
 
         <button id="download" name="download" class="button" style="float: left !important; font-size: 100%; padding:10px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Download</button>
         <button id="resetbtn" name="resetbtn" class="submit" style="margin: auto; font-size: 100%; padding:10px;border-color: Black; border-radius:10px; background-color: Black;color:white;text-align:center;">Reset Table</button>
-        <button id="datapageXY" name="GotoXY" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center;">Create Chart</button>
+        <button id="datapageXY" name="GotoXY" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center; margin-right: 15px;">Create Chart</button>
 
         <form method="POST">
           <input type="submit" id="reset_submit" style="display: none;">

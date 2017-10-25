@@ -19,7 +19,10 @@
   for($i = 0; $i < $tsize; $i+=1){
       $tID = $tIDsarr['rows'][$i]['TableID'];
       $tName = $tIDsarr['rows'][$i]['TableName'];
-      $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" name="table_selected" value='.$tID.'>'. $tName .'</button>';
+      $output .= '<fieldset clase="form-box" style="position: relative; margin-bottom:10% ">';
+      $output .= '<button style="position: absolute; right:-15px; top:-15px; text-align: right;" type="button" class="btn btn-primary" onClick="DeleteTable('.$tID.')">X</button>';
+      $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; padding:10px" name="table_selected" value='.$tID.'>'. $tName .'</button>';
+      $output .= '</fieldset>';
   }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -71,11 +74,19 @@
         <form method="POST">
           <?php echo $output ?>
         </form>
-
       </div>
 
 
     </div>
   </div>
+  <script>
+    function DeleteTable(TID){
+        if(confirm("The Table will be permanantly deleted. \nAre you Sure?")){
+            if(confirm("All data within the table will not be Reclaimable. \nLast Chance")){
+                alert(TID);
+            }
+        }
+    }
+  </script>
 </body>
 </html>

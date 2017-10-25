@@ -11,7 +11,7 @@
   CheckRequestLogout();
   navBarCreate('rgb(252, 103, 25)', 'Chart Library');
 
-  $graph_temp = GetGraphImage($_SESSION['graphid']);
+
 
   $gsize = 0;
   $gotgraphlist = GetGraphTableList();
@@ -52,7 +52,8 @@
       $json = json_encode($graphlist_output);
       $graphlistarr = (json_decode($json, true));
 
-      for($i = 1; $i < $gsize; $i+=1){
+
+      for($i = 0; $i < $gsize; $i+=1){
           $key = 0;
           $output .= '<form method="POST">';
           $output .= '<div class="row" style="margin: 0;">';
@@ -76,6 +77,11 @@
           $output .= '<input type="number" name="graphs_tableid" value='.$tID.' style="display: none"/>';
           $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; margin-bottom:10px; padding:10px" name="graphlist_selected" value='.$gID.'> View </button>';
           $output .= '</div></div></div></div></form>';
+      }
+
+      $graphimage = array();
+      for ($j = 0; $j < $gsize; $j+=1){
+          array_push($graphimage, $graphlistarr['rows'][$j]['Image']);
       }
   }
 
@@ -137,18 +143,23 @@
   <script>
 
   $(document).ready(function(){
-      var canvas = document.getElementById('graph1');
-      canvas.width = (window.innerWidth/1.2);
-      canvas.height = (window.innerHeight/2);
-      canvascopy(canvas);
+      var ImagesAmount = "<?php echo $gsize ?>";
+      var GraphImages = <?php echo json_encode($graphimage); ?>;
+      var GraphCanvas;
+      for(var i = 0; i < ImagesAmount; i+=1){
+          eval("GraphCanvas = document.getElementById('graph"+i+"');");
+          GraphCanvas.width = (window.innerWidth/1.2);
+          GraphCanvas.height = (window.innerHeight/2);
+          canvascopy(GraphCanvas, GraphImages[i]);
+      }
   });
 
 
-  function canvascopy(canvas){
-      var ctx = canvas.getContext('2d');
+  function canvascopy(graphcanvas, graphimage){
+      var ctx = graphcanvas.getContext('2d');
       var DOMURL = window.URL || window.webkitURL || window;
 
-      pngCanvas = "<?php echo $graph_temp[0]; ?>";
+      pngCanvas = graphimage;
       //alert(pngCanvas);
       var img = new Image();
       var svg = dataURLtoBlob(pngCanvas);

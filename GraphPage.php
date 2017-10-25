@@ -335,7 +335,7 @@ $dataarr = (json_decode($json, true));
               else {
                 $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'} ";
               }
-              $graph .= "line: { color: '";
+              $graph .= ", line: { color: '";
               if ($base == 'x'){
                 $graph .= $customarr["rows"][$y_num]["ColourCode"] . "'} ";
               }
@@ -480,7 +480,7 @@ $dataarr = (json_decode($json, true));
     function canvasstart() {
         var canvas = document.getElementById('graph');
         var pngCanvas = canvas.toDataURL();
-        document.getElementById('temp').value = cleandataURL(pngCanvas);
+        document.getElementById('temp').value = pngCanvas;
         //alert(document.getElementById('temp').value);
         document.getElementById('action').click();
     }
@@ -512,7 +512,7 @@ $dataarr = (json_decode($json, true));
               echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
               echo "<div class='col' style='margin: auto; float: right;'>";
               if (checkPhone() == 'ios'){
-                echo "<input type=\"text\" id=\"custom\"/>";
+                echo "<input type=\"text\" id=\"custom\" name=\"color\"/>";
                 echo '<script>
                         $("#custom").spectrum({
                             color: "#f00"
