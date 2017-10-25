@@ -273,9 +273,7 @@ $(document).ready(function(){
             if (DTTrue){
               rowUpdate += "var value = data." + aColumns[i] + ";";
               rowUpdate += "if (!(value == null || value == '')){";
-              rowUpdate += "var dates = new Date(value);";
-              //rowUpdate += "dates.setHours(22, -dates.getTimezoneOffset(), 0, 0);";
-              rowUpdate += "alert(dates);";
+              rowUpdate += "var dates = new Date(value); dates.setUTCHours(22);";
               rowUpdate += "var format = dates.toISOString();";
               rowUpdate += "var convert = format.replace('.000Z', '');";
               rowUpdate += "$('#"+aColumns[i]+"').val(convert);}";
