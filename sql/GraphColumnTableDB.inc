@@ -42,4 +42,5 @@ function ChangeGraphColumn($GraphID, $FieldID, $axis){
   return "UPDATE GraphColumnTable SET FieldID = $FieldID, Axis=\"$axis\" WHERE GraphID=$GraphID;";
 }
 
+
  ?>

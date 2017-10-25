@@ -59,6 +59,7 @@ function RequestVariousTableAsList($TableID, $requestfield){
 function DeleteTable($TableID){
   $sql = DeleteFieldTable($TableID);
   $sql .= DeleteTableInTableList($TableID);
+  $sql .= RemoveTableInGraph($TableID);
   $sql .= "DROP TABLE " . NumberToWordsFormat($TableID) . ";";
   CallDatabase($sql);
 }
