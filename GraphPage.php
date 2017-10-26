@@ -183,7 +183,7 @@ $dataarr = (json_decode($json, true));
       float: right !important;
     }
     .modebar-group:first-child>.modebar-btn:nth-child(2) {
-      /*display: none !important;*/
+      display: none !important;
     }
     .modebar-group:nth-child(5){
       display: none !important;
