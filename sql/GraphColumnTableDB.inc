@@ -8,11 +8,12 @@ function GraphColumnSwitchAxis($result){
   foreach ($result as $data){
     if ($data['Axis'] == 'x'){
       $id = $data['GraphColumnID'];
-      $sql .= "UPDATE GraphColumnTable SET Axis=\"y\" WHERE GraphColumnID=\"$id\";";
+      $sql .= "UPDATE GraphColumnTable SET Axis=\"y\" WHERE GraphColumnID=$id;";
     }else{
-      $sql .= "UPDATE GraphColumnTable SET Axis=\"x\" WHERE GraphColumnID=\"$id\";";
+      $sql .= "UPDATE GraphColumnTable SET Axis=\"x\" WHERE GraphColumnID=$id;";
     }
   }
+  CallTestAlert($sql);
   CallDatabase($sql);
 }
 
