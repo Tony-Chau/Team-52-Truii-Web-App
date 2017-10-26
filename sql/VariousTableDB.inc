@@ -36,6 +36,7 @@ function GetVariousTable($TableID){
   $sql = "SELECT TableName FROM TableList WHERE TableID = $TableID;";
   $gottablename = mysqli_query($connection,$sql);
   $tablename = mysqli_fetch_assoc($gottablename);
+  $tablename = $tablename['TableName'];
   try{
     $result = $pdo->query("SELECT * FROM " . NumberToWordsFormat($TableID) . " ORDER BY $tablename"."ID;");
   }catch (PDOException $e){
