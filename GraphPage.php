@@ -2,7 +2,6 @@
 include 'sql/mysql.inc';
 include 'inc/tools.inc';
 include 'inc/styles_and_scripts.inc';
-include 'inc/ChartValidator.inc';
 include 'sql/Bootgrid/connection.php';
 include 'sql/Bootgrid/getcolumns.php';
 include 'sql/Bootgrid/gettable.php';
@@ -254,8 +253,8 @@ $dataarr = (json_decode($json, true));
   }
   $tName = $tIDsarr['rows'][$key]['TableName'];
 
-  $chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
-  if ($graphtype == $chart_list[8]){
+  $chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Horizontal Bar", "Pie", "Overlaid Area"];
+  if ($graphtype == $chart_list[7]){
       $graph .= "var data = [{";
       $graph .= "type: 'pie', ";
       $graph .= "values:[";
@@ -305,7 +304,7 @@ $dataarr = (json_decode($json, true));
 
 
   }
-  else if ($graphtype == $chart_list[3] || $graphtype == $chart_list[7]){
+  else if ($graphtype == $chart_list[3] || $graphtype == $chart_list[6]){
       $graph .= "var data = [{";
       $graph .= "type: 'bar', ";
       if ($graphtype == 'Bar'){
@@ -506,7 +505,7 @@ $dataarr = (json_decode($json, true));
                 $graph .= $customarr["rows"][$x_num]["ColourCode"] . "'} ";
               }
           }
-          else if ($graphtype == $chart_list[6]){
+          else if ($graphtype == $chart_list[8]){
               $graph .= "fill: '";
               $graph .= $customarr["rows"][$y_num]["ColourCode"];
               $graph .= "', ";
@@ -622,7 +621,7 @@ $dataarr = (json_decode($json, true));
         $('#ChangeXY').click(function(){
           $('#ChangeXYsubmit').click();
           $(this).prop('disabled', true);
-        })
+        });
 
         $('#ValueChange').click(function(){
           window.location.href = 'datapage.php';

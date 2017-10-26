@@ -90,7 +90,7 @@ var x_disabled = [size];
   options.DataType[Number("<?php echo $i;?>")] = "<?php echo $arr['rows'][$i]['DataType']?>";
 "<?php } ?>";
 
-var chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
+var chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Horizontal Bar", "Pie", /*"Overlaid Area"*/];
 function Create_Chart(){
   var BreakPoints = 2;
   var bps = 1;

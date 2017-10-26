@@ -3,29 +3,14 @@
   include 'inc/tools.inc';
   include 'inc/styles_and_scripts.inc';
   include("sql/Bootgrid/connection.php");
-  include("sql/Bootgrid/gettable.php");
-
   CheckMobile();
 
   if (!is_log()){
     gotoPage('Index');
   }
 
-  if ($tsize == 0){
-    gotoPage('previousgraphpage');
-  }
   CheckRequestLogout();
   navBarCreate('rgb(31,194,222)', 'Choose Data Page');
-
-  $output = '';
-  for($i = 0; $i < $tsize; $i+=1){
-      $tID = $tIDsarr['rows'][$i]['TableID'];
-      $tName = $tIDsarr['rows'][$i]['TableName'];
-      $output .= '<fieldset clase="form-box" style="position: relative; margin-bottom:10% ">';
-      $output .= '<button style="position: absolute; right:-15px; top:-15px; text-align: right;" type="button" class="btn btn-primary" onClick="DeleteTable('.$tID.')">X</button>';
-      $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; padding:10px" name="table_selected" value='.$tID.'>'. $tName .'</button>';
-      $output .= '</fieldset>';
-  }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['table_selected'])){
@@ -50,10 +35,29 @@
             CallTestAlert('Sorry. The selected table no longer exist. Please select another table');
           }
       }
-      else if (isset($_POST['delete_table'])){
+      if (isset($_POST['delete_table'])){
           DeleteTable($_POST['delete_table']);
       }
   }
+
+
+  include("sql/Bootgrid/gettable.php");
+
+  if ($tsize == 0){
+    gotoPage('previousgraphpage');
+  }
+
+  $output = '';
+  for($i = 0; $i < $tsize; $i+=1){
+      $tID = $tIDsarr['rows'][$i]['TableID'];
+      $tName = $tIDsarr['rows'][$i]['TableName'];
+      $output .= '<fieldset clase="form-box" style="position: relative; margin-bottom:10% ">';
+      $output .= '<button style="position: absolute; right:-15px; top:-15px; text-align: right;" type="button" class="btn btn-primary" onClick="DeleteTable('.$tID.')">X</button>';
+      $output .= '<button type="submit" style="width: 100%; font-size: 100%; border: solid; border-color: #A9A9A9; border-radius:5px; padding:10px" name="table_selected" value='.$tID.'>'. $tName .'</button>';
+      $output .= '</fieldset>';
+  }
+
+
 
 ?>
 <!DOCTYPE html>

@@ -32,8 +32,12 @@ function GetVariousTable($TableID){
   $link = 'mysql:host=' . get_dbServer() . ';dbname=' . get_dbDatabase();
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $connection = mysqli_connect(get_dbServer(), get_dbUsername(), get_dbPassword(), get_dbDatabase());
+  $sql = "SELECT TableName FROM TableList WHERE TableID = $TableID;";
+  $gottablename = mysqli_query($connection,$sql);
+  $tablename = mysqli_fetch_assoc($gottablename);
   try{
-    $result = $pdo->query("SELECT * FROM " . NumberToWordsFormat($TableID) . ";");
+    $result = $pdo->query("SELECT * FROM " . NumberToWordsFormat($TableID) . " ORDER BY $tablename"."ID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
@@ -63,7 +67,6 @@ function DeleteTable($TableID){
   $sql .= DeleteTableInTableList($TableID);
   $sql .= RemoveTableInGraph($TableID);
   $sql .= "DROP TABLE " . NumberToWordsFormat($TableID) . ";";
-  CallTestAlert($sql);
   CallDatabase($sql);
 }
 

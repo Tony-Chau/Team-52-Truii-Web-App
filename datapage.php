@@ -148,13 +148,13 @@ $(document).ready(function(){
     }else{
       var message = 'Please have ';
       if (numberofints <= 2){
-          message += 'atleast 3 number type inputs';
+          message += 'at least 3 number type inputs';
       }
       if (numberofdata <= 2){
           if (numberofints <= 2){
               message += ' and ';
           }
-          message += 'atleast 3 data entries';
+          message += 'at least 3 data entries';
       }
       message += ' before proceeding';
       alert(message);
