@@ -2,9 +2,10 @@
 include 'sql/mysql.inc';
 include 'inc/tools.inc';
 include 'inc/styles_and_scripts.inc';
-include 'inc/ChartValidator.inc';
 include 'sql/Bootgrid/connection.php';
 include 'sql/Bootgrid/getcolumns.php';
+
+  CheckMobile();
 
   if (!is_log()){
     gotoPage('Index');
@@ -145,13 +146,13 @@ function Create_Axis(axis){
   }
   if (!(chart == 'Pie' || chart == 'Bar' || chart == "Horizontal Bar")){
     if (!check){
-      $('#title-chart').html('<h3><span style="margin-left:5px" id="title">Sorry, but it seems there are no appropiate data types you can select that is suitable for your chart selection. <a href="datapage.php">Click here</a> to go back to your datapage or go back to the chart selection</span></h3>');
+      $('#title-chart').html('<h3><span style="margin-left:5px" id="title">Sorry, but it seems there are no appropiate data types you can select that is suitable for your chart selection. <a href="datapage.php">Click here</a> to go back to your data page or go back to the chart selection</span></h3>');
     }else{
       $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
     }
   }else{
     if (!check){
-      $('#title-chart').html('<h3><span style="margin-left:5px" id="title">Sorry, but it seems there are no appropiate data types you can select that is suitable for your chart selection. <a href="datapage.php">Click here</a> to go back to your datapage or go back to the chart selection</span></h3>');
+      $('#title-chart').html('<h3><span style="margin-left:5px" id="title">Sorry, but it seems there are no appropiate data types you can select that is suitable for your chart selection. <a href="datapage.php">Click here</a> to go back to your data page or go back to the chart selection</span></h3>');
     }
     else if (axis == 'x'){
       $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> Select Value </span></th></tr>');

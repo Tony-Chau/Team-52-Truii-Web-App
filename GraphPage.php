@@ -7,6 +7,8 @@ include 'sql/Bootgrid/connection.php';
 include 'sql/Bootgrid/getcolumns.php';
 include 'sql/Bootgrid/gettable.php';
 
+  CheckMobile();
+
   if (!is_log()){
     gotoPage('Index');
   }
@@ -33,6 +35,20 @@ $json = json_encode($customoutput);
 $customarr = (json_decode($json, true));
 
 
+
+$graphsize = 0;
+$graph_query = getGraphColumn($graphid);
+while($graphfields = $graph_query->fetch(PDO::FETCH_ASSOC))
+{
+    $graphcolumns[] = $graphfields;
+    $graphsize+=1;
+}
+$graphoutput = array( 'rows' => $graphcolumns );
+$json = json_encode($graphoutput);
+$grapharr = (json_decode($json, true));
+
+
+
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['CChange'])){
           $CC_sql = "";
@@ -45,24 +61,32 @@ $customarr = (json_decode($json, true));
                   }
               }
           }
-          if (mysqli_query($connection, $CC_sql)){
-            gotoPage('GraphPage');
+          CallDatabase($CC_sql);
+          gotoPage('GraphPage');
+      }
+      if (isset($_POST['ChangeXYsubmit'])){
+
+          $CXY_sql = '';
+          for($i = 0; $i < $graphsize; $i+=1){
+            $id = $grapharr['rows'][$i]['GraphColumnID'];
+            if ($grapharr['rows'][$i]['Axis'] == 'x'){
+              $CXY_sql .= 'UPDATE GraphColumnTable SET Axis="y" WHERE GraphColumnID='.$id.';';
+            }else{
+              $CXY_sql .= 'UPDATE GraphColumnTable SET Axis="x" WHERE GraphColumnID='.$id.';';
+            }
           }
+          CallDatabase($CXY_sql);
+
+          gotoPage('GraphPage');
       }
   }
 
+
+
+
 $graphtype = RequestGraphTableDetail($graphid, 'GraphType');
 
-$graphsize = 0;
-$graph_query = getGraphColumn($graphid);
-while($graphfields = $graph_query->fetch(PDO::FETCH_ASSOC))
-{
-    $graphcolumns[] = $graphfields;
-    $graphsize+=1;
-}
-$graphoutput = array( 'rows' => $graphcolumns );
-$json = json_encode($graphoutput);
-$grapharr = (json_decode($json, true));
+
 
 $x_axis = array();
 $x_size = 0;
@@ -126,7 +150,7 @@ if(!empty($listresult)){
 }
 else{
     echo "<script language='javascript'>";
-    echo "alert('Table possesses no variables, please include atleast 1 row')";
+    echo "alert('Table possesses no variables, please include atleast 3 row')";
     echo "</script>";
     gotoPage('datapage');
 }
@@ -184,12 +208,17 @@ $dataarr = (json_decode($json, true));
 
           <button id="ValueChange" class="button" style="float: left !important; font-size: 90%; padding:5px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Edit Values</button>
           <?php
-            if ($graphtype == "Pie"){
+            if ($graphtype == "Bar" || $graphtype == "Horizontal Bar" || $graphtype == "Pie"){
                 echo '<button id="ChangeXY" name="ChangeXY" class="button" style="margin: auto; font-size: 90%; padding:5px; border-color:rgb(128,128,128); border-radius:10px; background-color:rgb(128,128,128); color:white;text-align:center;" disabled>Swap XY Values</button>';
+            }
+            else{
+                echo '<button id="ChangeXY" name="ChangeXY" class="button" style="margin: auto; font-size: 90%; padding:5px; border-color:#90B963; border-radius:10px; background-color:#90B963;color:white;text-align:center;">Swap XY Values</button>';
+            }
+
+            if ($graphtype == "Pie"){
                 echo '<button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 90%; padding:5px; border-color:rgb(128,128,128); border-radius:10px; background-color:rgb(128,128,128); color:white; text-align:center; margin-right: 15px;" disabled>Edit Colors</button>';
             }
             else {
-                echo '<button id="ChangeXY" name="ChangeXY" class="button" style="margin: auto; font-size: 90%; padding:5px; border-color:#90B963; border-radius:10px; background-color:#90B963;color:white;text-align:center;">Swap XY Values</button>';
                 echo '<button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 90%; padding:5px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center; margin-right: 15px;">Edit Colors</button>';
             }
            ?>
@@ -198,6 +227,9 @@ $dataarr = (json_decode($json, true));
       </div>
 
       <div id="H2Canvas" style="display: none;"></div>
+      <form method="post">
+          <input type="submit" name="ChangeXYsubmit" id="ChangeXYsubmit" value="ChangeXYsubmit" style="display:none">
+      </form>
       <form method=POST style="display: none;" id="snapshot">
           <input type="hidden" name="temp" id="temp" value="" />
           <input type="submit" name="action" id="action"/>
@@ -587,6 +619,11 @@ $dataarr = (json_decode($json, true));
           $('.modal-title').text('Change Color');
         });
 
+        $('#ChangeXY').click(function(){
+          $('#ChangeXYsubmit').click();
+          $(this).prop('disabled', true);
+        })
+
         $('#ValueChange').click(function(){
           window.location.href = 'datapage.php';
         });
@@ -650,7 +687,7 @@ $dataarr = (json_decode($json, true));
               echo "<div class='row' style='margin: auto'>";
               echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
               echo "<div class='col' style='margin: auto; float: right;' id='CustomColors".$i."'>";
-              if (checkPhone() != 'ios'){
+              if (checkPhone() == 'ios'){
                 echo "<input type='text' id='$colname' name='$colname'/>";
                 echo '<script>';
                 echo '  var C_Color = tinycolor("'.$customarr['rows'][$i]['ColourCode'].'");

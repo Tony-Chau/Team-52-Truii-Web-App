@@ -5,6 +5,8 @@
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/gettable.php");
 
+  CheckMobile();
+
   if (!is_log()){
     gotoPage('Index');
   }

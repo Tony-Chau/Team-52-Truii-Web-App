@@ -5,6 +5,8 @@
   include("sql/Bootgrid/connection.php");
   include("sql/Bootgrid/getcolumns.php");
 
+  CheckMobile();
+
   if (!is_log()){
     gotoPage('Index');
   }
@@ -20,7 +22,7 @@
   $datatypes = '';
   $datatypes .= '<option value="VARCHAR(255)">Text</option>';
   $datatypes .= '<option value="INT"># Numbers</option>';
-  $datatypes .= '<option value="FLOAT">% Percentage</option>';
+  //$datatypes .= '<option value="FLOAT">% Percentage</option>';
   $datatypes .= '<option value="DATETIME">&#x1F5D3 DateTime</option>';
   $datatypes .= '<option value="DATE">&#x1F4C5 Date</option>';
   $datatypes .= '<option value="TIME">&#x231A Time</option>';
@@ -29,7 +31,7 @@
   $DTAmount = 0;
   $DTPlace = array();
   for ($i = 1; $i < $size; $i+=1){
-      if ('INT' == $arr['rows'][$i]['DataType']){
+      if ('INT' == $arr['rows'][$i]['DataType'] || 'FLOAT' == $arr['rows'][$i]['DataType']){
           $INTColumns += 1;
       }
       else if ('DATETIME' == $arr['rows'][$i]['DataType']){
@@ -37,6 +39,10 @@
           $DTAmount += 1;
       }
   }
+
+  $query_row = "SELECT * FROM " . $table;
+  $result_row = mysqli_query($connection, $query_row);
+  $total_records = mysqli_num_rows($result_row);
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       ResetValueVariousTable($_SESSION['tableid']);
@@ -132,13 +138,26 @@ $(document).ready(function(){
     }
   });
 
+
+  var numberofdata = <?php echo $total_records; ?>;
   $('#datapageXY').click(function(){
     //Please make numberofdata equals to the number of data or rows inserted
-    var numberofdata = <?php echo $INTColumns; ?>;
-    if (numberofdata >= 3){
+    var numberofints = <?php echo $INTColumns; ?>;
+    if (numberofints >= 3 && numberofdata >= 3){
       window.location.href = 'datapageXY.php';
     }else{
-      alert('Please have at least 3 numbers or floats types input and atleast 3 data entries before proceeding');
+      var message = 'Please have ';
+      if (numberofints <= 2){
+          message += 'atleast 3 number type inputs';
+      }
+      if (numberofdata <= 2){
+          if (numberofints <= 2){
+              message += ' and ';
+          }
+          message += 'atleast 3 data entries';
+      }
+      message += ' before proceeding';
+      alert(message);
     }
   });
 
@@ -232,6 +251,7 @@ $(document).ready(function(){
         success:function(data)
         {
           //alert(data);
+          numberofdata += 1;
           $(':input[type="submit"]').prop('disabled', false);
           $('#table_form')[0].reset();
           $('#tableModal').modal('hide');
@@ -300,6 +320,7 @@ $(document).ready(function(){
       if(confirm("Are you sure you want to delete this?"))
       {
         $(':input[type="submit"]').prop('disabled', true);
+        numberofdata -= 1;
         var col = "<?php echo $arr['rows'][0]['COLUMN_NAME']; ?>";
         //var col = "<?php //echo $arr['rows'][1]['FieldName']; ?>";
         eval("var " + col + " = $(this).data('row-id');");
@@ -349,7 +370,7 @@ $(document).ready(function(){
     }
     else
     {
-      alert("All Fields are Required");
+      alert("Fields are Required");
     }
   });
 
@@ -410,7 +431,7 @@ $(document).ready(function(){
       }
       else
       {
-        alert("All Fields are Required");
+        alert("Fields are Required");
       }
     }
   });
@@ -434,6 +455,9 @@ $(document).ready(function(){
               echo "<label>Enter " . $colname . "</label>";
 
               if ('INT' == $arr['rows'][$i]['DataType']){
+                  $coltype = 'number';
+              }
+              else if ('FLOAT' == $arr['rows'][$i]['DataType']){
                   $coltype = 'number';
               }
               else if ('DATETIME' == $arr['rows'][$i]['DataType']){

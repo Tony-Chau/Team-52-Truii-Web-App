@@ -4,6 +4,7 @@
   include 'inc/tools.inc';
   include("sql/Bootgrid/connection.php");
 
+  CheckMobile();
 
   if (!is_log()){
     gotoPage('Index');
@@ -71,7 +72,7 @@
      div += "<input type=\"text\" name=\"ColumnTitle" + i + "\" class=\"form-control\" id=\"textinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\" aria-describedby=\"tablename\" placeholder=\"Enter Title\" required></br>";
      div += "<div class=\"form-group\" style=\"margin-bottom: 2%;\"><label for=\"exampleSelect1\" style=\"margin-left: 4%; margin-right: 4%;color: #FFFFFF;\">Unit of Measurement</label>";
      div += "<select name=\"ColumnType" + i + "\" class=\"form-control\" id=\"selectinput" + i + "\" style=\"width: 92%; margin-left: 4%; margin-right: 4%;\">";
-     div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"INT\"># Numbers</option><option value=\"FLOAT\">% Percentage</option><option value=\"DATETIME\">&#x1F5D3 DateTime</option>";
+     div += "<option value=\"VARCHAR(255)\">Text</option><option value=\"INT\"># Numbers</option><option value=\"DATETIME\">&#x1F5D3 DateTime</option>";
      div += "<option value=\"DATE\">&#x1F4C5 Date</option><option value=\"TIME\">&#x231A Time</option></select></div></fieldset>";
      div += "</div>";
      $('#divColumn').append(div);
@@ -117,7 +118,6 @@
                 <select name="ColumnType1" class="form-control" id="selectinput1" style="width: 92%; margin-left: 4%; margin-right: 4%;">
                   <option value="VARCHAR(255)">Text</option>
                   <option value="INT"># Numbers</option>
-                  <option value="FLOAT">% Percentage</option>
                   <option value="DATETIME">&#x1F5D3 DateTime</option>
                   <option value="DATE">&#x1F4C5 Date</option>
                   <option value="TIME">&#x231A Time</option>

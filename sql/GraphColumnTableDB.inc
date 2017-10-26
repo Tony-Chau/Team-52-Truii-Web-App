@@ -3,20 +3,6 @@ function EnterGraphColumnTable($GraphID, $FieldID, $Axis){
   return "INSERT INTO GraphColumnTable(GraphID, FieldID, Axis) VALUES($GraphID, $FieldID, \"$Axis\");";
 }
 
-function GraphColumnSwitchAxis($result){
-  $sql = '';
-  foreach ($result as $data){
-    if ($data['Axis'] == 'x'){
-      $id = $data['GraphColumnID'];
-      $sql .= "UPDATE GraphColumnTable SET Axis=\"y\" WHERE GraphColumnID=$id;";
-    }else{
-      $sql .= "UPDATE GraphColumnTable SET Axis=\"x\" WHERE GraphColumnID=$id;";
-    }
-  }
-  CallTestAlert($sql);
-  CallDatabase($sql);
-}
-
 function getGraphColumn($GraphID){
   $sql = "SELECT * FROM GraphColumnTable WHERE GraphID = $GraphID;";
   $dbUser = get_dbUsername();
@@ -30,9 +16,6 @@ function getGraphColumn($GraphID){
     echo $e->getMessage();
   }
   $pdo=null;
-  foreach($result as $data){
-    CallTestAlert($data['Axis']);
-  }
   return $result;
 }
 

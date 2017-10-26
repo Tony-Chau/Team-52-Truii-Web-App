@@ -12,6 +12,7 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
   }
   $sql .= EnterTable($TableName);
   $sql .= EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType);
+  CallTestAlert($sql);
   CallDatabase($sql);
 }
 

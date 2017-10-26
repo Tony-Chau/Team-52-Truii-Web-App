@@ -12,11 +12,11 @@ function navBarCreate($ColorCode, $currentpage){
                 <a href='' onclick='window.history.back();return false;'>
                         <ul><li style='margin-top:-5px' class='fa fa-angle-left fa-3x'></li></ul></a></div>
                         <div style='margin-left:22.5%;margin-bottom:1%;'>
-                        <a href='recorddatapageAddDelete'>
+                        <a href='recorddatapageAddDelete.php'>
                                 <ul><li style='margin-top:-3px;' class='fa fa-table fa-3x'></br></li></ul></a>
                         </div>
                         <div style='margin-left:55%;'>
-                        <a href='previousgraphpage'>
+                        <a href='previousgraphpage.php'>
                                 <ul><li style='margin-top:-3px;' class='fa fa-bar-chart fa-3x'></br></li></ul></a>
                       </div>";
                 $distance = '-15px';
