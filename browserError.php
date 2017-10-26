@@ -1,1 +1,1 @@
-Sorry, but this TruiiMobile website is only accessible to mobile devices only.
+Sorry, but this website can only be accessible to mobile devices only.
