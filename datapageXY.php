@@ -125,11 +125,13 @@ function Create_Axis(axis){
   var bps = 2;
   var point = 0;
   var outputx = '<tr>';
+  var check = false;
   for (var i = 1; i < size; i += 1){
     var cName = options.FieldName[i];
     if (ChartValidate(chart, axis, options.DataType[i])){
       if (x_disabled[i]){
         point += 1;
+        check = true;
         outputx  += '<td><button onclick="'+axis+'_selection(' + i + ');" class="btn btn-default original-btn-'+axis+'" value="'+ cName +'" name="'+axis+'-'+ cName +'" id="'+axis+'-axis-button' + i +'" style="width: 100%"><span style="font-size: 100%;" disabled>'+ cName + '</span></button></td>';
       }
     }
@@ -142,9 +144,16 @@ function Create_Axis(axis){
     }
   }
   if (!(chart == 'Pie' || chart == 'Bar' || chart == "Horizontal Bar")){
-    $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
+    if (!check){
+      $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title">Sorry, but it seems there are no appropiate data types you can select that is suitable for your chart selection. <a href="datapage.php">Click here</a> to go back to your datapage or go back to the chart selection</span></th></tr>');
+    }else{
+      $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> '+axis.toUpperCase()+'-Axis </span></th></tr>');
+    }
   }else{
-    if (axis == 'x'){
+    if (!check){
+      $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title">Sorry, but it seems there are no appropiate data types you can select that is suitable for your chart selection. <a href="datapage.php">Click here</a> to go back to your datapage or go back to the chart selection</span></th></tr>');
+    }
+    else if (axis == 'x'){
       $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> Select Value </span></th></tr>');
     }else{
       $('#title-chart').html('<tr><th><span style="margin-left:5px" id="title"> Select Title </span></th></tr>');
