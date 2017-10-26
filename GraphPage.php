@@ -5,6 +5,7 @@ include 'inc/styles_and_scripts.inc';
 include 'inc/ChartValidator.inc';
 include 'sql/Bootgrid/connection.php';
 include 'sql/Bootgrid/getcolumns.php';
+include 'sql/Bootgrid/gettable.php';
 
   if (!is_log()){
     gotoPage('Index');
@@ -45,7 +46,7 @@ $customarr = (json_decode($json, true));
               }
           }
           if (mysqli_query($connection, $CC_sql)){
-            CallTestAlert('works');
+            gotoPage('GraphPage');
           }
       }
   }
@@ -175,16 +176,24 @@ $dataarr = (json_decode($json, true));
         <div class="col">
 
           <div id="Results" style="margin-top: 10%"></div>
-          <button type="button" id="ColorChange" data-toggle="modal" data-target="#tableModal" class="btn btn-info btn-lg" style="font-size: 125%; margin-right: 1%;">Change Color</button>
-          <div id="H2Canvas" style="display: none;"></div>
-
-          <form method=POST style="display: none;" id="snapshot">
-            <input type="hidden" name="temp" id="temp" value="" />
-            <input type="submit" name="action" id="action"/>
-          </form>
 
         </div>
       </div>
+      <div class="row" style="margin-bottom: 20px;" align="center">
+        <div class="col">
+
+          <button id="ValueChange" class="button" style="float: left !important; font-size: 100%; padding:10px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Change Values</button>
+          <button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center; margin-right: 15px;">Change Color</button>
+
+        </div>
+      </div>
+
+      <div id="H2Canvas" style="display: none;"></div>
+      <form method=POST style="display: none;" id="snapshot">
+          <input type="hidden" name="temp" id="temp" value="" />
+          <input type="submit" name="action" id="action"/>
+      </form>
+
     </div>
   </div>
   <?php
@@ -404,37 +413,57 @@ $dataarr = (json_decode($json, true));
       }
       $graph .= "]; ";
 
+
+      for ($j = 0; $j < $tsize; $j+=1){
+          $gtID = $_SESSION['tableid'];
+          $tID = $tIDsarr['rows'][$j]['TableID'];
+          if ($gtID == $tID){
+              $key = $j;
+          }
+      }
+      $tName = $tIDsarr['rows'][$key]['TableName'];
+
       $layout .= "var layout = {";
-      $layout .= "title: 'Record of Student Results', ";
-      $layout .= "autosize: true,";
+      $layout .= "title: '";
+      $layout .= $tName . " Table's " . $graphtype . " Graph";
+      $layout .= "', ";
+      $layout .= "autosize: true, ";
+      $layout .= "showlegend: true, ";
+	    $layout .= "legend: {'orientation': 'h', ";
+      $layout .= "}, ";
       $layout .= "margin: {";
       $layout .= "l	:	60, ";
       $layout .= "r	:	20, ";
       $layout .= "t	:	120, ";
-      $layout .= "b	:	75, ";
+      $layout .= "b	:	0, ";
       $layout .= "pad	:	0, ";
       $layout .= "autoexpand : true,";
       $layout .= "}, ";
 
       $layout .= "xaxis: {";
-      $layout .= "title: 'Overall Grade', ";
-      $layout .= "showgrid: false, ";
+      $layout .= "title: '";
+
+      $layout .= "', ";
+      $layout .= "showgrid: true, ";
       $layout .= "zeroline: false, ";
       //$layout .= "fixedrange: true";
       $layout .= "}, ";
       $layout .= "yaxis: {";
-      $layout .= "title: 'Year', ";
-      $layout .= "showline: false, ";
+      $layout .= "title: '";
+
+      $layout .= "', ";
+      $layout .= "showline: true, ";
       $layout .= "zeroline: false, ";
       //$layout .= "fixedrange: true";
       $layout .= "} };";
 
 
       $canvas .= "var clayout = {";
-      $canvas .= "autosize: true,";
+      $canvas .= "showlegend: false, ";
+      $canvas .= "autosize: true, ";
       $canvas .= "margin: {";
       $canvas .= "l	:	0, ";
-      $canvas .= "r	:	0, ";
+      $canvas .= "r	:	5, ";
       $canvas .= "t	:	0, ";
       $canvas .= "b	: 0, ";
       $canvas .= "pad	:	0, ";
@@ -474,6 +503,10 @@ $dataarr = (json_decode($json, true));
         $('#ColorChange').click(function(){
           $('#table_form')[0].reset();
           $('.modal-title').text('Change Color');
+        });
+
+        $('#ValueChange').click(function(){
+          window.location.href = 'datapage.php';
         });
 
         $(document).on('submit', '#snapshot', function(event){
@@ -559,7 +592,14 @@ $dataarr = (json_decode($json, true));
           <br />
         </div>
         <div class="modal-footer">
-          <input type="submit" name="CChange" id="CChange" class="btn btn-success" value="Change Color"/>
+          <button type="button" id="ChangeButton" class="btn btn-success">Change Color</button>
+          <input type="submit" name="CChange" id="CChange" class="btn btn-success" value="Change Color" style="display: none;"/>
+          <script>
+            $('#ChangeButton').click(function(){
+                $('#CChange').click();
+                $(this).prop('disabled', true);
+            });
+          </script>
         </div>
       </div>
     </form>

@@ -5,7 +5,7 @@ function gotoPage($page){
 
 function navBarCreate($ColorCode, $currentpage){
   $distance = '-5px';
-  $nav = " <nav class='navbar navbar-default' style='width: 100%;position:fixed;background-color:$ColorCode;padding-bottom:2%;height:40px;z-index: 5;margin-left:-20px;margin-right:-20px;list-style-type:none;'>
+  $nav = " <nav class='navbar navbar-default' style='width: 100%;position:fixed;background-color:$ColorCode;padding-bottom:2%;height:40px;z-index: 1002;margin-left:-20px;margin-right:-20px;list-style-type:none;'>
               <div class='container-fluid'>";
               if ($currentpage != 'Home'){
                 $nav .= "<div>
