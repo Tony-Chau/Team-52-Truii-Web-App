@@ -183,7 +183,14 @@ $dataarr = (json_decode($json, true));
         <div class="col">
 
           <button id="ValueChange" class="button" style="float: left !important; font-size: 100%; padding:10px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Change Values</button>
-          <button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center; margin-right: 15px;">Change Color</button>
+          <?php
+            if ($graphtype == "Pie"){
+                echo '<button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(128,128,128); border-radius:10px; background-color:rgb(128,128,128); color:white; text-align:center; margin-right: 15px;" disabled>Change Color</button>';
+            }
+            else {
+                echo '<button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center; margin-right: 15px;">Change Color</button>';
+            }
+           ?>
 
         </div>
       </div>
@@ -600,11 +607,7 @@ $dataarr = (json_decode($json, true));
 
     });
 
-    var graphhtype = "<?php echo $graphtype; ?>";
-    alert(graphtype);
-    if (graphtype == "Pie"){
-      $("#ColorChange").attr('disabled', 'disabled');
-    }
+
 
     function cleandataURL(dataurl) {
         var arr = dataurl.split(','), url = arr[1];
