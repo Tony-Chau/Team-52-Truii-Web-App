@@ -182,13 +182,15 @@ $dataarr = (json_decode($json, true));
       <div class="row" style="margin-bottom: 20px;" align="center">
         <div class="col">
 
-          <button id="ValueChange" class="button" style="float: left !important; font-size: 100%; padding:10px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Change Values</button>
+          <button id="ValueChange" class="button" style="float: left !important; font-size: 90%; padding:5px; border-color:rgb(31,194,222); border-radius:10px; background-color:rgb(31,194,222); color:white; text-align:center;">Edit Values</button>
           <?php
             if ($graphtype == "Pie"){
-                echo '<button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(128,128,128); border-radius:10px; background-color:rgb(128,128,128); color:white; text-align:center; margin-right: 15px;" disabled>Change Color</button>';
+                echo '<button id="ChangeXY" name="ChangeXY" class="button" style="margin: auto; font-size: 90%; padding:5px; border-color:rgb(128,128,128); border-radius:10px; background-color:rgb(128,128,128); color:white;text-align:center;" disabled>Swap XY Values</button>';
+                echo '<button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 90%; padding:5px; border-color:rgb(128,128,128); border-radius:10px; background-color:rgb(128,128,128); color:white; text-align:center; margin-right: 15px;" disabled>Edit Colors</button>';
             }
             else {
-                echo '<button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 100%; padding:10px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center; margin-right: 15px;">Change Color</button>';
+                echo '<button id="ChangeXY" name="ChangeXY" class="button" style="margin: auto; font-size: 90%; padding:5px; border-color:#90B963; border-radius:10px; background-color:#90B963;color:white;text-align:center;">Swap XY Values</button>';
+                echo '<button id="ColorChange" data-toggle="modal" data-target="#tableModal" class="button" style="float: right !important; font-size: 90%; padding:5px; border-color:rgb(252,103,25); border-radius:10px; background-color:rgb(252,103,25); color:white; text-align:center; margin-right: 15px;">Edit Colors</button>';
             }
            ?>
 
@@ -648,8 +650,7 @@ $dataarr = (json_decode($json, true));
               echo "<div class='row' style='margin: auto'>";
               echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
               echo "<div class='col' style='margin: auto; float: right;' id='CustomColors".$i."'>";
-              if (checkPhone() == 'ios'){
-              // if ($i == 0){
+              if (checkPhone() != 'ios'){
                 echo "<input type='text' id='$colname' name='$colname'/>";
                 echo '<script>';
                 echo '  var C_Color = tinycolor("'.$customarr['rows'][$i]['ColourCode'].'");
