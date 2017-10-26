@@ -42,7 +42,7 @@ function CallTestAlert($message){
 function ConvertDatatoCSV($FieldName_Array, $Value_Array, $length){
   $csv = '';
   $Fieldlength =  count($FieldName_Array);
-  for ($i = 0; $i < $Fieldlength; $i += 1){
+  for ($i = 0; $i < $Fieldlength + 1; $i += 1){
     for ($j = 0; $j < $length; $j += 1){
       $word = $Value_Array[$i][$j];
       if ($j == $length - 1){
