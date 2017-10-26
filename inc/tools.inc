@@ -39,17 +39,10 @@ function CallTestAlert($message){
 }
 
 
-function ConvertDatatoCSV($FieldName_Array, $Value_Array, $length){
+function ConvertDatatoCSV($FieldName_Array, $Value_Array){
   $csv = '';
   $Fieldlength =  count($FieldName_Array);
-  for ($i = 0; $i < $Fieldlength; $i += 1){
-    if ($i == $length - 1){
-      $csv .= $FieldName_Array[$i] . "\n";
-    }else{
-      $csv .= $FieldName_Array[$i] . ',';
-    }
-  }
-  for ($i = 0; $i < $Fieldlength; $i += 1){
+  for ($i = 0; $i < $Fieldlength + 1; $i += 1){
     for ($j = 0; $j < $length; $j += 1){
       $word = $Value_Array[$i][$j];
       if ($j == $length - 1){
@@ -69,6 +62,34 @@ function ConvertDatatoCSV($FieldName_Array, $Value_Array, $length){
   }
   return $csv;
 }
+
+// function ConvertDatatoCSV($FieldName_Array, $Value_Array){
+//      $csv = '';
+//     $list = array();
+//     $length =  count($FieldName_Array);
+//     for ($i = 0; $i < $length; $i += 1){
+//       if ($i == $length - 1){
+//         $csv .= $FieldName_Array[$i];
+//       }else{
+//         $csv .= $FieldName_Array[$i] . ', ';
+//       }
+//     }
+//     array_push($list, $csv);
+//     $csv = '';
+//     for ($i = 0; $i < $length; $i += 1){
+//       for ($j = 0; $j < $length; $j += 1){
+//         if ($j == $length - 1){
+//           $csv .= $Value_Array[$i][$j];
+//         }else{
+//           $csv .= $Value_Array[$i][$j] . ", ";
+//         }
+//       }
+//       array_push($list, $csv);
+//       $csv = '';
+//     }
+//     // $list = array_reverse($list);
+//     return $list;
+//   }
 
 function checkWord($word){
   if (!is_numeric($word)){

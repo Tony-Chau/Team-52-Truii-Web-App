@@ -35,15 +35,16 @@ CheckRequestLogout();
     $count += 1;
   }
 
-  $TableNames = 'file';
-  $json = '' . json_encode($ValueResult);
-  $json_dec = json_decode ($json);
+  // $TableNames = 'file';
+  // $json = '' . json_encode($ValueResult);
+  // $json_dec = json_decode ($json);
   $filename =  rand(100000,999999) . '.csv';
-  $handle = fopen($filename, 'w');
-  foreach($json_dec as $row){
-    fputcsv($handle, $row);
-  }
-  fclose($handle);
+  // $handle = fopen($filename, 'w');
+  // foreach($json_dec as $row){
+  //   fputcsv($handle, $row);
+  // }
+  // fclose($handle);
+  file_put_contents($filename, ConvertDatatoCSV($FieldResult, $ValueResult));
   header('Content-Type: application/octet-stream');
   header('Content-Disposition: attachment; filename='.basename($filename));
   header('Expires: 0');

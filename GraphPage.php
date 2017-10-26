@@ -610,7 +610,7 @@ $dataarr = (json_decode($json, true));
 
     setTimeout(function() {
         canvasstart();
-    }, 15000);
+    }, 5000);
 
     $(document).ready(function(){
         $('#ColorChange').click(function(){
