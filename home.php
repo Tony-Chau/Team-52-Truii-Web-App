@@ -23,13 +23,13 @@
 
 
   <div id ="Homebutton">
-    <div class= "container" style="margin-top: 20%">
+    <div class= "container" style="margin-top: 70px">
       <div class="row" style="margin: 0">
         <div class="col">
 
           <div align="center">
             <a href='previousgraphpage.php' style="text-decoration:none;">
-              <input type="image" src="images//graphmarker.png" name="image" style="width: 75%; height: 30%"><br>
+              <input type="image" src="images//graphmarker.png" name="image" style="width: 225px; height: 150px"><br>
               <h1 style="color:#EF6724;" style='margin-left:5%;'> <b style="font-size: 150%;">Chart Marker</b> </h1>
             </a>
           </div>
@@ -41,7 +41,7 @@
 
           <div align="center">
             <a href='recorddatapageAddDelete.php' style="text-decoration:none;">
-              <br><input type="image" src="images//recorddata.png" name="image" style="width: 75%; height: 30%"><br>
+              <br><input type="image" src="images//recorddata.png" name="image" style="width: 225px; height: 150px"><br>
               <h1 style="color:#0ABFDD;" style='margin-left:5%;'> <b style="font-size: 150%;">Record Data</b> </h1>
             </a>
           </div>
