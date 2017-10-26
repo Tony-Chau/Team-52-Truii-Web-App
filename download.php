@@ -14,7 +14,6 @@ CheckRequestLogout();
     array_push($FieldResult, $data['FieldName']);
   }
   $VariousTable = GetVariousTable($TableID);
-  $length = $VariousTable->rowCount();
   $ValueResult = array();
   $count = 0;
   array_push($ValueResult, $FieldResult);
@@ -30,11 +29,14 @@ CheckRequestLogout();
           array_push($Values, '');
         }
       }
+      if ($FieldResult[$i] == $data[$FieldResult[$i]]){
+        array_push($Values, '');
+      }
     }
     array_push($ValueResult, $Values);
     $count += 1;
   }
-
+  print_r($ValueResult);
   // $TableNames = 'file';
   // $json = '' . json_encode($ValueResult);
   // $json_dec = json_decode ($json);
@@ -44,7 +46,7 @@ CheckRequestLogout();
   //   fputcsv($handle, $row);
   // }
   // fclose($handle);
-  file_put_contents($filename, ConvertDatatoCSV($FieldResult, $ValueResult, $length));
+  file_put_contents($filename, ConvertDatatoCSV($FieldResult, $ValueResult));
   header('Content-Type: application/octet-stream');
   header('Content-Disposition: attachment; filename='.basename($filename));
   header('Expires: 0');

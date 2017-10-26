@@ -39,26 +39,26 @@ function CallTestAlert($message){
 }
 
 
-function ConvertDatatoCSV($FieldName_Array, $Value_Array, $length){
+function ConvertDatatoCSV($FieldName_Array, $Value_Array){
   $csv = '';
   $Fieldlength =  count($FieldName_Array);
-  for ($i = 0; $i < $Fieldlength + 1; $i += 1){
-    for ($j = 0; $j < $length; $j += 1){
+  for($i = 0; $i < $Fieldlength; $i += 1){
+    if ($i == $Fieldlength - 1){
+      $csv .= checkWord($FieldName_Array[$i]) . "\n";
+    }else{
+      $csv .= checkWord($FieldName_Array[$i]) . ",";
+    }
+  }
+  for ($i = 1; $i < count($Value_Array); $i += 1){
+    for ($j = 0; $j < $Fieldlength; $j += 1){
       $word = $Value_Array[$i][$j];
-      if ($j == $length - 1){
-        if ($word == ''){
-          $csv .= "\n";
-        }else{
-          $csv .= checkWord($word) . "\n";
-        }
+      if ($j == $Fieldlength - 1){
+        $csv .= checkWord($word) . "\n";
       }else{
-        if ($word == ''){
-          $csv .= ",";
-        }else{
-          $csv .= checkWord($word) . ",";
-        }
+        $csv .= checkWord($word) . ",";
       }
     }
+
   }
   return $csv;
 }

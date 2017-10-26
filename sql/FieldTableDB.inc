@@ -20,7 +20,7 @@ function GetFieldTableList($TableID){
   $pdo = new PDO($link, $dbUser, $dbPassword);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try{
-    $result = $pdo->query("SELECT * FROM FieldTable WHERE TableID = $TableID;");
+    $result = $pdo->query("SELECT * FROM FieldTable WHERE TableID = $TableID ORDER BY FieldID;");
   }catch (PDOException $e){
     echo $e->getMessage();
   }
