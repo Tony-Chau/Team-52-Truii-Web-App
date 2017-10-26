@@ -16,8 +16,8 @@ include 'sql/Bootgrid/getcolumns.php';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['chart'])){
           $charttype = $_POST['chart'];
+          EnterGraphTable($_SESSION['tableid'], $charttype);
           $ID_Graph = GetLastGraphTableID();
-          $sql = EnterGraphTable($_SESSION['tableid'], $charttype);
           for ($i = 1; $i < $size; $i+=1){
               $fID = $arr['rows'][$i]['FieldID'];
               $randcolour = RandomColourGenerator();

@@ -113,7 +113,7 @@ function GetLastGraphTableID(){
     echo $e->getMessage();
   }
   foreach ($result as $data){
-    return $data['GraphID'] + 1;
+    return $data['GraphID'];
   }
   return 1;
 }
