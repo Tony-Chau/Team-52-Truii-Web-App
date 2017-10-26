@@ -5,7 +5,7 @@ function EnterCustomFieldTable($FieldID, $GraphID, $ColourCode){
 }
 
 //Update the colour code
-function UpdateCustomFieldColourCode($FieldID, $CustomFieldID){
+function UpdateCustomFieldColourCode($CustomFieldID, $ColourCode){
   return "UPDATE CustomFieldTable SET ColourCode=\"$ColourCode\" WHERE CustomFieldID=$CustomFieldID);";
 }
 

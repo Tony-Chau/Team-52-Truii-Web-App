@@ -36,13 +36,9 @@ $customarr = (json_decode($json, true));
       if (isset($_POST['CChange'])){
           $CC_sql = "";
           for($i = 0; $i < $customsize; $i+=1){
-              for ($j=1; $j < $size; $j+=1) {
-                  if ($customarr['rows'][$i]['FieldID'] == $arr['rows'][$j]['FieldID']){
-                      $CFid = $customarr['rows'][$i]['CustomFieldID'];
-                      $C_Code = $_POST[$arr['rows'][$j]['FieldName']];
-                      $CC_sql .= UpdateCustomFieldColourCode($CFid, $C_Code);
-                  }
-              }
+              $CFid = $customarr['rows'][$i]['CustomFieldID'];
+              $C_Code = $_POST["ColorRGB_$i"];
+              $CC_sql .= UpdateCustomFieldColourCode($CFid, $C_Code);
           }
           if (mysqli_query($connection, $CC_sql)){
             CallTestAlert('works');
@@ -523,7 +519,7 @@ $dataarr = (json_decode($json, true));
         <div class="modal-body" style="overflow-y: scroll !important;">
           <?php
           echo "<div class='container' style='margin: auto;'><form method='POST'>";
-          for($i = 0; $i < $graphsize - 1; $i+=1){
+          for($i = 0; $i < $customsize; $i+=1){
               if ($base == 'x'){
                   $colname = $y_axis[$i];
               }
@@ -532,13 +528,13 @@ $dataarr = (json_decode($json, true));
               }
               echo "<div class='row' style='margin: auto'>";
               echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
-              echo "<div class='col' style='margin: auto; float: right;' id='CustomColors".$i."'>";
+              echo "<div class='col' style='margin: auto; float: right;' id='CustomColors'>";
               if (checkPhone() == 'ios'){
               // if ($i == 0){
-                echo "<input type='text' id='$colname' name='$colname'/>";
+                echo "<input type='text' id='Color".$i."'/>";
                 echo '<script>';
                 echo '  var C_Color = tinycolor("'.$customarr['rows'][$i]['ColourCode'].'");
-                        $("#'.$colname.'").spectrum({
+                        $("#Color'.$i.'").spectrum({
                             color: C_Color.toHexString()
                         });
                       </script>';
@@ -547,8 +543,8 @@ $dataarr = (json_decode($json, true));
                   echo '<script>';
                   echo '  var C_Color = tinycolor("'.$customarr['rows'][$i]['ColourCode'].'");';
                   echo '  var HexColor = C_Color.toHexString();';
-                  echo "  var input = '<input type=\'color\' name=\'$colname\' value=\''+HexColor+'\' style=\'border-radius: 5px;\'/>';";
-                  echo "  $('#CustomColors".$i."').append(input);";
+                  echo "  var input = '<input type=\'color\' id=\'Color".$i."\' value=\''+HexColor+'\' style=\'border-radius: 5px;\'/>';";
+                  echo "  $('#CustomColors').append(input);";
                   echo '</script>';
               }
 
@@ -559,7 +555,25 @@ $dataarr = (json_decode($json, true));
           <br />
         </div>
         <div class="modal-footer">
-          <input type="submit" name="CChange" id="CChange" class="btn btn-success" value="Change Color"/>
+          <button type="button" id="ChangeButton" class="btn btn-success">Change Color</button>
+          <?php
+            for($i = 0; $i < $customsize; $i+=1){
+              echo "<input type='hidden' name='ColorRGB_".$i."' id='ColorRGB_".$i."' value=''/>";
+            }
+           ?>
+           <script>
+              $('#ChangeButton').click(function(){
+                  var colorAmount = "<?php echo $customsize ?>";
+                  for (var i = 0; i < colorAmount; i+=1){
+                      var ColorHex = tinycolor($("#Color"+i+"").val());
+                      var RGBColor = ColorHex.toRgbString();
+                      document.getElementById('ColorRGB'+i).value = RGBColor;
+                  }
+                  $('#CChange').click();
+                  $(this).prop('disabled', true);
+              });
+           </script>
+          <input type="submit" name="CChange" id="CChange" value="Change Color" style="display: none;"/>
         </div>
       </div>
     </form>
