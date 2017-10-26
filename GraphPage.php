@@ -160,7 +160,7 @@ $dataarr = (json_decode($json, true));
       float: right !important;
     }
     .modebar-group:first-child>.modebar-btn:nth-child(2) {
-      display: none !important;
+      /*display: none !important;*/
     }
     .modebar-group:nth-child(5){
       display: none !important;
@@ -203,6 +203,16 @@ $dataarr = (json_decode($json, true));
   $canvas = "";
   $x_num = 0;
   $y_num = 0;
+
+  for ($j = 0; $j < $tsize; $j+=1){
+      $gtID = $_SESSION['tableid'];
+      $tID = $tIDsarr['rows'][$j]['TableID'];
+      if ($gtID == $tID){
+          $key = $j;
+      }
+  }
+  $tName = $tIDsarr['rows'][$key]['TableName'];
+
   $chart_list = ["Scatter plot", "Line Dash", "Bubble", "Bar", "Scatter Line", "Line", "Overlaid Area", "Horizontal Bar", "Pie"];
   if ($graphtype == $chart_list[8]){
       $graph .= "var data = [{";
@@ -224,9 +234,33 @@ $dataarr = (json_decode($json, true));
       }
       $graph .= "'] }]; ";
 
+
       $layout .= "var layout = {";
-      $layout .= "title: 'Record of Student Results' ";
+      $layout .= "title: '";
+      $layout .= $tName . " Tables " . $graphtype . " Graph";
+      $layout .= "', ";
+      $layout .= "autosize: true, ";
+      $layout .= "margin: {";
+      $layout .= "l	:	50, ";
+      $layout .= "r	:	30, ";
+      $layout .= "t	:	100, ";
+      $layout .= "b	:	0, ";
+      $layout .= "pad	:	0, ";
+      $layout .= "autoexpand : true,";
+      $layout .= "}, ";
       $layout .= "};";
+
+      $canvas .= "var clayout = {";
+      $canvas .= "showlegend: false, ";
+      $canvas .= "autosize: true, ";
+      $canvas .= "margin: {";
+      $canvas .= "l	:	0, ";
+      $canvas .= "r	:	5, ";
+      $canvas .= "t	:	0, ";
+      $canvas .= "b	: 0, ";
+      $canvas .= "pad	:	0, ";
+      $canvas .= "autoexpand : true,";
+      $canvas .= "} };";
 
 
   }
@@ -269,8 +303,43 @@ $dataarr = (json_decode($json, true));
       $graph .= " }]; ";
 
       $layout .= "var layout = {";
-      $layout .= "title: 'Record of Student Results' ";
-      $layout .= "};";
+      $layout .= "title: '";
+      $layout .= $tName . " Tables " . $graphtype . " Graph";
+      $layout .= "', ";
+      $layout .= "autosize: true, ";
+      $layout .= "margin: {";
+      $layout .= "l	:	60, ";
+      $layout .= "r	:	40, ";
+      $layout .= "t	:	100, ";
+      $layout .= "b	:	60, ";
+      $layout .= "pad	:	0, ";
+      $layout .= "autoexpand : true,";
+      $layout .= "}, ";
+      $layout .= "xaxis: {";
+      $layout .= "title: '";
+      if ($graphtype == 'Horizontal Bar'){
+          $layout .= $x_axis[$x_num];
+      }
+      $layout .= "'}, ";
+      $layout .= "yaxis: {";
+      $layout .= "title: '";
+      if ($graphtype == 'Bar'){
+          $layout .= $x_axis[$x_num];
+      }
+      $layout .= "', ";
+      $layout .= "} };";
+
+      $canvas .= "var clayout = {";
+      $canvas .= "showlegend: false, ";
+      $canvas .= "autosize: true, ";
+      $canvas .= "margin: {";
+      $canvas .= "l	:	0, ";
+      $canvas .= "r	:	5, ";
+      $canvas .= "t	:	0, ";
+      $canvas .= "b	: 0, ";
+      $canvas .= "pad	:	0, ";
+      $canvas .= "autoexpand : true,";
+      $canvas .= "} };";
   }
 
   else {
@@ -313,6 +382,15 @@ $dataarr = (json_decode($json, true));
               }
           }
           $graph .= "], ";
+
+          $graph .= "name : '";
+          if ($base == 'x'){
+              $graph .= $y_axis[$y_num];
+          }
+          else{
+              $graph .= $x_axis[$x_num];
+          }
+          $graph .= "', ";
 
           /****************************************************/
 
@@ -414,18 +492,9 @@ $dataarr = (json_decode($json, true));
       $graph .= "]; ";
 
 
-      for ($j = 0; $j < $tsize; $j+=1){
-          $gtID = $_SESSION['tableid'];
-          $tID = $tIDsarr['rows'][$j]['TableID'];
-          if ($gtID == $tID){
-              $key = $j;
-          }
-      }
-      $tName = $tIDsarr['rows'][$key]['TableName'];
-
       $layout .= "var layout = {";
       $layout .= "title: '";
-      $layout .= $tName . " Table's " . $graphtype . " Graph";
+      $layout .= $tName . " Tables " . $graphtype . " Graph";
       $layout .= "', ";
       $layout .= "autosize: true, ";
       $layout .= "showlegend: true, ";
@@ -442,7 +511,9 @@ $dataarr = (json_decode($json, true));
 
       $layout .= "xaxis: {";
       $layout .= "title: '";
-
+      if ($base == 'x'){
+          $layout .= $x_axis[$x_num];
+      }
       $layout .= "', ";
       $layout .= "showgrid: true, ";
       $layout .= "zeroline: false, ";
@@ -450,7 +521,9 @@ $dataarr = (json_decode($json, true));
       $layout .= "}, ";
       $layout .= "yaxis: {";
       $layout .= "title: '";
-
+      if ($base == 'y'){
+          $layout .= $y_axis[$y_num];
+      }
       $layout .= "', ";
       $layout .= "showline: true, ";
       $layout .= "zeroline: false, ";
@@ -526,6 +599,12 @@ $dataarr = (json_decode($json, true));
 
 
     });
+
+    var graphhtype = "<?php echo $graphtype; ?>";
+    alert(graphtype);
+    if (graphtype == "Pie"){
+      $("#ColorChange").attr('disabled', 'disabled');
+    }
 
     function cleandataURL(dataurl) {
         var arr = dataurl.split(','), url = arr[1];

@@ -17,9 +17,6 @@
     $password = $data['Password'];
   }
   if ($_SERVER['REQUEST_METHOD'] == "POST"){
-    if (isset($_POST['Logout'])){
-
-    }
     if (isset($_POST['ChangePassword'])){
       if ($_POST['password'] == $password){
         ChangeUserPassword($_POST['con_password']);
@@ -87,7 +84,7 @@
       <div class="row" style="padding: 0; padding-left:10px; margin-bottom: 3%">
         <button type="button" name="Logoutbtn" id="Logoutbtn" class="btn btn-primary">Logout</button>
         <form method="POST">
-          <input type="submit" name='Logout' id="Logout" value='Logout' style="display: none;">
+          <input type="submit" name='logout' id="Logout" value='Logout' style="display: none;">
         </form>
         <script type="text/javascript" language='javascript'>
           $('#Logoutbtn').click(function(){
