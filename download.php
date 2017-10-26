@@ -36,7 +36,6 @@ CheckRequestLogout();
     array_push($ValueResult, $Values);
     $count += 1;
   }
-  print_r($ValueResult);
   // $TableNames = 'file';
   // $json = '' . json_encode($ValueResult);
   // $json_dec = json_decode ($json);
