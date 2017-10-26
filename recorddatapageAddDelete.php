@@ -36,7 +36,7 @@
           }
           if ($valid){
             CreateTable($table_name, $aFields, $dTypes);
-            $_SESSION['tableid'] = GetTableIDLastNumber()-1;
+            $_SESSION['tableid'] = GetTableIDLastNumber();
             gotoPage('datapage');
           }else{
             CallTestAlert('Around 2 or more tables have the same name. Please try again');

@@ -10,7 +10,7 @@ function EnterGraphTable($tableId, $GraphType){
 }
 
 function RemoveTableInGraph($TableID){
-  return "DELETE FROM GraphTable WHERE TableID = $TableID";
+  return "DELETE FROM GraphTable WHERE TableID = $TableID;";
 }
 
 function InsertImage($GraphID, $Image){

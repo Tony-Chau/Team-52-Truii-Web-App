@@ -1,6 +1,9 @@
 <?php
 //Generates tables
 function CreateTable($TableName, $ArrayOfFields, $DataType){
+  $connection = mysqli_connect(get_dbServer(), get_dbUsername(), get_dbPassword(), get_dbDatabase());
+  $sql = EnterTable($TableName);
+  mysqli_query($connection,$sql);
   $TableID = GetTableIDLastNumber();
   $sql = "CREATE TABLE " . NumberToWordsFormat($TableID) . "( " . $TableName . "ID INT AUTO_INCREMENT, ";
   for ($i = 0; $i < count($ArrayOfFields); $i+= 1){
@@ -10,9 +13,7 @@ function CreateTable($TableName, $ArrayOfFields, $DataType){
       $sql .= CheckDateTime($ArrayOfFields[$i]) . " " . $DataType[$i] . ", ";
     }
   }
-  $sql .= EnterTable($TableName);
   $sql .= EnterArrayFieldTable($TableID, $ArrayOfFields, $DataType);
-  CallTestAlert($sql);
   CallDatabase($sql);
 }
 
@@ -62,6 +63,7 @@ function DeleteTable($TableID){
   $sql .= DeleteTableInTableList($TableID);
   $sql .= RemoveTableInGraph($TableID);
   $sql .= "DROP TABLE " . NumberToWordsFormat($TableID) . ";";
+  CallTestAlert($sql);
   CallDatabase($sql);
 }
 
