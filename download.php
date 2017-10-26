@@ -44,7 +44,7 @@ CheckRequestLogout();
   //   fputcsv($handle, $row);
   // }
   // fclose($handle);
-  file_put_contents($filename, ConvertDatatoCSV($FieldResult, $ValueResult));
+  file_put_contents($filename, ConvertDatatoCSV($FieldResult, $ValueResult, $length));
   header('Content-Type: application/octet-stream');
   header('Content-Disposition: attachment; filename='.basename($filename));
   header('Expires: 0');
