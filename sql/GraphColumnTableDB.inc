@@ -30,6 +30,9 @@ function getGraphColumn($GraphID){
     echo $e->getMessage();
   }
   $pdo=null;
+  foreach($result as $data){
+    CallTestAlert($data['Axis']);
+  }
   return $result;
 }
 

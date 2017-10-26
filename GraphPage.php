@@ -33,20 +33,6 @@ $json = json_encode($customoutput);
 $customarr = (json_decode($json, true));
 
 
-
-$graphsize = 0;
-$graph_query = getGraphColumn($graphid);
-while($graphfields = $graph_query->fetch(PDO::FETCH_ASSOC))
-{
-    $graphcolumns[] = $graphfields;
-    $graphsize+=1;
-}
-$graphoutput = array( 'rows' => $graphcolumns );
-$json = json_encode($graphoutput);
-$grapharr = (json_decode($json, true));
-
-
-
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if (isset($_POST['CChange'])){
           $CC_sql = "";
@@ -59,18 +45,24 @@ $grapharr = (json_decode($json, true));
                   }
               }
           }
-          CallDatabase($CC_sql);
-          gotoPage('GraphPage');
-      }
-      if (isset($_POST['ChangeXYsubmit'])){
-          GraphColumnSwitchAxis($graph_query);
-          gotoPage('GraphPage');
+          if (mysqli_query($connection, $CC_sql)){
+            gotoPage('GraphPage');
+          }
       }
   }
 
 $graphtype = RequestGraphTableDetail($graphid, 'GraphType');
 
-
+$graphsize = 0;
+$graph_query = getGraphColumn($graphid);
+while($graphfields = $graph_query->fetch(PDO::FETCH_ASSOC))
+{
+    $graphcolumns[] = $graphfields;
+    $graphsize+=1;
+}
+$graphoutput = array( 'rows' => $graphcolumns );
+$json = json_encode($graphoutput);
+$grapharr = (json_decode($json, true));
 
 $x_axis = array();
 $x_size = 0;
@@ -206,9 +198,6 @@ $dataarr = (json_decode($json, true));
       </div>
 
       <div id="H2Canvas" style="display: none;"></div>
-      <form method="post">
-          <input type="submit" name="ChangeXYsubmit" id="ChangeXYsubmit" value="ChangeXYsubmit" style="display:none">
-      </form>
       <form method=POST style="display: none;" id="snapshot">
           <input type="hidden" name="temp" id="temp" value="" />
           <input type="submit" name="action" id="action"/>
@@ -598,10 +587,6 @@ $dataarr = (json_decode($json, true));
           $('.modal-title').text('Change Color');
         });
 
-        $('#ChangeXY').click(function(){
-          $('#ChangeXYsubmit').click();
-        })
-
         $('#ValueChange').click(function(){
           window.location.href = 'datapage.php';
         });
@@ -665,7 +650,7 @@ $dataarr = (json_decode($json, true));
               echo "<div class='row' style='margin: auto'>";
               echo "<div class='col' style='margin: auto; float:left;'><label>" . $colname . "</label></div>";
               echo "<div class='col' style='margin: auto; float: right;' id='CustomColors".$i."'>";
-              if (checkPhone() == 'ios'){
+              if (checkPhone() != 'ios'){
                 echo "<input type='text' id='$colname' name='$colname'/>";
                 echo '<script>';
                 echo '  var C_Color = tinycolor("'.$customarr['rows'][$i]['ColourCode'].'");
