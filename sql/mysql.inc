@@ -12,7 +12,7 @@ function get_dbServer(){
   return 'team52.heliohost.org';
 }
 function get_dbUsername(){
-  return 'team52_manager';
+  return 'team52tr_manager';
 }
 function get_dbPassword(){
   return 'Midori.1';
