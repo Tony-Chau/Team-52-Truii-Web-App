@@ -2,7 +2,6 @@
 function gotoPage($page){
   echo "<script>window.location.href = '$page.php'; </script>";
 }
-
 function navBarCreate($ColorCode, $currentpage){
   $distance = '-5px';
   $nav = " <nav class='navbar navbar-default' style='width: 100%;position:fixed;background-color:$ColorCode;padding-bottom:2%;height:40px;z-index: 1002;margin-left:-20px;margin-right:-20px;list-style-type:none;'>
@@ -33,12 +32,9 @@ function navBarCreate($ColorCode, $currentpage){
   </nav>";
   echo $nav;
 }
-
 function CallTestAlert($message){
   echo "<script>alert('".$message."');</script>";
 }
-
-
 function ConvertDatatoCSV($FieldName_Array, $Value_Array){
   $csv = '';
   $Fieldlength =  count($FieldName_Array);
@@ -58,12 +54,9 @@ function ConvertDatatoCSV($FieldName_Array, $Value_Array){
         $csv .= checkWord($word) . ",";
       }
     }
-
   }
   return $csv;
 }
-
-
 function checkWord($word){
   if (!is_numeric($word)){
     $sub = 0;
@@ -78,7 +71,6 @@ function checkWord($word){
   }
   return $word;
 }
-
 function CheckMobile($ismobile = null){
   //Code from Detect Mobile Browsers
   $useragent=$_SERVER['HTTP_USER_AGENT'];
@@ -88,19 +80,15 @@ function CheckMobile($ismobile = null){
     if ($ismobile == null){
       gotoPage('browserError');
     }
-
   }else{
     if ($ismobile != null){
         gotoPage('index');
     }
-
   }
 }
-
 function RandomColourGenerator(){
   return "rgb(".rand(0,255).", ".rand(0,255).", ".rand(0,255).")";
 }
-
 function checkPhone(){
   $useragent = $_SERVER['HTTP_USER_AGENT'];
   $iPod    = stripos($useragent,"iPod");
