@@ -80,7 +80,7 @@
           <div class="row-mid" id="row-mid">
             <label class="label" id="label">Password</label><br>
             <input type="password" name="log_password" class="input" id="input" required><br>
-            <p style="float:right; color:#FFFFFF; font-size:90%; margin-top:1%; font-weight: normal;" onclick='Recovery()'>Remember Password?</p>
+            <p style="float:right; color:#FFFFFF; font-size:90%; margin-top:1%; font-weight: normal;" onclick='window.location.href = "recoveryEmail.php"'>Remember Password?</p>
           </div>
 
 
