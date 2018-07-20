@@ -79,8 +79,10 @@
 
           <div class="row-mid" id="row-mid">
             <label class="label" id="label">Password</label><br>
-            <input type="password" name="log_password" class="input" id="input" required>
+            <input type="password" name="log_password" class="input" id="input" required><br>
+            <p style="float:right; color:#FFFFFF; font-size:90%; margin-top:1%; font-weight: normal;" onclick='Recovery()'>Remember Password?</p>
           </div>
+
 
           <div class="row-button" id="row-button">
             <input type="submit" value="Login" class="submit" id="submit" name='log'>
@@ -146,6 +148,10 @@ function Register(){
   }else{
     alert('Your passwords do not match');
   }
+}
+
+function Recovery(){
+  gotoPage()
 }
 </script>
   <!-- JavaScript files should be linked at the bottom of the page  -->
