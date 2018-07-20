@@ -112,4 +112,8 @@ function generatekey(){
   }
   return $str;
 }
+
+function createlink($key){
+  return 'https://www.team52truii.heliohost.org/confirmaccount?confirmKey=' . $key;
+}
  ?>
