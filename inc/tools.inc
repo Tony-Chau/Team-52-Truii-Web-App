@@ -100,4 +100,16 @@ function checkPhone(){
     return 'android';
   }
 }
+
+function sendmail($sendto, $header, $subject, $message){
+  mail($sendto, $subject, $message, $header);
+}
+
+function generatekey(){
+  $str = '';
+  for ($i = 0; $i < 10; $i += 1){
+    $str .= rand(0, 9);
+  }
+  return $str;
+}
  ?>
