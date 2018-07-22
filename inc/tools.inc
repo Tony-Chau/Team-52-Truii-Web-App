@@ -116,4 +116,16 @@ function generatekey(){
 function createlink($key){
   return 'https://www.team52truii.heliohost.org/confirmaccount?confirmKey=' . $key;
 }
+
+function setCookie($name, $value){
+  setcookie($name, $value, time() + (60*60*24*2), '/');
+  //set to 2 days
+}
+
+function checkCookie($name, $value){
+  if (isset($_COOKIE[$name]) && ($_COOKIE[$name] == $value){
+    return true;
+  }
+  return false;
+}
  ?>

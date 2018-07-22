@@ -145,7 +145,8 @@
             </div>
 
             <div class="row-bottom" id="row-bottom">
-              <input type="submit" class="submit" id="register" name='btnRemember'>
+              <input type="button" value="Register" class="submit" id="submit" onclick='Register();'>
+              <input type="submit" style='display:none;' class="submit" id="register" name='btnRegister'>
             </div>
             <div class="row-bottom" id="row-bottom">
               <input type="button" value="Back" id="btnLog" class="submit" onclick="toLog();">
