@@ -30,6 +30,19 @@
       }else{
         CallTestAlert('Sorry it seems either your email or your password was incorrect or do not exist. Please try again or create an account');
       }
+    }else if (isset($_POST['btnRemember'])){
+      $remember_email = $_POST['remember_email'];
+      $userid = -1;
+      foreach($UserTable as $data){
+        if ($data['Username'] == $remember_email){
+          $userid = $data['UserID'];
+        }
+      }
+      if ($userid != -1){
+        //send email code
+      }else{
+        CallTestAlert('Sorry, but it seems that this email does not exist within our system. If this is a new email, please register it, else try again');
+      }
     }else if(isset($_POST['btnRegister'])){
       //register
       $reg_username = $_POST['reg_username'];
@@ -69,7 +82,7 @@
 
   <div class="centered" align="center" id="centered">
     <div class="container-fluid" id="login-container">
-
+        <!--LOGIN-->
         <form method=POST>
           <div id="log" style="display:block; opacity:1;">
           <div class="row-top" id="row-top">
@@ -80,7 +93,7 @@
           <div class="row-mid" id="row-mid">
             <label class="label" id="label">Password</label><br>
             <input type="password" name="log_password" class="input" id="input" required><br>
-            <p style="float:right; color:#FFFFFF; font-size:90%; margin-top:1%; font-weight: normal;" onclick='window.location.href = "recoveryEmail.php";'>Remember Password?</p>
+            <p style="float:right; color:#FFFFFF; font-size:90%; margin-top:1%; font-weight: normal;" onclick='toRemeber();'>Remember Password?</p>
           </div>
 
 
@@ -93,8 +106,24 @@
               <input type="button" value="Register" class="submit" id="btnRegister" onclick="toRegiter();">
           </div>
         </div>
+        <!--Remeber-->
+          <form method=POST>
+            <div id="Remember" style="opacity:0;display:none;">
+              <div class="row-top" id="row-top">
+                <label class="label" id="label">Email</label><br>
+                <input type="email" name="remember_email" class='input' id='input' required>
+              </div>
+              <div class="row-mid" id="row-mid" style='margin-top:10%;'>
+                <input type="submit" class="submit" id="submit" value="Send to Email" name='btnRemeber'>
+                </div>
+                <div class="row-bottom" id="row-bottom">
+              <input type="button" value="Back" id="btnLog" class="submit" onclick="toLog();">
+              </div>
+            </div>
+          </form>
+          <!--Register-->
           <form method=POST >
-            <div id ="Register" style="opacity:0;display:none;" id="Register">
+            <div id ="Register" style="opacity:0;display:none;">
               <div class="row-top" id="row-top">
                 <label class="label" id="label">Full Name</label><br>
                 <input type="text" name="reg_name" class="input" id="input" required>
@@ -116,8 +145,7 @@
             </div>
 
             <div class="row-bottom" id="row-bottom">
-              <input type="button" value="Register" class="submit" id="submit" onclick='Register();'>
-              <input type="submit" style='display:none;' class="submit" id="register" name='btnRegister'>
+              <input type="submit" class="submit" id="register" name='btnRemember'>
             </div>
             <div class="row-bottom" id="row-bottom">
               <input type="button" value="Back" id="btnLog" class="submit" onclick="toLog();">
@@ -128,16 +156,26 @@
   </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+var currentpage = 'log';
 function toRegiter(){
-  $("#log").animate({height: 'toggle', opacity: "0", display:'none'}, "slow");
+  $("#" + currentpage).animate({height: 'toggle', opacity: "0", display:'none'}, "slow");
   $("#Register").animate({height: 'toggle'}, "slow");
   $('#Register').animate({opacity: "1", display:'block'}, "slow");
+  currentpage = 'Register';
 }
 
 function toLog(){
-  $("#Register").animate({height: 'toggle', opacity: "0", display:'none'}, "slow");
+  $("#" + currentpage).animate({height: 'toggle', opacity: "0", display:'none'}, "slow");
   $("#log").animate({height: 'toggle'}, "slow");
   $('#log').animate({opacity: "1", display:'block'}, "slow");
+  currentpage = 'log'
+}
+
+function toRemeber(){
+  $("#" + currentpage).animate({height: 'toggle', opacity: "0", display:'none'}, "slow");
+  $("#Remember").animate({height: 'toggle'}, "slow");
+  $('#Remember').animate({opacity: "1", display:'block'}, "slow");
+  currentpage = 'Remember'
 }
 
 function Register(){
@@ -150,9 +188,7 @@ function Register(){
   }
 }
 
-function Recovery(){
-  gotoPage()
-}
+
 </script>
   <!-- JavaScript files should be linked at the bottom of the page  -->
   <script src="js/jquery.min.js"></script>
