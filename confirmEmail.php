@@ -11,9 +11,12 @@
   if ($_SERVER['REQUEST_METHOD'] == 'GET'){
     if (isset($_GET['confirmKey'])){
       //do something
+      log_in($userid);
+      gotoPage('home');
     }
   }else{
-    gotoPage('index');
+    //gotoPage('index');
+    gotoPage('home');
   }
   ?>
 
