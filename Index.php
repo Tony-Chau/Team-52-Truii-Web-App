@@ -39,7 +39,15 @@
         }
       }
       if ($userid != -1){
-        //send email code
+        $purpose = array('Email', 'RecoverKey');
+        $key = array($remember_email, generatekey());
+        createCookie($purpose[0], $key[0]);
+        createCookie($purpose[1], $key[1]);
+        $header = 'Recover Password';
+        $subject = 'Team 52 Truii (Recover Password)';
+        $message = "Please click on the link below \n" . createlink($purpose, $key) .
+                    "\nYou only have 48 hours before this link expires. Make sure you use the same device to change your email successfully.";
+        sendmail($remember_email, $header, $subject, $message);
       }else{
         CallTestAlert('Sorry, but it seems that this email does not exist within our system. If this is a new email, please register it, else try again');
       }

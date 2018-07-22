@@ -113,8 +113,19 @@ function generatekey(){
   return $str;
 }
 
-function createlink($key){
-  return 'https://www.team52truii.heliohost.org/confirmaccount?confirmKey=' . $key;
+function createlink($purpose, $key){
+  $str = 'https://www.team52truii.heliohost.org/confirmaccount?';
+  if ((is_array($purpose) && is_array($key)) && (count($purpose) == count($key))){
+    for ($i = 0; i < count($purpose); $i += 1){
+      $str .= $purpose[$i] . '=' . $key[$i];
+      if (i < count($purpose) - 1){
+        $str .= '&';
+      }
+      return $str;
+    }
+  }else{
+    return $str . $purpose . '=' . $key;
+  }
 }
 
 function createCookie($name, $value){
