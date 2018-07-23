@@ -115,4 +115,10 @@ function ChangeUserPassword($password){
   $connection = mysqli_connect(get_dbServer(), get_dbUsername(), get_dbPassword(), get_dbDatabase());
   mysqli_query($connection,$sql);
 }
+
+function ChangeUserPasswordByEmail($email, $password){
+  $sql = "UPDATE UserTable SET Password=\"$password\" WHERE UserName=\"$email\";";
+  $connection = mysqli_connect(get_dbServer(), get_dbUsername(), get_dbPassword(), get_dbDatabase());
+  mysqli_query($connection,$sql);
+}
 ?>
