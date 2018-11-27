@@ -12,13 +12,13 @@ function get_dbServer(){
   return 'team52truii.heliohost.org';
 }
 function get_dbUsername(){
-  return 'team52tr_manager';
+  return 'team52_manager';
 }
 function get_dbPassword(){
-  return 'Midori.1';
+  return 'Midori';
 }
 function get_dbDatabase(){
-  return 'team52tr_TruiiDB';
+  return 'truii52_DB';
 }
 function is_log(){
   if (isset($_SESSION['UserID'])){
