@@ -46,7 +46,6 @@
                   array_push($Types, $arr['rows'][$i]['DataType']);
               }
           }
-
           EditValueVariousTable($tableid, $variousid, $Fields, $Datas, $Types);
           //echo 'Value Updated';
 

@@ -6,7 +6,6 @@
   //log_in(1);
 
   CheckMobile();
-
   if (is_log()){
     gotoPage('home');
   }
@@ -66,6 +65,7 @@
       if ($valid){
         CreateUser($reg_name, $reg_username, $password);
         LogUser($reg_username, $password);
+        gotoPage('index');
       }else{
         CallTestAlert('This email has already been registered. Please register with a different email address');
       }

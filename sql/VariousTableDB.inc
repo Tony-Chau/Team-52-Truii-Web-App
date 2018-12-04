@@ -116,12 +116,14 @@ function EnterVariousTable($TableID, $Array_of_FieldName, $array_of_data, $array
 
 //Edit the value of the customise table
 function EditValueVariousTable($TableID, $VariousID, $Field_Array, $Value_Array, $type_array){
+  CallTestAlert("HERE");
   $TableName = RequestTableDetail($TableID, "TableName");
   $sql = '';
   for ($i = 0; $i < count($Field_Array); $i += 1){
     $sql .= "UPDATE " . NumberToWordsFormat($TableID) . " SET " . $Field_Array[$i] . " =" . sqlInsertionString($Value_Array[$i], $type_array[$i]);
     $sql .= " WHERE " . $TableName . "ID = " . $VariousID . ";";
   }
+  CallTestAlert($sql);
   CallDatabase($sql);
 }
 
