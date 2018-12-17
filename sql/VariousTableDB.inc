@@ -122,7 +122,6 @@ function EditValueVariousTable($TableID, $VariousID, $Field_Array, $Value_Array,
     $sql .= "UPDATE " . NumberToWordsFormat($TableID) . " SET " . $Field_Array[$i] . " =" . sqlInsertionString($Value_Array[$i], $type_array[$i]);
     $sql .= " WHERE " . $TableName . "ID = " . $VariousID . ";";
   }
-  CallTestAlert($sql);
   CallDatabase($sql);
 }
 
