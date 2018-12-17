@@ -2,12 +2,11 @@
   //columninsert.php
   include("../mysql.inc");
   include("connection.php");
-
   //started using getcolumns.php
   include("getcolumns.php");
   if(isset($_POST["operation"]))
   {
-
+      //CallTestAlert("CHECKING");
       $oldcName = $_POST['edit_column_selected'];
       for($i = 1; $i < $size; $i+=1){
           if ($oldcName == $arr['rows'][$i]['FieldName']){
