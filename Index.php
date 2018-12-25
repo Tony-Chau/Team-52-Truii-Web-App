@@ -65,7 +65,7 @@
       if ($valid){
         CreateUser($reg_name, $reg_username, $password);
         LogUser($reg_username, $password);
-        gotoPage('index');
+        gotoPage('Index');
       }else{
         CallTestAlert('This email has already been registered. Please register with a different email address');
       }
