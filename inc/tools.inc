@@ -82,7 +82,7 @@ function CheckMobile($ismobile = null){
     }
   }else{
     if ($ismobile != null){
-        gotoPage('index');
+        gotoPage('Index');
     }
   }
 }
