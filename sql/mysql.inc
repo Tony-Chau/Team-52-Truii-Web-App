@@ -22,11 +22,13 @@ function get_dbDatabase(){
 }
 function is_log(){
   if (isset($_SESSION['UserID'])){
+    /*
     $userdetails = RequestUserDetail($_SESSION['UserID']);
     if(isset($userdetails['Name']) && isset($userdetails['Username']) && isset($userdetail['Password'])){
       return true;
-    }
-    log_out();
+    }*/
+    //log_out();
+    return true;
   };
   return false;
 }
