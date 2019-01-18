@@ -21,8 +21,12 @@ function get_dbDatabase(){
   return 'truii52_DB';
 }
 function is_log(){
-  if (isset($_SESSION['UserID'])){
-    return true;
+  if (isset($_SESSION['UserID'])){'
+    $userdetails = RequestUserDetail($_SESSION['UserID']);
+    if(isset($userdetails['Name']) && isset($userdetails['Username']) && isset($userdetail['Password'])){
+      return true;
+    }
+    log_out();
   };
   return false;
 }
