@@ -1,4 +1,4 @@
 # Team-52-Truii-Web-App
-<a href="https://team52truii.heliohost.org">Visit our website</a><br />
-Note: This website can only be accessed via mobile devices, as using a Web browser from a desktop or laptop will re-direct you to an error page. The Remember Password feature has not been implemented and will be deleted soon. I apologize if you have attempted to use that feature. 
-<p>Click here for demo video: https://drive.google.com/drive/folders/1qweFwmW_HPQSUzOYIiOjWfCf-Pw6Pt7X?usp=sharing</p>
+The project was developed for our QUT Capstone project where we were assigned to develop a prototype web app for Truii. The aim of this project is to develop a web app to allow users to create their own custom made data tables (unfortunately, the DB is down at this moment). The project also includes other features, such as exporting data as a csv file, generating various types of graphs, and exporting them as images are also included. Please click on the link below to see a playlist of videos demostrating how the app works. 
+
+<p>Click here for demo videos: https://drive.google.com/drive/folders/1qweFwmW_HPQSUzOYIiOjWfCf-Pw6Pt7X?usp=sharing</p>
